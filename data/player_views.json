@@ -1,0 +1,75 @@
+{
+  "updated_at": 1776700209,
+  "items": {
+    "237104": {
+      "player_id": "237104",
+      "name": "Henri",
+      "country": "Brazil",
+      "club": "CRB",
+      "position": "Defender",
+      "age": 23,
+      "views": 6,
+      "last_viewed_at": 1776684412,
+      "recent_view_events": [
+        1776681984,
+        1776682007,
+        1776682007,
+        1776682021,
+        1776682021,
+        1776684412
+      ]
+    },
+    "182434": {
+      "player_id": "182434",
+      "name": "D. Beljo",
+      "country": "Croatia",
+      "club": "Dinamo Zagreb",
+      "position": "Attacker",
+      "age": 23,
+      "views": 1,
+      "last_viewed_at": 1776684888,
+      "recent_view_events": [
+        1776684888
+      ]
+    },
+    "153420": {
+      "player_id": "153420",
+      "name": "G. Wickens",
+      "country": "England",
+      "club": "Lincoln",
+      "position": "Goalkeeper",
+      "age": 24,
+      "views": 7,
+      "last_viewed_at": 1776700203,
+      "recent_view_events": [
+        1776700203
+      ]
+    },
+    "298129": {
+      "player_id": "298129",
+      "name": "M. Boateng",
+      "country": "England",
+      "club": "Plymouth",
+      "position": "Midfielder",
+      "age": 23,
+      "views": 2,
+      "last_viewed_at": 1776700209,
+      "recent_view_events": [
+        1776700209
+      ]
+    },
+    "272729": {
+      "player_id": "272729",
+      "name": "D. Huisman",
+      "country": "Netherlands",
+      "club": "FC Eindhoven",
+      "position": "Midfielder",
+      "age": 23,
+      "views": 1,
+      "last_viewed_at": 1776686666,
+      "recent_view_events": [
+        1776686666
+      ]
+    }
+  }
+}

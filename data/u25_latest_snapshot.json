@@ -1,0 +1,277 @@
+{
+  "timestamp": 1776684930,
+  "players_count": 26114,
+  "rankings_count": 26114,
+  "top_30": [
+    {
+      "player_id": "306800",
+      "league": "Serie A",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 99.48,
+      "total_rank_score": 99.9
+    },
+    {
+      "player_id": "161800",
+      "league": "Jupiler Pro League",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 99.45,
+      "total_rank_score": 99.89
+    },
+    {
+      "player_id": "152931",
+      "league": "Serie B",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 98.76,
+      "total_rank_score": 99.75
+    },
+    {
+      "player_id": "45950",
+      "league": "Bundesliga",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 98.73,
+      "total_rank_score": 99.75
+    },
+    {
+      "player_id": "51068",
+      "league": "Liga MX",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 98.71,
+      "total_rank_score": 99.74
+    },
+    {
+      "player_id": "138793",
+      "league": "League One",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 98.59,
+      "total_rank_score": 99.72
+    },
+    {
+      "player_id": "51266",
+      "league": "Serie B",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 98.56,
+      "total_rank_score": 99.71
+    },
+    {
+      "player_id": "161790",
+      "league": "Superliga",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 98.57,
+      "total_rank_score": 99.71
+    },
+    {
+      "player_id": "153422",
+      "league": "League One",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 98.45,
+      "total_rank_score": 99.69
+    },
+    {
+      "player_id": "404891",
+      "league": "Jupiler Pro League",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 98.38,
+      "total_rank_score": 99.68
+    },
+    {
+      "player_id": "69275",
+      "league": "Premier Division",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 98.21,
+      "total_rank_score": 99.64
+    },
+    {
+      "player_id": "355256",
+      "league": "Liga Profesional Argentina",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 98.1,
+      "total_rank_score": 99.62
+    },
+    {
+      "player_id": "342268",
+      "league": "2. Bundesliga",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 98.06,
+      "total_rank_score": 99.61
+    },
+    {
+      "player_id": "308814",
+      "league": "HNL",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 98.03,
+      "total_rank_score": 99.61
+    },
+    {
+      "player_id": "340681",
+      "league": "Challenger Pro League",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.99,
+      "total_rank_score": 99.6
+    },
+    {
+      "player_id": "202783",
+      "league": "3. Liga",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.97,
+      "total_rank_score": 99.59
+    },
+    {
+      "player_id": "331046",
+      "league": "Serie B",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.9,
+      "total_rank_score": 99.58
+    },
+    {
+      "player_id": "325399",
+      "league": "Serie B",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.9,
+      "total_rank_score": 99.58
+    },
+    {
+      "player_id": "303467",
+      "league": "Championship",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.86,
+      "total_rank_score": 99.57
+    },
+    {
+      "player_id": "279905",
+      "league": "2. Bundesliga",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.83,
+      "total_rank_score": 99.57
+    },
+    {
+      "player_id": "334915",
+      "league": "Serie B",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.8,
+      "total_rank_score": 99.56
+    },
+    {
+      "player_id": "284307",
+      "league": "League Two",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.75,
+      "total_rank_score": 99.55
+    },
+    {
+      "player_id": "33805",
+      "league": "Jupiler Pro League",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.74,
+      "total_rank_score": 99.55
+    },
+    {
+      "player_id": "40560",
+      "league": "Bundesliga",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.75,
+      "total_rank_score": 99.55
+    },
+    {
+      "player_id": "282637",
+      "league": "Championship",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.69,
+      "total_rank_score": 99.54
+    },
+    {
+      "player_id": "30458",
+      "league": "Serie B",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.65,
+      "total_rank_score": 99.53
+    },
+    {
+      "player_id": "327897",
+      "league": "Bundesliga",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.67,
+      "total_rank_score": 99.53
+    },
+    {
+      "player_id": "138908",
+      "league": "Premier League",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.59,
+      "total_rank_score": 99.52
+    },
+    {
+      "player_id": "294722",
+      "league": "Jupiler Pro League",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.61,
+      "total_rank_score": 99.52
+    },
+    {
+      "player_id": "282126",
+      "league": "Jupiler Pro League",
+      "position": "FW",
+      "performance_score": 100.0,
+      "potential_score": 100.0,
+      "adaptation_probability": 97.58,
+      "total_rank_score": 99.52
+    }
+  ]
+}

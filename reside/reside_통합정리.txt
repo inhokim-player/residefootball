@@ -1,0 +1,33 @@
+RESIDE 통합 정리 (자동화/스케줄/API)
+====================================
+
+[핵심 목표]
+- API-Football 기반 선수 정보(선수ID, 국적, 나이, 키) 수집/갱신 자동화
+- 한국시간 오전 10시 기준 자동 수집
+- 사이트 + API + 스케줄러 운영 단순화
+
+[현재 표준 운영 모드]
+- 기본: Full 상시 운영
+  - 실행 파일: RESIDE_전체자동.bat
+  - 내부 실행: start_server_stack.bat Full
+  - 구성: API + u25_auto_scheduler + live_feed
+
+[스케줄 기준]
+- 단일 기준 파일: data/automation_config.json
+  - schedule_times: ["10:00"]
+  - timezone: "Asia/Seoul"
+- start_u25_automation.bat / start_u25_system.bat 도 고정시간 하드코드 제거 완료
+
+[중복 실행 방지]
+- Full 모드 실행 시, 윈도우 10시 단발 작업(U25_RESIDE_DailyPipeline_10am)은 자동 비활성화
+  - 반영 파일: RESIDE_전체자동.bat, RUN_U25_AT_LOGON.cmd
+
+[PC 전원 OFF 이슈]
+- 로컬 PC가 꺼지면 로컬 API/스케줄은 중지됨
+- PC 꺼져도 계속 보이려면 항상 켜진 서버(클라우드/VPS/IDC)에 API+DB 상시 운영 필요
+
+[참조 문서]
+- 운영 상세: RESIDE_시스템_홈페이지_프롬프트.txt
+- 이 폴더 실행 가이드: reside_실행순서.txt
+- 점검 항목: reside_점검체크리스트.txt
+- 스케줄 모드 전환: reside_스케줄모드전환.txt

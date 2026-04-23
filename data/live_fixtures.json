@@ -1,0 +1,5519 @@
+{
+  "get": "fixtures",
+  "parameters": {
+    "live": "all"
+  },
+  "errors": [],
+  "results": 23,
+  "paging": {
+    "current": 1,
+    "total": 1
+  },
+  "response": [
+    {
+      "fixture": {
+        "id": 1490231,
+        "referee": "Allen Chapman, USA",
+        "timezone": "UTC",
+        "date": "2026-04-23T00:30:00+00:00",
+        "timestamp": 1776904200,
+        "periods": {
+          "first": 1776904200,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Toyota Stadium",
+          "city": "Frisco"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 45,
+          "extra": 3
+        }
+      },
+      "league": {
+        "id": 253,
+        "name": "Major League Soccer",
+        "country": "USA",
+        "logo": "https://media.api-sports.io/football/leagues/253.png",
+        "flag": "https://media.api-sports.io/flags/us.svg",
+        "season": 2026,
+        "round": "Regular Season - 9",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1597,
+          "name": "FC Dallas",
+          "logo": "https://media.api-sports.io/football/teams/1597.png",
+          "winner": false
+        },
+        "away": {
+          "id": 1612,
+          "name": "Minnesota United FC",
+          "logo": "https://media.api-sports.io/football/teams/1612.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 4,
+            "extra": null
+          },
+          "team": {
+            "id": 1612,
+            "name": "Minnesota United FC",
+            "logo": "https://media.api-sports.io/football/teams/1612.png"
+          },
+          "player": {
+            "id": 351496,
+            "name": "A. Markanich"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 31,
+            "extra": null
+          },
+          "team": {
+            "id": 1612,
+            "name": "Minnesota United FC",
+            "logo": "https://media.api-sports.io/football/teams/1612.png"
+          },
+          "player": {
+            "id": 351496,
+            "name": "A. Markanich"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 41,
+            "extra": null
+          },
+          "team": {
+            "id": 1597,
+            "name": "FC Dallas",
+            "logo": "https://media.api-sports.io/football/teams/1597.png"
+          },
+          "player": {
+            "id": 115532,
+            "name": "S. Moreno"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1492602,
+        "referee": "Fernando Hernandez, Mexico",
+        "timezone": "UTC",
+        "date": "2026-04-23T01:00:00+00:00",
+        "timestamp": 1776906000,
+        "periods": {
+          "first": 1776906000,
+          "second": null
+        },
+        "venue": {
+          "id": 1071,
+          "name": "Estadio Jalisco",
+          "city": "Guadalajara"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 27,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 262,
+        "name": "Liga MX",
+        "country": "Mexico",
+        "logo": "https://media.api-sports.io/football/leagues/262.png",
+        "flag": "https://media.api-sports.io/flags/mx.svg",
+        "season": 2025,
+        "round": "Clausura - 16",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 2283,
+          "name": "Atlas",
+          "logo": "https://media.api-sports.io/football/teams/2283.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2279,
+          "name": "Tigres UANL",
+          "logo": "https://media.api-sports.io/football/teams/2279.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 17,
+            "extra": null
+          },
+          "team": {
+            "id": 2279,
+            "name": "Tigres UANL",
+            "logo": "https://media.api-sports.io/football/teams/2279.png"
+          },
+          "player": {
+            "id": 196615,
+            "name": "Joaquim"
+          },
+          "assist": {
+            "id": 6579,
+            "name": "J. Brunetta"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1492603,
+        "referee": "Maximiliano Quintero Hernandez, Mexico",
+        "timezone": "UTC",
+        "date": "2026-04-23T01:00:00+00:00",
+        "timestamp": 1776906000,
+        "periods": {
+          "first": 1776906000,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Alfonso Lastras Ramirez",
+          "city": "San Luis de Potosi"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 28,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 262,
+        "name": "Liga MX",
+        "country": "Mexico",
+        "logo": "https://media.api-sports.io/football/leagues/262.png",
+        "flag": "https://media.api-sports.io/flags/mx.svg",
+        "season": 2025,
+        "round": "Clausura - 16",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 2314,
+          "name": "Atletico San Luis",
+          "logo": "https://media.api-sports.io/football/teams/2314.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2285,
+          "name": "Santos Laguna",
+          "logo": "https://media.api-sports.io/football/teams/2285.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 17,
+            "extra": null
+          },
+          "team": {
+            "id": 2314,
+            "name": "Atletico San Luis",
+            "logo": "https://media.api-sports.io/football/teams/2314.png"
+          },
+          "player": {
+            "id": 182656,
+            "name": "A. Sanchez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1492604,
+        "referee": "Marco Antonio Ortiz Nava, Mexico",
+        "timezone": "UTC",
+        "date": "2026-04-23T01:00:00+00:00",
+        "timestamp": 1776906000,
+        "periods": {
+          "first": 1776906000,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Estadio de Mazatlan",
+          "city": "Mazatlan"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 25,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 262,
+        "name": "Liga MX",
+        "country": "Mexico",
+        "logo": "https://media.api-sports.io/football/leagues/262.png",
+        "flag": "https://media.api-sports.io/flags/mx.svg",
+        "season": 2025,
+        "round": "Clausura - 16",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 14002,
+          "name": "Mazatlán",
+          "logo": "https://media.api-sports.io/football/teams/14002.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2281,
+          "name": "Toluca",
+          "logo": "https://media.api-sports.io/football/teams/2281.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 12,
+            "extra": null
+          },
+          "team": {
+            "id": 2281,
+            "name": "Toluca",
+            "logo": "https://media.api-sports.io/football/teams/2281.png"
+          },
+          "player": {
+            "id": 2889,
+            "name": "A. Vega"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 15,
+            "extra": null
+          },
+          "team": {
+            "id": 14002,
+            "name": "Mazatlán",
+            "logo": "https://media.api-sports.io/football/teams/14002.png"
+          },
+          "player": {
+            "id": 35730,
+            "name": "B. Rubio"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": "misses next match"
+        },
+        {
+          "time": {
+            "elapsed": 23,
+            "extra": null
+          },
+          "team": {
+            "id": 14002,
+            "name": "Mazatlán",
+            "logo": "https://media.api-sports.io/football/teams/14002.png"
+          },
+          "player": {
+            "id": 35511,
+            "name": "J. Diaz"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1519331,
+        "referee": "Gabriel Ismael Gonzalez Cordero, Ecuador",
+        "timezone": "UTC",
+        "date": "2026-04-23T01:00:00+00:00",
+        "timestamp": 1776906000,
+        "periods": {
+          "first": 1776906000,
+          "second": null
+        },
+        "venue": {
+          "id": 471,
+          "name": "Estadio Rodrigo Paz Delgado",
+          "city": "Quito"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 26,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 242,
+        "name": "Liga Pro",
+        "country": "Ecuador",
+        "logo": "https://media.api-sports.io/football/leagues/242.png",
+        "flag": "https://media.api-sports.io/flags/ec.svg",
+        "season": 2026,
+        "round": "Regular Season - 10",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1158,
+          "name": "LDU de Quito",
+          "logo": "https://media.api-sports.io/football/teams/1158.png",
+          "winner": null
+        },
+        "away": {
+          "id": 1156,
+          "name": "Aucas",
+          "logo": "https://media.api-sports.io/football/teams/1156.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 16,
+            "extra": null
+          },
+          "team": {
+            "id": 1156,
+            "name": "Aucas",
+            "logo": "https://media.api-sports.io/football/teams/1156.png"
+          },
+          "player": {
+            "id": 66554,
+            "name": "L. Arroyo"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1534588,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-04-23T01:00:00+00:00",
+        "timestamp": 1776906000,
+        "periods": {
+          "first": 1776906000,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 26,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 1219,
+        "name": "Copa Presidente",
+        "country": "El-Salvador",
+        "logo": "https://media.api-sports.io/football/leagues/1219.png",
+        "flag": "https://media.api-sports.io/flags/sv.svg",
+        "season": 2026,
+        "round": "Round of 16",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 4303,
+          "name": "Firpo",
+          "logo": "https://media.api-sports.io/football/teams/4303.png",
+          "winner": true
+        },
+        "away": {
+          "id": 27501,
+          "name": "Batanecos",
+          "logo": "https://media.api-sports.io/football/teams/27501.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 4,
+            "extra": null
+          },
+          "team": {
+            "id": 4303,
+            "name": "Firpo",
+            "logo": "https://media.api-sports.io/football/teams/4303.png"
+          },
+          "player": {
+            "id": 95545,
+            "name": "M. Ferreira"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 20,
+            "extra": null
+          },
+          "team": {
+            "id": 4303,
+            "name": "Firpo",
+            "logo": "https://media.api-sports.io/football/teams/4303.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1542111,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-04-23T01:00:00+00:00",
+        "timestamp": 1776906000,
+        "periods": {
+          "first": 1776906000,
+          "second": null
+        },
+        "venue": {
+          "id": 1821,
+          "name": "Estadio Carlos Vega Villalba",
+          "city": "Zacatecas"
+        },
+        "status": {
+          "long": "First Half",
+          "short": "1H",
+          "elapsed": 27,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 263,
+        "name": "Liga de Expansión MX",
+        "country": "Mexico",
+        "logo": "https://media.api-sports.io/football/leagues/263.png",
+        "flag": "https://media.api-sports.io/flags/mx.svg",
+        "season": 2025,
+        "round": "Quarter-finals",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 2299,
+          "name": "Mineros de Zacatecas",
+          "logo": "https://media.api-sports.io/football/teams/2299.png",
+          "winner": true
+        },
+        "away": {
+          "id": 2284,
+          "name": "Monarcas",
+          "logo": "https://media.api-sports.io/football/teams/2284.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 3,
+            "extra": null
+          },
+          "team": {
+            "id": 2299,
+            "name": "Mineros de Zacatecas",
+            "logo": "https://media.api-sports.io/football/teams/2299.png"
+          },
+          "player": {
+            "id": 554749,
+            "name": "M. Perez"
+          },
+          "assist": {
+            "id": 35495,
+            "name": "P. Padilla"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 16,
+            "extra": null
+          },
+          "team": {
+            "id": 2299,
+            "name": "Mineros de Zacatecas",
+            "logo": "https://media.api-sports.io/football/teams/2299.png"
+          },
+          "player": {
+            "id": 354499,
+            "name": "A. Villacorta"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 23,
+            "extra": null
+          },
+          "team": {
+            "id": 2299,
+            "name": "Mineros de Zacatecas",
+            "logo": "https://media.api-sports.io/football/teams/2299.png"
+          },
+          "player": {
+            "id": 354499,
+            "name": "A. Villacorta"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 23,
+            "extra": null
+          },
+          "team": {
+            "id": 2299,
+            "name": "Mineros de Zacatecas",
+            "logo": "https://media.api-sports.io/football/teams/2299.png"
+          },
+          "player": {
+            "id": 354499,
+            "name": "A. Villacorta"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Red Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1489178,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-04-23T00:00:00+00:00",
+        "timestamp": 1776902400,
+        "periods": {
+          "first": 1776902400,
+          "second": 1776906000
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": "San Isidro de El General"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 66,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 162,
+        "name": "Primera División",
+        "country": "Costa-Rica",
+        "logo": "https://media.api-sports.io/football/leagues/162.png",
+        "flag": "https://media.api-sports.io/flags/cr.svg",
+        "season": 2025,
+        "round": "Clausura - 17",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 819,
+          "name": "Perez Zeledon",
+          "logo": "https://media.api-sports.io/football/teams/819.png",
+          "winner": null
+        },
+        "away": {
+          "id": 815,
+          "name": "CS Herediano",
+          "logo": "https://media.api-sports.io/football/teams/815.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 41,
+            "extra": null
+          },
+          "team": {
+            "id": 819,
+            "name": "Perez Zeledon",
+            "logo": "https://media.api-sports.io/football/teams/819.png"
+          },
+          "player": {
+            "id": 270486,
+            "name": "R. Rodriguez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 51,
+            "extra": null
+          },
+          "team": {
+            "id": 815,
+            "name": "CS Herediano",
+            "logo": "https://media.api-sports.io/football/teams/815.png"
+          },
+          "player": {
+            "id": 27623,
+            "name": "G. Montes"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 57,
+            "extra": null
+          },
+          "team": {
+            "id": 819,
+            "name": "Perez Zeledon",
+            "logo": "https://media.api-sports.io/football/teams/819.png"
+          },
+          "player": {
+            "id": 14213,
+            "name": "J. Canales"
+          },
+          "assist": {
+            "id": 656767,
+            "name": "D. Christopher"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 57,
+            "extra": null
+          },
+          "team": {
+            "id": 819,
+            "name": "Perez Zeledon",
+            "logo": "https://media.api-sports.io/football/teams/819.png"
+          },
+          "player": {
+            "id": 560327,
+            "name": "M. Pereira"
+          },
+          "assist": {
+            "id": 475959,
+            "name": "A. Fallas"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1490226,
+        "referee": "Sergiy Boyko, Ukraine",
+        "timezone": "UTC",
+        "date": "2026-04-22T23:30:00+00:00",
+        "timestamp": 1776900600,
+        "periods": {
+          "first": 1776900600,
+          "second": 1776904200
+        },
+        "venue": {
+          "id": null,
+          "name": "Yankee Stadium",
+          "city": "Bronx"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 88,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 253,
+        "name": "Major League Soccer",
+        "country": "USA",
+        "logo": "https://media.api-sports.io/football/leagues/253.png",
+        "flag": "https://media.api-sports.io/flags/us.svg",
+        "season": 2026,
+        "round": "Regular Season - 9",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1604,
+          "name": "New York City FC",
+          "logo": "https://media.api-sports.io/football/teams/1604.png",
+          "winner": true
+        },
+        "away": {
+          "id": 2242,
+          "name": "FC Cincinnati",
+          "logo": "https://media.api-sports.io/football/teams/2242.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 4,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 20,
+            "extra": null
+          },
+          "team": {
+            "id": 1604,
+            "name": "New York City FC",
+            "logo": "https://media.api-sports.io/football/teams/1604.png"
+          },
+          "player": {
+            "id": 75414,
+            "name": "N. Mercau"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 23,
+            "extra": null
+          },
+          "team": {
+            "id": 2242,
+            "name": "FC Cincinnati",
+            "logo": "https://media.api-sports.io/football/teams/2242.png"
+          },
+          "player": {
+            "id": 3063,
+            "name": "T. Hadebe"
+          },
+          "assist": {
+            "id": 50981,
+            "name": "A. Powell"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 32,
+            "extra": null
+          },
+          "team": {
+            "id": 2242,
+            "name": "FC Cincinnati",
+            "logo": "https://media.api-sports.io/football/teams/2242.png"
+          },
+          "player": {
+            "id": 21036,
+            "name": "K. Denkey"
+          },
+          "assist": {
+            "id": 288468,
+            "name": "E. Echenique"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 35,
+            "extra": null
+          },
+          "team": {
+            "id": 1604,
+            "name": "New York City FC",
+            "logo": "https://media.api-sports.io/football/teams/1604.png"
+          },
+          "player": {
+            "id": 75414,
+            "name": "N. Mercau"
+          },
+          "assist": {
+            "id": 50859,
+            "name": "M. Moralez"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 2242,
+            "name": "FC Cincinnati",
+            "logo": "https://media.api-sports.io/football/teams/2242.png"
+          },
+          "player": {
+            "id": 50981,
+            "name": "A. Powell"
+          },
+          "assist": {
+            "id": 542095,
+            "name": "A. Chirila"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 50,
+            "extra": null
+          },
+          "team": {
+            "id": 2242,
+            "name": "FC Cincinnati",
+            "logo": "https://media.api-sports.io/football/teams/2242.png"
+          },
+          "player": {
+            "id": 307100,
+            "name": "G. Flores"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 53,
+            "extra": null
+          },
+          "team": {
+            "id": 1604,
+            "name": "New York City FC",
+            "logo": "https://media.api-sports.io/football/teams/1604.png"
+          },
+          "player": {
+            "id": 359532,
+            "name": "A. Ojeda"
+          },
+          "assist": {
+            "id": 7050,
+            "name": "A. O'Neill"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 57,
+            "extra": null
+          },
+          "team": {
+            "id": 2242,
+            "name": "FC Cincinnati",
+            "logo": "https://media.api-sports.io/football/teams/2242.png"
+          },
+          "player": {
+            "id": 15798,
+            "name": "Evander"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Var",
+          "detail": "Goal Disallowed - Foul",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 60,
+            "extra": null
+          },
+          "team": {
+            "id": 2242,
+            "name": "FC Cincinnati",
+            "logo": "https://media.api-sports.io/football/teams/2242.png"
+          },
+          "player": {
+            "id": 288468,
+            "name": "E. Echenique"
+          },
+          "assist": {
+            "id": 362155,
+            "name": "G. Valenzuela"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 60,
+            "extra": null
+          },
+          "team": {
+            "id": 2242,
+            "name": "FC Cincinnati",
+            "logo": "https://media.api-sports.io/football/teams/2242.png"
+          },
+          "player": {
+            "id": 307100,
+            "name": "G. Flores"
+          },
+          "assist": {
+            "id": 71039,
+            "name": "T. Anunga"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 65,
+            "extra": null
+          },
+          "team": {
+            "id": 2242,
+            "name": "FC Cincinnati",
+            "logo": "https://media.api-sports.io/football/teams/2242.png"
+          },
+          "player": {
+            "id": 21036,
+            "name": "K. Denkey"
+          },
+          "assist": {
+            "id": 362155,
+            "name": "G. Valenzuela"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 71,
+            "extra": null
+          },
+          "team": {
+            "id": 2242,
+            "name": "FC Cincinnati",
+            "logo": "https://media.api-sports.io/football/teams/2242.png"
+          },
+          "player": {
+            "id": 50928,
+            "name": "K. Smith"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 72,
+            "extra": null
+          },
+          "team": {
+            "id": 1604,
+            "name": "New York City FC",
+            "logo": "https://media.api-sports.io/football/teams/1604.png"
+          },
+          "player": {
+            "id": 50859,
+            "name": "M. Moralez"
+          },
+          "assist": {
+            "id": 70299,
+            "name": "Talles Magno"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 72,
+            "extra": null
+          },
+          "team": {
+            "id": 1604,
+            "name": "New York City FC",
+            "logo": "https://media.api-sports.io/football/teams/1604.png"
+          },
+          "player": {
+            "id": 1103,
+            "name": "H. Wolf"
+          },
+          "assist": {
+            "id": 50854,
+            "name": "K. Parks"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 79,
+            "extra": null
+          },
+          "team": {
+            "id": 1604,
+            "name": "New York City FC",
+            "logo": "https://media.api-sports.io/football/teams/1604.png"
+          },
+          "player": {
+            "id": 70299,
+            "name": "Talles Magno"
+          },
+          "assist": {
+            "id": 359532,
+            "name": "A. Ojeda"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 83,
+            "extra": null
+          },
+          "team": {
+            "id": 2242,
+            "name": "FC Cincinnati",
+            "logo": "https://media.api-sports.io/football/teams/2242.png"
+          },
+          "player": {
+            "id": 64168,
+            "name": "T. Barlow"
+          },
+          "assist": {
+            "id": 200833,
+            "name": "A. Jabbari"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 84,
+            "extra": null
+          },
+          "team": {
+            "id": 1604,
+            "name": "New York City FC",
+            "logo": "https://media.api-sports.io/football/teams/1604.png"
+          },
+          "player": {
+            "id": 359532,
+            "name": "A. Ojeda"
+          },
+          "assist": {
+            "id": 379134,
+            "name": "J. Shore"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 84,
+            "extra": null
+          },
+          "team": {
+            "id": 1604,
+            "name": "New York City FC",
+            "logo": "https://media.api-sports.io/football/teams/1604.png"
+          },
+          "player": {
+            "id": 75414,
+            "name": "N. Mercau"
+          },
+          "assist": {
+            "id": 641983,
+            "name": "A. Farnos"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1490227,
+        "referee": "Fotis Bazakos, USA",
+        "timezone": "UTC",
+        "date": "2026-04-22T23:30:00+00:00",
+        "timestamp": 1776900600,
+        "periods": {
+          "first": 1776900600,
+          "second": 1776904200
+        },
+        "venue": {
+          "id": null,
+          "name": "BMO Field",
+          "city": "Toronto"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 86,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 253,
+        "name": "Major League Soccer",
+        "country": "USA",
+        "logo": "https://media.api-sports.io/football/leagues/253.png",
+        "flag": "https://media.api-sports.io/flags/us.svg",
+        "season": 2026,
+        "round": "Regular Season - 9",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1601,
+          "name": "Toronto FC",
+          "logo": "https://media.api-sports.io/football/teams/1601.png",
+          "winner": null
+        },
+        "away": {
+          "id": 1599,
+          "name": "Philadelphia Union",
+          "logo": "https://media.api-sports.io/football/teams/1599.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 7,
+            "extra": null
+          },
+          "team": {
+            "id": 1601,
+            "name": "Toronto FC",
+            "logo": "https://media.api-sports.io/football/teams/1601.png"
+          },
+          "player": {
+            "id": 50817,
+            "name": "J. Osorio"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 16,
+            "extra": null
+          },
+          "team": {
+            "id": 1601,
+            "name": "Toronto FC",
+            "logo": "https://media.api-sports.io/football/teams/1601.png"
+          },
+          "player": {
+            "id": 51272,
+            "name": "D. Salloi"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 4
+          },
+          "team": {
+            "id": 1599,
+            "name": "Philadelphia Union",
+            "logo": "https://media.api-sports.io/football/teams/1599.png"
+          },
+          "player": {
+            "id": 199406,
+            "name": "M. Iloski"
+          },
+          "assist": {
+            "id": 263510,
+            "name": "J. Lukic"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 1601,
+            "name": "Toronto FC",
+            "logo": "https://media.api-sports.io/football/teams/1601.png"
+          },
+          "player": {
+            "id": 362774,
+            "name": "A. Coello"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 49,
+            "extra": null
+          },
+          "team": {
+            "id": 1601,
+            "name": "Toronto FC",
+            "logo": "https://media.api-sports.io/football/teams/1601.png"
+          },
+          "player": {
+            "id": 50816,
+            "name": "R. Laryea"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 53,
+            "extra": null
+          },
+          "team": {
+            "id": 1599,
+            "name": "Philadelphia Union",
+            "logo": "https://media.api-sports.io/football/teams/1599.png"
+          },
+          "player": {
+            "id": 338367,
+            "name": "D. Jean Jacques"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 54,
+            "extra": null
+          },
+          "team": {
+            "id": 1601,
+            "name": "Toronto FC",
+            "logo": "https://media.api-sports.io/football/teams/1601.png"
+          },
+          "player": {
+            "id": 237195,
+            "name": "D. Kerr"
+          },
+          "assist": {
+            "id": 512956,
+            "name": "M. Henry"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 56,
+            "extra": null
+          },
+          "team": {
+            "id": 1601,
+            "name": "Toronto FC",
+            "logo": "https://media.api-sports.io/football/teams/1601.png"
+          },
+          "player": {
+            "id": 25332,
+            "name": "J. Sargent"
+          },
+          "assist": {
+            "id": 51272,
+            "name": "D. Salloi"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 61,
+            "extra": null
+          },
+          "team": {
+            "id": 1599,
+            "name": "Philadelphia Union",
+            "logo": "https://media.api-sports.io/football/teams/1599.png"
+          },
+          "player": {
+            "id": 64339,
+            "name": "J. Sery Larsen"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 1601,
+            "name": "Toronto FC",
+            "logo": "https://media.api-sports.io/football/teams/1601.png"
+          },
+          "player": {
+            "id": 237109,
+            "name": "K. Franklin"
+          },
+          "assist": {
+            "id": 16776,
+            "name": "J. Cifuentes"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 65,
+            "extra": null
+          },
+          "team": {
+            "id": 1601,
+            "name": "Toronto FC",
+            "logo": "https://media.api-sports.io/football/teams/1601.png"
+          },
+          "player": {
+            "id": 51032,
+            "name": "W. Zimmerman"
+          },
+          "assist": {
+            "id": 365962,
+            "name": "L. Stefanovic"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 65,
+            "extra": null
+          },
+          "team": {
+            "id": 1599,
+            "name": "Philadelphia Union",
+            "logo": "https://media.api-sports.io/football/teams/1599.png"
+          },
+          "player": {
+            "id": 153506,
+            "name": "I. Vassilev"
+          },
+          "assist": {
+            "id": 50740,
+            "name": "A. Bedoya"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 65,
+            "extra": null
+          },
+          "team": {
+            "id": 1599,
+            "name": "Philadelphia Union",
+            "logo": "https://media.api-sports.io/football/teams/1599.png"
+          },
+          "player": {
+            "id": 338367,
+            "name": "D. Jean Jacques"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 78,
+            "extra": null
+          },
+          "team": {
+            "id": 1599,
+            "name": "Philadelphia Union",
+            "logo": "https://media.api-sports.io/football/teams/1599.png"
+          },
+          "player": {
+            "id": 392387,
+            "name": "O. Makhanya"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 79,
+            "extra": null
+          },
+          "team": {
+            "id": 1599,
+            "name": "Philadelphia Union",
+            "logo": "https://media.api-sports.io/football/teams/1599.png"
+          },
+          "player": {
+            "id": 321839,
+            "name": "B. Damiani"
+          },
+          "assist": {
+            "id": 508068,
+            "name": "E. Alladoh"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1490228,
+        "referee": "Filip Dujic, USA",
+        "timezone": "UTC",
+        "date": "2026-04-22T23:30:00+00:00",
+        "timestamp": 1776900600,
+        "periods": {
+          "first": 1776900600,
+          "second": 1776904200
+        },
+        "venue": {
+          "id": 0,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 87,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 253,
+        "name": "Major League Soccer",
+        "country": "USA",
+        "logo": "https://media.api-sports.io/football/leagues/253.png",
+        "flag": "https://media.api-sports.io/flags/us.svg",
+        "season": 2026,
+        "round": "Regular Season - 9",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1598,
+          "name": "Orlando City SC",
+          "logo": "https://media.api-sports.io/football/teams/1598.png",
+          "winner": true
+        },
+        "away": {
+          "id": 18310,
+          "name": "Charlotte",
+          "logo": "https://media.api-sports.io/football/teams/18310.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 3,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 21,
+            "extra": null
+          },
+          "team": {
+            "id": 1598,
+            "name": "Orlando City SC",
+            "logo": "https://media.api-sports.io/football/teams/1598.png"
+          },
+          "player": {
+            "id": 463959,
+            "name": "Luis Otavio"
+          },
+          "assist": {
+            "id": 382291,
+            "name": "Z. Taifi"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 24,
+            "extra": null
+          },
+          "team": {
+            "id": 1598,
+            "name": "Orlando City SC",
+            "logo": "https://media.api-sports.io/football/teams/1598.png"
+          },
+          "player": {
+            "id": 80998,
+            "name": "I. Angulo"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 33,
+            "extra": null
+          },
+          "team": {
+            "id": 18310,
+            "name": "Charlotte",
+            "logo": "https://media.api-sports.io/football/teams/18310.png"
+          },
+          "player": {
+            "id": 542333,
+            "name": "M. Agyemang"
+          },
+          "assist": {
+            "id": 47058,
+            "name": "P. Biel"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 41,
+            "extra": null
+          },
+          "team": {
+            "id": 18310,
+            "name": "Charlotte",
+            "logo": "https://media.api-sports.io/football/teams/18310.png"
+          },
+          "player": {
+            "id": 18926,
+            "name": "A. Westwood"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 41,
+            "extra": null
+          },
+          "team": {
+            "id": 1598,
+            "name": "Orlando City SC",
+            "logo": "https://media.api-sports.io/football/teams/1598.png"
+          },
+          "player": {
+            "id": 463959,
+            "name": "Luis Otavio"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 2
+          },
+          "team": {
+            "id": 1598,
+            "name": "Orlando City SC",
+            "logo": "https://media.api-sports.io/football/teams/1598.png"
+          },
+          "player": {
+            "id": 5919,
+            "name": "M. Ojeda"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 49,
+            "extra": null
+          },
+          "team": {
+            "id": 1598,
+            "name": "Orlando City SC",
+            "logo": "https://media.api-sports.io/football/teams/1598.png"
+          },
+          "player": {
+            "id": 5919,
+            "name": "M. Ojeda"
+          },
+          "assist": {
+            "id": 461514,
+            "name": "J. Ellis"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 59,
+            "extra": null
+          },
+          "team": {
+            "id": 18310,
+            "name": "Charlotte",
+            "logo": "https://media.api-sports.io/football/teams/18310.png"
+          },
+          "player": {
+            "id": 17365,
+            "name": "H. Toffolo"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 61,
+            "extra": null
+          },
+          "team": {
+            "id": 1598,
+            "name": "Orlando City SC",
+            "logo": "https://media.api-sports.io/football/teams/1598.png"
+          },
+          "player": {
+            "id": 5919,
+            "name": "M. Ojeda"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 66,
+            "extra": null
+          },
+          "team": {
+            "id": 1598,
+            "name": "Orlando City SC",
+            "logo": "https://media.api-sports.io/football/teams/1598.png"
+          },
+          "player": {
+            "id": 407262,
+            "name": "Tiago"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 18310,
+            "name": "Charlotte",
+            "logo": "https://media.api-sports.io/football/teams/18310.png"
+          },
+          "player": {
+            "id": 408541,
+            "name": "R. Aloko"
+          },
+          "assist": {
+            "id": 323800,
+            "name": "K. A. Calderon Vargas"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 18310,
+            "name": "Charlotte",
+            "logo": "https://media.api-sports.io/football/teams/18310.png"
+          },
+          "player": {
+            "id": 348231,
+            "name": "I. Toklomati"
+          },
+          "assist": {
+            "id": 304119,
+            "name": "A. Goodwin"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 18310,
+            "name": "Charlotte",
+            "logo": "https://media.api-sports.io/football/teams/18310.png"
+          },
+          "player": {
+            "id": 19026,
+            "name": "L. de la Torre"
+          },
+          "assist": {
+            "id": 50905,
+            "name": "B. Bronico"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 74,
+            "extra": null
+          },
+          "team": {
+            "id": 1598,
+            "name": "Orlando City SC",
+            "logo": "https://media.api-sports.io/football/teams/1598.png"
+          },
+          "player": {
+            "id": 407262,
+            "name": "Tiago"
+          },
+          "assist": {
+            "id": 362428,
+            "name": "T. Reid-Brown"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 78,
+            "extra": null
+          },
+          "team": {
+            "id": 1598,
+            "name": "Orlando City SC",
+            "logo": "https://media.api-sports.io/football/teams/1598.png"
+          },
+          "player": {
+            "id": 382291,
+            "name": "Z. Taifi"
+          },
+          "assist": {
+            "id": 471739,
+            "name": "I. Gomez"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 80,
+            "extra": null
+          },
+          "team": {
+            "id": 1598,
+            "name": "Orlando City SC",
+            "logo": "https://media.api-sports.io/football/teams/1598.png"
+          },
+          "player": {
+            "id": 471739,
+            "name": "I. Gomez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 81,
+            "extra": null
+          },
+          "team": {
+            "id": 18310,
+            "name": "Charlotte",
+            "logo": "https://media.api-sports.io/football/teams/18310.png"
+          },
+          "player": {
+            "id": 17365,
+            "name": "H. Toffolo"
+          },
+          "assist": {
+            "id": 7343,
+            "name": "D. Schnegg"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 81,
+            "extra": null
+          },
+          "team": {
+            "id": 18310,
+            "name": "Charlotte",
+            "logo": "https://media.api-sports.io/football/teams/18310.png"
+          },
+          "player": {
+            "id": 18926,
+            "name": "A. Westwood"
+          },
+          "assist": {
+            "id": 48580,
+            "name": "D. Diani"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1490229,
+        "referee": "Ricardo Montero, Costa Rica",
+        "timezone": "UTC",
+        "date": "2026-04-22T23:45:00+00:00",
+        "timestamp": 1776901500,
+        "periods": {
+          "first": 1776901500,
+          "second": 1776905100
+        },
+        "venue": {
+          "id": null,
+          "name": "Mercedes-Benz Stadium",
+          "city": "Atlanta"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 69,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 253,
+        "name": "Major League Soccer",
+        "country": "USA",
+        "logo": "https://media.api-sports.io/football/leagues/253.png",
+        "flag": "https://media.api-sports.io/flags/us.svg",
+        "season": 2026,
+        "round": "Regular Season - 9",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1608,
+          "name": "Atlanta United FC",
+          "logo": "https://media.api-sports.io/football/teams/1608.png",
+          "winner": true
+        },
+        "away": {
+          "id": 1609,
+          "name": "New England Revolution",
+          "logo": "https://media.api-sports.io/football/teams/1609.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 19,
+            "extra": null
+          },
+          "team": {
+            "id": 1609,
+            "name": "New England Revolution",
+            "logo": "https://media.api-sports.io/football/teams/1609.png"
+          },
+          "player": {
+            "id": 47998,
+            "name": "A. Yusuf"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Var",
+          "detail": "Goal Disallowed - offside",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 38,
+            "extra": null
+          },
+          "team": {
+            "id": 1608,
+            "name": "Atlanta United FC",
+            "logo": "https://media.api-sports.io/football/teams/1608.png"
+          },
+          "player": {
+            "id": 50749,
+            "name": "F. Picault"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 1608,
+            "name": "Atlanta United FC",
+            "logo": "https://media.api-sports.io/football/teams/1608.png"
+          },
+          "player": {
+            "id": 305832,
+            "name": "M. Galarza"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 48,
+            "extra": null
+          },
+          "team": {
+            "id": 1608,
+            "name": "Atlanta United FC",
+            "logo": "https://media.api-sports.io/football/teams/1608.png"
+          },
+          "player": {
+            "id": 265734,
+            "name": "M. Edwards"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 60,
+            "extra": null
+          },
+          "team": {
+            "id": 1609,
+            "name": "New England Revolution",
+            "logo": "https://media.api-sports.io/football/teams/1609.png"
+          },
+          "player": {
+            "id": 50774,
+            "name": "G. Yow"
+          },
+          "assist": {
+            "id": 51010,
+            "name": "D. Fagundez"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 66,
+            "extra": null
+          },
+          "team": {
+            "id": 1609,
+            "name": "New England Revolution",
+            "logo": "https://media.api-sports.io/football/teams/1609.png"
+          },
+          "player": {
+            "id": 363393,
+            "name": "L. Langoni"
+          },
+          "assist": {
+            "id": 413230,
+            "name": "P. Miller"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1490230,
+        "referee": "Marcos de Oliveira, USA",
+        "timezone": "UTC",
+        "date": "2026-04-22T23:30:00+00:00",
+        "timestamp": 1776900600,
+        "periods": {
+          "first": 1776900600,
+          "second": 1776904200
+        },
+        "venue": {
+          "id": null,
+          "name": "Sports Illustrated Stadium",
+          "city": "Harrison"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 88,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 253,
+        "name": "Major League Soccer",
+        "country": "USA",
+        "logo": "https://media.api-sports.io/football/leagues/253.png",
+        "flag": "https://media.api-sports.io/flags/us.svg",
+        "season": 2026,
+        "round": "Regular Season - 9",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1602,
+          "name": "New York Red Bulls",
+          "logo": "https://media.api-sports.io/football/teams/1602.png",
+          "winner": null
+        },
+        "away": {
+          "id": 1615,
+          "name": "DC United",
+          "logo": "https://media.api-sports.io/football/teams/1615.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 4,
+        "away": 4
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 15,
+            "extra": null
+          },
+          "team": {
+            "id": 1602,
+            "name": "New York Red Bulls",
+            "logo": "https://media.api-sports.io/football/teams/1602.png"
+          },
+          "player": {
+            "id": 418618,
+            "name": "J. Hall"
+          },
+          "assist": {
+            "id": 418310,
+            "name": "R. Donkor"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 21,
+            "extra": null
+          },
+          "team": {
+            "id": 1602,
+            "name": "New York Red Bulls",
+            "logo": "https://media.api-sports.io/football/teams/1602.png"
+          },
+          "player": {
+            "id": 418310,
+            "name": "R. Donkor"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 37,
+            "extra": null
+          },
+          "team": {
+            "id": 1615,
+            "name": "DC United",
+            "logo": "https://media.api-sports.io/football/teams/1615.png"
+          },
+          "player": {
+            "id": 111287,
+            "name": "T. Baribo"
+          },
+          "assist": {
+            "id": 323776,
+            "name": "J. Hopkins"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 1602,
+            "name": "New York Red Bulls",
+            "logo": "https://media.api-sports.io/football/teams/1602.png"
+          },
+          "player": {
+            "id": 542088,
+            "name": "M. Dos Santos"
+          },
+          "assist": {
+            "id": 388894,
+            "name": "J. Masanka Bungi"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 50,
+            "extra": null
+          },
+          "team": {
+            "id": 1602,
+            "name": "New York Red Bulls",
+            "logo": "https://media.api-sports.io/football/teams/1602.png"
+          },
+          "player": {
+            "id": 461645,
+            "name": "A. Mehmeti"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 52,
+            "extra": null
+          },
+          "team": {
+            "id": 1602,
+            "name": "New York Red Bulls",
+            "logo": "https://media.api-sports.io/football/teams/1602.png"
+          },
+          "player": {
+            "id": 341970,
+            "name": "J. Ruvalcaba"
+          },
+          "assist": {
+            "id": 1152,
+            "name": "E. Forsberg"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 54,
+            "extra": null
+          },
+          "team": {
+            "id": 1615,
+            "name": "DC United",
+            "logo": "https://media.api-sports.io/football/teams/1615.png"
+          },
+          "player": {
+            "id": 323776,
+            "name": "J. Hopkins"
+          },
+          "assist": {
+            "id": 195090,
+            "name": "Peglow"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 59,
+            "extra": null
+          },
+          "team": {
+            "id": 1615,
+            "name": "DC United",
+            "logo": "https://media.api-sports.io/football/teams/1615.png"
+          },
+          "player": {
+            "id": 111287,
+            "name": "T. Baribo"
+          },
+          "assist": {
+            "id": 195090,
+            "name": "Peglow"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 65,
+            "extra": null
+          },
+          "team": {
+            "id": 1602,
+            "name": "New York Red Bulls",
+            "logo": "https://media.api-sports.io/football/teams/1602.png"
+          },
+          "player": {
+            "id": 313773,
+            "name": "R. Mosquera"
+          },
+          "assist": {
+            "id": 422252,
+            "name": "M. Sofo"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 65,
+            "extra": null
+          },
+          "team": {
+            "id": 1602,
+            "name": "New York Red Bulls",
+            "logo": "https://media.api-sports.io/football/teams/1602.png"
+          },
+          "player": {
+            "id": 461645,
+            "name": "A. Mehmeti"
+          },
+          "assist": {
+            "id": 48010,
+            "name": "G. Berggren"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 71,
+            "extra": null
+          },
+          "team": {
+            "id": 1602,
+            "name": "New York Red Bulls",
+            "logo": "https://media.api-sports.io/football/teams/1602.png"
+          },
+          "player": {
+            "id": 341970,
+            "name": "J. Ruvalcaba"
+          },
+          "assist": {
+            "id": 418310,
+            "name": "R. Donkor"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 77,
+            "extra": null
+          },
+          "team": {
+            "id": 1615,
+            "name": "DC United",
+            "logo": "https://media.api-sports.io/football/teams/1615.png"
+          },
+          "player": {
+            "id": 51197,
+            "name": "A. Herrera"
+          },
+          "assist": {
+            "id": 207781,
+            "name": "C. Clark"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 80,
+            "extra": null
+          },
+          "team": {
+            "id": 1615,
+            "name": "DC United",
+            "logo": "https://media.api-sports.io/football/teams/1615.png"
+          },
+          "player": {
+            "id": 111287,
+            "name": "T. Baribo"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 80,
+            "extra": null
+          },
+          "team": {
+            "id": 1602,
+            "name": "New York Red Bulls",
+            "logo": "https://media.api-sports.io/football/teams/1602.png"
+          },
+          "player": {
+            "id": 341970,
+            "name": "J. Ruvalcaba"
+          },
+          "assist": {
+            "id": 275,
+            "name": "E. M. Choupo-Moting"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 81,
+            "extra": null
+          },
+          "team": {
+            "id": 1615,
+            "name": "DC United",
+            "logo": "https://media.api-sports.io/football/teams/1615.png"
+          },
+          "player": {
+            "id": 323776,
+            "name": "J. Hopkins"
+          },
+          "assist": {
+            "id": 458452,
+            "name": "J. Murrell"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 81,
+            "extra": null
+          },
+          "team": {
+            "id": 1615,
+            "name": "DC United",
+            "logo": "https://media.api-sports.io/football/teams/1615.png"
+          },
+          "player": {
+            "id": 51138,
+            "name": "B. Servania"
+          },
+          "assist": {
+            "id": 641592,
+            "name": "N. Markovic"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 86,
+            "extra": null
+          },
+          "team": {
+            "id": 1615,
+            "name": "DC United",
+            "logo": "https://media.api-sports.io/football/teams/1615.png"
+          },
+          "player": {
+            "id": null,
+            "name": null
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1493476,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-04-22T23:30:00+00:00",
+        "timestamp": 1776900600,
+        "periods": {
+          "first": 1776900600,
+          "second": 1776904200
+        },
+        "venue": {
+          "id": null,
+          "name": "Centreville Bank Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 90,
+          "extra": 3
+        }
+      },
+      "league": {
+        "id": 255,
+        "name": "USL Championship",
+        "country": "USA",
+        "logo": "https://media.api-sports.io/football/leagues/255.png",
+        "flag": "https://media.api-sports.io/flags/us.svg",
+        "season": 2026,
+        "round": "Group Stage",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 22855,
+          "name": "Rhode Island",
+          "logo": "https://media.api-sports.io/football/teams/22855.png",
+          "winner": true
+        },
+        "away": {
+          "id": 3990,
+          "name": "Charleston Battery",
+          "logo": "https://media.api-sports.io/football/teams/3990.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 4,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 15,
+            "extra": null
+          },
+          "team": {
+            "id": 3990,
+            "name": "Charleston Battery",
+            "logo": "https://media.api-sports.io/football/teams/3990.png"
+          },
+          "player": {
+            "id": 102477,
+            "name": "L. Kissiedou"
+          },
+          "assist": {
+            "id": 540888,
+            "name": "M. Foster"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 51,
+            "extra": null
+          },
+          "team": {
+            "id": 22855,
+            "name": "Rhode Island",
+            "logo": "https://media.api-sports.io/football/teams/22855.png"
+          },
+          "player": {
+            "id": 540848,
+            "name": "J. Williams"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 61,
+            "extra": null
+          },
+          "team": {
+            "id": 22855,
+            "name": "Rhode Island",
+            "logo": "https://media.api-sports.io/football/teams/22855.png"
+          },
+          "player": {
+            "id": 351495,
+            "name": "J. Kwizera"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 3990,
+            "name": "Charleston Battery",
+            "logo": "https://media.api-sports.io/football/teams/3990.png"
+          },
+          "player": {
+            "id": 413213,
+            "name": "S. Suber"
+          },
+          "assist": {
+            "id": 540781,
+            "name": "A. Cabrera"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 3990,
+            "name": "Charleston Battery",
+            "logo": "https://media.api-sports.io/football/teams/3990.png"
+          },
+          "player": {
+            "id": 645890,
+            "name": "K. Pakhomov"
+          },
+          "assist": {
+            "id": 88962,
+            "name": "D. Martinez"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 66,
+            "extra": null
+          },
+          "team": {
+            "id": 22855,
+            "name": "Rhode Island",
+            "logo": "https://media.api-sports.io/football/teams/22855.png"
+          },
+          "player": {
+            "id": 540848,
+            "name": "J. Williams"
+          },
+          "assist": {
+            "id": 47450,
+            "name": "Koke Vegas"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 70,
+            "extra": null
+          },
+          "team": {
+            "id": 22855,
+            "name": "Rhode Island",
+            "logo": "https://media.api-sports.io/football/teams/22855.png"
+          },
+          "player": {
+            "id": 406707,
+            "name": "H. Diop"
+          },
+          "assist": {
+            "id": 171351,
+            "name": "G. Stoneman"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 71,
+            "extra": null
+          },
+          "team": {
+            "id": 3990,
+            "name": "Charleston Battery",
+            "logo": "https://media.api-sports.io/football/teams/3990.png"
+          },
+          "player": {
+            "id": 543190,
+            "name": "N. Messer"
+          },
+          "assist": {
+            "id": 411192,
+            "name": "L. Blackstock"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 71,
+            "extra": null
+          },
+          "team": {
+            "id": 3990,
+            "name": "Charleston Battery",
+            "logo": "https://media.api-sports.io/football/teams/3990.png"
+          },
+          "player": {
+            "id": 172208,
+            "name": "J. Kelly"
+          },
+          "assist": {
+            "id": 541837,
+            "name": "C. Swan"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 74,
+            "extra": null
+          },
+          "team": {
+            "id": 22855,
+            "name": "Rhode Island",
+            "logo": "https://media.api-sports.io/football/teams/22855.png"
+          },
+          "player": {
+            "id": 351495,
+            "name": "J. Kwizera"
+          },
+          "assist": {
+            "id": 270964,
+            "name": "N. Fuson"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 74,
+            "extra": null
+          },
+          "team": {
+            "id": 22855,
+            "name": "Rhode Island",
+            "logo": "https://media.api-sports.io/football/teams/22855.png"
+          },
+          "player": {
+            "id": 541016,
+            "name": "H. Bacharach Capdevila"
+          },
+          "assist": {
+            "id": 70074,
+            "name": "Z. Herivaux"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 80,
+            "extra": null
+          },
+          "team": {
+            "id": 22855,
+            "name": "Rhode Island",
+            "logo": "https://media.api-sports.io/football/teams/22855.png"
+          },
+          "player": {
+            "id": 311370,
+            "name": "A. Rodriguez"
+          },
+          "assist": {
+            "id": 32368,
+            "name": "D. Atkinson"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 83,
+            "extra": null
+          },
+          "team": {
+            "id": 22855,
+            "name": "Rhode Island",
+            "logo": "https://media.api-sports.io/football/teams/22855.png"
+          },
+          "player": {
+            "id": 32368,
+            "name": "D. Atkinson"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Penalty",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 85,
+            "extra": null
+          },
+          "team": {
+            "id": 3990,
+            "name": "Charleston Battery",
+            "logo": "https://media.api-sports.io/football/teams/3990.png"
+          },
+          "player": {
+            "id": 88962,
+            "name": "D. Martinez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1498249,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-04-22T22:45:00+00:00",
+        "timestamp": 1776897900,
+        "periods": {
+          "first": 1776897900,
+          "second": 1776901500
+        },
+        "venue": {
+          "id": null,
+          "name": null,
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 82,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 1200,
+        "name": "Liga MX U21",
+        "country": "Mexico",
+        "logo": "https://media.api-sports.io/football/leagues/1200.png",
+        "flag": "https://media.api-sports.io/flags/mx.svg",
+        "season": 2025,
+        "round": "Clausura - 16",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 26831,
+          "name": "Club Tijuana U21",
+          "logo": "https://media.api-sports.io/football/teams/26831.png",
+          "winner": true
+        },
+        "away": {
+          "id": 26838,
+          "name": "Pachuca U21",
+          "logo": "https://media.api-sports.io/football/teams/26838.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": []
+    },
+    {
+      "fixture": {
+        "id": 1537031,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-04-22T23:30:00+00:00",
+        "timestamp": 1776900600,
+        "periods": {
+          "first": 1776900600,
+          "second": 1776904200
+        },
+        "venue": {
+          "id": null,
+          "name": "Estádio Governador Plácido Castelo",
+          "city": "Fortaleza"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 90,
+          "extra": 5
+        }
+      },
+      "league": {
+        "id": 73,
+        "name": "Copa Do Brasil",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/73.png",
+        "flag": "https://media.api-sports.io/flags/br.svg",
+        "season": 2026,
+        "round": "Round of 32",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 154,
+          "name": "Fortaleza EC",
+          "logo": "https://media.api-sports.io/football/teams/154.png",
+          "winner": true
+        },
+        "away": {
+          "id": 146,
+          "name": "CRB",
+          "logo": "https://media.api-sports.io/football/teams/146.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 11,
+            "extra": null
+          },
+          "team": {
+            "id": 154,
+            "name": "Fortaleza EC",
+            "logo": "https://media.api-sports.io/football/teams/154.png"
+          },
+          "player": {
+            "id": 403953,
+            "name": "Ryan"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 11,
+            "extra": null
+          },
+          "team": {
+            "id": 146,
+            "name": "CRB",
+            "logo": "https://media.api-sports.io/football/teams/146.png"
+          },
+          "player": {
+            "id": 54012,
+            "name": "Fabio Alemao"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 32,
+            "extra": null
+          },
+          "team": {
+            "id": 146,
+            "name": "CRB",
+            "logo": "https://media.api-sports.io/football/teams/146.png"
+          },
+          "player": {
+            "id": 137607,
+            "name": "Mikael"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 43,
+            "extra": null
+          },
+          "team": {
+            "id": 146,
+            "name": "CRB",
+            "logo": "https://media.api-sports.io/football/teams/146.png"
+          },
+          "player": {
+            "id": 10526,
+            "name": "Pedro Castro"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 154,
+            "name": "Fortaleza EC",
+            "logo": "https://media.api-sports.io/football/teams/154.png"
+          },
+          "player": {
+            "id": 9483,
+            "name": "Mailton"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 4
+          },
+          "team": {
+            "id": 154,
+            "name": "Fortaleza EC",
+            "logo": "https://media.api-sports.io/football/teams/154.png"
+          },
+          "player": {
+            "id": 6078,
+            "name": "E. Britez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 154,
+            "name": "Fortaleza EC",
+            "logo": "https://media.api-sports.io/football/teams/154.png"
+          },
+          "player": {
+            "id": 516180,
+            "name": "Lucas Emanoel"
+          },
+          "assist": {
+            "id": 158434,
+            "name": "J. B. Miritello"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 48,
+            "extra": null
+          },
+          "team": {
+            "id": 146,
+            "name": "CRB",
+            "logo": "https://media.api-sports.io/football/teams/146.png"
+          },
+          "player": {
+            "id": 237104,
+            "name": "Henri"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 56,
+            "extra": null
+          },
+          "team": {
+            "id": 154,
+            "name": "Fortaleza EC",
+            "logo": "https://media.api-sports.io/football/teams/154.png"
+          },
+          "player": {
+            "id": 158434,
+            "name": "J. B. Miritello"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 57,
+            "extra": null
+          },
+          "team": {
+            "id": 146,
+            "name": "CRB",
+            "logo": "https://media.api-sports.io/football/teams/146.png"
+          },
+          "player": {
+            "id": 10526,
+            "name": "Pedro Castro"
+          },
+          "assist": {
+            "id": 9910,
+            "name": "De Lucca"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 66,
+            "extra": null
+          },
+          "team": {
+            "id": 146,
+            "name": "CRB",
+            "logo": "https://media.api-sports.io/football/teams/146.png"
+          },
+          "player": {
+            "id": 10320,
+            "name": "Danielzinho"
+          },
+          "assist": {
+            "id": 9821,
+            "name": "Douglas Baggio"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 66,
+            "extra": null
+          },
+          "team": {
+            "id": 154,
+            "name": "Fortaleza EC",
+            "logo": "https://media.api-sports.io/football/teams/154.png"
+          },
+          "player": {
+            "id": 403953,
+            "name": "Ryan"
+          },
+          "assist": {
+            "id": 1069,
+            "name": "Lucas Sasha"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 73,
+            "extra": null
+          },
+          "team": {
+            "id": 146,
+            "name": "CRB",
+            "logo": "https://media.api-sports.io/football/teams/146.png"
+          },
+          "player": {
+            "id": 9910,
+            "name": "De Lucca"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 75,
+            "extra": null
+          },
+          "team": {
+            "id": 154,
+            "name": "Fortaleza EC",
+            "logo": "https://media.api-sports.io/football/teams/154.png"
+          },
+          "player": {
+            "id": 223253,
+            "name": "Pierre"
+          },
+          "assist": {
+            "id": 404575,
+            "name": "Ronald"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 76,
+            "extra": null
+          },
+          "team": {
+            "id": 146,
+            "name": "CRB",
+            "logo": "https://media.api-sports.io/football/teams/146.png"
+          },
+          "player": {
+            "id": 137607,
+            "name": "Mikael"
+          },
+          "assist": {
+            "id": 1498,
+            "name": "Luiz Phellype"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 76,
+            "extra": null
+          },
+          "team": {
+            "id": 146,
+            "name": "CRB",
+            "logo": "https://media.api-sports.io/football/teams/146.png"
+          },
+          "player": {
+            "id": 54695,
+            "name": "Hereda"
+          },
+          "assist": {
+            "id": 10338,
+            "name": "Kevin"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 77,
+            "extra": null
+          },
+          "team": {
+            "id": 154,
+            "name": "Fortaleza EC",
+            "logo": "https://media.api-sports.io/football/teams/154.png"
+          },
+          "player": {
+            "id": 404575,
+            "name": "Ronald"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 90,
+            "extra": null
+          },
+          "team": {
+            "id": 154,
+            "name": "Fortaleza EC",
+            "logo": "https://media.api-sports.io/football/teams/154.png"
+          },
+          "player": {
+            "id": 6242,
+            "name": "T. Pochettino"
+          },
+          "assist": {
+            "id": 237920,
+            "name": "Paulo Baya"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 90,
+            "extra": null
+          },
+          "team": {
+            "id": 154,
+            "name": "Fortaleza EC",
+            "logo": "https://media.api-sports.io/football/teams/154.png"
+          },
+          "player": {
+            "id": 10073,
+            "name": "Luiz Fernando"
+          },
+          "assist": {
+            "id": 362718,
+            "name": "Lucca Prior"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1537039,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-04-22T23:30:00+00:00",
+        "timestamp": 1776900600,
+        "periods": {
+          "first": 1776900600,
+          "second": 1776904200
+        },
+        "venue": {
+          "id": null,
+          "name": "Orlando Scarpelli",
+          "city": "Florianópolis"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 90,
+          "extra": 6
+        }
+      },
+      "league": {
+        "id": 73,
+        "name": "Copa Do Brasil",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/73.png",
+        "flag": "https://media.api-sports.io/flags/br.svg",
+        "season": 2026,
+        "round": "Round of 32",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 13975,
+          "name": "Athletic Club",
+          "logo": "https://media.api-sports.io/football/teams/13975.png",
+          "winner": false
+        },
+        "away": {
+          "id": 119,
+          "name": "Internacional",
+          "logo": "https://media.api-sports.io/football/teams/119.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 16,
+            "extra": null
+          },
+          "team": {
+            "id": 13975,
+            "name": "Athletic Club",
+            "logo": "https://media.api-sports.io/football/teams/13975.png"
+          },
+          "player": {
+            "id": 396358,
+            "name": "Kauan Rodrigues"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 32,
+            "extra": null
+          },
+          "team": {
+            "id": 119,
+            "name": "Internacional",
+            "logo": "https://media.api-sports.io/football/teams/119.png"
+          },
+          "player": {
+            "id": 9921,
+            "name": "Bruno Henrique"
+          },
+          "assist": {
+            "id": 9893,
+            "name": "Alerrandro"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 119,
+            "name": "Internacional",
+            "logo": "https://media.api-sports.io/football/teams/119.png"
+          },
+          "player": {
+            "id": 2044,
+            "name": "G. Mercado"
+          },
+          "assist": {
+            "id": 305042,
+            "name": "Victor Gabriel"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 61,
+            "extra": null
+          },
+          "team": {
+            "id": 13975,
+            "name": "Athletic Club",
+            "logo": "https://media.api-sports.io/football/teams/13975.png"
+          },
+          "player": {
+            "id": 195975,
+            "name": "Jhonatan Silva"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 63,
+            "extra": null
+          },
+          "team": {
+            "id": 119,
+            "name": "Internacional",
+            "logo": "https://media.api-sports.io/football/teams/119.png"
+          },
+          "player": {
+            "id": 129902,
+            "name": "A. Bernabei"
+          },
+          "assist": {
+            "id": 692,
+            "name": "Alan Patrick"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 119,
+            "name": "Internacional",
+            "logo": "https://media.api-sports.io/football/teams/119.png"
+          },
+          "player": {
+            "id": 22231,
+            "name": "Thiago Maia"
+          },
+          "assist": {
+            "id": 10147,
+            "name": "Vitinho"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 64,
+            "extra": null
+          },
+          "team": {
+            "id": 119,
+            "name": "Internacional",
+            "logo": "https://media.api-sports.io/football/teams/119.png"
+          },
+          "player": {
+            "id": 9893,
+            "name": "Alerrandro"
+          },
+          "assist": {
+            "id": 6011,
+            "name": "R. Borre"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 66,
+            "extra": null
+          },
+          "team": {
+            "id": 119,
+            "name": "Internacional",
+            "logo": "https://media.api-sports.io/football/teams/119.png"
+          },
+          "player": {
+            "id": 6519,
+            "name": "R. Villagra"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 68,
+            "extra": null
+          },
+          "team": {
+            "id": 13975,
+            "name": "Athletic Club",
+            "logo": "https://media.api-sports.io/football/teams/13975.png"
+          },
+          "player": {
+            "id": 346824,
+            "name": "D. Vera"
+          },
+          "assist": {
+            "id": 180926,
+            "name": "Leo Chu"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 71,
+            "extra": null
+          },
+          "team": {
+            "id": 13975,
+            "name": "Athletic Club",
+            "logo": "https://media.api-sports.io/football/teams/13975.png"
+          },
+          "player": {
+            "id": 314162,
+            "name": "Diogo Batista"
+          },
+          "assist": {
+            "id": 458373,
+            "name": "Marcelo Henrique"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 72,
+            "extra": null
+          },
+          "team": {
+            "id": 119,
+            "name": "Internacional",
+            "logo": "https://media.api-sports.io/football/teams/119.png"
+          },
+          "player": {
+            "id": 415052,
+            "name": "Allex"
+          },
+          "assist": {
+            "id": 305819,
+            "name": "Kayky"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 79,
+            "extra": null
+          },
+          "team": {
+            "id": 13975,
+            "name": "Athletic Club",
+            "logo": "https://media.api-sports.io/football/teams/13975.png"
+          },
+          "player": {
+            "id": 544689,
+            "name": "Jota"
+          },
+          "assist": {
+            "id": 307870,
+            "name": "G. Cabezas"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 79,
+            "extra": null
+          },
+          "team": {
+            "id": 13975,
+            "name": "Athletic Club",
+            "logo": "https://media.api-sports.io/football/teams/13975.png"
+          },
+          "player": {
+            "id": 396358,
+            "name": "Kauan Rodrigues"
+          },
+          "assist": {
+            "id": 454454,
+            "name": "Max"
+          },
+          "type": "subst",
+          "detail": "Substitution 4",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 79,
+            "extra": null
+          },
+          "team": {
+            "id": 13975,
+            "name": "Athletic Club",
+            "logo": "https://media.api-sports.io/football/teams/13975.png"
+          },
+          "player": {
+            "id": 266389,
+            "name": "Ian Luccas"
+          },
+          "assist": {
+            "id": 129966,
+            "name": "Pedro Oliveira"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 81,
+            "extra": null
+          },
+          "team": {
+            "id": 13975,
+            "name": "Athletic Club",
+            "logo": "https://media.api-sports.io/football/teams/13975.png"
+          },
+          "player": {
+            "id": 322327,
+            "name": "Belezi"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 86,
+            "extra": null
+          },
+          "team": {
+            "id": 119,
+            "name": "Internacional",
+            "logo": "https://media.api-sports.io/football/teams/119.png"
+          },
+          "player": {
+            "id": 9921,
+            "name": "Bruno Henrique"
+          },
+          "assist": {
+            "id": 96353,
+            "name": "Paulinho Paula"
+          },
+          "type": "subst",
+          "detail": "Substitution 5",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1538346,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-04-23T00:00:00+00:00",
+        "timestamp": 1776902400,
+        "periods": {
+          "first": 1776902400,
+          "second": 1776906000
+        },
+        "venue": {
+          "id": null,
+          "name": "Estadio Ramon Tahuichi Aguilera Costas",
+          "city": "Santa Cruz"
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 64,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 344,
+        "name": "Primera División",
+        "country": "Bolivia",
+        "logo": "https://media.api-sports.io/football/leagues/344.png",
+        "flag": "https://media.api-sports.io/flags/bo.svg",
+        "season": 2026,
+        "round": "Apertura - 3",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 3701,
+          "name": "Blooming",
+          "logo": "https://media.api-sports.io/football/teams/3701.png",
+          "winner": true
+        },
+        "away": {
+          "id": 3706,
+          "name": "Nacional Potosí",
+          "logo": "https://media.api-sports.io/football/teams/3706.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 3,
+            "extra": null
+          },
+          "team": {
+            "id": 3701,
+            "name": "Blooming",
+            "logo": "https://media.api-sports.io/football/teams/3701.png"
+          },
+          "player": {
+            "id": 26714,
+            "name": "D. Bejarano"
+          },
+          "assist": {
+            "id": 125635,
+            "name": "R. Hinojosa"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 29,
+            "extra": null
+          },
+          "team": {
+            "id": 3706,
+            "name": "Nacional Potosí",
+            "logo": "https://media.api-sports.io/football/teams/3706.png"
+          },
+          "player": {
+            "id": 13216,
+            "name": "M. Nunez"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 38,
+            "extra": null
+          },
+          "team": {
+            "id": 3701,
+            "name": "Blooming",
+            "logo": "https://media.api-sports.io/football/teams/3701.png"
+          },
+          "player": {
+            "id": 65996,
+            "name": "J. Valverde"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 40,
+            "extra": null
+          },
+          "team": {
+            "id": 3701,
+            "name": "Blooming",
+            "logo": "https://media.api-sports.io/football/teams/3701.png"
+          },
+          "player": {
+            "id": 352663,
+            "name": "J. Vila"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 42,
+            "extra": null
+          },
+          "team": {
+            "id": 3701,
+            "name": "Blooming",
+            "logo": "https://media.api-sports.io/football/teams/3701.png"
+          },
+          "player": {
+            "id": 13271,
+            "name": "J. Garces"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 3701,
+            "name": "Blooming",
+            "logo": "https://media.api-sports.io/football/teams/3701.png"
+          },
+          "player": {
+            "id": 125635,
+            "name": "R. Hinojosa"
+          },
+          "assist": {
+            "id": 579041,
+            "name": "R. Melgar"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 2
+          },
+          "team": {
+            "id": 3706,
+            "name": "Nacional Potosí",
+            "logo": "https://media.api-sports.io/football/teams/3706.png"
+          },
+          "player": {
+            "id": 65756,
+            "name": "D. Hoyos"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 3701,
+            "name": "Blooming",
+            "logo": "https://media.api-sports.io/football/teams/3701.png"
+          },
+          "player": {
+            "id": 13271,
+            "name": "J. Garces"
+          },
+          "assist": {
+            "id": 330400,
+            "name": "A. Vasquez"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 3701,
+            "name": "Blooming",
+            "logo": "https://media.api-sports.io/football/teams/3701.png"
+          },
+          "player": {
+            "id": 579041,
+            "name": "R. Melgar"
+          },
+          "assist": {
+            "id": 655902,
+            "name": "M. Ocampo"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 3706,
+            "name": "Nacional Potosí",
+            "logo": "https://media.api-sports.io/football/teams/3706.png"
+          },
+          "player": {
+            "id": 549611,
+            "name": "J. Orellana"
+          },
+          "assist": {
+            "id": 549618,
+            "name": "S. Pena"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 3706,
+            "name": "Nacional Potosí",
+            "logo": "https://media.api-sports.io/football/teams/3706.png"
+          },
+          "player": {
+            "id": 13216,
+            "name": "M. Nunez"
+          },
+          "assist": {
+            "id": 546779,
+            "name": "J. Rojas"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 49,
+            "extra": null
+          },
+          "team": {
+            "id": 3701,
+            "name": "Blooming",
+            "logo": "https://media.api-sports.io/football/teams/3701.png"
+          },
+          "player": {
+            "id": 65791,
+            "name": "M. Villarroel"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Var",
+          "detail": "Goal Disallowed - video review",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 54,
+            "extra": null
+          },
+          "team": {
+            "id": 3706,
+            "name": "Nacional Potosí",
+            "logo": "https://media.api-sports.io/football/teams/3706.png"
+          },
+          "player": {
+            "id": 76748,
+            "name": "O. Baldomar"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 57,
+            "extra": null
+          },
+          "team": {
+            "id": 3701,
+            "name": "Blooming",
+            "logo": "https://media.api-sports.io/football/teams/3701.png"
+          },
+          "player": {
+            "id": 655902,
+            "name": "M. Ocampo"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 59,
+            "extra": null
+          },
+          "team": {
+            "id": 3701,
+            "name": "Blooming",
+            "logo": "https://media.api-sports.io/football/teams/3701.png"
+          },
+          "player": {
+            "id": 65674,
+            "name": "C. Menacho"
+          },
+          "assist": {
+            "id": 196036,
+            "name": "J. Chura"
+          },
+          "type": "subst",
+          "detail": "Substitution 3",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1540053,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-04-23T00:15:00+00:00",
+        "timestamp": 1776903300,
+        "periods": {
+          "first": 1776903300,
+          "second": 1776906900
+        },
+        "venue": {
+          "id": null,
+          "name": "Cancha De Temperley",
+          "city": null
+        },
+        "status": {
+          "long": "Second Half",
+          "short": "2H",
+          "elapsed": 54,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 130,
+        "name": "Copa Argentina",
+        "country": "Argentina",
+        "logo": "https://media.api-sports.io/football/leagues/130.png",
+        "flag": "https://media.api-sports.io/flags/ar.svg",
+        "season": 2026,
+        "round": "Round of 32",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 469,
+          "name": "Deportivo Moron",
+          "logo": "https://media.api-sports.io/football/teams/469.png",
+          "winner": false
+        },
+        "away": {
+          "id": 1963,
+          "name": "Midland",
+          "logo": "https://media.api-sports.io/football/teams/1963.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 18,
+            "extra": null
+          },
+          "team": {
+            "id": 469,
+            "name": "Deportivo Moron",
+            "logo": "https://media.api-sports.io/football/teams/469.png"
+          },
+          "player": {
+            "id": 566181,
+            "name": "T. Lauro"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 43,
+            "extra": null
+          },
+          "team": {
+            "id": 1963,
+            "name": "Midland",
+            "logo": "https://media.api-sports.io/football/teams/1963.png"
+          },
+          "player": {
+            "id": 289458,
+            "name": "J. Perales"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 1
+          },
+          "team": {
+            "id": 1963,
+            "name": "Midland",
+            "logo": "https://media.api-sports.io/football/teams/1963.png"
+          },
+          "player": {
+            "id": 573973,
+            "name": "G. Cepeda"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 469,
+            "name": "Deportivo Moron",
+            "logo": "https://media.api-sports.io/football/teams/469.png"
+          },
+          "player": {
+            "id": 414522,
+            "name": "F. Baez"
+          },
+          "assist": {
+            "id": 125659,
+            "name": "G. Berterame"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 469,
+            "name": "Deportivo Moron",
+            "logo": "https://media.api-sports.io/football/teams/469.png"
+          },
+          "player": {
+            "id": 566181,
+            "name": "T. Lauro"
+          },
+          "assist": {
+            "id": 5410,
+            "name": "J. Olivares"
+          },
+          "type": "subst",
+          "detail": "Substitution 2",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 46,
+            "extra": null
+          },
+          "team": {
+            "id": 1963,
+            "name": "Midland",
+            "logo": "https://media.api-sports.io/football/teams/1963.png"
+          },
+          "player": {
+            "id": 289458,
+            "name": "J. Perales"
+          },
+          "assist": {
+            "id": 536861,
+            "name": "R. Cao"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1490232,
+        "referee": "Rubiel Vazquez, USA",
+        "timezone": "UTC",
+        "date": "2026-04-23T00:30:00+00:00",
+        "timestamp": 1776904200,
+        "periods": {
+          "first": 1776904200,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Shell Energy Stadium",
+          "city": "Houston"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 3
+        }
+      },
+      "league": {
+        "id": 253,
+        "name": "Major League Soccer",
+        "country": "USA",
+        "logo": "https://media.api-sports.io/football/leagues/253.png",
+        "flag": "https://media.api-sports.io/flags/us.svg",
+        "season": 2026,
+        "round": "Regular Season - 9",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1600,
+          "name": "Houston Dynamo",
+          "logo": "https://media.api-sports.io/football/teams/1600.png",
+          "winner": true
+        },
+        "away": {
+          "id": 25484,
+          "name": "San Diego",
+          "logo": "https://media.api-sports.io/football/teams/25484.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 14,
+            "extra": null
+          },
+          "team": {
+            "id": 1600,
+            "name": "Houston Dynamo",
+            "logo": "https://media.api-sports.io/football/teams/1600.png"
+          },
+          "player": {
+            "id": 306581,
+            "name": "Felipe Andrade"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 35,
+            "extra": null
+          },
+          "team": {
+            "id": 1600,
+            "name": "Houston Dynamo",
+            "logo": "https://media.api-sports.io/football/teams/1600.png"
+          },
+          "player": {
+            "id": 214270,
+            "name": "I. Aliyu"
+          },
+          "assist": {
+            "id": 66208,
+            "name": "O. Lingr"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 38,
+            "extra": null
+          },
+          "team": {
+            "id": 25484,
+            "name": "San Diego",
+            "logo": "https://media.api-sports.io/football/teams/25484.png"
+          },
+          "player": {
+            "id": 2977,
+            "name": "A. Godoy"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1520654,
+        "referee": "Andre Luis Skettino Policarpo Bento, Brazil",
+        "timezone": "UTC",
+        "date": "2026-04-23T00:30:00+00:00",
+        "timestamp": 1776904200,
+        "periods": {
+          "first": 1776904200,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Arena Pantanal",
+          "city": "Cuiabá"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 5
+        }
+      },
+      "league": {
+        "id": 72,
+        "name": "Serie B",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/72.png",
+        "flag": "https://media.api-sports.io/flags/br.svg",
+        "season": 2026,
+        "round": "Regular Season - 6",
+        "standings": true
+      },
+      "teams": {
+        "home": {
+          "id": 1193,
+          "name": "Cuiaba",
+          "logo": "https://media.api-sports.io/football/teams/1193.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2618,
+          "name": "Botafogo SP",
+          "logo": "https://media.api-sports.io/football/teams/2618.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 25,
+            "extra": null
+          },
+          "team": {
+            "id": 2618,
+            "name": "Botafogo SP",
+            "logo": "https://media.api-sports.io/football/teams/2618.png"
+          },
+          "player": {
+            "id": 1840,
+            "name": "Wallace"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 40,
+            "extra": null
+          },
+          "team": {
+            "id": 1193,
+            "name": "Cuiaba",
+            "logo": "https://media.api-sports.io/football/teams/1193.png"
+          },
+          "player": {
+            "id": 133182,
+            "name": "Vitor Mendes"
+          },
+          "assist": {
+            "id": 463967,
+            "name": "Luis Soares"
+          },
+          "type": "subst",
+          "detail": "Substitution 1",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 4
+          },
+          "team": {
+            "id": 1193,
+            "name": "Cuiaba",
+            "logo": "https://media.api-sports.io/football/teams/1193.png"
+          },
+          "player": {
+            "id": 162684,
+            "name": "Rodrigo Rodrigues"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1537032,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-04-23T00:30:00+00:00",
+        "timestamp": 1776904200,
+        "periods": {
+          "first": 1776904200,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Estádio do Maracanã",
+          "city": "Rio de Janeiro"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 5
+        }
+      },
+      "league": {
+        "id": 73,
+        "name": "Copa Do Brasil",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/73.png",
+        "flag": "https://media.api-sports.io/flags/br.svg",
+        "season": 2026,
+        "round": "Round of 32",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 127,
+          "name": "Flamengo",
+          "logo": "https://media.api-sports.io/football/teams/127.png",
+          "winner": null
+        },
+        "away": {
+          "id": 136,
+          "name": "Vitoria",
+          "logo": "https://media.api-sports.io/football/teams/136.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 10,
+            "extra": null
+          },
+          "team": {
+            "id": 127,
+            "name": "Flamengo",
+            "logo": "https://media.api-sports.io/football/teams/127.png"
+          },
+          "player": {
+            "id": 332654,
+            "name": "Evertton Araujo"
+          },
+          "assist": {
+            "id": 5995,
+            "name": "N. de la Cruz"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 11,
+            "extra": null
+          },
+          "team": {
+            "id": 136,
+            "name": "Vitoria",
+            "logo": "https://media.api-sports.io/football/teams/136.png"
+          },
+          "player": {
+            "id": 9549,
+            "name": "Erick"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 44,
+            "extra": null
+          },
+          "team": {
+            "id": 127,
+            "name": "Flamengo",
+            "logo": "https://media.api-sports.io/football/teams/127.png"
+          },
+          "player": {
+            "id": 618,
+            "name": "Danilo"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        }
+      ]
+    },
+    {
+      "fixture": {
+        "id": 1537033,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2026-04-23T00:30:00+00:00",
+        "timestamp": 1776904200,
+        "periods": {
+          "first": 1776904200,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Estádio Cícero de Souza Marques",
+          "city": "Bragança Paulista"
+        },
+        "status": {
+          "long": "Halftime",
+          "short": "HT",
+          "elapsed": 45,
+          "extra": 6
+        }
+      },
+      "league": {
+        "id": 73,
+        "name": "Copa Do Brasil",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/73.png",
+        "flag": "https://media.api-sports.io/flags/br.svg",
+        "season": 2026,
+        "round": "Round of 32",
+        "standings": false
+      },
+      "teams": {
+        "home": {
+          "id": 794,
+          "name": "RB Bragantino",
+          "logo": "https://media.api-sports.io/football/teams/794.png",
+          "winner": null
+        },
+        "away": {
+          "id": 7848,
+          "name": "Mirassol",
+          "logo": "https://media.api-sports.io/football/teams/7848.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [
+        {
+          "time": {
+            "elapsed": 7,
+            "extra": null
+          },
+          "team": {
+            "id": 794,
+            "name": "RB Bragantino",
+            "logo": "https://media.api-sports.io/football/teams/794.png"
+          },
+          "player": {
+            "id": 279811,
+            "name": "Lucas Barbosa"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 1
+          },
+          "team": {
+            "id": 794,
+            "name": "RB Bragantino",
+            "logo": "https://media.api-sports.io/football/teams/794.png"
+          },
+          "player": {
+            "id": 431417,
+            "name": "Vinicinho"
+          },
+          "assist": {
+            "id": null,
+            "name": null
+          },
+          "type": "Card",
+          "detail": "Yellow Card",
+          "comments": null
+        },
+        {
+          "time": {
+            "elapsed": 45,
+            "extra": 3
+          },
+          "team": {
+            "id": 7848,
+            "name": "Mirassol",
+            "logo": "https://media.api-sports.io/football/teams/7848.png"
+          },
+          "player": {
+            "id": 504957,
+            "name": "Neto Moura"
+          },
+          "assist": {
+            "id": 9907,
+            "name": "Victor Luis"
+          },
+          "type": "Goal",
+          "detail": "Normal Goal",
+          "comments": null
+        }
+      ]
+    }
+  ]
+}

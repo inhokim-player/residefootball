@@ -1,0 +1,36 @@
+RESIDE FOOTBALL 총정리
+======================
+
+목적
+- 사이트 명단 기준 핵심 운영만 빠르게 확인
+
+핵심 실행
+- 기본 운영: RESIDE_전체자동.bat (Full: API+Scheduler+LiveFeed)
+- 기준 설정: data/automation_config.json
+- 스케줄: schedule_times=["10:00"], timezone="Asia/Seoul"
+
+데이터 흐름
+- 수집: global_u25_harvest.py
+- 파이프라인: u25_pipeline.py --once
+- API 제공: u25_api.py
+- 사이트 표시: site/index.html
+
+보조(선택)
+- 로그온 자동: RUN_U25_AT_LOGON.cmd
+- 단발 10시 작업: register_daily_10am_task.bat
+- 단발 ON/OFF: enable_daily_10am_task.bat / disable_daily_10am_task.bat
+- 규칙: Full 상시 운영과 단발 10시 작업 동시 사용 금지
+
+일일 체크
+- API 상태: http://127.0.0.1:8010/health
+- 스케줄러/live_feed 로그 갱신 확인
+- 사이트 명단 반영 확인
+
+장애 복구
+1) RESIDE_전체자동.bat 재실행
+2) run_u25_pipeline_10am_once.bat 1회 실행
+3) run_u25_update_once.bat 수동 실행
+
+중요
+- PC OFF 시 로컬 자동화 중지
+- 상시 서비스는 항상 켜진 서버(API+DB) 필요
