@@ -2218,11 +2218,7 @@
      */
     let API_BASE = "https://api.residefootball.com";
     const FORCE_REGISTERED_ONLY_MODE = true;
-    const REGISTERED_PLAYERS_PATHS = [
-      "../data/registered_players.json",
-      "/data/registered_players.json",
-      "/reside football/data/registered_players.json",
-    ];
+    const REGISTERED_PLAYERS_PATH = "/data/registered_players.json";
     const REGISTERED_PLAYERS_CACHE_KEY = "u25_registered_players_cache_v1";
     const DEFAULT_REGISTERED_PLAYERS = [
       { player_id: "237104", name: "Henri", age: 23, height_cm: 0, weight_kg: 0, dominant_foot: "Right", country: "Brazil", continent: "South America", club: "CRB", position: "Defender", league: "-" },
@@ -2572,19 +2568,21 @@
     }
 
     async function fetchRegisteredPlayersSnapshot() {
-      for (const path of REGISTERED_PLAYERS_PATHS) {
-        try {
-          const res = await fetch(path, { cache: "no-store", headers: { Accept: "application/json" } });
-          if (!res.ok) continue;
+      try {
+        const res = await fetch(REGISTERED_PLAYERS_PATH, { cache: "no-store", headers: { Accept: "application/json" } });
+        if (res.ok) {
           const payload = await res.json();
           const items = normalizeRegisteredPlayers(payload);
           if (items.length) {
             saveRegisteredPlayersCache(items);
             return items;
           }
-        } catch (e) {
-          // try next candidate
+          console.error("registered_players.json is empty:", REGISTERED_PLAYERS_PATH);
+        } else {
+          console.error("Failed to fetch registered players:", REGISTERED_PLAYERS_PATH, res.status);
         }
+      } catch (e) {
+        console.error("Fetch error for registered players:", REGISTERED_PLAYERS_PATH, e);
       }
       const cached = loadRegisteredPlayersCache();
       if (cached.length) return cached;
