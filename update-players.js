@@ -57,6 +57,7 @@ export default async function handler(req, res) {
 
   const apiFootballKey = String(process.env.API_FOOTBALL_KEY || "").trim();
   const apiFootballPlayersUrl = String(process.env.API_FOOTBALL_PLAYERS_URL || "").trim();
+  const apiFootballMaxPages = Math.max(1, Math.min(200, Number(process.env.API_FOOTBALL_MAX_PAGES || 30) || 30));
   const githubToken = String(process.env.GITHUB_TOKEN || "").trim();
   const githubRepo = String(process.env.GITHUB_REPO || "").trim(); // owner/repo
   const githubBranch = String(process.env.GITHUB_BRANCH || "main").trim();
@@ -80,25 +81,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const apiRes = await fetch(apiFootballPlayersUrl, {
-      method: "GET",
-      headers: {
-        "x-apisports-key": apiFootballKey,
-        Accept: "application/json",
-      },
+    const items = await fetchAllApiFootballPlayers({
+      apiFootballPlayersUrl,
+      apiFootballKey,
+      maxPages: apiFootballMaxPages,
     });
-    if (!apiRes.ok) {
-      const text = await apiRes.text();
-      return res.status(502).json({
-        ok: false,
-        error: "api_football_failed",
-        status: apiRes.status,
-        body_preview: text.slice(0, 180),
-      });
-    }
-
-    const payload = await apiRes.json();
-    const items = normalizeApiFootballPlayers(payload);
     if (!items.length) {
       return res.status(422).json({
         ok: false,
@@ -121,6 +108,7 @@ export default async function handler(req, res) {
       ok: true,
       mode: "api_football_to_github",
       players: items.length,
+      max_pages: apiFootballMaxPages,
       path: targetPath,
       commit_sha: saved.commitSha,
     });
@@ -164,6 +152,52 @@ function normalizeApiFootballPlayers(payload) {
     });
   }
   return out.filter((x) => x.player_id && x.name);
+}
+
+async function fetchAllApiFootballPlayers({
+  apiFootballPlayersUrl,
+  apiFootballKey,
+  maxPages,
+}) {
+  const headers = {
+    "x-apisports-key": apiFootballKey,
+    Accept: "application/json",
+  };
+  const all = [];
+  const seen = new Set();
+  let totalPages = 1;
+
+  for (let page = 1; page <= totalPages && page <= maxPages; page += 1) {
+    const url = buildPagedUrl(apiFootballPlayersUrl, page);
+    const apiRes = await fetch(url, { method: "GET", headers });
+    if (!apiRes.ok) {
+      const text = await apiRes.text();
+      throw new Error(`api_football_failed:${apiRes.status}:${text.slice(0, 180)}`);
+    }
+    const payload = await apiRes.json();
+    const onePage = normalizeApiFootballPlayers(payload);
+    for (const p of onePage) {
+      if (!p.player_id || seen.has(p.player_id)) continue;
+      seen.add(p.player_id);
+      all.push(p);
+    }
+    const pagingTotal = Number(payload?.paging?.total || 0);
+    if (pagingTotal > 0) {
+      totalPages = pagingTotal;
+    } else if (!onePage.length) {
+      break;
+    }
+  }
+  return all;
+}
+
+function buildPagedUrl(baseUrl, page) {
+  const hasQuery = baseUrl.includes("?");
+  const re = /([?&])page=\d+/i;
+  if (re.test(baseUrl)) {
+    return baseUrl.replace(re, `$1page=${page}`);
+  }
+  return `${baseUrl}${hasQuery ? "&" : "?"}page=${page}`;
 }
 
 function parseCm(v) {
