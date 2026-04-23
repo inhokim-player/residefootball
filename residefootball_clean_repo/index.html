@@ -1,0 +1,3861 @@
+<!DOCTYPE html>
+<html lang="ko" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="description" content="residefootball.com U25 축구 스카우팅 플랫폼 - 선수 데이터, 랭킹, 분석, 라이브 피드 제공." />
+  <link rel="canonical" href="https://residefootball.com/" />
+  <meta property="og:title" content="Reside Football - U25 Scouting" />
+  <meta property="og:description" content="U25 선수 랭킹, 스카우팅 분석, 라이브 피드를 한 번에 확인하세요." />
+  <meta property="og:url" content="https://residefootball.com/" />
+  <meta property="og:type" content="website" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'none'; base-uri 'none'; frame-ancestors 'none'; img-src 'self' data: https: blob:; font-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://api.residefootball.com http://127.0.0.1:* http://localhost:*; upgrade-insecure-requests;" />
+  <title>U25 축구 스카우팅 시스템</title>
+  <!-- Bootstrap 5.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <style>
+    :root {
+      --bg-main: #070d17;
+      --bg-card: #0f1828;
+      --bg-elev: #15223a;
+      --border: #284062;
+      --text-main: #eef4ff;
+      --text-muted: #9fb3d6;
+      --brand: #2d7ff9;
+      --brand-soft: #17345f;
+      --success-soft: #163f2e;
+      --radius: 16px;
+      --shadow: 0 14px 38px rgba(0, 0, 0, 0.42);
+    }
+
+    body {
+      background:
+        radial-gradient(1200px 520px at 100% -12%, rgba(72, 135, 255, 0.2), transparent 62%),
+        radial-gradient(1000px 560px at -12% -18%, rgba(61, 116, 222, 0.2), transparent 68%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0)),
+        var(--bg-main);
+      color: var(--text-main);
+      letter-spacing: 0.01em;
+    }
+
+    .header.navbar {
+      min-height: 54px;
+      padding-top: 0.3rem;
+      padding-bottom: 0.3rem;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 14, 25, 0.78) !important;
+      border-bottom-color: var(--border) !important;
+      top: 42px;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+    }
+
+    /* 운영자만 보면 되는 초소형 연결 상태(문구만, 링크 없음) */
+    .nav-conn-hint {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      opacity: 0.55;
+      white-space: nowrap;
+      user-select: none;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .nav-conn-hint.is-fail {
+      color: #d4a84b;
+      opacity: 0.95;
+    }
+
+    .live-rank-banner {
+      position: sticky;
+      top: 0;
+      z-index: 1085;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.42rem 0.95rem;
+      border-bottom: 1px solid rgba(112, 152, 220, 0.38);
+      background: linear-gradient(90deg, rgba(6, 16, 32, 0.96), rgba(17, 42, 82, 0.96), rgba(7, 17, 34, 0.96));
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.34);
+      overflow: hidden;
+    }
+
+    .live-rank-banner__leader {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      padding-right: 0.4rem;
+      border-right: 1px solid rgba(120, 152, 206, 0.35);
+    }
+
+    .live-rank-banner__label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 20px;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      background: linear-gradient(135deg, rgba(76, 158, 255, 0.38), rgba(35, 95, 180, 0.34));
+      color: #d5ebff;
+      box-shadow: inset 0 0 0 1px rgba(156, 202, 255, 0.35);
+    }
+
+    .live-rank-banner__top-player {
+      color: #f3f8ff;
+      cursor: pointer;
+    }
+
+    .live-rank-banner__top-player:hover {
+      color: #99c6ff;
+    }
+
+    .live-rank-banner__top-score {
+      font-weight: 700;
+      color: #a8dbff;
+    }
+
+    .live-rank-banner__ticker-wrap {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+    }
+
+    .live-rank-banner__ticker-track {
+      display: inline-flex;
+      gap: 0.6rem;
+      white-space: nowrap;
+      will-change: transform;
+      animation: rankTickerMove 62s linear infinite;
+      padding-left: 100%;
+    }
+
+    .live-rank-banner__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      line-height: 1.1;
+      border-radius: 999px;
+      padding: 0.18rem 0.5rem;
+      border: 1px solid rgba(129, 161, 211, 0.34);
+      color: #dceaff;
+      background: rgba(24, 46, 82, 0.54);
+      cursor: pointer;
+    }
+
+    .live-rank-banner__item:hover {
+      border-color: rgba(130, 168, 223, 0.58);
+      color: #edf4ff;
+    }
+
+    .rank-move-up {
+      color: #55d48f;
+      font-weight: 700;
+    }
+
+    .rank-move-down {
+      color: #ff8585;
+      font-weight: 700;
+    }
+
+    .rank-move-flat {
+      color: #8fa5c4;
+      font-weight: 700;
+    }
+
+    @keyframes rankTickerMove {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    @media (max-width: 991px) {
+      .header.navbar {
+        top: 46px;
+      }
+
+      .live-rank-banner {
+        min-height: 46px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.35rem;
+        padding: 0.4rem 0.7rem 0.5rem;
+      }
+
+      .live-rank-banner__leader {
+        border-right: 0;
+        padding-right: 0;
+      }
+    }
+
+    .header .navbar-brand-reside {
+      display: flex;
+      align-items: baseline;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      line-height: 1.2;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .header .navbar-brand-reside:hover {
+      opacity: 0.94;
+      transform: translateY(-1px);
+    }
+
+    .header .navbar-brand-reside .brand-main {
+      font-size: 1.08rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #f4f9ff;
+    }
+
+    .header .navbar-brand-reside .brand-sub {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #93aed8;
+    }
+
+    .hero {
+      margin-top: 0.9rem;
+      margin-bottom: 0.8rem;
+      padding: 0.95rem 0.2rem 0.3rem;
+    }
+
+    .hero-title {
+      font-size: clamp(1.35rem, 2.9vw, 2rem);
+      font-weight: 800;
+      margin: 0;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      text-shadow: 0 0 24px rgba(86, 146, 255, 0.28);
+    }
+
+    .hero-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-update-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.22rem 0.62rem;
+      border-radius: 999px;
+      border: 1px solid rgba(155, 194, 246, 0.38);
+      background: linear-gradient(135deg, rgba(52, 112, 211, 0.22), rgba(29, 76, 151, 0.15));
+      color: #cde4ff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .hero-guide-pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(149, 184, 243, 0.45);
+      border-radius: 999px;
+      background: rgba(20, 42, 74, 0.56);
+      color: #d8e8ff;
+      padding: 0.24rem 0.62rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .admin-panel {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 1200;
+      width: min(360px, calc(100vw - 28px));
+      border: 1px solid rgba(130, 166, 221, 0.4);
+      border-radius: 12px;
+      background: rgba(12, 23, 40, 0.96);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+      padding: 0.72rem;
+      display: none;
+    }
+
+    .admin-panel.is-open {
+      display: block;
+    }
+
+    .admin-panel__title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.55rem;
+      color: #e3efff;
+    }
+
+    .hero-sub {
+      margin-top: 0.35rem;
+      color: #b8c9e6;
+      font-size: 0.95rem;
+      max-width: 900px;
+    }
+
+    .hero-contact-bar {
+      margin-top: 0.65rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem 1.25rem;
+    }
+
+    .hero-contact-bar__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #c9d8ef;
+      text-decoration: none;
+    }
+
+    .hero-contact-bar__link:hover {
+      color: #9fc1ff;
+    }
+
+    .hero-contact-bar__ico {
+      display: inline-flex;
+      color: #8fc0ff;
+    }
+
+    .hero-contact-bar__ico svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    .dashboard-card {
+      background: linear-gradient(180deg, rgba(21, 33, 54, 0.82), rgba(14, 22, 38, 0.94));
+      border: 1px solid var(--border) !important;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .dashboard-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      border: 1px solid rgba(125, 164, 223, 0.14);
+      background: linear-gradient(140deg, rgba(109, 162, 247, 0.08), transparent 42%, transparent 58%, rgba(109, 162, 247, 0.06));
+    }
+
+    .compact-card .card-header {
+      font-size: 0.94rem;
+      font-weight: 700;
+      padding: 0.68rem 0.85rem;
+      border-bottom: 1px solid rgba(157, 176, 207, 0.18);
+      background: linear-gradient(180deg, rgba(20, 33, 53, 0.9), rgba(17, 26, 43, 0.9));
+    }
+
+    .compact-card .card-body {
+      padding: 0.75rem 0.85rem;
+    }
+
+    .compact-label {
+      font-size: 0.78rem;
+      margin-bottom: 0.25rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .form-select,
+    .form-control {
+      background-color: rgba(8, 14, 24, 0.85);
+      border-color: var(--border);
+      color: var(--text-main);
+      border-radius: 10px;
+    }
+
+    .form-select:focus,
+    .form-control:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 0.2rem rgba(45, 127, 249, 0.2);
+      background-color: rgba(8, 14, 24, 0.92);
+      color: var(--text-main);
+    }
+
+    #apply-filter {
+      border-radius: 10px;
+      border: 0;
+      background: linear-gradient(180deg, #3a8bff, #2d7ff9);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    #apply-filter:hover {
+      background: linear-gradient(180deg, #529aff, #3e89fb);
+    }
+
+    .table {
+      --bs-table-bg: transparent;
+      --bs-table-color: var(--text-main);
+      --bs-table-border-color: rgba(157, 176, 207, 0.16);
+      margin-bottom: 0;
+    }
+
+    .table thead th {
+      color: #c9d8ef;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom-width: 1px;
+      border-bottom-color: rgba(157, 176, 207, 0.2);
+      white-space: nowrap;
+    }
+
+    .table tbody td {
+      font-size: 0.87rem;
+      vertical-align: middle;
+      color: #e3ebf9;
+    }
+
+    .table-hover > tbody > tr:hover > * {
+      --bs-table-bg-state: rgba(45, 127, 249, 0.12);
+    }
+
+    #top30-body td:first-child {
+      font-weight: 700;
+      color: #9fc1ff;
+      width: 44px;
+    }
+
+    #top30-body td:nth-child(2) {
+      font-weight: 600;
+    }
+
+    .player-name-cell {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .copy-player-btn {
+      border: 1px solid rgba(157, 176, 207, 0.38);
+      background: linear-gradient(135deg, rgba(48, 94, 168, 0.82), rgba(35, 73, 133, 0.8));
+      color: #f2f7ff;
+      border-radius: 999px;
+      min-width: 44px;
+      height: 22px;
+      padding: 0 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: copy;
+      font-size: 0.61rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .copy-player-btn:hover {
+      background: linear-gradient(135deg, rgba(67, 119, 201, 0.92), rgba(45, 89, 163, 0.9));
+      border-color: rgba(184, 211, 255, 0.86);
+    }
+
+    .copy-player-btn:focus-visible {
+      outline: 2px solid rgba(110, 170, 255, 0.9);
+      outline-offset: 1px;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: 0.35rem 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .text-bg-success {
+      background-color: var(--success-soft) !important;
+      color: #9ceec2 !important;
+      border: 1px solid rgba(156, 238, 194, 0.35);
+    }
+
+    .text-bg-danger {
+      border: 1px solid rgba(255, 147, 147, 0.35);
+    }
+
+    .tiny-note {
+      font-size: 0.74rem;
+      color: #94a3b8;
+    }
+    .index-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.45rem;
+    }
+    .index-cell {
+      border: 1px solid rgba(157, 176, 207, 0.18);
+      border-radius: 10px;
+      padding: 0.45rem;
+      background: rgba(8, 14, 24, 0.45);
+    }
+    .index-name {
+      font-size: 0.75rem;
+      color: #9db0cf;
+    }
+    .index-val {
+      font-size: 1.02rem;
+      font-weight: 700;
+      margin-top: 0.08rem;
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+    }
+    .metric-item {
+      border: 1px solid rgba(157, 176, 207, 0.18);
+      border-radius: 10px;
+      padding: 0.45rem 0.5rem;
+      background: rgba(8, 14, 24, 0.5);
+    }
+    .metric-title {
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0.35rem;
+      color: #d2def2;
+    }
+    .mini-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.35rem;
+    }
+    .mini-inputs input {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.35rem;
+    }
+    .continent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.7rem;
+    }
+    .continent-card {
+      border: 1px solid rgba(157, 176, 207, 0.16);
+      border-radius: 12px;
+      background: rgba(8, 14, 24, 0.45);
+      padding: 0.55rem;
+    }
+    .continent-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #b7cae9;
+      margin-bottom: 0.35rem;
+    }
+    .continent-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.78rem;
+      padding: 0.3rem 0.1rem;
+      border-bottom: 1px dashed rgba(157, 176, 207, 0.13);
+    }
+    .continent-row:last-child {
+      border-bottom: 0;
+    }
+    .continent-player {
+      min-width: 0;
+      flex: 1;
+      line-height: 1.3;
+    }
+    .continent-player-name {
+      font-weight: 600;
+      color: #e7eef9;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+    .continent-player-meta {
+      color: #8fa6cb;
+      font-size: 0.72rem;
+    }
+    .continent-score {
+      color: #8fc0ff;
+      font-weight: 700;
+      white-space: nowrap;
+      font-size: 0.76rem;
+    }
+    .global-rank-card {
+      border: 1px solid rgba(157, 176, 207, 0.2);
+      border-radius: 10px;
+      background: rgba(8, 14, 24, 0.45);
+      padding: 0.55rem 0.65rem;
+      margin-bottom: 0.5rem;
+    }
+    .clickable-player {
+      cursor: pointer;
+    }
+    .clickable-player:hover {
+      background: rgba(45, 127, 249, 0.12);
+      border-radius: 8px;
+    }
+    .pager-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.65rem 0.8rem;
+      border-top: 1px solid rgba(157, 176, 207, 0.16);
+      background: rgba(8, 14, 24, 0.35);
+    }
+    .pager-left,
+    .pager-right {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    #all-players-body td:first-child {
+      color: #8fc0ff;
+      font-weight: 700;
+      width: 60px;
+    }
+
+    body.splash-open {
+      overflow: hidden;
+    }
+
+    #entry-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 20000;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      overflow: hidden;
+      background: radial-gradient(1300px 740px at 65% 15%, rgba(51, 112, 214, 0.16), transparent 62%), #050812;
+      padding: max(1.25rem, env(safe-area-inset-top, 0px)) max(1.25rem, env(safe-area-inset-right, 0px))
+        max(0.5rem, env(safe-area-inset-bottom, 0px)) max(1.25rem, env(safe-area-inset-left, 0px));
+    }
+
+    .entry-splash__main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      position: relative;
+      z-index: 3;
+      padding-bottom: clamp(0.5rem, 4vh, 2rem);
+    }
+
+    .entry-splash__footer {
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+      width: 100%;
+      max-width: min(100%, 560px);
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: clamp(4.4rem, 20vh, 8.6rem);
+      padding: 0.35rem 0.5rem 0;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      pointer-events: none;
+    }
+
+    .entry-splash__sync {
+      margin-bottom: 0.35rem;
+    }
+
+    .entry-splash__sync.automation-sand__body {
+      gap: 0.55rem;
+    }
+
+    .entry-splash__sync-caption {
+      margin: 0 0 0.55rem;
+      padding: 0;
+      text-align: center;
+      font-size: clamp(1.08rem, 2.9vw, 1.34rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgba(231, 238, 249, 0.9);
+    }
+
+    .entry-splash__sync-caption .splash-line {
+      display: block;
+      letter-spacing: 0.015em;
+      text-transform: none;
+      line-height: 1.52;
+    }
+
+    .entry-splash__sync-caption .splash-line + .splash-line {
+      margin-top: 0.22rem;
+      color: #d6e7ff;
+      font-weight: 600;
+    }
+
+    .entry-splash__footer .entry-splash__collab-link {
+      pointer-events: auto;
+    }
+
+    .entry-splash__footer .entry-splash__lang-btn {
+      pointer-events: auto;
+    }
+
+    .entry-splash__lang {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.42rem;
+      margin: 0 0 0.65rem;
+    }
+
+    .entry-splash__lang-btn {
+      border: 1px solid rgba(163, 197, 244, 0.45);
+      background: rgba(17, 29, 51, 0.72);
+      color: #ebf3ff;
+      border-radius: 999px;
+      padding: 0.2rem 0.58rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .entry-splash__lang-btn:hover {
+      border-color: rgba(203, 227, 255, 0.72);
+      background: rgba(42, 68, 111, 0.72);
+      transform: translateY(-1px);
+    }
+
+    .entry-splash__lang-btn.is-active {
+      border-color: rgba(210, 233, 255, 0.95);
+      background: linear-gradient(140deg, rgba(69, 128, 221, 0.55), rgba(48, 95, 171, 0.45));
+      color: #ffffff;
+    }
+
+    .entry-splash__collab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.85rem;
+      padding-top: 0.15rem;
+      border-top: 0;
+    }
+
+    .entry-splash__collab-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: clamp(0.88rem, 2.4vw, 1.08rem);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #e7eef9;
+      text-decoration: none;
+    }
+
+    .entry-splash__collab-link:hover {
+      color: #ffffff;
+    }
+
+    .entry-splash__collab-ico {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #9fc1ff;
+    }
+
+    .entry-splash__collab-ico svg {
+      width: clamp(22px, 4.5vw, 28px);
+      height: clamp(22px, 4.5vw, 28px);
+    }
+
+    .entry-splash__collab-sep {
+      color: rgba(200, 214, 240, 0.45);
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    #entry-splash .entry-splash__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    #entry-splash .entry-splash__shade {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        to top,
+        rgba(5, 8, 18, 0.78) 0%,
+        rgba(5, 8, 18, 0.22) 42%,
+        rgba(5, 8, 18, 0.5) 100%
+      );
+    }
+
+    #entry-splash .entry-splash__stack {
+      position: relative;
+      text-align: center;
+      max-width: min(100%, 520px);
+    }
+
+    #reside-enter {
+      border: 1px solid rgba(199, 223, 255, 0.58);
+      outline: none;
+      box-shadow:
+        0 20px 44px rgba(4, 11, 24, 0.64),
+        0 0 42px rgba(93, 154, 255, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.88);
+      background: linear-gradient(180deg, rgba(248, 252, 255, 1), rgba(217, 233, 251, 0.94));
+      color: #0b1322;
+      font-weight: 800;
+      font-size: clamp(1.85rem, 5.2vw, 2.85rem);
+      letter-spacing: 0.2em;
+      text-indent: 0.2em;
+      padding: 0.52rem 1.3rem;
+      margin: 0;
+      cursor: pointer;
+      font-family: inherit;
+      line-height: 1.15;
+      text-shadow: none;
+      -webkit-tap-highlight-color: transparent;
+      border-radius: 999px;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    #reside-enter:hover {
+      transform: translateY(-2px) scale(1.015);
+      filter: brightness(1.03);
+    }
+
+    #reside-enter:focus-visible {
+      color: #0b1322;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+    }
+
+    #entry-splash .reside-tagline {
+      margin: 0.4rem 0 0;
+      padding: 0;
+      color: rgba(236, 244, 255, 0.96);
+      font-size: clamp(0.68rem, 2.2vw, 0.92rem);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-shadow: 0 0 18px rgba(90, 151, 255, 0.3);
+    }
+
+    #splash-sync-line {
+      animation: splashTextFloat 3.2s ease-in-out infinite;
+    }
+
+    @keyframes splashTextFloat {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-2px);
+      }
+    }
+
+    #entry-splash.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.42s ease, visibility 0s linear 0.42s;
+    }
+
+    .ad-banner-slot {
+      margin-top: 0.15rem;
+      border: 1px dashed rgba(157, 176, 207, 0.42) !important;
+      border-radius: var(--radius);
+      background: rgba(8, 14, 24, 0.42);
+      padding: 0.65rem 0.85rem;
+    }
+
+    .ad-banner-slot__content {
+      width: 100%;
+      max-width: 970px;
+      min-height: 90px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ad-banner-slot__hint {
+      margin: 0.5rem 0 0;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .automation-sand__body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+    }
+
+    .automation-sand__icon {
+      display: inline-flex;
+      color: #8fc0ff;
+      filter: drop-shadow(0 0 6px rgba(45, 127, 249, 0.35));
+      animation: automation-sand-flip 3s ease-in-out infinite;
+    }
+
+    @keyframes automation-sand-flip {
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(180deg);
+      }
+    }
+
+    .automation-sand__clock {
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 1.28rem;
+      color: #e7eef9;
+      text-shadow: 0 0 14px rgba(45, 127, 249, 0.32);
+    }
+
+    .spotlight-split {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .spotlight-split__pane {
+      flex: 1 1 280px;
+      min-width: 0;
+    }
+
+    @media (min-width: 992px) {
+      .spotlight-split__pane--live {
+        border-right: 1px solid rgba(38, 54, 82, 0.95);
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      .spotlight-split__pane--live {
+        border-bottom: 1px solid rgba(38, 54, 82, 0.95);
+      }
+    }
+
+    .stat-top-rank-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9db0cf;
+      margin-bottom: 0.45rem;
+    }
+
+    .header .nav-collab__link {
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #d8e8ff !important;
+      padding-left: 0.65rem;
+      padding-right: 0.65rem;
+      border-radius: 999px;
+      transition: color .18s ease, background-color .18s ease, transform .18s ease;
+    }
+
+    .header .nav-collab__link:hover {
+      color: #f8fbff !important;
+      background: rgba(67, 139, 246, 0.22);
+      transform: translateY(-1px);
+    }
+
+    .nav-lang-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border: 1px solid rgba(153, 179, 217, 0.48);
+      background: rgba(23, 42, 74, 0.62);
+      cursor: pointer;
+      padding: 0.35rem 0.55rem;
+      line-height: 1;
+      text-decoration: none;
+      border-radius: 999px;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .nav-lang-btn:hover {
+      border-color: rgba(181, 206, 244, 0.68);
+      background: rgba(40, 65, 105, 0.68);
+    }
+
+    .nav-lang-btn__icon svg {
+      display: block;
+    }
+
+    .nav-lang-btn__badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #9fc1ff;
+    }
+
+    #nav-contact-mail {
+      font-weight: 700;
+      padding-left: 0.78rem;
+      padding-right: 0.78rem;
+      border: 1px solid rgba(162, 196, 244, 0.42);
+      background: linear-gradient(135deg, rgba(61, 121, 216, 0.22), rgba(34, 81, 158, 0.12));
+      box-shadow: inset 0 0 0 1px rgba(181, 208, 244, 0.1);
+    }
+
+    #nav-contact-mail:hover {
+      border-color: rgba(193, 220, 255, 0.72);
+      box-shadow: 0 8px 18px rgba(25, 70, 146, 0.36);
+    }
+
+    #visitor-count {
+      background: linear-gradient(135deg, rgba(42, 115, 223, 0.95), rgba(32, 90, 181, 0.95)) !important;
+      border: 1px solid rgba(159, 201, 255, 0.36);
+      letter-spacing: 0.06em;
+    }
+
+    .nav-player-search {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-right: 0.45rem;
+    }
+
+    .nav-player-search__input {
+      width: clamp(140px, 18vw, 220px);
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(159, 201, 255, 0.4);
+      background: rgba(18, 30, 52, 0.9);
+      color: #e9f1ff;
+      padding: 0 0.8rem;
+      font-size: 0.82rem;
+    }
+
+    .nav-player-search__input::placeholder {
+      color: rgba(186, 206, 236, 0.72);
+    }
+
+    .nav-player-search__btn {
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(159, 201, 255, 0.48);
+      background: linear-gradient(140deg, rgba(54, 109, 194, 0.4), rgba(37, 77, 145, 0.3));
+      color: #eaf3ff;
+      padding: 0 0.72rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-player-search__btn--yt {
+      border-color: rgba(255, 122, 122, 0.55);
+      background: linear-gradient(140deg, rgba(186, 40, 40, 0.38), rgba(140, 22, 22, 0.3));
+    }
+
+    .site-legal-footer {
+      border-top: 1px solid rgba(134, 166, 214, 0.28);
+      background: rgba(8, 13, 25, 0.95);
+      padding: 1.2rem 1.1rem 1.45rem;
+      color: rgba(219, 229, 245, 0.9);
+      font-size: 0.78rem;
+      line-height: 1.62;
+    }
+
+    .site-legal-footer__inner {
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    .site-legal-footer p {
+      margin: 0 0 0.45rem;
+    }
+
+    .site-legal-footer p:last-child {
+      margin-bottom: 0;
+    }
+
+    .site-legal-footer a {
+      color: #d6e8ff;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="entry-splash" role="dialog" aria-modal="true" aria-label="RESIDE 시작 화면"
+    aria-describedby="reside-tagline splash-sync-line">
+    <img class="entry-splash__bg" src="reside-landing.png" alt="" width="1920" height="1080" decoding="async"
+      fetchpriority="high" />
+    <div class="entry-splash__shade" aria-hidden="true"></div>
+    <div class="entry-splash__main">
+      <div class="entry-splash__stack">
+        <button type="button" id="reside-enter" data-i18n="splash.enter">RESIDE</button>
+        <p id="reside-tagline" class="reside-tagline" data-i18n="splash.tagline">WORLD U25 FOOTBALL PLAYERS</p>
+      </div>
+    </div>
+    <footer class="entry-splash__footer">
+      <div class="entry-splash__lang" aria-label="Language selector">
+        <button type="button" class="entry-splash__lang-btn" data-lang-set="ko">🇰🇷 한국어</button>
+        <button type="button" class="entry-splash__lang-btn" data-lang-set="en">🇺🇸 English</button>
+        <button type="button" class="entry-splash__lang-btn" data-lang-set="zh">🇨🇳 中文</button>
+        <button type="button" class="entry-splash__lang-btn" data-lang-set="ja">🇯🇵 日本語</button>
+        <button type="button" class="entry-splash__lang-btn" data-lang-set="ar">🇸🇦 العربية</button>
+      </div>
+      <p id="splash-sync-line" class="entry-splash__sync-caption" data-i18n-html="1" data-i18n="splash.syncLine">
+        <span class="splash-line">You can check out u25 football players around the world for free.</span>
+        <span class="splash-line">Now find some hidden gems.</span>
+        <span class="splash-line">Please apply it to the game or the reality.</span>
+      </p>
+      <div class="entry-splash__sync automation-sand__body" role="status" aria-live="polite">
+        <span class="automation-sand__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <path
+              d="M7 3h10v2.2L12.8 12 17 18.8V21H7v-2.2l4.2-6.8L7 5.2V3zm2.2 2l3.8 6.1L17 5H9.2zM9.2 19H15l-2.9-4.7L9.2 19z"
+              fill="currentColor" />
+          </svg>
+        </span>
+        <span id="splash-auto-countdown" class="automation-sand__clock" role="timer" aria-live="polite">--:--:--</span>
+      </div>
+      <div class="entry-splash__collab">
+        <a id="splash-contact-mail" class="entry-splash__collab-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=k23agent@gmail.com" target="_blank" rel="noopener noreferrer">
+          <span class="entry-splash__collab-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <path d="M4 6.5h16v11H4v-11z" stroke="currentColor" stroke-width="1.65" stroke-linejoin="round" />
+              <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span data-i18n="splash.mailLabel">Email</span>
+        </a>
+        <span class="entry-splash__collab-sep" aria-hidden="true">·</span>
+        <a class="entry-splash__collab-link js-ig-profile-link" href="https://www.instagram.com/resideofficial234/"
+          target="_blank" rel="noopener noreferrer">
+          <span class="entry-splash__collab-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <path fill="currentColor"
+                d="M12 2.2c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85C2.42 3.92 3.93 2.4 7.15 2.25 8.42 2.19 8.8 2.18 12 2.18zm0-2.2C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12c0 3.26.01 3.67.07 4.95.2 4.35 2.62 6.77 6.98 6.98 1.28.06 1.69.07 4.95.07 3.26 0 3.67-.01 4.95-.07 4.35-.2 6.78-2.63 6.98-6.98.06-1.28.07-1.69.07-4.95 0-3.26-.01-3.67-.07-4.95-.2-4.35-2.63-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zm0 10.16a4 4 0 114-4 4 4 0 01-4 4zm6.41-11.85a1.44 1.44 0 11-1.44-1.44 1.44 1.44 0 011.44 1.44z" />
+            </svg>
+          </span>
+          <span data-i18n="splash.igLabel">Instagram</span>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <div id="live-rank-banner" class="live-rank-banner" aria-live="polite">
+    <div class="live-rank-banner__leader">
+      <span class="live-rank-banner__label" data-i18n="banner.liveLabel">LIVE</span>
+      <span data-i18n="banner.topLabel">Top</span>
+      <strong id="banner-top-player" class="live-rank-banner__top-player">-</strong>
+      <span class="live-rank-banner__top-score">(<span id="banner-top-score">-</span>)</span>
+    </div>
+    <div class="live-rank-banner__ticker-wrap">
+      <div id="banner-rank-ticker" class="live-rank-banner__ticker-track"></div>
+    </div>
+  </div>
+
+  <nav class="header navbar navbar-expand-lg bg-body-tertiary sticky-top border-bottom border-secondary">
+    <div class="container-fluid">
+      <a id="navbar-brand-reload" class="navbar-brand navbar-brand-reside text-decoration-none" href="#"
+        data-i18n-aria="nav.brandReload">
+        <span class="brand-main">RESIDE FOOTBALL</span>
+        <span class="brand-sub">WORLD U25 FOOTBALL PLAYERS</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" data-i18n-aria="nav.menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-wrap">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Football Only</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 flex-wrap align-items-lg-center">
+          <li class="nav-item">
+            <div class="nav-player-search">
+              <input id="nav-player-search-input" class="nav-player-search__input" type="text"
+                data-i18n-placeholder="nav.playerSearchPlaceholder" placeholder="Search player name" />
+              <button type="button" id="nav-player-search-btn" class="nav-player-search__btn"
+                data-i18n="nav.playerSearchBtn">Google</button>
+              <button type="button" id="nav-player-search-yt-btn" class="nav-player-search__btn nav-player-search__btn--yt"
+                data-i18n="nav.playerSearchYtBtn">YouTube</button>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a id="nav-contact-mail" class="nav-link nav-collab__link" href="https://mail.google.com/mail/?view=cm&fs=1&to=k23agent@gmail.com"
+              target="_blank" rel="noopener noreferrer"
+              title="k23agent@gmail.com" data-i18n="nav.partner">Partner with us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-collab__link js-ig-profile-link"
+              href="https://www.instagram.com/resideofficial234/" target="_blank" rel="noopener noreferrer"
+              title="@resideofficial234">INSTAGRAM</a>
+          </li>
+          <li class="nav-item d-flex align-items-center px-1">
+            <span id="browser-conn-hint" class="nav-conn-hint" style="display:none;" aria-hidden="true"></span>
+          </li>
+          <li class="nav-item d-flex align-items-center">
+            <button type="button" id="lang-toggle" class="nav-lang-btn nav-collab__link" data-i18n-aria="nav.langToggle">
+              <span class="nav-lang-btn__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.55" />
+                  <path d="M3 12h18M12 3c2.6 3.8 2.6 16.2 0 20M12 3c-2.6 3.8-2.6 16.2 0 20" stroke="currentColor"
+                    stroke-width="1.55" stroke-linecap="round" />
+                </svg>
+              </span>
+              <span id="lang-badge" class="nav-lang-btn__badge">KO</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid px-3 pb-4">
+    <section class="hero">
+      <div class="hero-title-row">
+        <h1 class="hero-title" data-i18n="hero.title">U25 Data Scouting Dashboard</h1>
+        <span class="hero-update-pill">(KST): 10:00 AM Live Player Update</span>
+        <span class="hero-guide-pill" data-i18n="hero.copyGuide">선수 복사 후 상단 검색에 붙여넣기 하시면 됩니다.</span>
+      </div>
+      <div class="hero-sub" data-i18n="hero.sub">전세계 유망주를 포지션·국가·리그 기준으로 빠르게 탐색하는 스카우팅 전용 화면</div>
+    </section>
+
+    <div class="card dashboard-card compact-card text-bg-dark border-secondary mb-3">
+      <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
+        <span data-i18n="filter.cardTitle">WORLD U25 PLAYERS</span>
+        <div class="d-flex align-items-center gap-2 flex-wrap justify-content-end">
+          <span id="visitor-count" class="badge text-bg-primary">VISITORS -</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row g-2 align-items-end">
+          <div class="col-12 col-md-3">
+            <label class="form-label compact-label" data-i18n="label.continent">대륙</label>
+            <select id="continent-filter" class="form-select form-select-sm">
+              <option value="">전체</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-3">
+            <label class="form-label compact-label" data-i18n="label.country">국가</label>
+            <select id="country-filter" class="form-select form-select-sm">
+              <option value="">전체</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-2">
+            <label class="form-label compact-label" data-i18n="label.position">포지션</label>
+            <select id="position-filter" class="form-select form-select-sm">
+              <option value="">전체</option>
+              <option value="FW">FW</option>
+              <option value="MF">MF</option>
+              <option value="DF">DF</option>
+              <option value="GK">GK</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-2">
+            <label class="form-label compact-label" data-i18n="label.league">리그</label>
+            <select id="league-filter" class="form-select form-select-sm">
+              <option value="">전체</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-2 d-grid">
+            <div class="d-grid gap-1">
+              <button type="button" id="apply-filter" class="btn btn-sm btn-primary" data-i18n="btn.search">검색</button>
+              <button type="button" id="reset-filter" class="btn btn-sm btn-outline-light" data-i18n="btn.reset">초기화</button>
+            </div>
+          </div>
+        </div>
+        <div class="row g-2 align-items-end mt-1">
+          <div class="col-12 col-md-4">
+            <label class="form-label compact-label" data-i18n="label.sortBy">정렬 기준</label>
+            <select id="sort-by" class="form-select form-select-sm">
+              <option value="" data-i18n-key="sort.all">전체</option>
+              <option value="minutes_played" data-i18n-key="sort.minutes">출장시간</option>
+              <option value="height_cm" data-i18n-key="sort.height">키</option>
+              <option value="weight_kg" data-i18n-key="sort.weight">몸무게</option>
+              <option value="pass_success_rate" data-i18n-key="sort.pass">패스 성공률</option>
+              <option value="duel_win_rate" data-i18n-key="sort.duel">경합 성공률</option>
+              <option value="shot_accuracy" data-i18n-key="sort.shot">슈팅 정확도</option>
+              <option value="goals" data-i18n-key="sort.goals">득점</option>
+              <option value="assists" data-i18n-key="sort.assists">어시스트</option>
+              <option value="tackle_success_rate" data-i18n-key="sort.tackle">태클 성공률</option>
+              <option value="intercept_success_rate" data-i18n-key="sort.intercept">인터셉트 성공률</option>
+              <option value="dribble_success_rate" data-i18n-key="sort.dribble">돌파 성공률</option>
+              <option value="space_creation_count" data-i18n-key="sort.space">공간창출 횟수</option>
+              <option value="sprint_speed" data-i18n-key="sort.sprint">스프린트 속도</option>
+              <option value="distance_per_match_km" data-i18n-key="sort.distance">경기당 뛰는거리</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-3">
+            <label class="form-label compact-label" data-i18n="label.sortOrder">정렬 방향</label>
+            <select id="sort-order" class="form-select form-select-sm">
+              <option value="desc" data-i18n-key="sort.desc">높은순</option>
+              <option value="asc" data-i18n-key="sort.asc">낮은순</option>
+            </select>
+          </div>
+        </div>
+        <div class="small text-secondary mt-2" data-i18n-html="1" data-i18n="hint.search">대륙·국가·포지션·리그·정렬을 고른 뒤 <strong>검색</strong>을 누르면 Top 30·통계·전체 선수 목록이 조건에 맞게 갱신됩니다.</div>
+        <div id="system-status" class="tiny-note mt-1" data-i18n="sys.loading">시스템 상태 불러오는 중...</div>
+      </div>
+    </div>
+
+    <div class="row g-3 mb-1">
+      <div class="col-6 col-md-3">
+        <div class="card dashboard-card text-bg-dark border-secondary">
+          <div class="card-body py-2">
+            <div class="tiny-note" data-i18n="kpi.players">U25 선수 수</div>
+            <div id="kpi-players" class="fs-5 fw-bold">-</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card dashboard-card text-bg-dark border-secondary">
+          <div class="card-body py-2">
+            <div class="tiny-note" data-i18n="kpi.countries">커버 국가 수</div>
+            <div id="kpi-countries" class="fs-5 fw-bold">-</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card dashboard-card text-bg-dark border-secondary">
+          <div class="card-body py-2">
+            <div class="tiny-note" data-i18n="kpi.leagues">커버 리그 수</div>
+            <div id="kpi-leagues" class="fs-5 fw-bold">-</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 align-items-start">
+      <div class="col-12 col-lg-7 col-xl-7">
+        <div class="card dashboard-card text-bg-dark border-secondary">
+          <div class="card-header fw-semibold" data-i18n="card.top30">포지션별 U25 주목 선수 Top 30</div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-dark table-hover table-sm mb-0 align-middle">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th data-i18n="th.player">선수</th>
+                    <th data-i18n="th.age">나이</th>
+                    <th data-i18n="th.height">키</th>
+                    <th data-i18n="th.weight">몸무게</th>
+                    <th data-i18n="th.foot">주발</th>
+                    <th data-i18n="th.country">국가</th>
+                    <th data-i18n="th.club">클럽</th>
+                    <th data-i18n="th.position">포지션</th>
+                    <th data-i18n="th.league">리그</th>
+                  </tr>
+                </thead>
+                <tbody id="top30-body">
+                  <tr>
+                    <td colspan="9" class="text-center text-secondary py-3" data-i18n="state.loading">데이터 로딩 중...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card dashboard-card text-bg-dark border-secondary mt-3">
+          <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
+            <span data-i18n="card.allPlayers">전체 선수 데이터 (필터 연동)</span>
+            <span id="all-players-total" class="tiny-note">총 0명</span>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-dark table-hover table-sm mb-0 align-middle">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>선수</th>
+                    <th>나이</th>
+                    <th>키</th>
+                    <th>몸무게</th>
+                    <th data-i18n="th.country">국가</th>
+                    <th data-i18n="th.continent">대륙</th>
+                    <th data-i18n="th.club">클럽</th>
+                    <th data-i18n="th.position">포지션</th>
+                    <th data-i18n="th.league">리그</th>
+                  </tr>
+                </thead>
+                <tbody id="all-players-body">
+                  <tr>
+                    <td colspan="11" class="text-center text-secondary py-3" data-i18n="state.loading">데이터 로딩 중...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pager-wrap">
+              <div class="pager-left">
+                <span class="tiny-note" data-i18n="pager.perPage">페이지당</span>
+                <select id="all-players-page-size" class="form-select form-select-sm" style="width:88px;">
+                  <option value="30">30</option>
+                  <option value="50" selected>50</option>
+                  <option value="100">100</option>
+                  <option value="200">200</option>
+                </select>
+                <span id="all-players-page-info" class="tiny-note">1 / 1</span>
+              </div>
+              <div class="pager-right">
+                <button id="all-players-prev" class="btn btn-sm btn-outline-light" data-i18n="pager.prev">이전</button>
+                <button id="all-players-next" class="btn btn-sm btn-outline-light" data-i18n="pager.next">다음</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-5 col-xl-5">
+        <div class="card dashboard-card text-bg-dark border-secondary mb-3">
+          <div class="card-header fw-semibold" data-i18n="card.topMatch">통계 매칭 최고 선수</div>
+          <div class="card-body small">
+            <div id="top-match-name" class="fw-bold">-</div>
+            <div id="top-match-meta" class="tiny-note">-</div>
+            <div class="mt-1"><span data-i18n="top.matchPct">매칭 퍼센트:</span> <span id="top-match-percent" class="fw-bold">-</span></div>
+          </div>
+        </div>
+
+        <div class="card dashboard-card text-bg-dark border-secondary mb-3">
+          <div class="card-header fw-semibold" data-i18n="card.schedules">핵심 리그 일정 (대륙별)</div>
+          <div class="card-body">
+            <div id="key-match-body" class="continent-grid">
+              <div class="tiny-note" data-i18n="state.waitData">데이터 대기 중...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card dashboard-card text-bg-dark border-secondary mb-3">
+          <div class="card-header fw-semibold" data-i18n="card.posDist">포지션 분포</div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-dark table-sm mb-0">
+                <thead>
+                  <tr>
+                    <th data-i18n="th.position">포지션</th>
+                    <th data-i18n="th.playersCount">선수 수</th>
+                  </tr>
+                </thead>
+                <tbody id="position-dist-body">
+                  <tr><td colspan="2" class="text-center text-secondary py-3" data-i18n="state.waitData">데이터 대기 중...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card dashboard-card text-bg-dark border-secondary mb-3">
+          <div class="card-header fw-semibold" data-i18n="card.advanced">분석 인덱스 (Data Model)</div>
+          <div class="card-body">
+            <div id="advanced-indexes" class="index-grid">
+              <div class="index-cell"><div class="index-name">Attacking</div><div id="idx-att" class="index-val">-</div></div>
+              <div class="index-cell"><div class="index-name">Build-up</div><div id="idx-build" class="index-val">-</div></div>
+              <div class="index-cell"><div class="index-name">Defensive</div><div id="idx-def" class="index-val">-</div></div>
+              <div class="index-cell"><div class="index-name">Athletic</div><div id="idx-ath" class="index-val">-</div></div>
+              <div class="index-cell"><div class="index-name">Clutch(80+)</div><div id="idx-clutch" class="index-val">-</div></div>
+              <div class="index-cell"><div class="index-name">Dribble Threat</div><div id="idx-drib" class="index-val">-</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card dashboard-card text-bg-dark border-secondary mb-3">
+          <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
+            <span>HIDDEN PLAYER PICK (STAT AI)</span>
+            <button type="button" id="hidden-player-shuffle" class="btn btn-sm btn-outline-light">Shuffle</button>
+          </div>
+          <div class="card-body">
+            <div id="hidden-player-name" class="fw-bold clickable-player" data-player-id="">-</div>
+            <div id="hidden-player-meta" class="tiny-note mt-1">-</div>
+            <div class="tiny-note mt-1">Hidden Score: <span id="hidden-player-score">-</span></div>
+            <div id="hidden-player-reason" class="tiny-note mt-2">-</div>
+          </div>
+        </div>
+
+        <div class="card dashboard-card text-bg-dark border-secondary automation-sand">
+          <div class="card-body py-3 automation-sand__body">
+            <span class="automation-sand__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="26" height="26" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <path
+                  d="M7 3h10v2.2L12.8 12 17 18.8V21H7v-2.2l4.2-6.8L7 5.2V3zm2.2 2l3.8 6.1L17 5H9.2zM9.2 19H15l-2.9-4.7L9.2 19z"
+                  fill="currentColor" />
+              </svg>
+            </span>
+            <span id="auto-next-countdown" class="automation-sand__clock" role="timer" aria-live="polite">--:--:--</span>
+          </div>
+          <div class="px-3 pb-3 pt-1 text-center tiny-note" id="last-full-sync-kst">Last full sync (KST): -</div>
+        </div>
+
+        <div class="card dashboard-card text-bg-dark border-secondary mt-3">
+          <div class="card-header fw-semibold" data-i18n="card.spotlightHeader">실시간 주목 · TOP 지표</div>
+          <div class="card-body p-0">
+            <div class="spotlight-split">
+              <div class="spotlight-split__pane spotlight-split__pane--live p-2 p-md-3">
+                <div class="global-rank-card">
+                  <div class="tiny-note">GLOBAL LIVE TOP 5</div>
+                  <div id="global-top5-list"></div>
+                </div>
+                <div id="spotlight-name" class="fs-5 fw-bold mt-2">-</div>
+                <div id="spotlight-meta" class="tiny-note">-</div>
+                <div class="mt-1"><span data-i18n="spotlight.spotlightLine">Spotlight Score:</span> <span id="spotlight-score" class="fw-bold">-</span></div>
+                <div id="spotlight-change" class="tiny-note mt-1" data-i18n="spotlight.watch">변동 감시 중...</div>
+                <div class="mt-2">
+                  <div class="tiny-note mb-1" data-i18n="spotlight.historyTitle">최근 변경 히스토리</div>
+                  <div id="spotlight-history"></div>
+                </div>
+                <div class="mt-2">
+                  <div class="tiny-note mb-1" data-i18n="spotlight.coreStats">핵심 스탯</div>
+                  <div class="table-responsive">
+                    <table class="table table-dark table-sm mb-0">
+                      <thead>
+                        <tr>
+                          <th data-i18n="th.pass">패스</th>
+                          <th data-i18n="th.duel">경합</th>
+                          <th data-i18n="th.shot">슈팅</th>
+                          <th data-i18n="th.space">공간</th>
+                          <th data-i18n="th.dribble">돌파</th>
+                          <th data-i18n="th.goals">득점</th>
+                          <th data-i18n="th.assists">도움</th>
+                          <th data-i18n="th.after80">80+</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr id="spotlight-stats-row">
+                          <td colspan="8" class="text-center text-secondary py-3" data-i18n="state.waitData">데이터 대기 중...</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div id="stat-top-rank-pane" class="spotlight-split__pane spotlight-split__pane--top p-2 p-md-3">
+                <div class="stat-top-rank-title" data-i18n="card.statTop">TOP · 합성 지표 랭킹</div>
+                <div id="stat-top-rank-body"></div>
+              </div>
+            </div>
+            <div class="p-2 p-md-3 border-top border-secondary">
+              <div class="tiny-note mb-1" data-i18n="spotlight.top5">대륙별 실시간 Top5</div>
+              <div id="spotlight-top5-by-continent" class="continent-grid"></div>
+            </div>
+            <div class="p-2 p-md-3 border-top border-secondary">
+              <div class="tiny-note mb-1">MOST VIEWED PLAYERS TOP 10</div>
+              <div id="most-viewed-body"></div>
+            </div>
+            <div class="p-2 p-md-3 border-top border-secondary">
+              <div class="tiny-note mb-1">1H TRENDING PLAYERS TOP 10</div>
+              <div id="trending-hour-body"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="site-legal-footer">
+    <div class="site-legal-footer__inner">
+      <p>Copyright © 2026 [RESIDEFOOTBALL]. All Rights Reserved.</p>
+      <p>[KOR] 본 사이트에서 제공하는 모든 데이터, 분석 정보 및 디자인은 저작권법의 보호를 받습니다. 본인의 비상업적 용도 외에 무단 복제, 배포, 데이터 크롤링 및 상업적 이용을 엄격히 금지하며, 위반 시 민·형사상의 법적 책임을 물을 수 있습니다.</p>
+      <p>[ENG] All data, analysis, and design provided on this site are protected by copyright law. Unauthorized reproduction, distribution, data crawling, or commercial use, other than for personal and non-commercial purposes, is strictly prohibited. Any violation may result in legal action under civil and criminal law.</p>
+      <p>Business Inquiries &amp; Data Partnerships: <a href="mailto:k23agent@gmail.com">[k23agent@gmail.com]</a></p>
+    </div>
+  </footer>
+
+  <div class="modal fade" id="playerModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content" style="background:#0f1a2b;border:1px solid #2a3b59;">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title" id="player-modal-title" data-i18n="modal.titleDefault">선수 상세 분석</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" data-i18n-aria="modal.close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="player-modal-meta" class="tiny-note mb-2">-</div>
+          <div class="table-responsive">
+            <table class="table table-dark table-sm mb-0">
+              <thead>
+                <tr>
+                  <th data-i18n="th.height">키</th>
+                  <th data-i18n="th.weight">몸무게</th>
+                  <th data-i18n="th.foot">주발</th>
+                  <th data-i18n="th.passRate">패스성공률</th>
+                  <th data-i18n="th.duelRate">경합승률</th>
+                  <th data-i18n="th.shotAcc">슈팅정확도</th>
+                  <th data-i18n="th.goals">득점</th>
+                  <th data-i18n="th.assists">어시스트</th>
+                  <th data-i18n="th.minutes">출장시간</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="player-modal-row-1">
+                  <td colspan="9" class="text-center text-secondary py-3" data-i18n="modal.pickHint">선수 선택 시 표시됩니다.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-responsive mt-2">
+            <table class="table table-dark table-sm mb-0">
+              <thead>
+                <tr>
+                  <th data-i18n="th.physical">피지컬</th>
+                  <th data-i18n="th.sprint">스프린트</th>
+                  <th data-i18n="th.distPerGame">거리/경기</th>
+                  <th data-i18n="th.tackleRate">태클성공률</th>
+                  <th data-i18n="th.interceptRate">인터셉트성공률</th>
+                  <th data-i18n="th.pass80">80+패스</th>
+                  <th data-i18n="th.att80">80+공격</th>
+                  <th data-i18n="th.spaceCreate">공간창출</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="player-modal-row-2">
+                  <td colspan="8" class="text-center text-secondary py-3">-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="admin-panel" class="admin-panel" aria-hidden="true">
+    <div class="admin-panel__title" data-i18n="admin.title">Runtime Admin Panel</div>
+    <div class="row g-2">
+      <div class="col-12">
+        <label class="form-label compact-label mb-1" for="admin-stuck-timeout" data-i18n="admin.stuckTimeout">Stuck timeout (ms)</label>
+        <input id="admin-stuck-timeout" class="form-control form-control-sm bg-dark text-light border-secondary" type="number" min="3000" max="120000" step="100">
+      </div>
+      <div class="col-12">
+        <label class="form-label compact-label mb-1" for="admin-retry-delay" data-i18n="admin.retryDelay">Retry delay (ms)</label>
+        <input id="admin-retry-delay" class="form-control form-control-sm bg-dark text-light border-secondary" type="number" min="200" max="30000" step="100">
+      </div>
+      <div class="col-12">
+        <label class="form-label compact-label mb-1" for="admin-retry-max" data-i18n="admin.retryMax">Auto retry max</label>
+        <input id="admin-retry-max" class="form-control form-control-sm bg-dark text-light border-secondary" type="number" min="0" max="10" step="1">
+      </div>
+    </div>
+    <div class="d-flex gap-2 mt-2">
+      <button id="admin-save" type="button" class="btn btn-sm btn-primary flex-fill" data-i18n="admin.save">Save</button>
+      <button id="admin-apply-now" type="button" class="btn btn-sm btn-success flex-fill" data-i18n="admin.applyNow">Apply now</button>
+      <button id="admin-reset" type="button" class="btn btn-sm btn-outline-light flex-fill" data-i18n="admin.reset">Reset</button>
+      <button id="admin-close" type="button" class="btn btn-sm btn-outline-secondary" data-i18n="admin.close">Close</button>
+    </div>
+    <div id="admin-status" class="tiny-note mt-2">ALT+SHIFT+A</div>
+  </section>
+
+  <script>
+    const LANG_KEY = "reside_ui_lang";
+    const SUPPORTED_LANGS = ["ko", "en", "zh", "ja", "ar"];
+    const API_TOKEN_KEY = "u25_api_bearer";
+    const LOCAL_VIEWS_KEY = "u25_local_player_views";
+    /** Same tab only: new tab / new window shows RESIDE splash again. */
+    const SPLASH_SKIP_KEY = "reside_entry_seen";
+    const CONTACT_EMAIL = "k23agent@gmail.com";
+    const INSTAGRAM_PROFILE_URL = "https://www.instagram.com/resideofficial234/";
+    const I18N = {
+      ko: {
+        "page.title": "U25 축구 스카우팅 시스템",
+        "splash.aria": "RESIDE 시작 화면",
+        "splash.enter": "입장",
+        "splash.tagline": "전 세계 U25 축구 선수",
+        "splash.syncLine": "<span class=\'splash-line\'>전 세계 U25 축구 선수를 무료로 확인할 수 있습니다.</span><span class=\'splash-line\'>이제 숨은 보석을 찾아보세요.</span><span class=\'splash-line\'>그 인사이트를 경기와 현실에 적용해보세요.</span>",
+        "splash.mailLabel": "메일",
+        "splash.igLabel": "인스타그램",
+        "nav.menu": "메뉴",
+        "nav.brandReload": "페이지 새로고침",
+        "nav.apiLock": "API",
+        "nav.apiLockAria": "API 액세스 토큰 설정",
+        "nav.langToggle": "언어 전환 (한국어/English/中文/日本語/العربية)",
+        "visitors.label": "VISITORS",
+        "nav.partner": "Partner with us",
+        "nav.playerSearchPlaceholder": "선수 이름 검색",
+        "nav.playerSearchBtn": "Google 검색",
+        "nav.playerSearchYtBtn": "YouTube 검색",
+        "contact.subject": "RESIDE FOOTBALL 협업 문의",
+        "hero.title": "U25 Data Scouting Dashboard",
+        "hero.copyGuide": "선수 복사 후 상단 검색에 붙여넣기 하시면 됩니다.",
+        "hero.sub": "전세계 유망주를 포지션·국가·리그 기준으로 빠르게 탐색하는 스카우팅 전용 화면",
+        "hero.contactAria": "이메일 및 인스타그램 바로가기",
+        "filter.cardTitle": "WORLD U25 PLAYERS",
+        "api.waiting": "API 대기",
+        "api.connected": "API 연결됨",
+        "api.needToken": "연결용 Bearer가 필요합니다. 상단 API 버튼에서 저장한 뒤 새로고침하세요.",
+        "api.failConn": "API 연결 실패",
+        "api.partial": "일부 데이터 로드 실패",
+        "api.ago": " · 최근정상 {{sec}}초전",
+        "label.continent": "대륙",
+        "label.country": "국가",
+        "label.position": "포지션",
+        "label.league": "리그",
+        "label.sortBy": "정렬 기준",
+        "label.sortOrder": "정렬 방향",
+        "filter.all": "전체",
+        "btn.search": "검색",
+        "btn.reset": "초기화",
+        "admin.title": "숨김 관리자 패널",
+        "admin.stuckTimeout": "로딩 지연 감지 시간(ms)",
+        "admin.retryDelay": "자동 재시도 간격(ms)",
+        "admin.retryMax": "자동 재시도 횟수",
+        "admin.save": "저장",
+        "admin.applyNow": "적용 후 재로딩",
+        "admin.reset": "기본값",
+        "admin.close": "닫기",
+        "admin.saved": "저장 완료 · 새로고침 후 적용",
+        "admin.resetDone": "기본값으로 초기화됨",
+        "admin.appliedNow": "적용 완료 · 대시보드 재로딩 중",
+        "hint.search": "대륙·국가·포지션·리그·정렬을 고른 뒤 <strong>검색</strong>을 누르면 Top 30·통계·전체 선수 목록이 조건에 맞게 갱신됩니다.",
+        "sys.loading": "시스템 상태 불러오는 중...",
+        "sys.needTokenHint": "연결 설정이 필요합니다. 상단 API 버튼에서 Bearer를 저장한 뒤 새로고침하세요.",
+        "sys.ok": "총 {{total}}명 · 마지막 갱신 {{time}}",
+        "sys.fail": "시스템 상태 일부 조회 실패 (자동 재시도 중)",
+        "kpi.players": "U25 선수 수",
+        "kpi.countries": "커버 국가 수",
+        "kpi.leagues": "커버 리그 수",
+        "all.total": "총 {{count}}명",
+        "card.top30": "포지션별 U25 주목 선수 Top 30",
+        "card.allPlayers": "전체 선수 데이터 (필터 연동)",
+        "card.topMatch": "통계 매칭 최고 선수",
+        "card.schedules": "핵심 리그 일정 (대륙별)",
+        "card.posDist": "포지션 분포",
+        "card.advanced": "분석 인덱스 (Data Model)",
+        "card.spotlightHeader": "실시간 주목 · TOP 지표",
+        "card.statTop": "TOP · 합성 지표 랭킹",
+        "th.player": "선수",
+        "th.age": "나이",
+        "th.height": "키",
+        "th.weight": "몸무게",
+        "th.foot": "주발",
+        "th.country": "국가",
+        "th.continent": "대륙",
+        "th.club": "클럽",
+        "th.position": "포지션",
+        "th.league": "리그",
+        "th.playersCount": "선수 수",
+        "th.pass": "패스",
+        "th.duel": "경합",
+        "th.shot": "슈팅",
+        "th.space": "공간",
+        "th.dribble": "돌파",
+        "th.goals": "득점",
+        "th.assists": "도움",
+        "th.after80": "80+",
+        "th.passRate": "패스성공률",
+        "th.duelRate": "경합승률",
+        "th.shotAcc": "슈팅정확도",
+        "th.minutes": "출장시간",
+        "th.physical": "피지컬",
+        "th.sprint": "스프린트",
+        "th.distPerGame": "거리/경기",
+        "th.tackleRate": "태클성공률",
+        "th.interceptRate": "인터셉트성공률",
+        "th.pass80": "80+패스",
+        "th.att80": "80+공격",
+        "th.spaceCreate": "공간창출",
+        "pager.perPage": "페이지당",
+        "pager.prev": "이전",
+        "pager.next": "다음",
+        "top.matchPct": "매칭 퍼센트:",
+        "spotlight.globalNo1": "전체 랭킹 1등 (글로벌 실시간)",
+        "spotlight.scoreLabel": "Score:",
+        "spotlight.spotlightLine": "Spotlight Score:",
+        "spotlight.watch": "변동 감시 중...",
+        "spotlight.historyTitle": "최근 변경 히스토리",
+        "spotlight.coreStats": "핵심 스탯",
+        "spotlight.top5": "대륙별 실시간 Top5",
+        "spotlight.change": "변경됨: 이전 선수 -> {{name}}",
+        "spotlight.stable": "현재 주목 선수 유지 중",
+        "modal.titleDefault": "선수 상세 분석",
+        "modal.close": "닫기",
+        "modal.pickHint": "선수 선택 시 표시됩니다.",
+        "modal.titleSuffix": " 상세 분석",
+        "modal.apiTitle": "API 액세스 토큰",
+        "modal.apiHint": "서버 .env 의 U25_API_TOKEN 과 동일한 값을 입력하세요. 이 브라우저 localStorage 에만 저장됩니다.",
+        "modal.apiPlaceholder": "토큰 값 (Bearer 접두사 없이)",
+        "modal.apiSave": "저장 후 새로고침",
+        "modal.apiClear": "토큰 삭제",
+        "ad.hint": "광고 배너: <code>#ad-banner-inner</code> 안에 <code>&lt;img&gt;</code>·iframe·스크립트를 넣으면 됩니다. 넣은 뒤에는 이 안내 문구를 지우면 됩니다.",
+        "sort.all": "전체",
+        "sort.minutes": "출장시간",
+        "sort.height": "키",
+        "sort.weight": "몸무게",
+        "sort.pass": "패스 성공률",
+        "sort.duel": "경합 성공률",
+        "sort.shot": "슈팅 정확도",
+        "sort.goals": "득점",
+        "sort.assists": "어시스트",
+        "sort.tackle": "태클 성공률",
+        "sort.intercept": "인터셉트 성공률",
+        "sort.dribble": "돌파 성공률",
+        "sort.space": "공간창출 횟수",
+        "sort.sprint": "스프린트 속도",
+        "sort.distance": "경기당 뛰는거리",
+        "sort.desc": "높은순",
+        "sort.asc": "낮은순",
+        "state.loading": "데이터 로딩 중...",
+        "state.loadingMore": "전체 선수 목록을 나눠서 불러오는 중…",
+        "state.failAllPlayers": "전체 선수 목록을 불러오지 못했습니다. (잠시 후 자동 재시도)",
+        "state.stuckLoading": "로딩이 예상보다 오래 걸리고 있습니다. 잠시 후 새로고침해 주세요.",
+        "state.waitData": "데이터 대기 중...",
+        "state.noPlayers": "조건에 맞는 선수가 없습니다.",
+        "state.noPlayersTop": "조건에 맞는 선수 없음",
+        "state.noData": "데이터 없음",
+        "state.failTop30": "선수 목록을 불러오지 못했습니다. 잠시 후 새로고침하거나 registered_players.json 데이터를 확인해 주세요.",
+        "state.failPos": "통계 로드 실패 (잠시 후 자동 재시도)",
+        "state.noSchedule": "현재 핵심 경기 데이터가 없습니다.",
+        "state.noMatches": "일정 없음",
+        "state.waitTop5": "대륙별 Top5 데이터 대기 중...",
+        "state.failKey": "핵심 경기 로드 실패",
+        "state.historyWait": "히스토리 대기 중...",
+        "state.noStatTop": "조건에 맞는 선수 데이터가 없습니다.",
+        "api.partialCount": "일부 데이터 로드 실패({{n}})",
+        "fmt.unknown": "Unknown",
+        "global.noData": "데이터 없음",
+      },
+      en: {
+        "page.title": "U25 Football Scouting",
+        "splash.aria": "RESIDE welcome screen",
+        "splash.enter": "ENTER",
+        "splash.tagline": "WORLD U25 FOOTBALL PLAYERS",
+        "splash.syncLine": "<span class='splash-line'>You can check out u25 football players around the world for free.</span><span class='splash-line'>Now find some hidden gems.</span><span class='splash-line'>Please apply it to the game or the reality.</span>",
+        "splash.mailLabel": "Email",
+        "splash.igLabel": "Instagram",
+        "nav.menu": "Menu",
+        "nav.brandReload": "Reload page",
+        "nav.apiLock": "API",
+        "nav.apiLockAria": "Set API access token",
+        "nav.langToggle": "Switch language (Korean / English / Chinese / Japanese / Arabic)",
+        "nav.partner": "Partner with us",
+        "nav.playerSearchPlaceholder": "Search player name",
+        "nav.playerSearchBtn": "Google Search",
+        "nav.playerSearchYtBtn": "YouTube Search",
+        "visitors.label": "VISITORS",
+        "banner.liveLabel": "LIVE",
+        "banner.topLabel": "Top",
+        "banner.noData": "No live ranking data",
+        "banner.scoreTag": "Score",
+        "banner.newEntry": "NEW",
+        "contact.subject": "RESIDE FOOTBALL partnership inquiry",
+        "hero.title": "U25 Data Scouting Dashboard",
+        "hero.copyGuide": "Copy a player and paste it in the top search bar.",
+        "hero.sub": "Scouting-focused view to explore prospects by position, country, and league.",
+        "hero.contactAria": "Email and Instagram shortcuts",
+        "filter.cardTitle": "WORLD U25 PLAYERS",
+        "api.waiting": "API waiting",
+        "api.connected": "API connected",
+        "api.needToken": "Bearer required. Save it via the top API button, then refresh.",
+        "api.failConn": "API connection failed",
+        "api.partial": "Some data failed to load",
+        "api.ago": " · last OK {{sec}}s ago",
+        "label.continent": "Continent",
+        "label.country": "Country",
+        "label.position": "Position",
+        "label.league": "League",
+        "label.sortBy": "Sort by",
+        "label.sortOrder": "Order",
+        "filter.all": "All",
+        "btn.search": "Search",
+        "btn.reset": "Reset",
+        "admin.title": "Hidden Admin Panel",
+        "admin.stuckTimeout": "Stuck timeout (ms)",
+        "admin.retryDelay": "Retry delay (ms)",
+        "admin.retryMax": "Auto retry max",
+        "admin.save": "Save",
+        "admin.applyNow": "Apply now",
+        "admin.reset": "Defaults",
+        "admin.close": "Close",
+        "admin.saved": "Saved · refresh to apply",
+        "admin.resetDone": "Reset to defaults",
+        "admin.appliedNow": "Applied · reloading dashboard",
+        "hint.search": "Choose continent, country, position, league, and sorting, then tap <strong>Search</strong> to refresh Top 30, stats, and the full player list.",
+        "sys.loading": "Loading system status...",
+        "sys.needTokenHint": "Connection setup required. Save the Bearer via the top API button, then refresh this page.",
+        "sys.ok": "{{total}} players · last update {{time}}",
+        "sys.fail": "System status partially unavailable (retrying)",
+        "kpi.players": "U25 players",
+        "kpi.countries": "Countries covered",
+        "kpi.leagues": "Leagues covered",
+        "all.total": "{{count}} players",
+        "card.top30": "U25 spotlight by position (Top 30)",
+        "card.allPlayers": "All players (linked to filters)",
+        "card.topMatch": "Best statistical match",
+        "card.schedules": "Key league schedule (by continent)",
+        "card.posDist": "Position distribution",
+        "card.advanced": "Analytics indexes (Data Model)",
+        "card.spotlightHeader": "Live spotlight · TOP metrics",
+        "card.statTop": "TOP · composite metric rank",
+        "th.player": "Player",
+        "th.age": "Age",
+        "th.height": "Height",
+        "th.weight": "Weight",
+        "th.foot": "Foot",
+        "th.country": "Country",
+        "th.continent": "Continent",
+        "th.club": "Club",
+        "th.position": "Pos",
+        "th.league": "League",
+        "th.playersCount": "Count",
+        "th.pass": "Pass",
+        "th.duel": "Duel",
+        "th.shot": "Shot",
+        "th.space": "Space",
+        "th.dribble": "Drib",
+        "th.goals": "Goals",
+        "th.assists": "Ast",
+        "th.after80": "80+",
+        "th.passRate": "Pass%",
+        "th.duelRate": "Duel%",
+        "th.shotAcc": "Shot acc.",
+        "th.minutes": "Minutes",
+        "th.physical": "Physical",
+        "th.sprint": "Sprint",
+        "th.distPerGame": "Dist/match",
+        "th.tackleRate": "Tackle%",
+        "th.interceptRate": "Int%",
+        "th.pass80": "80+ pass",
+        "th.att80": "80+ att",
+        "th.spaceCreate": "Space",
+        "pager.perPage": "Per page",
+        "pager.prev": "Prev",
+        "pager.next": "Next",
+        "top.matchPct": "Match %:",
+        "spotlight.globalNo1": "Global #1 (live)",
+        "spotlight.scoreLabel": "Score:",
+        "spotlight.spotlightLine": "Spotlight score:",
+        "spotlight.watch": "Watching for changes...",
+        "spotlight.historyTitle": "Recent changes",
+        "spotlight.coreStats": "Key stats",
+        "spotlight.top5": "Live Top 5 by continent",
+        "spotlight.change": "Changed: previous → {{name}}",
+        "spotlight.stable": "Spotlight player unchanged",
+        "modal.titleDefault": "Player analysis",
+        "modal.close": "Close",
+        "modal.pickHint": "Select a player to view details.",
+        "modal.titleSuffix": " — analysis",
+        "modal.apiTitle": "API access token",
+        "modal.apiHint": "Enter the same value as U25_API_TOKEN in the server .env file. Stored only in this browser's localStorage.",
+        "modal.apiPlaceholder": "Token value (without Bearer prefix)",
+        "modal.apiSave": "Save and reload",
+        "modal.apiClear": "Remove token",
+        "ad.hint": "Ad slot: put an <code>&lt;img&gt;</code>, iframe, or script inside <code>#ad-banner-inner</code>. Remove this hint after you publish the ad.",
+        "sort.all": "All",
+        "sort.minutes": "Minutes played",
+        "sort.height": "Height",
+        "sort.weight": "Weight",
+        "sort.pass": "Pass success %",
+        "sort.duel": "Duel win %",
+        "sort.shot": "Shot accuracy",
+        "sort.goals": "Goals",
+        "sort.assists": "Assists",
+        "sort.tackle": "Tackle success %",
+        "sort.intercept": "Intercept success %",
+        "sort.dribble": "Dribble success %",
+        "sort.space": "Space creation",
+        "sort.sprint": "Sprint speed",
+        "sort.distance": "Distance / match",
+        "sort.desc": "High → low",
+        "sort.asc": "Low → high",
+        "state.loading": "Loading data...",
+        "state.loadingMore": "Loading the full player list in batches…",
+        "state.failAllPlayers": "Could not load the full player list. (auto-retry)",
+        "state.stuckLoading": "Loading is taking longer than usual. Please wait a moment or refresh the page.",
+        "state.waitData": "Waiting for data...",
+        "state.noPlayers": "No players match the filters.",
+        "state.noPlayersTop": "No players match",
+        "state.noData": "No data",
+        "state.failTop30": "Could not load the player list. Please refresh in a moment or verify `registered_players.json` has data.",
+        "state.failPos": "Failed to load stats (auto-retry)",
+        "state.noSchedule": "No key match data right now.",
+        "state.noMatches": "No fixtures",
+        "state.waitTop5": "Waiting for Top 5 by continent...",
+        "state.failKey": "Failed to load key matches",
+        "state.historyWait": "Waiting for history...",
+        "state.noStatTop": "No player data for this query.",
+        "api.partialCount": "Partial load failure ({{n}})",
+        "fmt.unknown": "Unknown",
+        "global.noData": "No data",
+      },
+    };
+
+    I18N.zh = Object.assign({}, I18N.en, {
+      "page.title": "U25 足球球探",
+      "splash.enter": "进入",
+      "splash.tagline": "全球 U25 足球球员",
+      "splash.syncLine": "<span class='splash-line'>你可以免费查看全球 U25 足球球员。</span><span class='splash-line'>现在就去发现隐藏宝石。</span><span class='splash-line'>请把它应用到比赛与现实中。</span>",
+      "splash.mailLabel": "电子邮件",
+      "splash.igLabel": "Instagram",
+      "nav.playerSearchPlaceholder": "搜索球员姓名",
+      "nav.playerSearchBtn": "Google 搜索",
+      "nav.playerSearchYtBtn": "YouTube 搜索",
+      "nav.langToggle": "切换语言（韩语/英语/中文/日语/阿拉伯语）",
+      "btn.search": "搜索",
+      "btn.reset": "重置",
+      "label.continent": "洲",
+      "label.country": "国家",
+      "label.position": "位置",
+      "label.league": "联赛",
+      "hero.copyGuide": "复制球员后，粘贴到顶部搜索栏即可。",
+      "filter.all": "全部",
+      "api.waiting": "API 等待中",
+      "api.connected": "API 已连接",
+      "api.needToken": "需要 API 令牌（请在 API 按钮中设置）",
+      "state.loading": "正在加载数据...",
+      "state.stuckLoading": "加载延迟。请稍后自动重试或刷新页面。",
+      "state.noData": "暂无数据",
+    });
+    I18N.ja = Object.assign({}, I18N.en, {
+      "page.title": "U25 サッカースカウティング",
+      "splash.enter": "入る",
+      "splash.tagline": "世界の U25 サッカー選手",
+      "splash.syncLine": "<span class='splash-line'>世界中の U25 サッカー選手を無料で確認できます。</span><span class='splash-line'>さあ、隠れた逸材を見つけましょう。</span><span class='splash-line'>それを試合と現実に活かしてください。</span>",
+      "splash.mailLabel": "メール",
+      "splash.igLabel": "Instagram",
+      "nav.playerSearchPlaceholder": "選手名を検索",
+      "nav.playerSearchBtn": "Google 検索",
+      "nav.playerSearchYtBtn": "YouTube 検索",
+      "nav.langToggle": "言語切替（韓国語/英語/中国語/日本語/アラビア語）",
+      "btn.search": "検索",
+      "btn.reset": "リセット",
+      "label.continent": "大陸",
+      "label.country": "国",
+      "label.position": "ポジション",
+      "label.league": "リーグ",
+      "hero.copyGuide": "選手をコピーして上部の検索欄に貼り付けてください。",
+      "filter.all": "すべて",
+      "api.waiting": "API 待機中",
+      "api.connected": "API 接続済み",
+      "api.needToken": "API トークンが必要です（API ボタンで設定）",
+      "state.loading": "データを読み込み中...",
+      "state.stuckLoading": "読み込みが遅れています。しばらくして自動再試行するか、ページを更新してください。",
+      "state.noData": "データなし",
+    });
+    I18N.ar = Object.assign({}, I18N.en, {
+      "page.title": "استكشاف مواهب U25",
+      "splash.enter": "دخول",
+      "splash.tagline": "لاعبو كرة القدم تحت 25 عامًا حول العالم",
+      "splash.syncLine": "<span class='splash-line'>يمكنك استكشاف لاعبي كرة القدم تحت 25 عامًا حول العالم مجانًا.</span><span class='splash-line'>الآن ابحث عن المواهب الخفية.</span><span class='splash-line'>يرجى تطبيق ذلك على اللعبة والواقع.</span>",
+      "splash.mailLabel": "البريد الإلكتروني",
+      "splash.igLabel": "إنستغرام",
+      "nav.playerSearchPlaceholder": "ابحث باسم اللاعب",
+      "nav.playerSearchBtn": "بحث Google",
+      "nav.playerSearchYtBtn": "بحث YouTube",
+      "nav.langToggle": "تبديل اللغة (الكورية/الإنجليزية/الصينية/اليابانية/العربية)",
+      "btn.search": "بحث",
+      "btn.reset": "إعادة ضبط",
+      "label.continent": "القارة",
+      "label.country": "الدولة",
+      "label.position": "المركز",
+      "label.league": "الدوري",
+      "hero.copyGuide": "انسخ اسم اللاعب ثم الصقه في شريط البحث العلوي.",
+      "filter.all": "الكل",
+      "api.waiting": "واجهة API قيد الانتظار",
+      "api.connected": "تم الاتصال بواجهة API",
+      "api.needToken": "مطلوب رمز API (قم بإعداده من زر API)",
+      "state.loading": "جار تحميل البيانات...",
+      "state.stuckLoading": "التحميل متأخر. سيتم إعادة المحاولة تلقائيًا قريبًا أو قم بتحديث الصفحة.",
+      "state.noData": "لا توجد بيانات",
+    });
+
+    function getLang() {
+      const v = String(localStorage.getItem(LANG_KEY) || "ko").toLowerCase();
+      return SUPPORTED_LANGS.includes(v) ? v : "ko";
+    }
+
+    function t(key, vars) {
+      const lang = getLang();
+      let s = (I18N[lang] && I18N[lang][key]) || (I18N.ko && I18N.ko[key]) || key;
+      if (vars && typeof vars === "object") {
+        Object.keys(vars).forEach((k) => {
+          s = s.split("{{" + k + "}}").join(String(vars[k]));
+        });
+      }
+      return s;
+    }
+
+    function localeTag() {
+      const lang = getLang();
+      if (lang === "en") return "en-US";
+      if (lang === "zh") return "zh-CN";
+      if (lang === "ja") return "ja-JP";
+      if (lang === "ar") return "ar-SA";
+      return "ko-KR";
+    }
+
+    function applyStaticI18n() {
+      const lang = getLang();
+      document.documentElement.lang = lang;
+      document.title = t("page.title");
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (!key) return;
+        const val = t(key);
+        if (el.dataset.i18nHtml === "1") el.innerHTML = val;
+        else el.textContent = val;
+      });
+      document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+        const key = el.getAttribute("data-i18n-aria");
+        if (key) el.setAttribute("aria-label", t(key));
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        if (key) el.setAttribute("placeholder", t(key));
+      });
+      document.querySelectorAll("#sort-by option[data-i18n-key]").forEach((opt) => {
+        const key = opt.getAttribute("data-i18n-key");
+        if (key) opt.textContent = t(key);
+      });
+      document.querySelectorAll("#sort-order option[data-i18n-key]").forEach((opt) => {
+        const key = opt.getAttribute("data-i18n-key");
+        if (key) opt.textContent = t(key);
+      });
+      const splash = document.getElementById("entry-splash");
+      if (splash) splash.setAttribute("aria-label", t("splash.aria"));
+      updateContactMailto();
+      document.querySelectorAll(".js-ig-profile-link").forEach((el) => {
+        el.setAttribute("href", INSTAGRAM_PROFILE_URL);
+      });
+      updateLangBadge();
+      updateSplashLangButtons();
+    }
+
+    function updateContactMailto() {
+      const subj = encodeURIComponent(t("contact.subject"));
+      const href = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(CONTACT_EMAIL) + "&su=" + subj;
+      ["nav-contact-mail", "splash-contact-mail"].forEach((id) => {
+        const a = document.getElementById(id);
+        if (a) {
+          a.href = href;
+          a.setAttribute("target", "_blank");
+          a.setAttribute("rel", "noopener noreferrer");
+        }
+      });
+    }
+
+    function updateLangBadge() {
+      const b = document.getElementById("lang-badge");
+      if (b) b.textContent = getLang().toUpperCase();
+    }
+
+    function updateSplashLangButtons() {
+      const lang = getLang();
+      document.querySelectorAll(".entry-splash__lang-btn[data-lang-set]").forEach((btn) => {
+        const target = String(btn.getAttribute("data-lang-set") || "").toLowerCase();
+        btn.classList.toggle("is-active", target === lang);
+      });
+    }
+
+    function toggleLang() {
+      const current = getLang();
+      const idx = SUPPORTED_LANGS.indexOf(current);
+      const next = SUPPORTED_LANGS[(idx + 1) % SUPPORTED_LANGS.length];
+      localStorage.setItem(LANG_KEY, next);
+    }
+
+    /*
+     * API 주소: ../data/automation_config.json 의 api.host/port 와 맞추면 좋습니다.
+     * 방문자(인터넷)는 회원님 PC 전원과 무관합니다. 이 URL이 가리키는 서버가
+     * 켜져 있어야 데이터가 보입니다(기본은 공개 API). 로컬만 쓸 때는 127.0.0.1 후보를 쓰세요.
+     */
+    let API_BASE = "https://api.residefootball.com";
+    const FORCE_REGISTERED_ONLY_MODE = true;
+    const REGISTERED_PLAYERS_PATH = "/data/registered_players.json";
+    const REGISTERED_PLAYERS_CACHE_KEY = "u25_registered_players_cache_v1";
+    const DEFAULT_REGISTERED_PLAYERS = [
+      { player_id: "237104", name: "Henri", age: 23, height_cm: 0, weight_kg: 0, dominant_foot: "Right", country: "Brazil", continent: "South America", club: "CRB", position: "Defender", league: "-" },
+      { player_id: "182434", name: "D. Beljo", age: 23, height_cm: 0, weight_kg: 0, dominant_foot: "Right", country: "Croatia", continent: "Europe", club: "Dinamo Zagreb", position: "Attacker", league: "-" },
+      { player_id: "153420", name: "G. Wickens", age: 24, height_cm: 0, weight_kg: 0, dominant_foot: "Right", country: "England", continent: "Europe", club: "Lincoln", position: "Goalkeeper", league: "-" },
+      { player_id: "298129", name: "M. Boateng", age: 23, height_cm: 0, weight_kg: 0, dominant_foot: "Right", country: "England", continent: "Europe", club: "Plymouth", position: "Midfielder", league: "-" },
+      { player_id: "272729", name: "D. Huisman", age: 23, height_cm: 0, weight_kg: 0, dominant_foot: "Right", country: "Netherlands", continent: "Europe", club: "FC Eindhoven", position: "Midfielder", league: "-" },
+    ];
+    let cachedPlayers = [];
+    let latestTop30 = [];
+    let lastApiOkAt = 0;
+    let lastSpotlightPlayerId = "";
+    let spotlightHistory = [];
+    let allPlayersRows = [];
+    let allPlayersPage = 1;
+    let allPlayersPageSize = 50;
+    let automationSnapshot = null;
+    let countdownTargetTs = 0;
+    let bannerPrevRanks = {};
+    let dashboardLoadInFlight = null;
+    const DASHBOARD_STUCK_TIMEOUT_MS_DEFAULT = 30000;
+    const DASHBOARD_AUTO_RETRY_DELAY_MS_DEFAULT = 1200;
+    const DASHBOARD_AUTO_RETRY_MAX_DEFAULT = 2;
+
+    function readRuntimeInt(key, fallback, min, max) {
+      const raw = localStorage.getItem(key);
+      const n = Number(raw);
+      if (!Number.isFinite(n)) return fallback;
+      return Math.max(min, Math.min(max, Math.floor(n)));
+    }
+
+    function runtimeDashboardSettings() {
+      return {
+        stuckTimeoutMs: readRuntimeInt(
+          "u25_dashboard_stuck_timeout_ms",
+          DASHBOARD_STUCK_TIMEOUT_MS_DEFAULT,
+          3000,
+          120000
+        ),
+        retryDelayMs: readRuntimeInt(
+          "u25_dashboard_retry_delay_ms",
+          DASHBOARD_AUTO_RETRY_DELAY_MS_DEFAULT,
+          200,
+          30000
+        ),
+        retryMax: readRuntimeInt(
+          "u25_dashboard_retry_max",
+          DASHBOARD_AUTO_RETRY_MAX_DEFAULT,
+          0,
+          10
+        ),
+      };
+    }
+
+    function setStatus(ok, text) {
+      if (ok) {
+        lastApiOkAt = Date.now();
+        updateBrowserConnHint("ok");
+        return;
+      }
+      const s = String(text || "");
+      if (s.includes(t("api.failConn")) || s.includes(t("api.needToken"))) {
+        updateBrowserConnHint("fail");
+      } else {
+        updateBrowserConnHint("ok");
+      }
+    }
+
+    function setVisitorCount(count) {
+      const el = document.getElementById("visitor-count");
+      if (!el) return;
+      const n = Number(count || 0);
+      el.textContent = `${t("visitors.label")} ${n.toLocaleString(localeTag())}`;
+    }
+
+    function updateBrowserConnHint(mode) {
+      const el = document.getElementById("browser-conn-hint");
+      if (!el) return;
+      el.classList.remove("is-fail");
+      if (mode === "fail") {
+        el.textContent = "연결 실패";
+        el.style.display = "inline-block";
+        el.classList.add("is-fail");
+        return;
+      }
+      el.textContent = "";
+      el.style.display = "none";
+    }
+
+    function isLocalDevPage() {
+      try {
+        const proto = (window.location.protocol || "").toLowerCase();
+        if (proto === "file:") return true;
+        const h = (window.location.hostname || "").toLowerCase();
+        return h === "localhost" || h === "127.0.0.1" || h === "[::1]";
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function apiBaseCandidates() {
+      const candidates = [];
+      const push = (v) => {
+        const x = String(v || "").trim();
+        if (!x || candidates.includes(x)) return;
+        candidates.push(x);
+      };
+      const fromQuery = new URLSearchParams(window.location.search).get("api");
+      const publicApi = "https://api.residefootball.com";
+      if (isLocalDevPage()) {
+        push(localStorage.getItem("u25_api_base"));
+        push(fromQuery);
+        push(API_BASE);
+        push(window.location.origin);
+        push(publicApi);
+      } else {
+        /* 배포·방문자: 집 PC(127.0.0.1)보다 공개 API를 먼저 시도 — PC 꺼도 데이터 가능 */
+        push(fromQuery);
+        push(publicApi);
+        push(API_BASE);
+        push(window.location.origin);
+        push(localStorage.getItem("u25_api_base"));
+      }
+      push("http://127.0.0.1:8010");
+      push("http://localhost:8010");
+      push("http://127.0.0.1:8000");
+      push("http://localhost:8000");
+      return candidates.filter((x) => /^https?:\/\//i.test(x));
+    }
+
+    async function probeApiBase(base) {
+      try {
+        const res = await fetch(base + "/health", { headers: { Accept: "application/json" } });
+        if (!res.ok) return false;
+        await res.json();
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    async function ensureApiBaseReachable() {
+      for (const base of apiBaseCandidates()) {
+        if (await probeApiBase(base)) {
+          API_BASE = base;
+          localStorage.setItem("u25_api_base", base);
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function esc(value) {
+      return String(value ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
+    }
+
+    function formatCm(value) {
+      const n = Number(value || 0);
+      return n > 0 ? `${n.toFixed(0)}cm` : "-";
+    }
+
+    function formatKg(value) {
+      const n = Number(value || 0);
+      return n > 0 ? `${n.toFixed(0)}kg` : "-";
+    }
+
+    function formatFoot(value) {
+      const v = String(value || "").trim();
+      return v || t("fmt.unknown");
+    }
+
+    function formatCountry(value) {
+      const v = String(value || "").trim();
+      if (!v || v.toLowerCase() === "unknown") return "-";
+      if (v.toLowerCase() === "unassigned") return "-";
+      return v;
+    }
+
+    function formatDateTime(tsSec) {
+      const n = Number(tsSec || 0);
+      if (!n) return "-";
+      const d = new Date(n * 1000);
+      return d.toLocaleString(localeTag());
+    }
+
+    function formatRemain(sec) {
+      const s = Math.max(0, Math.floor(Number(sec || 0)));
+      const h = Math.floor(s / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const r = s % 60;
+      return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
+    }
+
+    function updateCountdownView() {
+      const mainEl = document.getElementById("auto-next-countdown");
+      const splashEl = document.getElementById("splash-auto-countdown");
+      let text = "--:--:--";
+      if (countdownTargetTs) {
+        const now = Math.floor(Date.now() / 1000);
+        text = formatRemain(countdownTargetTs - now);
+      }
+      if (mainEl) mainEl.textContent = text;
+      if (splashEl) splashEl.textContent = text;
+    }
+
+    function updateLastFullSyncKst(tsSec) {
+      const el = document.getElementById("last-full-sync-kst");
+      if (!el) return;
+      const n = Number(tsSec || 0);
+      if (!n) {
+        el.textContent = "Last full sync (KST): -";
+        return;
+      }
+      const text = new Date(n * 1000).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
+      el.textContent = `Last full sync (KST): ${text}`;
+    }
+
+    function renderAutomationStatus(payload) {
+      const state = payload?.state || {};
+      const times = (payload?.schedule_times || ["08:00", "18:00", "23:00"]).map((x) => String(x));
+      const now = new Date();
+      const candidates = [];
+      for (const hm of times) {
+        const h = Number(hm.slice(0, 2));
+        const m = Number(hm.slice(3, 5));
+        if (Number.isNaN(h) || Number.isNaN(m)) continue;
+        const d = new Date(now);
+        d.setHours(h, m, 0, 0);
+        if (d.getTime() <= now.getTime()) d.setDate(d.getDate() + 1);
+        candidates.push(Math.floor(d.getTime() / 1000));
+      }
+      countdownTargetTs = candidates.length ? Math.min(...candidates) : 0;
+      updateCountdownView();
+      updateLastFullSyncKst(state?.last_success_ts || 0);
+    }
+
+    async function loadAutomationStatus() {
+      try {
+        automationSnapshot = await fetchJSONRetry("/system/automation-status", 2);
+        renderAutomationStatus(automationSnapshot);
+      } catch (e) {
+        const el = document.getElementById("auto-next-countdown");
+        const sp = document.getElementById("splash-auto-countdown");
+        if (el) el.textContent = "--:--:--";
+        if (sp) sp.textContent = "--:--:--";
+        countdownTargetTs = 0;
+        updateLastFullSyncKst(0);
+      }
+    }
+
+    async function registerVisitor() {
+      try {
+        const payload = await fetchJSONRetry("/system/visitors?increment=1", 1);
+        setVisitorCount(payload?.count || 0);
+      } catch (e) {
+        setVisitorCount(0);
+      }
+    }
+
+    function getApiAuthHeaders() {
+      const raw = localStorage.getItem(API_TOKEN_KEY);
+      if (!raw) return {};
+      const token = String(raw).trim();
+      if (!token) return {};
+      return { Authorization: "Bearer " + token };
+    }
+
+    async function fetchHealthProbe() {
+      const res = await fetch(API_BASE + "/health", { headers: { Accept: "application/json" } });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    }
+
+    async function fetchJSON(path, options) {
+      const base = options && typeof options === "object" ? options : {};
+      const headers = Object.assign({ Accept: "application/json" }, getApiAuthHeaders(), base.headers || {});
+      const res = await fetch(API_BASE + path, Object.assign({ cache: "no-store" }, base, { headers }));
+      if (res.status === 401) {
+        const sys = document.getElementById("system-status");
+        if (sys) sys.textContent = t("sys.needTokenHint");
+        setStatus(false, t("api.needToken"));
+        throw new Error("HTTP 401");
+      }
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    }
+
+    async function fetchJSONRetry(path, retries = 2) {
+      let last;
+      for (let i = 0; i <= retries; i++) {
+        try {
+          return await fetchJSON(path);
+        } catch (e) {
+          last = e;
+          await new Promise((r) => setTimeout(r, 350 * (i + 1)));
+        }
+      }
+      throw last;
+    }
+
+    function currentKstHour() {
+      try {
+        const fmt = new Intl.DateTimeFormat("en-US", {
+          timeZone: "Asia/Seoul",
+          hour12: false,
+          hour: "2-digit",
+        });
+        const h = Number(fmt.format(new Date()));
+        if (Number.isFinite(h)) return h;
+      } catch (e) {
+        // ignore
+      }
+      return new Date(Date.now() + 9 * 60 * 60 * 1000).getUTCHours();
+    }
+
+    function isBeforeKst10() {
+      return currentKstHour() < 10;
+    }
+
+    function shouldUseRegisteredOnlyMode() {
+      if (FORCE_REGISTERED_ONLY_MODE) return true;
+      return isBeforeKst10();
+    }
+
+    function normalizeRegisteredPlayers(payload) {
+      if (Array.isArray(payload)) return payload;
+      if (Array.isArray(payload?.items)) return payload.items;
+      return [];
+    }
+
+    function loadRegisteredPlayersCache() {
+      try {
+        const raw = localStorage.getItem(REGISTERED_PLAYERS_CACHE_KEY);
+        if (!raw) return [];
+        return normalizeRegisteredPlayers(JSON.parse(raw));
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveRegisteredPlayersCache(items) {
+      try {
+        localStorage.setItem(REGISTERED_PLAYERS_CACHE_KEY, JSON.stringify(items || []));
+      } catch (e) {
+        // storage unavailable
+      }
+    }
+
+    async function fetchRegisteredPlayersSnapshot() {
+      try {
+        const res = await fetch(REGISTERED_PLAYERS_PATH, { cache: "no-store", headers: { Accept: "application/json" } });
+        if (res.ok) {
+          const payload = await res.json();
+          const items = normalizeRegisteredPlayers(payload);
+          if (items.length) {
+            saveRegisteredPlayersCache(items);
+            return items;
+          }
+          console.error("registered_players.json is empty:", REGISTERED_PLAYERS_PATH);
+        } else {
+          console.error("Failed to fetch registered players:", REGISTERED_PLAYERS_PATH, res.status);
+        }
+      } catch (e) {
+        console.error("Fetch error for registered players:", REGISTERED_PLAYERS_PATH, e);
+      }
+      const cached = loadRegisteredPlayersCache();
+      if (cached.length) return cached;
+      saveRegisteredPlayersCache(DEFAULT_REGISTERED_PLAYERS);
+      return DEFAULT_REGISTERED_PLAYERS.slice();
+    }
+
+    function renderRegisteredOnlyMode(items, reason) {
+      const list = Array.isArray(items) ? items : [];
+      cachedPlayers = list.slice();
+      renderTop30(list.slice(0, 500));
+      allPlayersRows = list.slice();
+      allPlayersPage = 1;
+      renderAllPlayersPage();
+      renderStatTopRankings(allPlayersRows);
+      renderAnalytics(null);
+      renderAdvancedIndexes(null);
+      renderHiddenPlayer(null);
+      renderSpotlight(null);
+      renderSpotlightTop5(null);
+      renderGlobalTop5(null);
+      renderMostViewed(null);
+      renderTrendingHour(null);
+      renderLiveRankBanner(null, null);
+      const systemEl = document.getElementById("system-status");
+      if (systemEl) {
+        systemEl.textContent = reason || "등록 선수 모드";
+      }
+      setStatus(true, reason || "registered-only");
+    }
+
+    function uniqueValues(items, key) {
+      const s = new Set();
+      for (const item of items) {
+        if (item[key]) s.add(item[key]);
+      }
+      return Array.from(s).sort((a, b) => String(a).localeCompare(String(b)));
+    }
+
+    function fillSelect(selectId, values) {
+      const el = document.getElementById(selectId);
+      const first = el.value || "";
+      const opts = ['<option value="">' + esc(t("filter.all")) + "</option>"].concat(values.map((v) => `<option value="${esc(v)}">${esc(v)}</option>`));
+      el.innerHTML = opts.join("");
+      el.value = first;
+    }
+
+    function getCurrentFilters() {
+      return {
+        continent: document.getElementById("continent-filter").value || "",
+        country: document.getElementById("country-filter").value || "",
+        position: document.getElementById("position-filter").value || "",
+        league: document.getElementById("league-filter").value || "",
+      };
+    }
+
+    async function syncFilterOptions() {
+      const f = getCurrentFilters();
+      const all = await fetchJSONRetry("/filters/options", 2);
+      fillSelect("continent-filter", all.continents || []);
+
+      const byContinent = await fetchJSONRetry(
+        "/filters/options?continent=" + encodeURIComponent(f.continent || ""),
+        2
+      );
+      fillSelect("country-filter", byContinent.countries || []);
+
+      const params = new URLSearchParams();
+      if (f.continent) params.set("continent", f.continent);
+      if (f.country) params.set("country", f.country);
+      if (f.position) params.set("position", f.position);
+      const byScope = await fetchJSONRetry("/filters/options?" + params.toString(), 2);
+      fillSelect("league-filter", byScope.leagues || []);
+      fillSelect("position-filter", byScope.positions || ["FW", "MF", "DF", "GK"]);
+
+      if (f.continent && (all.continents || []).includes(f.continent)) {
+        document.getElementById("continent-filter").value = f.continent;
+      }
+      if (f.country && (byContinent.countries || []).includes(f.country)) {
+        document.getElementById("country-filter").value = f.country;
+      }
+      if (f.position && (byScope.positions || []).includes(f.position)) {
+        document.getElementById("position-filter").value = f.position;
+      }
+      if (f.league && (byScope.leagues || []).includes(f.league)) {
+        document.getElementById("league-filter").value = f.league;
+      }
+    }
+
+    function buildQueryFromFilters() {
+      const continent = document.getElementById("continent-filter").value;
+      const country = document.getElementById("country-filter").value;
+      const position = document.getElementById("position-filter").value;
+      const league = document.getElementById("league-filter").value;
+      const params = new URLSearchParams();
+      if (continent) params.set("continent", continent);
+      if (country) params.set("country", country);
+      if (position) params.set("position", position);
+      if (league) params.set("league", league);
+      return params.toString();
+    }
+
+
+    function renderTop30(items) {
+      const body = document.getElementById("top30-body");
+      latestTop30 = items;
+      if (!items.length) {
+        body.innerHTML = '<tr><td colspan="9" class="text-center text-secondary py-3">' + esc(t("state.noPlayers")) + "</td></tr>";
+        return;
+      }
+
+      body.innerHTML = items.map((row, idx) => `
+        <tr class="player-row" data-player-id="${esc(row.player_id)}" style="cursor:pointer">
+          <td>${idx + 1}</td>
+          <td>
+            <span class="player-name-cell">
+              <span>${esc(row.name)}</span>
+              <button type="button" class="copy-player-btn" data-copy-player-name="${esc(row.name)}" title="Copy player name">COPY</button>
+            </span>
+          </td>
+          <td>U${esc(row.age ?? "-")}</td>
+          <td>${formatCm(row.height_cm)}</td>
+          <td>${formatKg(row.weight_kg)}</td>
+          <td>${formatFoot(row.dominant_foot)}</td>
+          <td>${esc(formatCountry(row.country))}</td>
+          <td>${esc(row.club)}</td>
+          <td>${esc(row.position)}</td>
+          <td>${esc(row.league)}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderPlayerModal(p) {
+      document.getElementById("player-modal-title").textContent = `${p.name || "-"}${t("modal.titleSuffix")}`;
+      document.getElementById("player-modal-meta").textContent =
+        `${p.country || "-"} · ${p.club || "-"} · ${p.position || "-"} · ${p.league || "-"} · U${p.age || "-"} · ${formatFoot(p.dominant_foot)}`;
+      document.getElementById("player-modal-row-1").innerHTML = `
+        <td>${formatCm(p.height_cm)}</td>
+        <td>${formatKg(p.weight_kg)}</td>
+        <td>${formatFoot(p.dominant_foot)}</td>
+        <td>${Number(p.pass_success_rate || 0).toFixed(1)}%</td>
+        <td>${Number(p.duel_win_rate || 0).toFixed(1)}%</td>
+        <td>${Number(p.shot_accuracy || 0).toFixed(1)}%</td>
+        <td>${Number(p.goals || 0).toLocaleString()}</td>
+        <td>${Number(p.assists || 0).toLocaleString()}</td>
+        <td>${Number(p.minutes_played || 0).toLocaleString()}</td>
+      `;
+      document.getElementById("player-modal-row-2").innerHTML = `
+        <td>${Number(p.physical_index || 0).toFixed(1)}</td>
+        <td>${Number(p.sprint_speed || 0).toFixed(1)}</td>
+        <td>${Number(p.distance_per_match_km || 0).toFixed(2)}km</td>
+        <td>${Number(p.tackle_success_rate || 0).toFixed(1)}%</td>
+        <td>${Number(p.intercept_success_rate || 0).toFixed(1)}%</td>
+        <td>${Number(p.after80_pass_success_rate || 0).toFixed(1)}%</td>
+        <td>${Number(p.after80_attack_success_rate || 0).toFixed(1)}%</td>
+        <td>${Number(p.space_creation_count || 0).toLocaleString()}</td>
+      `;
+    }
+
+
+    function readLocalViews() {
+      try {
+        const raw = localStorage.getItem(LOCAL_VIEWS_KEY);
+        const obj = raw ? JSON.parse(raw) : {};
+        return obj && typeof obj === "object" ? obj : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function writeLocalViews(data) {
+      try {
+        localStorage.setItem(LOCAL_VIEWS_KEY, JSON.stringify(data));
+      } catch (e) {
+        // ignore quota
+      }
+    }
+
+    function trackLocalPlayerView(player) {
+      if (!player || !player.player_id) return;
+      const all = readLocalViews();
+      const key = String(player.player_id);
+      const now = Math.floor(Date.now() / 1000);
+      const old = all[key] && typeof all[key] === "object" ? all[key] : {};
+      const recent = Array.isArray(old.recent_view_events) ? old.recent_view_events : [];
+      const floor = now - 3600;
+      const filtered = recent
+        .map((x) => Number(x || 0))
+        .filter((x) => Number.isFinite(x) && x >= floor)
+        .slice(-500);
+      filtered.push(now);
+      all[key] = {
+        player_id: key,
+        name: player.name || old.name || "-",
+        country: player.country || old.country || "-",
+        club: player.club || old.club || "-",
+        position: player.position || old.position || "-",
+        age: player.age ?? old.age ?? null,
+        views: Number(old.views || 0) + 1,
+        views_1h: filtered.length,
+        last_viewed_at: now,
+        recent_view_events: filtered,
+      };
+      writeLocalViews(all);
+    }
+
+    function localViewsTop(limit = 10, byHour = false) {
+      const all = Object.values(readLocalViews());
+      const now = Math.floor(Date.now() / 1000);
+      const floor = now - 3600;
+      const rows = all.map((r) => {
+        const recent = Array.isArray(r.recent_view_events) ? r.recent_view_events : [];
+        const views1h = recent.map((x) => Number(x || 0)).filter((x) => Number.isFinite(x) && x >= floor).length;
+        return { ...r, views_1h: views1h };
+      });
+      rows.sort((a, b) => {
+        if (byHour) return Number(b.views_1h || 0) - Number(a.views_1h || 0) || Number(b.views || 0) - Number(a.views || 0);
+        return Number(b.views || 0) - Number(a.views || 0) || Number(b.views_1h || 0) - Number(a.views_1h || 0);
+      });
+      return rows.slice(0, limit);
+    }
+
+    function discoveryFallbackTop(limit = 10) {
+      const source = (allPlayersRows && allPlayersRows.length ? allPlayersRows : cachedPlayers).slice(0, 2000);
+      if (!source.length) return [];
+      const ranked = source
+        .map((p) => ({ ...p, _score: compositeStatScore(p) }))
+        .sort((a, b) => Number(b._score || 0) - Number(a._score || 0))
+        .slice(0, limit)
+        .map((p) => ({
+          player_id: p.player_id,
+          name: p.name || "-",
+          country: p.country || "-",
+          club: p.club || "-",
+          position: p.position || "-",
+          age: p.age,
+          views: 0,
+          views_1h: 0,
+        }));
+      return ranked;
+    }
+
+    async function openPlayerModal(playerId) {
+      try {
+        const data = await fetchJSONRetry("/players/" + encodeURIComponent(playerId), 2);
+        if (!data?.found || !data?.player) return;
+        renderPlayerModal(data.player);
+        trackLocalPlayerView(data.player);
+        const modal = new bootstrap.Modal(document.getElementById("playerModal"));
+        modal.show();
+      } catch (e) {
+        // noop
+      }
+    }
+
+    function kickoffLocal(utc) {
+      if (!utc) return "-";
+      const d = new Date(utc);
+      if (isNaN(d.getTime())) return "-";
+      return d.toLocaleString(localeTag(), { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+    }
+
+    function renderKeyMatches(items) {
+      const body = document.getElementById("key-match-body");
+      const groups = items?.by_continent || {};
+      const continents = Object.keys(groups);
+      if (continents.length) {
+        body.innerHTML = continents.map((continent) => {
+          const list = groups[continent] || [];
+          const rows = list.map((m) => `
+            <div class="continent-row">
+              <div class="continent-player">
+                <span class="continent-player-name">${esc(m.league_name)}</span>
+                <span class="continent-player-meta">${esc(m.home)} vs ${esc(m.away)} (${kickoffLocal(m.kickoff_utc)})</span>
+              </div>
+            </div>
+          `).join("");
+          return `<div class="continent-card"><div class="continent-title">${esc(continent)}</div>${rows || '<div class="tiny-note">' + esc(t("state.noMatches")) + "</div>"}</div>`;
+        }).join("");
+        return;
+      }
+      const flat = items?.response || items || [];
+      if (!flat.length) {
+        body.innerHTML = '<div class="tiny-note">' + esc(t("state.noSchedule")) + "</div>";
+        return;
+      }
+      body.innerHTML = `<div class="continent-card"><div class="continent-title">Global</div>${flat.map((m) => `
+        <div class="continent-row">
+          <div class="continent-player">
+            <span class="continent-player-name">${esc(m.league_name)}</span>
+            <span class="continent-player-meta">${esc(m.home)} vs ${esc(m.away)} (${kickoffLocal(m.kickoff_utc)})</span>
+          </div>
+        </div>
+      `).join("")}</div>`;
+    }
+
+    function renderAnalytics(payload) {
+      const o = payload?.overview || {};
+      document.getElementById("kpi-players").textContent = Number(o.players_count || 0).toLocaleString();
+      document.getElementById("kpi-countries").textContent = Number(o.countries_count || 0).toLocaleString();
+      document.getElementById("kpi-leagues").textContent = Number(o.leagues_count || 0).toLocaleString();
+
+      const posBody = document.getElementById("position-dist-body");
+      const rows = (payload?.by_position || []).map((r) => `
+        <tr>
+          <td>${esc(r.position)}</td>
+          <td>${Number(r.cnt || 0).toLocaleString()}</td>
+        </tr>
+      `).join("");
+      posBody.innerHTML = rows || '<tr><td colspan="2" class="text-center text-secondary py-3">' + esc(t("state.noData")) + "</td></tr>";
+    }
+
+    function renderTopMatch(payload) {
+      const top = payload?.top_player;
+      if (!top) {
+        document.getElementById("top-match-name").textContent = "-";
+        document.getElementById("top-match-meta").textContent = t("state.noPlayersTop");
+        document.getElementById("top-match-percent").textContent = "-";
+        return;
+      }
+      document.getElementById("top-match-name").textContent = top.name || "-";
+      document.getElementById("top-match-meta").textContent = `${top.country || "-"} · ${top.club || "-"} · ${top.position || "-"}`;
+      document.getElementById("top-match-percent").textContent = `${Number(top.match_percent || 0).toFixed(2)}%`;
+    }
+
+    function renderSpotlight(payload) {
+      if (!payload?.found || !payload?.player) {
+        document.getElementById("spotlight-name").textContent = "-";
+        document.getElementById("spotlight-meta").textContent = t("state.noPlayersTop");
+        document.getElementById("spotlight-score").textContent = "-";
+        document.getElementById("spotlight-stats-row").innerHTML =
+          '<td colspan="8" class="text-center text-secondary py-3">' + esc(t("state.noData")) + "</td>";
+        renderSpotlightHistory();
+        return;
+      }
+      const p = payload.player;
+      document.getElementById("spotlight-name").textContent = p.name || "-";
+      document.getElementById("spotlight-meta").textContent = `${p.country || "-"} · ${p.club || "-"} · ${p.position || "-"} · U${p.age || "-"}`;
+      document.getElementById("spotlight-score").textContent = Number(p.spotlight_score || 0).toFixed(2);
+      document.getElementById("spotlight-stats-row").innerHTML = `
+        <td>${Number(p.stats?.pass_success_rate || 0).toFixed(1)}%</td>
+        <td>${Number(p.stats?.duel_win_rate || 0).toFixed(1)}%</td>
+        <td>${Number(p.stats?.shot_accuracy || 0).toFixed(1)}%</td>
+        <td>${Number(p.stats?.space_creation_count || 0).toLocaleString()}</td>
+        <td>${Number(p.stats?.dribble_success_rate || 0).toFixed(1)}%</td>
+        <td>${Number(p.stats?.goals || 0).toLocaleString()}</td>
+        <td>${Number(p.stats?.assists || 0).toLocaleString()}</td>
+        <td>${Number(p.stats?.after80_attack_success_rate || 0).toFixed(1)}%</td>
+      `;
+      const changeEl = document.getElementById("spotlight-change");
+      if (lastSpotlightPlayerId && lastSpotlightPlayerId !== String(p.player_id || "")) {
+        changeEl.textContent = t("spotlight.change", { name: p.name || "-" });
+        spotlightHistory.unshift({
+          ts: Date.now(),
+          name: p.name || "-",
+          country: p.country || "-",
+          league: p.league || "-",
+          score: Number(p.spotlight_score || 0),
+        });
+        spotlightHistory = spotlightHistory.slice(0, 5);
+      } else {
+        changeEl.textContent = t("spotlight.stable");
+      }
+      lastSpotlightPlayerId = String(p.player_id || "");
+      renderSpotlightHistory();
+    }
+
+    function renderSpotlightHistory() {
+      const host = document.getElementById("spotlight-history");
+      if (!host) return;
+      if (!spotlightHistory.length) {
+        host.innerHTML = '<div class="tiny-note">' + esc(t("state.historyWait")) + "</div>";
+        return;
+      }
+      host.innerHTML = spotlightHistory.map((h) => {
+        const d = new Date(h.ts);
+        const hm = d.toLocaleTimeString(localeTag(), { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+        return `<div class="tiny-note">${hm} · ${esc(h.name)} (${esc(h.country)}/${esc(h.league)}) · ${Number(h.score).toFixed(2)}</div>`;
+      }).join("");
+    }
+
+    function renderSpotlightTop5(payload) {
+      const host = document.getElementById("spotlight-top5-by-continent");
+      const items = payload?.items || {};
+      const continents = Object.keys(items);
+      if (!continents.length) {
+        host.innerHTML = '<div class="tiny-note">' + esc(t("state.waitTop5")) + "</div>";
+        return;
+      }
+      host.innerHTML = continents.map((c) => {
+        const list = (items[c] || []).slice(0, 5);
+        const rows = list.map((p, i) => `
+          <div class="continent-row clickable-player" data-player-id="${esc(p.player_id)}">
+            <div class="continent-player">
+              <span class="continent-player-name">${i + 1}. ${esc(p.name)} (U${esc(p.age)})</span>
+              <span class="continent-player-meta">${esc(formatCountry(p.country))} · ${formatCm(p.height_cm)} / ${formatKg(p.weight_kg)} · ${formatFoot(p.dominant_foot)}</span>
+            </div>
+            <span class="continent-score">${Number(p.spotlight_score || 0).toFixed(1)}</span>
+          </div>
+        `).join("");
+        return `<div class="continent-card"><div class="continent-title">${esc(c)}</div>${rows || '<div class="tiny-note">' + esc(t("state.noData")) + "</div>"}</div>`;
+      }).join("");
+    }
+
+    function renderGlobalTop5(payload) {
+      const host = document.getElementById("global-top5-list");
+      if (!host) return;
+      const items = (payload?.items || []).slice(0, 5);
+      if (!items.length) {
+        host.innerHTML = `<div class="tiny-note">${esc(t("global.noData"))}</div>`;
+        return;
+      }
+      host.innerHTML = items.map((p, i) => {
+        const meta = `${esc(formatCountry(p.country))} · ${esc(p.position || "-")} · ${esc(p.club || "-")}`;
+        return `<div class="continent-row clickable-player" data-player-id="${esc(p.player_id)}">
+          <div class="continent-player">
+            <span class="continent-player-name">${i + 1}. ${esc(p.name)} (U${esc(p.age ?? "-")})</span>
+            <span class="continent-player-meta">${meta}</span>
+          </div>
+          <span class="continent-score">${Number(p.spotlight_score || 0).toFixed(1)}</span>
+        </div>`;
+      }).join("");
+    }
+
+    function renderMostViewed(payload) {
+      const host = document.getElementById("most-viewed-body");
+      if (!host) return;
+      const remote = (payload?.items || []).slice(0, 10);
+      const local = localViewsTop(10, false);
+      const items = remote.length ? remote : (local.length ? local : discoveryFallbackTop(10));
+      if (!items.length) {
+        host.innerHTML = `<div class="tiny-note">${esc(t("global.noData"))}</div>`;
+        return;
+      }
+      host.innerHTML = items.map((p, i) => {
+        const meta = `${esc(p.country || "-")} · ${esc(p.position || "-")} · ${esc(p.club || "-")}`;
+        const up1h = Number(p.views_1h || 0);
+        return `<div class="continent-row clickable-player" data-player-id="${esc(p.player_id)}">
+          <div class="continent-player">
+            <span class="continent-player-name">${i + 1}. ${esc(p.name || "-")} (U${esc(p.age ?? "-")})</span>
+            <span class="continent-player-meta">${meta} · 1H +${up1h.toLocaleString(localeTag())}</span>
+          </div>
+          <span class="continent-score">${Number(p.views || 0).toLocaleString(localeTag())}</span>
+        </div>`;
+      }).join("");
+    }
+
+    function renderTrendingHour(payload) {
+      const host = document.getElementById("trending-hour-body");
+      if (!host) return;
+      const remote = (payload?.items || []).slice(0, 10);
+      const local = localViewsTop(10, true);
+      const items = remote.length ? remote : (local.length ? local : discoveryFallbackTop(10));
+      if (!items.length) {
+        host.innerHTML = `<div class="tiny-note">${esc(t("global.noData"))}</div>`;
+        return;
+      }
+      host.innerHTML = items.map((p, i) => {
+        const meta = `${esc(p.country || "-")} · ${esc(p.position || "-")} · ${esc(p.club || "-")}`;
+        const up1h = Number(p.views_1h || 0);
+        return `<div class="continent-row clickable-player" data-player-id="${esc(p.player_id)}">
+          <div class="continent-player">
+            <span class="continent-player-name">${i + 1}. ${esc(p.name || "-")} (U${esc(p.age ?? "-")})</span>
+            <span class="continent-player-meta">${meta} · Last hour views</span>
+          </div>
+          <span class="continent-score rank-move-up">🔥 +${up1h.toLocaleString(localeTag())}</span>
+        </div>`;
+      }).join("");
+    }
+
+    function normalizeBannerPlayer(item) {
+      if (!item) return null;
+      return {
+        player_id: String(item.player_id || ""),
+        name: String(item.name || "-"),
+        country: formatCountry(item.country),
+        club: String(item.club || "-"),
+        position: String(item.position || "-"),
+        spotlight_score: Number(item.spotlight_score || 0),
+      };
+    }
+
+    function rankMoveLabel(prevRank, nowRank) {
+      if (!prevRank) return { cls: "rank-move-flat", text: t("banner.newEntry") };
+      const diff = prevRank - nowRank;
+      if (diff > 0) return { cls: "rank-move-up", text: `+${diff}` };
+      if (diff < 0) return { cls: "rank-move-down", text: `-${Math.abs(diff)}` };
+      return { cls: "rank-move-flat", text: "·" };
+    }
+
+    function pickBannerRankRows(top5Payload, globalPayload) {
+      const merged = [];
+      const seen = new Set();
+      const byContinent = top5Payload?.items || {};
+      Object.values(byContinent).forEach((rows) => {
+        (rows || []).forEach((raw) => {
+          const p = normalizeBannerPlayer(raw);
+          if (!p || !p.player_id || seen.has(p.player_id)) return;
+          seen.add(p.player_id);
+          merged.push(p);
+        });
+      });
+      const no1 = normalizeBannerPlayer(globalPayload?.player);
+      if (no1 && no1.player_id && !seen.has(no1.player_id)) {
+        seen.add(no1.player_id);
+        merged.push(no1);
+      }
+      return merged.sort((a, b) => b.spotlight_score - a.spotlight_score).slice(0, 12);
+    }
+
+    function renderLiveRankBanner(globalPayload, top5Payload) {
+      const topPlayerEl = document.getElementById("banner-top-player");
+      const topScoreEl = document.getElementById("banner-top-score");
+      const tickerEl = document.getElementById("banner-rank-ticker");
+      if (!topPlayerEl || !topScoreEl || !tickerEl) return;
+
+      const top = normalizeBannerPlayer(globalPayload?.player);
+      if (!top) {
+        topPlayerEl.textContent = "-";
+        topPlayerEl.removeAttribute("data-player-id");
+        topScoreEl.textContent = "-";
+        tickerEl.innerHTML = `<span class="live-rank-banner__item">${esc(t("banner.noData"))}</span>`;
+        bannerPrevRanks = {};
+        return;
+      }
+
+      topPlayerEl.textContent = top.name;
+      topPlayerEl.setAttribute("data-player-id", top.player_id);
+      topScoreEl.textContent = `${t("banner.scoreTag")} ${top.spotlight_score.toFixed(2)}`;
+
+      const rows = pickBannerRankRows(top5Payload, globalPayload);
+      if (!rows.length) {
+        tickerEl.innerHTML = `<span class="live-rank-banner__item">${esc(t("banner.noData"))}</span>`;
+        bannerPrevRanks = {};
+        return;
+      }
+
+      const nowRanks = {};
+      const tickerItems = rows.map((p, idx) => {
+        const rank = idx + 1;
+        nowRanks[p.player_id] = rank;
+        const move = rankMoveLabel(bannerPrevRanks[p.player_id], rank);
+        const label = `${rank}. ${p.name} (${p.spotlight_score.toFixed(1)})`;
+        return `<span class="live-rank-banner__item" data-player-id="${esc(p.player_id)}">
+          <span>${esc(label)}</span>
+          <span class="${move.cls}">${esc(move.text)}</span>
+        </span>`;
+      }).join("");
+
+      tickerEl.innerHTML = tickerItems + tickerItems;
+      bannerPrevRanks = nowRanks;
+    }
+
+    function compositeStatScore(p) {
+      const n = (v) => Number(v || 0);
+      const clamp01 = (v, cap) => Math.min(Math.max(n(v), 0), cap) / cap;
+      const ratesAvg =
+        (n(p.pass_success_rate) +
+          n(p.duel_win_rate) +
+          n(p.shot_accuracy) +
+          n(p.tackle_success_rate) +
+          n(p.intercept_success_rate) +
+          n(p.dribble_success_rate)) /
+        6;
+      const goalsN = clamp01(p.goals, 28) * 100;
+      const astN = clamp01(p.assists, 22) * 100;
+      const spaceN = clamp01(p.space_creation_count, 140) * 100;
+      const sprintN = clamp01(p.sprint_speed, 42) * 100;
+      const distN = clamp01(p.distance_per_match_km, 15) * 100;
+      const minutesN = clamp01(p.minutes_played, 4200) * 100;
+      return (
+        ratesAvg * 0.5 +
+        goalsN * 0.14 +
+        astN * 0.1 +
+        spaceN * 0.11 +
+        sprintN * 0.07 +
+        distN * 0.05 +
+        minutesN * 0.03
+      );
+    }
+
+    function renderStatTopRankings(rows) {
+      const host = document.getElementById("stat-top-rank-body");
+      if (!host) return;
+      if (!rows.length) {
+        host.innerHTML = '<div class="tiny-note">' + esc(t("state.noStatTop")) + "</div>";
+        return;
+      }
+      const ranked = rows
+        .map((p) => ({ p, s: compositeStatScore(p) }))
+        .sort((a, b) => b.s - a.s)
+        .slice(0, 8);
+      host.innerHTML = ranked
+        .map(({ p, s }, i) => {
+          const meta = `${esc(formatCountry(p.country))} · ${esc(p.position || "-")} · ${esc(p.league || "-")}`;
+          return `
+        <div class="continent-row clickable-player" data-player-id="${esc(p.player_id)}">
+          <div class="continent-player">
+            <span class="continent-player-name">${i + 1}. ${esc(p.name)} (U${esc(p.age ?? "-")})</span>
+            <span class="continent-player-meta">${meta}</span>
+          </div>
+          <span class="continent-score">${Number(s).toFixed(1)}</span>
+        </div>`;
+        })
+        .join("");
+    }
+
+    function renderAdvancedIndexes(a) {
+      document.getElementById("idx-att").textContent = Number(a?.attacking_index || 0).toFixed(1);
+      document.getElementById("idx-build").textContent = Number(a?.build_up_index || 0).toFixed(1);
+      document.getElementById("idx-def").textContent = Number(a?.defensive_index || 0).toFixed(1);
+      document.getElementById("idx-ath").textContent = Number(a?.athletic_index || 0).toFixed(1);
+      document.getElementById("idx-clutch").textContent = Number(a?.clutch_index || 0).toFixed(1);
+      document.getElementById("idx-drib").textContent = Number(a?.dribble_threat_index || 0).toFixed(1);
+    }
+
+    function renderHiddenPlayer(payload) {
+      const nameEl = document.getElementById("hidden-player-name");
+      const metaEl = document.getElementById("hidden-player-meta");
+      const scoreEl = document.getElementById("hidden-player-score");
+      const reasonEl = document.getElementById("hidden-player-reason");
+      if (!nameEl || !metaEl || !scoreEl || !reasonEl) return;
+      const p = payload?.player;
+      if (!payload?.found || !p) {
+        nameEl.textContent = "-";
+        nameEl.setAttribute("data-player-id", "");
+        metaEl.textContent = t("global.noData");
+        scoreEl.textContent = "-";
+        reasonEl.textContent = "-";
+        return;
+      }
+      nameEl.textContent = `${p.name || "-"} (U${p.age || "-"})`;
+      nameEl.setAttribute("data-player-id", String(p.player_id || ""));
+      metaEl.textContent = `${formatCountry(p.country)} · ${p.club || "-"} · ${p.position || "-"}`;
+      scoreEl.textContent = Number(p.hidden_score || payload?.hidden_score || 0).toFixed(2);
+      const r = payload?.reason || {};
+      reasonEl.textContent = `Minutes ${Number(r.minutes_played || 0).toLocaleString(localeTag())} · Goals ${Number(r.goals || 0)} · Assists ${Number(r.assists || 0)} · Space ${Number(r.space_creation_count || 0)}`;
+    }
+
+    function renderAllPlayersPage() {
+      const body = document.getElementById("all-players-body");
+      const total = allPlayersRows.length;
+      document.getElementById("all-players-total").textContent = t("all.total", {
+        count: Number(total).toLocaleString(localeTag()),
+      });
+      if (!total) {
+        body.innerHTML = '<tr><td colspan="11" class="text-center text-secondary py-3">' + esc(t("state.noPlayers")) + "</td></tr>";
+        document.getElementById("all-players-page-info").textContent = "0 / 0";
+        document.getElementById("all-players-prev").disabled = true;
+        document.getElementById("all-players-next").disabled = true;
+        return;
+      }
+      const pageCount = Math.max(1, Math.ceil(total / allPlayersPageSize));
+      allPlayersPage = Math.max(1, Math.min(allPlayersPage, pageCount));
+      const start = (allPlayersPage - 1) * allPlayersPageSize;
+      const end = Math.min(total, start + allPlayersPageSize);
+      const slice = allPlayersRows.slice(start, end);
+      body.innerHTML = slice.map((row, i) => `
+        <tr class="all-player-row" data-player-id="${esc(row.player_id)}" style="cursor:pointer">
+          <td>${start + i + 1}</td>
+          <td>
+            <span class="player-name-cell">
+              <span>${esc(row.name)}</span>
+              <button type="button" class="copy-player-btn" data-copy-player-name="${esc(row.name)}" title="Copy player name">COPY</button>
+            </span>
+          </td>
+          <td>U${esc(row.age ?? "-")}</td>
+          <td>${formatCm(row.height_cm)}</td>
+          <td>${formatKg(row.weight_kg)}</td>
+          <td>${formatFoot(row.dominant_foot)}</td>
+          <td>${esc(formatCountry(row.country))}</td>
+          <td>${esc(row.continent)}</td>
+          <td>${esc(row.club)}</td>
+          <td>${esc(row.position)}</td>
+          <td>${esc(row.league)}</td>
+        </tr>
+      `).join("");
+      document.getElementById("all-players-page-info").textContent = `${allPlayersPage} / ${pageCount}`;
+      document.getElementById("all-players-prev").disabled = allPlayersPage <= 1;
+      document.getElementById("all-players-next").disabled = allPlayersPage >= pageCount;
+    }
+
+    async function loadDashboard() {
+      if (shouldUseRegisteredOnlyMode()) {
+        const registered = await fetchRegisteredPlayersSnapshot();
+        renderRegisteredOnlyMode(
+          registered,
+          FORCE_REGISTERED_ONLY_MODE
+            ? "API 비활성화 모드 - 등록된 선수만 표시"
+            : "KST 10:00 전 - 등록된 선수만 표시"
+        );
+        return;
+      }
+
+      const failedBlocks = [];
+      try {
+        const playersData = await fetchJSONRetry("/players", 3);
+        cachedPlayers = playersData.items || [];
+        if (cachedPlayers.length) {
+          saveRegisteredPlayersCache(cachedPlayers);
+        }
+      } catch (err) {
+        const registered = await fetchRegisteredPlayersSnapshot();
+        if (registered.length) {
+          renderRegisteredOnlyMode(
+            registered,
+            "API 연결 실패 - 등록된 선수로 표시"
+          );
+          return;
+        }
+        failedBlocks.push("players");
+      }
+
+      try {
+        await syncFilterOptions();
+      } catch (err) {
+        failedBlocks.push("filters");
+      }
+
+      const q = buildQueryFromFilters();
+      const sortBy = document.getElementById("sort-by").value;
+      const sortOrder = document.getElementById("sort-order").value;
+      const playersParams = new URLSearchParams(q);
+      playersParams.set("limit", "30");
+      if (sortBy) {
+        playersParams.set("sort_by", sortBy);
+        playersParams.set("sort_order", sortOrder);
+      }
+      const playersPath = "/players?" + playersParams.toString();
+
+      const allPlayersParams = new URLSearchParams(q);
+      allPlayersParams.set("limit", "500");
+      if (sortBy) {
+        allPlayersParams.set("sort_by", sortBy);
+        allPlayersParams.set("sort_order", sortOrder);
+      }
+      const allPlayersPath = "/players?" + allPlayersParams.toString();
+
+      const [topRes, analyticsRes, advancedRes, hiddenRes, spotlightRes, top5Res, sysRes, topGlobalRes, mostViewedRes, trendingHourRes, allPlayersRes] = await Promise.allSettled([
+        fetchJSONRetry(playersPath, 2),
+        fetchJSONRetry("/analytics/overview" + (q ? `?${q}` : ""), 2),
+        fetchJSONRetry("/analytics/advanced" + (q ? `?${q}` : ""), 2),
+        fetchJSONRetry("/analytics/hidden-player" + (q ? `?${q}` : ""), 2),
+        fetchJSONRetry("/scouting/spotlight" + (q ? `?${q}` : ""), 2),
+        fetchJSONRetry("/scouting/spotlight-top5", 2),
+        fetchJSONRetry("/system/status", 2),
+        fetchJSONRetry("/scouting/spotlight-top-global?limit=5", 2),
+        fetchJSONRetry("/analytics/most-viewed?limit=10", 2),
+        fetchJSONRetry("/analytics/trending-hour?limit=10", 2),
+        fetchJSONRetry(allPlayersPath, 2),
+      ]);
+
+      if (topRes.status === "fulfilled") {
+        const list = topRes.value.items || [];
+        renderTop30(list);
+        const best = { top_player: list[0] ? { ...list[0], match_percent: 100 } : null };
+        renderTopMatch(best);
+      } else {
+        failedBlocks.push("top30");
+        document.getElementById("top30-body").innerHTML =
+          '<tr><td colspan="9" class="text-center text-danger py-3">' + esc(t("state.failTop30")) + "</td></tr>";
+        renderTopMatch(null);
+      }
+
+      if (analyticsRes.status === "fulfilled") {
+        renderAnalytics(analyticsRes.value);
+      } else {
+        failedBlocks.push("analytics");
+        document.getElementById("position-dist-body").innerHTML =
+          '<tr><td colspan="2" class="text-center text-danger py-3">' + esc(t("state.failPos")) + "</td></tr>";
+      }
+
+      if (advancedRes.status === "fulfilled") {
+        renderAdvancedIndexes(advancedRes.value);
+      } else {
+        failedBlocks.push("advanced");
+        renderAdvancedIndexes(null);
+      }
+
+      if (hiddenRes.status === "fulfilled") {
+        renderHiddenPlayer(hiddenRes.value);
+      } else {
+        failedBlocks.push("hidden_player");
+        renderHiddenPlayer(null);
+      }
+
+      if (spotlightRes.status === "fulfilled") {
+        renderSpotlight(spotlightRes.value);
+      } else {
+        failedBlocks.push("spotlight");
+        renderSpotlight(null);
+      }
+
+      if (top5Res.status === "fulfilled") {
+        renderSpotlightTop5(top5Res.value);
+      } else {
+        failedBlocks.push("top5");
+        renderSpotlightTop5(null);
+      }
+
+      if (topGlobalRes.status === "fulfilled") {
+        renderGlobalTop5(topGlobalRes.value);
+      } else {
+        failedBlocks.push("global_top5");
+        const fallbackItems = [];
+        const seen = new Set();
+        const byContinent = top5Res.status === "fulfilled" ? (top5Res.value?.items || {}) : {};
+        Object.values(byContinent).forEach((rows) => {
+          (rows || []).forEach((p) => {
+            const id = String(p?.player_id || "");
+            if (!id || seen.has(id)) return;
+            seen.add(id);
+            fallbackItems.push(p);
+          });
+        });
+        fallbackItems.sort((a, b) => Number(b?.spotlight_score || 0) - Number(a?.spotlight_score || 0));
+        renderGlobalTop5({ items: fallbackItems.slice(0, 5) });
+      }
+
+      if (mostViewedRes.status === "fulfilled") {
+        renderMostViewed(mostViewedRes.value);
+      } else {
+        failedBlocks.push("most_viewed");
+        renderMostViewed(null);
+      }
+
+      if (trendingHourRes.status === "fulfilled") {
+        renderTrendingHour(trendingHourRes.value);
+      } else {
+        failedBlocks.push("trending_hour");
+        renderTrendingHour(null);
+      }
+
+      const bannerTop = topGlobalRes.status === "fulfilled" ? (topGlobalRes.value?.items || [])[0] : null;
+      renderLiveRankBanner(
+        bannerTop ? { found: true, player: bannerTop } : null,
+        top5Res.status === "fulfilled" ? top5Res.value : null
+      );
+
+      if (allPlayersRes.status === "fulfilled") {
+        allPlayersRows = allPlayersRes.value.items || [];
+        allPlayersPage = 1;
+        renderAllPlayersPage();
+        renderStatTopRankings(allPlayersRows);
+      } else {
+        failedBlocks.push("all_players");
+        allPlayersRows = [];
+        renderAllPlayersPage();
+        renderStatTopRankings([]);
+      }
+
+      if (sysRes.status === "fulfilled") {
+        const sys = sysRes.value;
+        document.getElementById("system-status").textContent = t("sys.ok", {
+          total: Number(sys?.players_total || 0).toLocaleString(localeTag()),
+          time: sys?.latest_updated_at || "-",
+        });
+      } else {
+        failedBlocks.push("system");
+        document.getElementById("system-status").textContent = t("sys.fail");
+      }
+
+      if (failedBlocks.length === 0) {
+        setStatus(true, t("api.connected"));
+      } else {
+        setStatus(false, t("api.partialCount", { n: failedBlocks.length }));
+      }
+    }
+
+    function markLoadingStuck() {
+      const msg = esc(t("state.stuckLoading"));
+      const topBody = document.getElementById("top30-body");
+      const allBody = document.getElementById("all-players-body");
+      const posBody = document.getElementById("position-dist-body");
+      const sys = document.getElementById("system-status");
+      if (topBody && topBody.textContent && topBody.textContent.includes(t("state.loading"))) {
+        topBody.innerHTML = `<tr><td colspan="9" class="text-center text-warning py-3">${msg}</td></tr>`;
+      }
+      if (allBody && allBody.textContent && allBody.textContent.includes(t("state.loading"))) {
+        allBody.innerHTML = `<tr><td colspan="11" class="text-center text-warning py-3">${msg}</td></tr>`;
+      }
+      if (posBody && posBody.textContent && posBody.textContent.includes(t("state.loading"))) {
+        posBody.innerHTML = `<tr><td colspan="2" class="text-center text-warning py-3">${msg}</td></tr>`;
+      }
+      if (sys && sys.textContent && sys.textContent.includes(t("sys.loading"))) {
+        sys.textContent = t("state.stuckLoading");
+      }
+    }
+
+    async function runDashboardCycle(force = false) {
+      if (dashboardLoadInFlight && !force) return dashboardLoadInFlight;
+      dashboardLoadInFlight = (async () => {
+        await loadDashboard();
+        await loadKeyMatches();
+      })();
+      try {
+        await dashboardLoadInFlight;
+      } finally {
+        dashboardLoadInFlight = null;
+      }
+    }
+
+    async function loadKeyMatches() {
+      try {
+        const data = await fetchJSONRetry("/schedule/key-leagues", 2);
+        renderKeyMatches(data || {});
+      } catch (err) {
+        document.getElementById("key-match-body").innerHTML = '<div class="text-danger tiny-note">' + esc(t("state.failKey")) + "</div>";
+      }
+    }
+
+    async function copyPlayerNameFromButton(target) {
+      const btn = target.closest("[data-copy-player-name]");
+      if (!btn) return false;
+      const playerName = String(btn.getAttribute("data-copy-player-name") || "").trim();
+      if (!playerName) return true;
+      const searchInput = document.getElementById("nav-player-search-input");
+      if (searchInput) searchInput.value = playerName;
+      const googleUrl = "https://www.google.com/search?q=" + encodeURIComponent(playerName + " football player");
+      try {
+        if (navigator?.clipboard?.writeText) {
+          await navigator.clipboard.writeText(playerName);
+        }
+      } catch (e) {
+        // clipboard permission blocked: search input is already prefilled
+      }
+      window.open(googleUrl, "_blank", "noopener");
+      return true;
+    }
+
+    async function syncFiltersOnly() {
+      try {
+        await syncFilterOptions();
+      } catch (e) {
+        // 검색 시 loadDashboard에서 다시 동기화·오류 표시
+      }
+    }
+
+    async function resetFiltersToDefault() {
+      document.getElementById("continent-filter").value = "";
+      document.getElementById("country-filter").value = "";
+      document.getElementById("position-filter").value = "";
+      document.getElementById("league-filter").value = "";
+      document.getElementById("sort-by").value = "";
+      document.getElementById("sort-order").value = "desc";
+      allPlayersPage = 1;
+      await syncFiltersOnly();
+      await runDashboardCycle(true);
+    }
+
+    document.getElementById("apply-filter").addEventListener("click", () => {
+      runDashboardCycle(true);
+    });
+    document.getElementById("reset-filter").addEventListener("click", () => {
+      resetFiltersToDefault().catch(() => {
+        runDashboardCycle(true);
+      });
+    });
+    document.getElementById("continent-filter").addEventListener("change", syncFiltersOnly);
+    document.getElementById("country-filter").addEventListener("change", syncFiltersOnly);
+    document.getElementById("position-filter").addEventListener("change", syncFiltersOnly);
+    document.getElementById("league-filter").addEventListener("change", syncFiltersOnly);
+    document.getElementById("top30-body").addEventListener("click", async (e) => {
+      if (await copyPlayerNameFromButton(e.target)) {
+        e.stopPropagation();
+        return;
+      }
+      const tr = e.target.closest(".player-row");
+      if (!tr) return;
+      openPlayerModal(tr.getAttribute("data-player-id"));
+    });
+    document.getElementById("spotlight-top5-by-continent").addEventListener("click", (e) => {
+      const row = e.target.closest("[data-player-id]");
+      if (!row) return;
+      openPlayerModal(row.getAttribute("data-player-id"));
+    });
+    document.getElementById("stat-top-rank-pane").addEventListener("click", (e) => {
+      const row = e.target.closest("[data-player-id]");
+      if (!row) return;
+      openPlayerModal(row.getAttribute("data-player-id"));
+    });
+    document.getElementById("global-top5-list").addEventListener("click", (e) => {
+      const row = e.target.closest("[data-player-id]");
+      if (!row) return;
+      openPlayerModal(row.getAttribute("data-player-id"));
+    });
+    document.getElementById("most-viewed-body").addEventListener("click", (e) => {
+      const row = e.target.closest("[data-player-id]");
+      if (!row) return;
+      openPlayerModal(row.getAttribute("data-player-id"));
+    });
+    const hiddenNameEl = document.getElementById("hidden-player-name");
+    if (hiddenNameEl) {
+      hiddenNameEl.addEventListener("click", (e) => {
+        const playerId = e.target.getAttribute("data-player-id");
+        if (!playerId) return;
+        openPlayerModal(playerId);
+      });
+    }
+    const hiddenShuffleEl = document.getElementById("hidden-player-shuffle");
+    if (hiddenShuffleEl) {
+      hiddenShuffleEl.addEventListener("click", () => {
+        refreshHiddenPlayerOnly();
+      });
+    }
+    document.getElementById("banner-top-player").addEventListener("click", (e) => {
+      const playerId = e.target.getAttribute("data-player-id");
+      if (!playerId) return;
+      openPlayerModal(playerId);
+    });
+    document.getElementById("banner-rank-ticker").addEventListener("click", (e) => {
+      const row = e.target.closest("[data-player-id]");
+      if (!row) return;
+      openPlayerModal(row.getAttribute("data-player-id"));
+    });
+    document.getElementById("all-players-body").addEventListener("click", async (e) => {
+      if (await copyPlayerNameFromButton(e.target)) {
+        e.stopPropagation();
+        return;
+      }
+      const tr = e.target.closest(".all-player-row");
+      if (!tr) return;
+      openPlayerModal(tr.getAttribute("data-player-id"));
+    });
+    document.getElementById("all-players-page-size").addEventListener("change", (e) => {
+      allPlayersPageSize = Math.max(1, Number(e.target.value) || 50);
+      allPlayersPage = 1;
+      renderAllPlayersPage();
+    });
+    document.getElementById("all-players-prev").addEventListener("click", () => {
+      allPlayersPage -= 1;
+      renderAllPlayersPage();
+    });
+    document.getElementById("all-players-next").addEventListener("click", () => {
+      allPlayersPage += 1;
+      renderAllPlayersPage();
+    });
+
+    async function bootstrap() {
+      if (shouldUseRegisteredOnlyMode()) {
+        setStatus(true, "registered-only");
+        await loadDashboard();
+        setInterval(() => {
+          runDashboardCycle(true).catch(() => { });
+        }, 60000);
+        return;
+      }
+      await ensureApiBaseReachable();
+      const runtime = runtimeDashboardSettings();
+      let retryCount = 0;
+      const stuckTimer = setTimeout(() => {
+        markLoadingStuck();
+        if (retryCount < runtime.retryMax) {
+          retryCount += 1;
+          setTimeout(() => {
+            runDashboardCycle(true).catch(() => { });
+          }, runtime.retryDelayMs);
+        }
+      }, runtime.stuckTimeoutMs);
+      try {
+        await fetchHealthProbe();
+        setStatus(true, t("api.connected"));
+      } catch (err) {
+        setStatus(false, t("api.failConn"));
+      }
+      await registerVisitor();
+      await loadAutomationStatus();
+      try {
+        await runDashboardCycle(true);
+      } finally {
+        clearTimeout(stuckTimer);
+      }
+    }
+
+    async function refreshLiveRankBannerOnly() {
+      const [topGlobalRes, top5Res] = await Promise.allSettled([
+        fetchJSONRetry("/scouting/spotlight-top-global?limit=5", 1),
+        fetchJSONRetry("/scouting/spotlight-top5", 1),
+      ]);
+      const top = topGlobalRes.status === "fulfilled" ? (topGlobalRes.value?.items || [])[0] : null;
+      renderLiveRankBanner(
+        top ? { found: true, player: top } : null,
+        top5Res.status === "fulfilled" ? top5Res.value : null
+      );
+    }
+
+    async function refreshHiddenPlayerOnly() {
+      const q = buildQueryFromFilters();
+      try {
+        const data = await fetchJSONRetry("/analytics/hidden-player" + (q ? `?${q}` : ""), 1);
+        renderHiddenPlayer(data);
+      } catch (e) {
+        renderHiddenPlayer(null);
+      }
+    }
+
+    (function setupEntrySplash() {
+      const splash = document.getElementById("entry-splash");
+      const btn = document.getElementById("reside-enter");
+      if (!splash || !btn) return;
+
+      function dismissSplash(persist) {
+        splash.classList.add("is-hidden");
+        document.body.classList.remove("splash-open");
+        splash.setAttribute("aria-hidden", "true");
+        if (persist) {
+          try {
+            sessionStorage.setItem(SPLASH_SKIP_KEY, "1");
+          } catch (e) {
+            /* ignore quota / private mode */
+          }
+        }
+      }
+
+      try {
+        localStorage.removeItem(SPLASH_SKIP_KEY);
+      } catch (e) {
+        /* ignore */
+      }
+
+      try {
+        if (sessionStorage.getItem(SPLASH_SKIP_KEY)) {
+          dismissSplash(false);
+          return;
+        }
+      } catch (e) {
+        /* show splash if storage unavailable */
+      }
+
+      document.body.classList.add("splash-open");
+      btn.addEventListener("click", () => {
+        dismissSplash(true);
+      });
+      splash.querySelectorAll(".entry-splash__lang-btn[data-lang-set]").forEach((langBtn) => {
+        langBtn.addEventListener("click", () => {
+          const next = String(langBtn.getAttribute("data-lang-set") || "").toLowerCase();
+          if (!SUPPORTED_LANGS.includes(next)) return;
+          localStorage.setItem(LANG_KEY, next);
+          applyStaticI18n();
+        });
+      });
+    })();
+
+    (function setupNavbarBrandReload() {
+      const el = document.getElementById("navbar-brand-reload");
+      if (!el) return;
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        location.reload();
+      });
+    })();
+
+    (function setupNavPlayerGoogleSearch() {
+      const input = document.getElementById("nav-player-search-input");
+      const googleBtn = document.getElementById("nav-player-search-btn");
+      const ytBtn = document.getElementById("nav-player-search-yt-btn");
+      if (!input || !googleBtn || !ytBtn) return;
+
+      function runSearch() {
+        const q = String(input.value || "").trim();
+        if (!q) return;
+        const url = "https://www.google.com/search?q=" + encodeURIComponent(q + " football player");
+        window.open(url, "_blank", "noopener");
+      }
+
+      function runYoutubeSearch() {
+        const q = String(input.value || "").trim();
+        if (!q) return;
+        const url = "https://www.youtube.com/results?search_query=" + encodeURIComponent(q + " football player");
+        window.open(url, "_blank", "noopener");
+      }
+
+      googleBtn.addEventListener("click", runSearch);
+      ytBtn.addEventListener("click", runYoutubeSearch);
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          runSearch();
+        }
+      });
+    })();
+
+    document.getElementById("lang-toggle").addEventListener("click", async () => {
+      toggleLang();
+      applyStaticI18n();
+      await fetchJSONRetry("/system/visitors", 1).then((payload) => setVisitorCount(payload?.count || 0)).catch(() => { });
+      await syncFiltersOnly();
+      await runDashboardCycle(true);
+    });
+
+    (function setupAdminPanel() {
+      const panel = document.getElementById("admin-panel");
+      const inputTimeout = document.getElementById("admin-stuck-timeout");
+      const inputDelay = document.getElementById("admin-retry-delay");
+      const inputMax = document.getElementById("admin-retry-max");
+      const saveBtn = document.getElementById("admin-save");
+      const applyNowBtn = document.getElementById("admin-apply-now");
+      const resetBtn = document.getElementById("admin-reset");
+      const closeBtn = document.getElementById("admin-close");
+      const statusEl = document.getElementById("admin-status");
+      if (!panel || !inputTimeout || !inputDelay || !inputMax || !saveBtn || !applyNowBtn || !resetBtn || !closeBtn || !statusEl) return;
+
+      function syncInputs() {
+        const cfg = runtimeDashboardSettings();
+        inputTimeout.value = String(cfg.stuckTimeoutMs);
+        inputDelay.value = String(cfg.retryDelayMs);
+        inputMax.value = String(cfg.retryMax);
+      }
+
+      function setStatus(msg) {
+        statusEl.textContent = msg;
+      }
+
+      function openPanel() {
+        syncInputs();
+        panel.classList.add("is-open");
+        panel.setAttribute("aria-hidden", "false");
+      }
+
+      function closePanel() {
+        panel.classList.remove("is-open");
+        panel.setAttribute("aria-hidden", "true");
+      }
+
+      function togglePanel() {
+        if (panel.classList.contains("is-open")) closePanel();
+        else openPanel();
+      }
+
+      saveBtn.addEventListener("click", () => {
+        localStorage.setItem("u25_dashboard_stuck_timeout_ms", String(inputTimeout.value || ""));
+        localStorage.setItem("u25_dashboard_retry_delay_ms", String(inputDelay.value || ""));
+        localStorage.setItem("u25_dashboard_retry_max", String(inputMax.value || ""));
+        setStatus(t("admin.saved"));
+      });
+
+      applyNowBtn.addEventListener("click", async () => {
+        localStorage.setItem("u25_dashboard_stuck_timeout_ms", String(inputTimeout.value || ""));
+        localStorage.setItem("u25_dashboard_retry_delay_ms", String(inputDelay.value || ""));
+        localStorage.setItem("u25_dashboard_retry_max", String(inputMax.value || ""));
+        setStatus(t("admin.appliedNow"));
+        await runDashboardCycle(true).catch(() => { });
+      });
+
+      resetBtn.addEventListener("click", () => {
+        localStorage.removeItem("u25_dashboard_stuck_timeout_ms");
+        localStorage.removeItem("u25_dashboard_retry_delay_ms");
+        localStorage.removeItem("u25_dashboard_retry_max");
+        syncInputs();
+        setStatus(t("admin.resetDone"));
+      });
+
+      closeBtn.addEventListener("click", closePanel);
+      document.addEventListener("keydown", (e) => {
+        if (e.altKey && e.shiftKey && String(e.key || "").toLowerCase() === "a") {
+          e.preventDefault();
+          togglePanel();
+        }
+      });
+      if (new URLSearchParams(window.location.search).get("admin") === "1") openPanel();
+    })();
+
+    applyStaticI18n();
+
+    bootstrap();
+    /* 자동 새로고침: 너무 자주 돌면 실패 문구만 반복되므로 간격을 넉넉히 둠 */
+    setInterval(() => runDashboardCycle(), 180000);
+    setInterval(refreshLiveRankBannerOnly, 120000);
+    setInterval(refreshHiddenPlayerOnly, 120000);
+    setInterval(loadAutomationStatus, 120000);
+    setInterval(updateCountdownView, 1000);
+  </script>
+
+</body>
+
+</html>
