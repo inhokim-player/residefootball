@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "season": 2025,
+  "schedule_times": ["10:00"],
+  "timezone": "Asia/Seoul",
+  "scheduler_poll_interval_sec": 30,
+  "harvest_delay": 0.25,
+  "bio_backfill_limit": 50000,
+  "bio_backfill_delay": 0.15,
+  "api": {
+    "host": "127.0.0.1",
+    "port": 8010
+  },
+  "live_feed": {
+    "interval_sec": 30,
+    "season": 2025
+  },
+  "security": {
+    "cors_origins": [
+      "https://residefootball.com",
+      "https://www.residefootball.com",
+      "http://127.0.0.1:5500",
+      "http://localhost:5500",
+      "http://127.0.0.1:8080",
+      "http://localhost:8080"
+    ],
+    "cors_allow_vercel_regex": true,
+    "request_rate_limit_per_minute": 120,
+    "request_rate_limit_window_sec": 60,
+    "allow_local_token_bypass": false,
+    "endpoint_rate_limits_per_minute": {
+      "/players": 120,
+      "/players/": 90,
+      "/adaptation/": 60,
+      "/scouting/best-match": 60,
+      "/analytics/hidden-player": 90,
+      "/scouting/spotlight-top5": 90,
+      "/scouting/spotlight-top-global": 90
+    },
+    "note_ko": "cors_origins 에 명시 오리진 + cors_allow_vercel_regex true 시 https://*.vercel.app 정규식 허용. 끄려면 cors_allow_vercel_regex false 또는 U25_DISABLE_VERCEL_CORS_REGEX=1. 운영은 U25_CORS_ORIGINS 로만 제한해도 됨."
+  },
+  "meta": {
+    "note_ko": "스케줄·시즌·API 포트·라이브 피드 주기는 이 파일만 수정하세요. 복제본은 data/automation_config.replica.json 입니다. site/index.html 의 API_BASE도 api.host / api.port 와 맞추세요."
+  }
+}

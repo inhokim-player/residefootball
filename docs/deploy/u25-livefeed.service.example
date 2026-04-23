@@ -1,0 +1,19 @@
+# /etc/systemd/system/u25-livefeed.service
+# API_FOOTBALL_KEY 가 .env 에 있어야 합니다.
+
+[Unit]
+Description=U25 API-Football live feed poller
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/u25-scouting
+EnvironmentFile=/opt/u25-scouting/.env
+ExecStart=/opt/u25-scouting/.venv/bin/python live_feed.py
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target

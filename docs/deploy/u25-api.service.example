@@ -1,0 +1,22 @@
+# /etc/systemd/system/u25-api.service
+# sudo cp u25-api.service.example /etc/systemd/system/u25-api.service
+# sudo systemctl daemon-reload && sudo systemctl enable --now u25-api
+#
+# User/WorkingDirectory/EnvironmentFile 를 서버 환경에 맞게 수정하세요.
+
+[Unit]
+Description=U25 Scouting API (uvicorn)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/u25-scouting
+EnvironmentFile=/opt/u25-scouting/.env
+ExecStart=/opt/u25-scouting/.venv/bin/python -m uvicorn u25_api:app --host 127.0.0.1 --port 8010
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
