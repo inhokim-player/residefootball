@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'none'; base-uri 'none'; frame-ancestors 'none'; img-src 'self' data: https: blob:; font-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://api.residefootball.com http://127.0.0.1:* http://localhost:*; upgrade-insecure-requests;" />
+  <title>U25 운영 콘솔 (비공개)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --border: #2a3f5c;
+      --text-muted: #94a8c9;
+    }
+
+    body {
+      background: radial-gradient(900px 420px at 100% 0%, rgba(55, 120, 255, 0.18), transparent 55%),
+        linear-gradient(180deg, #060b14, #050a12);
+      color: #e8f0ff;
+      min-height: 100vh;
+    }
+
+    .card {
+      background: rgba(12, 22, 40, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.82rem;
+    }
+
+    .check-row {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.45rem 0;
+    }
+
+    .check-row:last-child {
+      border-bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar border-bottom border-secondary mb-3" style="background: rgba(8, 14, 26, 0.9);">
+    <div class="container-fluid py-2 d-flex flex-wrap align-items-center gap-2">
+      <span class="navbar-brand mb-0 h1 text-light fs-5">U25 운영 콘솔</span>
+      <span class="badge text-bg-secondary">비공개 · 메인과 동일 localStorage</span>
+      <div class="ms-auto d-flex flex-wrap gap-2">
+        <a class="btn btn-sm btn-outline-light" href="index.html">메인 대시보드</a>
+        <button id="btn-refresh" type="button" class="btn btn-sm btn-primary">지금 새로고침</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container pb-5">
+    <div class="row g-3">
+      <div class="col-lg-4">
+        <div class="card p-3 h-100">
+          <h2 class="h6 text-info mb-3">현재 시각 · 자동화 스케줄</h2>
+          <div class="mb-2"><span class="text-secondary">서버·브라우저 기준(로컬):</span>
+            <div id="clock-local" class="fs-4 fw-semibold">--</div>
+          </div>
+          <div class="mb-2"><span class="text-secondary">설정 타임존:</span>
+            <div id="clock-tz-label" class="mono">--</div>
+            <div id="clock-tz" class="fs-5 fw-semibold">--</div>
+          </div>
+          <hr class="border-secondary" />
+          <div class="muted mb-1">스케줄 시각 (설정 파일)</div>
+          <div id="schedule-chip" class="mono">--</div>
+          <div class="mt-2 muted">마지막 풀 동기 성공(스케줄러 state)</div>
+          <div id="last-sync" class="mono">--</div>
+          <div class="mt-2 muted">사유 / 상태</div>
+          <div id="last-reason" class="mono small">--</div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <div class="card p-3 mb-3">
+          <h2 class="h6 text-warning mb-2">서버 연결 점검</h2>
+          <p class="muted mb-2">
+            메인 <code>index.html</code> 과 동일하게 <code>/health</code> 로 주소를 맞춥니다.
+            주소는 <code class="mono">localStorage.u25_api_base</code> · 필요 시
+            <code class="mono">u25_api_bearer</code> (Bearer) 입니다.
+          </p>
+          <div class="row g-2 align-items-end">
+            <div class="col-md-6">
+              <label class="form-label small mb-1">서버 주소(URL)</label>
+              <input id="input-api-base" class="form-control form-control-sm bg-dark text-light border-secondary mono"
+                type="text" placeholder="http://127.0.0.1:8010" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small mb-1">접속용 Bearer(선택)</label>
+              <input id="input-token" class="form-control form-control-sm bg-dark text-light border-secondary mono"
+                type="password" autocomplete="off" placeholder="서버 .env 의 U25_API_TOKEN 과 동일" />
+            </div>
+            <div class="col-12 d-flex flex-wrap gap-2">
+              <button id="btn-save-creds" type="button" class="btn btn-sm btn-success">저장 후 재탐색</button>
+              <button id="btn-clear-base" type="button" class="btn btn-sm btn-outline-secondary">저장된 주소 지우기</button>
+              <button id="btn-clear-token" type="button" class="btn btn-sm btn-outline-secondary">Bearer 지우기</button>
+            </div>
+          </div>
+          <div class="mt-3 d-flex flex-wrap align-items-center gap-2">
+            <span id="pill-health" class="badge text-bg-secondary">health: 대기</span>
+            <span id="pill-probe" class="badge text-bg-secondary">서버 프로브: 대기</span>
+            <span class="muted small">마지막 정상: <span id="last-ok">-</span></span>
+          </div>
+          <div id="health-json" class="mono mt-2 p-2 rounded border border-secondary small text-break" style="max-height:120px;overflow:auto;">--</div>
+        </div>
+
+        <div class="card p-3 mb-3">
+          <h2 class="h6 text-success mb-2">데이터 파일 신호 (mtime)</h2>
+          <p class="muted small mb-2">엔드포인트 <code>/system/admin-signals</code></p>
+          <div class="table-responsive">
+            <table class="table table-sm table-dark table-borderless mb-0">
+              <thead>
+                <tr class="text-secondary">
+                  <th>경로</th>
+                  <th>존재</th>
+                  <th>크기</th>
+                  <th>수정 시각 (KST)</th>
+                </tr>
+              </thead>
+              <tbody id="signals-body">
+                <tr>
+                  <td colspan="4" class="text-secondary">불러오는 중…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card p-3 mb-3">
+          <h2 class="h6 mb-2">DB 요약</h2>
+          <p class="muted small mb-2"><code>/system/status</code></p>
+          <div id="db-summary" class="mono small">--</div>
+        </div>
+
+        <div class="card p-3">
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+            <h2 class="h6 mb-0">운영 체크리스트</h2>
+            <div class="ms-auto d-flex flex-wrap gap-2">
+              <button id="btn-checklist-reset" type="button" class="btn btn-sm btn-outline-warning">기본 목록으로</button>
+              <button id="btn-checklist-clear-done" type="button" class="btn btn-sm btn-outline-light">완료 전부 해제</button>
+            </div>
+          </div>
+          <p class="muted small">완료 여부는 이 브라우저 <code class="mono">localStorage</code> 에만 저장됩니다.</p>
+          <div id="checklist-root"></div>
+          <hr class="border-secondary" />
+          <div class="row g-2">
+            <div class="col-md-10">
+              <input id="input-new-item" class="form-control form-control-sm bg-dark text-light border-secondary"
+                type="text" placeholder="새 항목 추가…" />
+            </div>
+            <div class="col-md-2">
+              <button id="btn-add-item" type="button" class="btn btn-sm btn-primary w-100">추가</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-3 mt-3">
+          <h2 class="h6 mb-2">메인 «로딩 지연» 설정</h2>
+          <p class="muted small mb-2">
+            메인에서 <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> 패널과 동일합니다.
+            키: <code class="mono">u25_dashboard_*</code>
+          </p>
+          <div class="row g-2">
+            <div class="col-md-4">
+              <label class="form-label small">stuckTimeoutMs</label>
+              <input id="dash-timeout" type="number" class="form-control form-control-sm bg-dark text-light border-secondary" min="3000" max="120000" step="100" />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small">retryDelayMs</label>
+              <input id="dash-delay" type="number" class="form-control form-control-sm bg-dark text-light border-secondary" min="200" max="30000" step="100" />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small">retryMax</label>
+              <input id="dash-max" type="number" class="form-control form-control-sm bg-dark text-light border-secondary" min="0" max="10" step="1" />
+            </div>
+            <div class="col-12 d-flex gap-2">
+              <button id="btn-dash-save" type="button" class="btn btn-sm btn-success">저장</button>
+              <button id="btn-dash-reset" type="button" class="btn btn-sm btn-outline-secondary">기본값</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const API_TOKEN_KEY = "u25_api_bearer";
+    const CHECKLIST_KEY = "u25_admin_ops_checklist_v1";
+
+    let API_BASE = "https://api.residefootball.com";
+    let lastApiOkAt = 0;
+    let automationTz = "Asia/Seoul";
+
+    const DEFAULT_CHECKLIST = [
+      { id: "env-key", label: ".env 에 API_FOOTBALL_KEY 채움", done: false },
+      { id: "srv", label: "백엔드: python -m uvicorn u25_api:app --host 127.0.0.1 --port 8010", done: false },
+      { id: "token", label: "U25_API_TOKEN 사용 시: 운영 콘솔에서 Bearer 저장 → 메인 새로고침", done: false },
+      { id: "countries", label: "국가 캐시: python fetch_countries.py", done: false },
+      { id: "live", label: "라이브 피드: start_live_feed.bat 또는 python live_feed.py", done: false },
+      { id: "browser", label: "메인 상단 네비 우측 «연결 실패» 문구가 없는지 확인", done: false },
+    ];
+
+    function readRuntimeInt(key, fallback, min, max) {
+      const raw = localStorage.getItem(key);
+      const n = Number(raw);
+      if (!Number.isFinite(n)) return fallback;
+      return Math.max(min, Math.min(max, Math.floor(n)));
+    }
+
+    function loadDashboardInputs() {
+      document.getElementById("dash-timeout").value = String(readRuntimeInt("u25_dashboard_stuck_timeout_ms", 12000, 3000, 120000));
+      document.getElementById("dash-delay").value = String(readRuntimeInt("u25_dashboard_retry_delay_ms", 1200, 200, 30000));
+      document.getElementById("dash-max").value = String(readRuntimeInt("u25_dashboard_retry_max", 2, 0, 10));
+    }
+
+    function apiBaseCandidates() {
+      const candidates = [];
+      const push = (v) => {
+        const x = String(v || "").trim();
+        if (!x || candidates.includes(x)) return;
+        candidates.push(x);
+      };
+      push(localStorage.getItem("u25_api_base"));
+      const fromQuery = new URLSearchParams(window.location.search).get("api");
+      push(fromQuery);
+      push(API_BASE);
+      push(window.location.origin);
+      push("https://api.residefootball.com");
+      push("http://127.0.0.1:8010");
+      push("http://localhost:8010");
+      push("http://127.0.0.1:8000");
+      push("http://localhost:8000");
+      return candidates.filter((x) => /^https?:\/\//i.test(x));
+    }
+
+    async function probeApiBase(base) {
+      try {
+        const res = await fetch(base + "/health", { headers: { Accept: "application/json" } });
+        if (!res.ok) return false;
+        await res.json();
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    async function ensureApiBaseReachable() {
+      for (const base of apiBaseCandidates()) {
+        if (await probeApiBase(base)) {
+          API_BASE = base;
+          localStorage.setItem("u25_api_base", base);
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function getApiAuthHeaders() {
+      const raw = localStorage.getItem(API_TOKEN_KEY);
+      if (!raw) return {};
+      const token = String(raw).trim();
+      if (!token) return {};
+      return { Authorization: "Bearer " + token };
+    }
+
+    async function fetchJSON(path) {
+      const headers = Object.assign({ Accept: "application/json" }, getApiAuthHeaders());
+      const res = await fetch(API_BASE + path, { cache: "no-store", headers });
+      if (res.status === 401) throw new Error("HTTP 401");
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    }
+
+    function setPill(id, ok, textOk, textBad) {
+      const el = document.getElementById(id);
+      el.textContent = ok ? textOk : textBad;
+      el.className = "badge " + (ok ? "text-bg-success" : "text-bg-danger");
+    }
+
+    function fmtKstFromUnix(sec) {
+      const n = Number(sec || 0);
+      if (!n) return "-";
+      return new Date(n * 1000).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
+    }
+
+    function tickClocks() {
+      const now = new Date();
+      document.getElementById("clock-local").textContent = now.toLocaleString("ko-KR");
+      const tz = automationTz || "Asia/Seoul";
+      document.getElementById("clock-tz-label").textContent = tz;
+      try {
+        document.getElementById("clock-tz").textContent = now.toLocaleString("ko-KR", { timeZone: tz });
+      } catch (e) {
+        document.getElementById("clock-tz").textContent = "(타임존 오류)";
+      }
+    }
+
+    async function refreshAll() {
+      tickClocks();
+      document.getElementById("input-api-base").value = localStorage.getItem("u25_api_base") || API_BASE;
+      document.getElementById("input-token").value = localStorage.getItem(API_TOKEN_KEY) || "";
+
+      const okBase = await ensureApiBaseReachable();
+      document.getElementById("input-api-base").value = API_BASE;
+
+      let healthPayload = null;
+      try {
+        const res = await fetch(API_BASE + "/health", { headers: { Accept: "application/json" } });
+        healthPayload = res.ok ? await res.json() : { error: "HTTP " + res.status };
+        lastApiOkAt = Date.now();
+        setPill("pill-health", res.ok, "health: 정상", "health: 실패");
+      } catch (e) {
+        setPill("pill-health", false, "", "health: 실패");
+        healthPayload = { error: String(e && e.message ? e.message : e) };
+      }
+      document.getElementById("health-json").textContent = JSON.stringify(healthPayload, null, 0);
+      document.getElementById("last-ok").textContent = lastApiOkAt
+        ? new Date(lastApiOkAt).toLocaleString("ko-KR")
+        : "-";
+
+      let authProbe = false;
+      if (okBase) {
+        try {
+          await fetchJSON("/system/status");
+          authProbe = true;
+        } catch (e) {
+          authProbe = false;
+        }
+      }
+      setPill(
+        "pill-probe",
+        authProbe,
+        "서버(/system/status): OK",
+        okBase ? "서버: 실패(Bearer·우회 설정 확인)" : "서버: 주소 없음"
+      );
+
+      if (okBase) {
+        try {
+          const auto = await fetchJSON("/system/automation-status");
+          automationTz = String(auto.timezone || "Asia/Seoul");
+          const times = (auto.schedule_times || []).join(", ");
+          document.getElementById("schedule-chip").textContent = times || "-";
+          const st = auto.state || {};
+          document.getElementById("last-sync").textContent = fmtKstFromUnix(st.last_success_ts || 0);
+          document.getElementById("last-reason").textContent = String(st.last_reason || "").trim() || "-";
+        } catch (e) {
+          document.getElementById("schedule-chip").textContent = "(automation-status 실패)";
+        }
+
+        try {
+          const sig = await fetchJSON("/system/admin-signals");
+          const body = document.getElementById("signals-body");
+          const rows = (sig.files || []).map((f) => {
+            const ex = f.exists ? "예" : "아니오";
+            const sz = f.exists ? Number(f.size_bytes || 0).toLocaleString("ko-KR") + " B" : "-";
+            const mt = f.exists ? fmtKstFromUnix(f.mtime_unix) : "-";
+            return `<tr><td class="mono">${esc(f.path)}</td><td>${ex}</td><td class="mono">${sz}</td><td class="mono">${mt}</td></tr>`;
+          });
+          body.innerHTML = rows.join("") || '<tr><td colspan="4" class="text-secondary">데이터 없음</td></tr>';
+        } catch (e) {
+          document.getElementById("signals-body").innerHTML =
+            '<tr><td colspan="4" class="text-danger">admin-signals 실패</td></tr>';
+        }
+
+        try {
+          const st = await fetchJSON("/system/status");
+          document.getElementById("db-summary").textContent =
+            `선수 ${Number(st.players_total || 0).toLocaleString("ko-KR")}명 · 최근 DB updated_at: ${st.latest_updated_at || "-"}`;
+        } catch (e) {
+          document.getElementById("db-summary").textContent = "로드 실패";
+        }
+      } else {
+        document.getElementById("signals-body").innerHTML =
+          '<tr><td colspan="4" class="text-warning">서버에 연결되지 않았습니다. 백엔드 실행·포트·CORS를 확인하세요.</td></tr>';
+        document.getElementById("db-summary").textContent = "-";
+      }
+
+      tickClocks();
+    }
+
+    function esc(s) {
+      return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
+    }
+
+    function loadChecklist() {
+      try {
+        const raw = localStorage.getItem(CHECKLIST_KEY);
+        if (!raw) return DEFAULT_CHECKLIST.map((x) => ({ ...x }));
+        const arr = JSON.parse(raw);
+        if (!Array.isArray(arr) || !arr.length) return DEFAULT_CHECKLIST.map((x) => ({ ...x }));
+        return arr.map((x) => ({
+          id: String(x.id || ""),
+          label: String(x.label || ""),
+          done: !!x.done,
+        }));
+      } catch (e) {
+        return DEFAULT_CHECKLIST.map((x) => ({ ...x }));
+      }
+    }
+
+    function saveChecklist(items) {
+      localStorage.setItem(CHECKLIST_KEY, JSON.stringify(items));
+    }
+
+    function renderChecklist() {
+      const items = loadChecklist();
+      const root = document.getElementById("checklist-root");
+      root.innerHTML = items
+        .map(
+          (it, idx) => `
+        <div class="check-row d-flex align-items-start gap-2">
+          <input class="form-check-input mt-1" type="checkbox" data-idx="${idx}" ${it.done ? "checked" : ""} />
+          <div class="flex-grow-1">
+            <div class="${it.done ? "text-decoration-line-through text-secondary" : ""}">${esc(it.label)}</div>
+            <div class="mt-1"><button type="button" class="btn btn-link btn-sm text-danger p-0" data-del="${idx}">삭제</button></div>
+          </div>
+        </div>`
+        )
+        .join("");
+
+      root.querySelectorAll("input[type=checkbox]").forEach((el) => {
+        el.addEventListener("change", () => {
+          const all = loadChecklist();
+          const i = Number(el.getAttribute("data-idx"));
+          if (!Number.isFinite(i) || !all[i]) return;
+          all[i].done = el.checked;
+          saveChecklist(all);
+          renderChecklist();
+        });
+      });
+      root.querySelectorAll("button[data-del]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const i = Number(btn.getAttribute("data-del"));
+          const all = loadChecklist();
+          if (!Number.isFinite(i)) return;
+          all.splice(i, 1);
+          saveChecklist(all.length ? all : DEFAULT_CHECKLIST.map((x) => ({ ...x })));
+          renderChecklist();
+        });
+      });
+    }
+
+    document.getElementById("btn-refresh").addEventListener("click", () => refreshAll().catch(() => { }));
+
+    document.getElementById("btn-save-creds").addEventListener("click", async () => {
+      const base = String(document.getElementById("input-api-base").value || "").trim();
+      const tok = String(document.getElementById("input-token").value || "").trim();
+      if (base) localStorage.setItem("u25_api_base", base);
+      else localStorage.removeItem("u25_api_base");
+      if (tok) localStorage.setItem(API_TOKEN_KEY, tok);
+      else localStorage.removeItem(API_TOKEN_KEY);
+      API_BASE = base || API_BASE;
+      await refreshAll();
+    });
+
+    document.getElementById("btn-clear-base").addEventListener("click", () => {
+      localStorage.removeItem("u25_api_base");
+      refreshAll().catch(() => { });
+    });
+    document.getElementById("btn-clear-token").addEventListener("click", () => {
+      localStorage.removeItem(API_TOKEN_KEY);
+      document.getElementById("input-token").value = "";
+      refreshAll().catch(() => { });
+    });
+
+    document.getElementById("btn-checklist-reset").addEventListener("click", () => {
+      if (!confirm("체크리스트를 기본 목록으로 바꿀까요?")) return;
+      saveChecklist(DEFAULT_CHECKLIST.map((x) => ({ ...x })));
+      renderChecklist();
+    });
+    document.getElementById("btn-checklist-clear-done").addEventListener("click", () => {
+      const all = loadChecklist().map((x) => ({ ...x, done: false }));
+      saveChecklist(all);
+      renderChecklist();
+    });
+    document.getElementById("btn-add-item").addEventListener("click", () => {
+      const v = String(document.getElementById("input-new-item").value || "").trim();
+      if (!v) return;
+      const all = loadChecklist();
+      all.push({ id: "custom-" + Date.now(), label: v, done: false });
+      saveChecklist(all);
+      document.getElementById("input-new-item").value = "";
+      renderChecklist();
+    });
+
+    document.getElementById("btn-dash-save").addEventListener("click", () => {
+      localStorage.setItem("u25_dashboard_stuck_timeout_ms", String(document.getElementById("dash-timeout").value || ""));
+      localStorage.setItem("u25_dashboard_retry_delay_ms", String(document.getElementById("dash-delay").value || ""));
+      localStorage.setItem("u25_dashboard_retry_max", String(document.getElementById("dash-max").value || ""));
+      alert("저장했습니다. 메인 대시보드를 새로고침하면 반영됩니다.");
+    });
+    document.getElementById("btn-dash-reset").addEventListener("click", () => {
+      localStorage.removeItem("u25_dashboard_stuck_timeout_ms");
+      localStorage.removeItem("u25_dashboard_retry_delay_ms");
+      localStorage.removeItem("u25_dashboard_retry_max");
+      loadDashboardInputs();
+    });
+
+    loadDashboardInputs();
+    renderChecklist();
+    refreshAll().catch(() => { });
+    setInterval(() => tickClocks(), 1000);
+    setInterval(() => refreshAll().catch(() => { }), 20000);
+  </script>
+</body>
+
+</html>

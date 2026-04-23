@@ -1,0 +1,64 @@
+================================================================================
+GitHub 에 올린 다음 → Vercel 에 배포 (순서 틀리면 안 됨)
+저장 위치: my website/_github_3pack_safe/GITHUB_AND_VERCEL_EXACT_STEPS.txt
+================================================================================
+
+■ 0. 준비 (로컬)
+  - Cursor/메모장에서 저장(Ctrl+S)까지 끝냈는지 확인.
+  - .env 는 Git 에 절대 안 올림. (루트 .gitignore 에 .env 있음)
+  - deploy.bat 이 git add 할 때 _github_3pack_safe 폴더도 포함함.
+
+■ 1. GitHub 에 파일 올리기 (먼저 이걸 끝내야 Vercel 이 같은 코드를 가져옴)
+
+  (방법 A — 권장)
+    1) 탐색기에서 폴더 연다:
+         ...\my website\_github_3pack_safe
+    2) push_to_github.bat 더블클릭
+       → 상위 폴더(my website)로 이동 후 deploy.bat 실행
+       → git add / commit / git push 시도
+
+  (방법 B — 직접)
+    1) PowerShell:
+         cd "...\my website"
+         .\deploy.bat
+
+  (반드시 확인)
+    - push 직후 github.com 저장소에서 site, scouting, _github_3pack_safe 등 폴더가 보이는지
+    - 저장소에 .env 나 *.db 가 없어야 함
+
+■ 2. Vercel 에 배포 (GitHub 연결 후)
+
+  1) https://vercel.com 로그인
+  2) Add New… → Project
+  3) Import Git Repository → 위에서 올린 **같은 GitHub 저장소** 선택
+  4) Configure Project 에서 아래를 **정확히**:
+       · Root Directory:  site        ← 반드시 소문자 site (저장소 루트가 아님)
+       · Framework Preset: Other     (또는 Vite 등 아님 → Other / Static)
+       · Build Command:      비움     (정적 HTML 이라 빌드 없음)
+       · Output Directory:  비움 또는 .  (Root 가 이미 site 이면 기본이 맞음)
+       · Install Command:    비움
+  5) Environment Variables: 보통 비움 (API 키는 브라우저에 넣지 않음)
+  6) Deploy 클릭
+  7) 배포 완료 후 나오는 URL(예: https://xxxx.vercel.app) 로 접속해 화면이 뜨는지 확인
+
+■ 3. 배포 후 꼭 할 것 (안 하면 API 막히거나 CSP 에 막힘)
+
+  [A] API 서버 CORS
+    - U25 API 가 돌아가는 서버의 .env 및 data/automation_config.json 의 CORS 목록에
+      다음을 추가(콤마로 구분):
+        · https://본인프로젝트.vercel.app
+        · Vercel 에 연결한 커스텀 도메인이 있으면 https://그도메인
+        · 기존에 쓰던 https://residefootball.com 등은 유지
+
+  [B] 브라우저 CSP (site/index.html)
+    - 배포 URL 로 열었을 때 개발자도구 Network/Console 에서 API 가 CSP 로 막히면
+      index.html 의 Content-Security-Policy 의 connect-src 에
+      위 Vercel 주소(https://*.vercel.app 또는 본인 URL)를 추가해야 함.
+
+■ 4. 순서 요약 (다시 한 번)
+  GitHub push 완료 → Vercel Import → Root Directory = site → Deploy
+  → CORS / CSP 정리 → 브라우저에서 재확인
+
+================================================================================
+문제 생기면: (1) Root Directory 가 site 인지 (2) CORS (3) CSP 순으로 본다.
+================================================================================

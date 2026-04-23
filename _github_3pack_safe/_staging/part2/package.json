@@ -1,0 +1,8 @@
+{
+  "name": "u25-scouting-site",
+  "private": true,
+  "description": "정적 사이트(site/). Node 빌드 없음 — engines만 인수인계용.",
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,41 @@
+================================================================================
+서버 배포 — GitHub 에 올린 뒤, 서버(24시간 켜 둔 PC/VPS)에서 할 일만
+(이 파일 위치: my website/_github_3pack_safe/서버배포.txt)
+================================================================================
+
+[1] 코드 받기
+  git clone <GitHub 저장소 URL>
+  cd <프로젝트 폴더>
+  (이미 있으면: git pull)
+
+[2] Python 환경
+  python -m venv .venv
+  Windows: .venv\Scripts\activate
+  Linux:   source .venv/bin/activate
+  pip install -r requirements.txt
+
+[3] 비밀 설정
+  프로젝트 루트에 .env 파일 만들기 (로컬에서 쓰던 것과 동일 키)
+  - API_FOOTBALL_KEY
+  - U25_API_TOKEN, U25_CORS_ORIGINS 등
+
+[4] API 항상 켜 두기 (방문자·사이트가 붙을 주소)
+  python -m uvicorn u25_api:app --host 0.0.0.0 --port 8010
+  (nginx / HTTPS 는 서버 정책에 맞게 앞단에 두면 됨.)
+
+[5] 매일 한국시간 오전 10시 선수 최신화 (API-Football)
+  한 번 실행 예시:
+    python u25_pipeline.py --once
+
+  Linux cron 예시 (KST 10:00):
+    0 10 * * * cd /절대/경로/my-website && /절대/경로/.venv/bin/python u25_pipeline.py --once >> /var/log/u25_pipeline.log 2>&1
+
+  Windows 이면 "작업 스케줄러"에 같은 명령, 매일 10:00.
+
+[6] 자동 스케줄러로 돌리고 싶으면 (선택)
+  python u25_auto_scheduler.py
+  (또는 Windows 에서 start_server_stack.bat Full — 로그온 시 작업 스케줄러에 등록 가능)
+
+※ 집 PC 를 끄면 집 PC 안의 스케줄은 멈춥니다. 위는 **서버** 기준입니다.
+
+================================================================================
