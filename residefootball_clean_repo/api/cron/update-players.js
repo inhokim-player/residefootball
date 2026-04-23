@@ -3,21 +3,24 @@ export default async function handler(req, res) {
     return res.status(405).json({ ok: false, error: "method_not_allowed" });
   }
 
-const { secret } = req.query;
+  const { secret } = req.query;
   const cronSecret = process.env.CRON_SECRET || "1234";
 
   if (cronSecret) {
     const incomingHeader = String(req.headers["x-cron-secret"] || "").trim();
     const authRaw = String(req.headers.authorization || "");
-    const bearer = authRaw.toLowerCase().startsWith("bearer ") ? authRaw.slice(7).trim() : "";
-    
-    const ok = (secret === cronSecret) || (incomingHeader === cronSecret) || (bearer === cronSecret);
-    
+    const bearer = authRaw.toLowerCase().startsWith("bearer ")
+      ? authRaw.slice(7).trim()
+      : "";
+
+    const ok =
+      secret === cronSecret ||
+      incomingHeader === cronSecret ||
+      bearer === cronSecret;
+
     if (!ok) {
       return res.status(401).json({ ok: false, error: "unauthorized" });
     }
-  }
-  }
   }
 
   const triggerUrl = process.env.API_SYNC_TRIGGER_URL || "";
@@ -61,11 +64,16 @@ const { secret } = req.query;
 
   const apiFootballKey = String(process.env.API_FOOTBALL_KEY || "").trim();
   const apiFootballPlayersUrl = String(process.env.API_FOOTBALL_PLAYERS_URL || "").trim();
-  const apiFootballMaxPages = Math.max(1, Math.min(200, Number(process.env.API_FOOTBALL_MAX_PAGES || 30) || 30));
+  const apiFootballMaxPages = Math.max(
+    1,
+    Math.min(200, Number(process.env.API_FOOTBALL_MAX_PAGES || 30) || 30)
+  );
   const githubToken = String(process.env.GITHUB_TOKEN || "").trim();
-  const githubRepo = String(process.env.GITHUB_REPO || "").trim(); // owner/repo
+  const githubRepo = String(process.env.GITHUB_REPO || "").trim();
   const githubBranch = String(process.env.GITHUB_BRANCH || "main").trim();
-  const targetPath = String(process.env.REGISTERED_PLAYERS_FILE_PATH || "data/registered_players.json").trim();
+  const targetPath = String(
+    process.env.REGISTERED_PLAYERS_FILE_PATH || "data/registered_players.json"
+  ).trim();
 
   if (!apiFootballKey || !apiFootballPlayersUrl) {
     return res.status(200).json({
@@ -129,15 +137,18 @@ function normalizeApiFootballPlayers(payload) {
   const rows = Array.isArray(payload?.response)
     ? payload.response
     : Array.isArray(payload?.items)
-      ? payload.items
-      : Array.isArray(payload)
-        ? payload
-        : [];
+    ? payload.items
+    : Array.isArray(payload)
+    ? payload
+    : [];
 
   const out = [];
   for (const row of rows) {
     const p = row?.player || row || {};
-    const stats0 = Array.isArray(row?.statistics) && row.statistics.length ? row.statistics[0] : {};
+    const stats0 =
+      Array.isArray(row?.statistics) && row.statistics.length
+        ? row.statistics[0]
+        : {};
     const team = stats0?.team || {};
     const league = stats0?.league || {};
     const birthCountry = String(p?.birth?.country || "").trim();
