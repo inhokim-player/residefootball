@@ -13,9 +13,10 @@ const { secret } = req.query;
     
     const ok = (secret === cronSecret) || (incomingHeader === cronSecret) || (bearer === cronSecret);
     
-    if ( ! ok ) {
+    if (!ok) {
       return res.status(401).json({ ok: false, error: "unauthorized" });
     }
+  }
   }
   }
 
