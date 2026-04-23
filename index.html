@@ -1855,12 +1855,12 @@
         "state.loading": "데이터 로딩 중...",
         "state.loadingMore": "전체 선수 목록을 나눠서 불러오는 중…",
         "state.failAllPlayers": "전체 선수 목록을 불러오지 못했습니다. (잠시 후 자동 재시도)",
-        "state.stuckLoading": "로딩이 오래 걸리고 있습니다. 표시할 행이 많거나 네트워크가 느릴 수 있습니다. 서버(u25_api)가 켜져 있는지 확인한 뒤 잠시만 기다리거나 새로고침 해 주세요. (브라우저는 API-Football 이 아니라 로컬 DB만 읽습니다.)",
+        "state.stuckLoading": "로딩이 예상보다 오래 걸리고 있습니다. 잠시 후 새로고침해 주세요.",
         "state.waitData": "데이터 대기 중...",
         "state.noPlayers": "조건에 맞는 선수가 없습니다.",
         "state.noPlayersTop": "조건에 맞는 선수 없음",
         "state.noData": "데이터 없음",
-        "state.failTop30": "선수 목록을 불러오지 못했습니다. start_u25_api.bat(또는 uvicorn)·8010 포트·상단 API Bearer 저장 여부를 확인하세요. (로컬 u25_api·DB 연결 오류이며 API-Football 과는 무관합니다.)",
+        "state.failTop30": "선수 목록을 불러오지 못했습니다. 잠시 후 새로고침하거나 registered_players.json 데이터를 확인해 주세요.",
         "state.failPos": "통계 로드 실패 (잠시 후 자동 재시도)",
         "state.noSchedule": "현재 핵심 경기 데이터가 없습니다.",
         "state.noMatches": "일정 없음",
@@ -2018,12 +2018,12 @@
         "state.loading": "Loading data...",
         "state.loadingMore": "Loading the full player list in batches…",
         "state.failAllPlayers": "Could not load the full player list. (auto-retry)",
-        "state.stuckLoading": "Loading is taking longer than usual (many rows or a slow link). Keep the u25_api server running, wait a bit, or refresh. The browser reads your local DB only—not API-Football.",
+        "state.stuckLoading": "Loading is taking longer than usual. Please wait a moment or refresh the page.",
         "state.waitData": "Waiting for data...",
         "state.noPlayers": "No players match the filters.",
         "state.noPlayersTop": "No players match",
         "state.noData": "No data",
-        "state.failTop30": "Could not load the player list. Check start_u25_api.bat (or uvicorn), port 8010, and Bearer saved via the top API button. (Local u25_api/DB only—not API-Football.)",
+        "state.failTop30": "Could not load the player list. Please refresh in a moment or verify `registered_players.json` has data.",
         "state.failPos": "Failed to load stats (auto-retry)",
         "state.noSchedule": "No key match data right now.",
         "state.noMatches": "No fixtures",
@@ -2217,6 +2217,13 @@
      * 켜져 있어야 데이터가 보입니다(기본은 공개 API). 로컬만 쓸 때는 127.0.0.1 후보를 쓰세요.
      */
     let API_BASE = "https://api.residefootball.com";
+    const FORCE_REGISTERED_ONLY_MODE = true;
+    const REGISTERED_PLAYERS_PATHS = [
+      "../data/registered_players.json",
+      "/data/registered_players.json",
+      "/reside football/data/registered_players.json",
+    ];
+    const REGISTERED_PLAYERS_CACHE_KEY = "u25_registered_players_cache_v1";
     let cachedPlayers = [];
     let latestTop30 = [];
     let lastApiOkAt = 0;
@@ -2507,6 +2514,96 @@
         }
       }
       throw last;
+    }
+
+    function currentKstHour() {
+      try {
+        const fmt = new Intl.DateTimeFormat("en-US", {
+          timeZone: "Asia/Seoul",
+          hour12: false,
+          hour: "2-digit",
+        });
+        const h = Number(fmt.format(new Date()));
+        if (Number.isFinite(h)) return h;
+      } catch (e) {
+        // ignore
+      }
+      return new Date(Date.now() + 9 * 60 * 60 * 1000).getUTCHours();
+    }
+
+    function isBeforeKst10() {
+      return currentKstHour() < 10;
+    }
+
+    function shouldUseRegisteredOnlyMode() {
+      if (FORCE_REGISTERED_ONLY_MODE) return true;
+      return isBeforeKst10();
+    }
+
+    function normalizeRegisteredPlayers(payload) {
+      if (Array.isArray(payload)) return payload;
+      if (Array.isArray(payload?.items)) return payload.items;
+      return [];
+    }
+
+    function loadRegisteredPlayersCache() {
+      try {
+        const raw = localStorage.getItem(REGISTERED_PLAYERS_CACHE_KEY);
+        if (!raw) return [];
+        return normalizeRegisteredPlayers(JSON.parse(raw));
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveRegisteredPlayersCache(items) {
+      try {
+        localStorage.setItem(REGISTERED_PLAYERS_CACHE_KEY, JSON.stringify(items || []));
+      } catch (e) {
+        // storage unavailable
+      }
+    }
+
+    async function fetchRegisteredPlayersSnapshot() {
+      for (const path of REGISTERED_PLAYERS_PATHS) {
+        try {
+          const res = await fetch(path, { cache: "no-store", headers: { Accept: "application/json" } });
+          if (!res.ok) continue;
+          const payload = await res.json();
+          const items = normalizeRegisteredPlayers(payload);
+          if (items.length) {
+            saveRegisteredPlayersCache(items);
+            return items;
+          }
+        } catch (e) {
+          // try next candidate
+        }
+      }
+      return loadRegisteredPlayersCache();
+    }
+
+    function renderRegisteredOnlyMode(items, reason) {
+      const list = Array.isArray(items) ? items : [];
+      cachedPlayers = list.slice();
+      renderTop30(list.slice(0, 30));
+      allPlayersRows = list.slice();
+      allPlayersPage = 1;
+      renderAllPlayersPage();
+      renderStatTopRankings(allPlayersRows);
+      renderAnalytics(null);
+      renderAdvancedIndexes(null);
+      renderHiddenPlayer(null);
+      renderSpotlight(null);
+      renderSpotlightTop5(null);
+      renderGlobalTop5(null);
+      renderMostViewed(null);
+      renderTrendingHour(null);
+      renderLiveRankBanner(null, null);
+      const systemEl = document.getElementById("system-status");
+      if (systemEl) {
+        systemEl.textContent = reason || "등록 선수 모드";
+      }
+      setStatus(true, reason || "registered-only");
     }
 
     function uniqueValues(items, key) {
@@ -3161,11 +3258,33 @@
     }
 
     async function loadDashboard() {
+      if (shouldUseRegisteredOnlyMode()) {
+        const registered = await fetchRegisteredPlayersSnapshot();
+        renderRegisteredOnlyMode(
+          registered,
+          FORCE_REGISTERED_ONLY_MODE
+            ? "API 비활성화 모드 - 등록된 선수만 표시"
+            : "KST 10:00 전 - 등록된 선수만 표시"
+        );
+        return;
+      }
+
       const failedBlocks = [];
       try {
         const playersData = await fetchJSONRetry("/players", 3);
         cachedPlayers = playersData.items || [];
+        if (cachedPlayers.length) {
+          saveRegisteredPlayersCache(cachedPlayers);
+        }
       } catch (err) {
+        const registered = await fetchRegisteredPlayersSnapshot();
+        if (registered.length) {
+          renderRegisteredOnlyMode(
+            registered,
+            "API 연결 실패 - 등록된 선수로 표시"
+          );
+          return;
+        }
         failedBlocks.push("players");
       }
 
@@ -3495,6 +3614,10 @@
     });
 
     async function bootstrap() {
+      if (shouldUseRegisteredOnlyMode()) {
+        await loadDashboard();
+        return;
+      }
       await ensureApiBaseReachable();
       const runtime = runtimeDashboardSettings();
       let retryCount = 0;

@@ -1,0 +1,69 @@
+{
+  "items": [
+    {
+      "player_id": "237104",
+      "name": "Henri",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Right",
+      "country": "Brazil",
+      "continent": "South America",
+      "club": "CRB",
+      "position": "Defender",
+      "league": "-"
+    },
+    {
+      "player_id": "182434",
+      "name": "D. Beljo",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Right",
+      "country": "Croatia",
+      "continent": "Europe",
+      "club": "Dinamo Zagreb",
+      "position": "Attacker",
+      "league": "-"
+    },
+    {
+      "player_id": "153420",
+      "name": "G. Wickens",
+      "age": 24,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Right",
+      "country": "England",
+      "continent": "Europe",
+      "club": "Lincoln",
+      "position": "Goalkeeper",
+      "league": "-"
+    },
+    {
+      "player_id": "298129",
+      "name": "M. Boateng",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Right",
+      "country": "England",
+      "continent": "Europe",
+      "club": "Plymouth",
+      "position": "Midfielder",
+      "league": "-"
+    },
+    {
+      "player_id": "272729",
+      "name": "D. Huisman",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Right",
+      "country": "Netherlands",
+      "continent": "Europe",
+      "club": "FC Eindhoven",
+      "position": "Midfielder",
+      "league": "-"
+    }
+  ]
+}
