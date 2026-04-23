@@ -2595,7 +2595,7 @@
     function renderRegisteredOnlyMode(items, reason) {
       const list = Array.isArray(items) ? items : [];
       cachedPlayers = list.slice();
-      renderTop30(list.slice(0, 30));
+      renderTop30(list.slice(0, 500));
       allPlayersRows = list.slice();
       allPlayersPage = 1;
       renderAllPlayersPage();
@@ -3625,7 +3625,11 @@
 
     async function bootstrap() {
       if (shouldUseRegisteredOnlyMode()) {
+        setStatus(true, "registered-only");
         await loadDashboard();
+        setInterval(() => {
+          runDashboardCycle(true).catch(() => { });
+        }, 60000);
         return;
       }
       await ensureApiBaseReachable();
