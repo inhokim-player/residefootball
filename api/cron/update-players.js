@@ -133,14 +133,13 @@ export default async function handler(req, res) {
       apiFootballKey,
       maxPages: apiFootballMaxPages,
     });
-    const maxAge = Math.max(15, Math.min(25, Number(process.env.API_FOOTBALL_MAX_AGE || 25) || 25));
-    const minAge = Math.max(15, Math.min(maxAge, Number(process.env.API_FOOTBALL_MIN_AGE || 15) || 15));
-    const u25 = filterAgeRange(items, minAge, maxAge);
+    const maxAge = Math.max(16, Math.min(24, Number(process.env.API_FOOTBALL_MAX_AGE || 24) || 24));
+    const u25 = filterUnderAge(items, maxAge);
     if (!u25.length) {
       return res.status(422).json({
         ok: false,
         error: "empty_players",
-        message: `API response had rows but none in age range ${minAge}-${maxAge} (U25). Check API_FOOTBALL_PLAYERS_URL filters.`,
+        message: `API response had rows but none with age <= ${maxAge} (UNDER_U25). Check API_FOOTBALL_PLAYERS_URL filters.`,
       });
     }
 
@@ -151,7 +150,7 @@ export default async function handler(req, res) {
       githubBranch,
       path: targetPath,
       content: body,
-      message: `cron: U25 registered players (${u25.length})`,
+      message: `cron: under-u25 registered players (${u25.length})`,
     });
 
     const dailyBody =
@@ -159,7 +158,7 @@ export default async function handler(req, res) {
         {
           updated_at: new Date().toISOString(),
           kst_date: formatDateInTimeZone(new Date(), "Asia/Seoul"),
-          age_min: minAge,
+          age_min: null,
           age_max: maxAge,
           players_count: u25.length,
           source_mode: "api-football-global-u25-market-value",
@@ -183,7 +182,7 @@ export default async function handler(req, res) {
       players: u25.length,
       max_pages: apiFootballMaxPages,
       kst_schedule_fixed: "10:00",
-      age_min: minAge,
+      age_min: null,
       age_max: maxAge,
       leagues: parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []),
       season: String(process.env.API_FOOTBALL_SEASON || currentLikelySeasonKst()).trim(),
@@ -202,13 +201,12 @@ export default async function handler(req, res) {
   }
 }
 
-function filterAgeRange(items, minAge, maxAge) {
-  const lo = Math.min(minAge, maxAge);
-  const hi = Math.max(minAge, maxAge);
+function filterUnderAge(items, maxAge) {
+  const hi = Math.max(1, Number(maxAge || 24));
   return (items || []).filter((p) => {
     const a = Number(p?.age);
     if (!Number.isFinite(a) || a <= 0) return false;
-    return a >= lo && a <= hi;
+    return a <= hi;
   });
 }
 
@@ -239,7 +237,7 @@ function normalizeApiFootballPlayers(payload) {
     const normalized = normalizeOnePlayer({
       player_id: String(p?.id || row?.player_id || "").trim(),
       name: pickPlayerName(p, row),
-      age: Number(p?.age || row?.age || 0) || 0,
+      age: resolveAge(p, row),
       height_cm: parseCm(p?.height || row?.height_cm || row?.height),
       weight_kg: parseKg(p?.weight || row?.weight_kg || row?.weight),
       dominant_foot: normalizeFoot(row?.dominant_foot || row?.foot || p?.foot || ""),
@@ -252,6 +250,29 @@ function normalizeApiFootballPlayers(payload) {
     if (normalized) out.push(normalized);
   }
   return dedupePlayers(out);
+}
+
+function resolveAge(playerObj, rowObj) {
+  const p = playerObj || {};
+  const r = rowObj || {};
+  const direct = Number(p?.age || r?.age || 0) || 0;
+  if (direct > 0) return direct;
+  const birth =
+    String(p?.birth?.date || r?.birth_date || r?.birth || "").trim();
+  const fromBirth = calcAgeFromBirthDate(birth);
+  return fromBirth > 0 ? fromBirth : 0;
+}
+
+function calcAgeFromBirthDate(isoDateLike) {
+  const raw = String(isoDateLike || "").trim();
+  if (!raw) return 0;
+  const d = new Date(raw);
+  if (Number.isNaN(d.getTime())) return 0;
+  const now = new Date();
+  let age = now.getUTCFullYear() - d.getUTCFullYear();
+  const m = now.getUTCMonth() - d.getUTCMonth();
+  if (m < 0 || (m === 0 && now.getUTCDate() < d.getUTCDate())) age -= 1;
+  return age > 0 ? age : 0;
 }
 
 function pickPlayerName(playerObj, rowObj) {

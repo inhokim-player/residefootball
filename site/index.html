@@ -2242,6 +2242,7 @@
     /** false: U25 API 우선. true: 등록 JSON만 강제(오프라인 데모). */
     const FORCE_REGISTERED_ONLY_MODE = false;
     const REGISTERED_PLAYERS_PATH = "/data/registered_players.json";
+    const REGISTERED_PLAYERS_PATH_FALLBACK = "./data/registered_players.json";
     /** KST 10:00 이후 정적 모드에서 API-Football 크론이 쓰는 당일 오버레이(JSON). */
     const DAILY_PLAYER_UPDATES_PATH = "/data/daily_player_updates.json";
     const REGISTERED_PLAYERS_CACHE_KEY = "u25_registered_players_cache_v1";
@@ -2613,6 +2614,19 @@
         const x = String(v || "").replace(/\s+/g, " ").trim();
         return x || fallback;
       };
+      const cleanCountry = (v) => {
+        const x = String(v || "").replace(/\s+/g, " ").trim();
+        if (!x) return "-";
+        const low = x.toLowerCase();
+        if (low === "unknown" || low === "unassigned" || low === "n/a" || low === "na") return "-";
+        return x;
+      };
+      const cleanContinent = (v) => {
+        const x = clean(v, "-");
+        const low = x.toLowerCase();
+        if (low === "unknown" || low === "unassigned" || low === "n/a" || low === "na") return "-";
+        return x;
+      };
       return {
         player_id: id,
         name,
@@ -2620,9 +2634,9 @@
         height_cm: toNum(row?.height_cm, 0, 260),
         weight_kg: toNum(row?.weight_kg, 0, 200),
         dominant_foot: clean(row?.dominant_foot, "Unknown"),
-        country: clean(row?.country, "-"),
-        continent: clean(row?.continent, "-"),
-        club: clean(row?.club, "-"),
+        country: cleanCountry(row?.country || row?.nationality),
+        continent: cleanContinent(row?.continent),
+        club: clean(row?.club || row?.team, "-"),
         position: clean(row?.position, "-"),
         league: clean(row?.league, "-"),
       };
@@ -2647,20 +2661,23 @@
     }
 
     async function fetchRegisteredPlayersSnapshot() {
+      const candidates = [REGISTERED_PLAYERS_PATH, REGISTERED_PLAYERS_PATH_FALLBACK];
       try {
-        const sep = REGISTERED_PLAYERS_PATH.includes("?") ? "&" : "?";
-        const url = `${REGISTERED_PLAYERS_PATH}${sep}_cb=${Date.now()}`;
-        const res = await fetch(url, { cache: "no-store", headers: { Accept: "application/json" } });
-        if (res.ok) {
-          const payload = await res.json();
-          const items = normalizeRegisteredPlayers(payload);
-          if (items.length) {
-            saveRegisteredPlayersCache(items);
-            return items;
+        for (const basePath of candidates) {
+          const sep = basePath.includes("?") ? "&" : "?";
+          const url = `${basePath}${sep}_cb=${Date.now()}`;
+          const res = await fetch(url, { cache: "no-store", headers: { Accept: "application/json" } });
+          if (res.ok) {
+            const payload = await res.json();
+            const items = normalizeRegisteredPlayers(payload);
+            if (items.length) {
+              saveRegisteredPlayersCache(items);
+              return items;
+            }
+            console.error("registered_players.json is empty:", basePath);
+            continue;
           }
-          console.error("registered_players.json is empty:", REGISTERED_PLAYERS_PATH);
-        } else {
-          console.error("Failed to fetch registered players:", REGISTERED_PLAYERS_PATH, res.status);
+          console.error("Failed to fetch registered players:", basePath, res.status);
         }
       } catch (e) {
         console.error("Fetch error for registered players:", REGISTERED_PLAYERS_PATH, e);
@@ -2669,6 +2686,37 @@
       if (cached.length) return cached;
       saveRegisteredPlayersCache(DEFAULT_REGISTERED_PLAYERS);
       return DEFAULT_REGISTERED_PLAYERS.slice();
+    }
+
+    function keepUnderU25(items) {
+      return (Array.isArray(items) ? items : []).filter((p) => {
+        const age = Number(p?.age || 0);
+        return Number.isFinite(age) && age > 0 && age < 25;
+      });
+    }
+
+    function sortU25Priority(items) {
+      return (Array.isArray(items) ? items : [])
+        .slice()
+        .sort((a, b) => {
+          const aAge = Number(a?.age || 99);
+          const bAge = Number(b?.age || 99);
+          if (aAge !== bAge) return aAge - bAge;
+          return compositeStatScore(b) - compositeStatScore(a);
+        });
+    }
+
+    function staticFilterOptionsFromRows(rows, f) {
+      const allRows = Array.isArray(rows) ? rows : [];
+      const byContinent = allRows.filter((r) => !f.continent || String(r.continent || "") === String(f.continent));
+      const byCountry = byContinent.filter((r) => !f.country || String(r.country || "") === String(f.country));
+      const byPosition = byCountry.filter((r) => !f.position || String(r.position || "") === String(f.position));
+      return {
+        continents: uniqueValues(allRows, "continent"),
+        countries: uniqueValues(byContinent, "country"),
+        positions: uniqueValues(byCountry, "position"),
+        leagues: uniqueValues(byPosition, "league"),
+      };
     }
 
     function isKstHourAtLeast10Korea() {
@@ -2719,22 +2767,40 @@
     }
 
     function renderRegisteredOnlyMode(items, reason) {
-      const list = Array.isArray(items) ? items : [];
+      const list = sortU25Priority(keepUnderU25(items));
       cachedPlayers = list.slice();
       renderTop30(list.slice(0, 500));
       allPlayersRows = list.slice();
       allPlayersPage = 1;
       renderAllPlayersPage();
       renderStatTopRankings(allPlayersRows);
-      renderAnalytics(null);
+      const totalCountries = new Set(list.map((r) => String(r.country || "").trim()).filter(Boolean)).size;
+      const totalLeagues = new Set(list.map((r) => String(r.league || "").trim()).filter(Boolean)).size;
+      const posMap = new Map();
+      for (const row of list) {
+        const key = String(row.position || "-");
+        posMap.set(key, Number(posMap.get(key) || 0) + 1);
+      }
+      renderAnalytics({
+        overview: { players_count: list.length, countries_count: totalCountries, leagues_count: totalLeagues },
+        by_position: Array.from(posMap.entries()).map(([position, cnt]) => ({ position, cnt })),
+      });
       renderAdvancedIndexes(null);
-      renderHiddenPlayer(null);
+      renderHiddenPlayer(pickHiddenPlayerLocal(list));
       renderSpotlight(null);
       renderSpotlightTop5(null);
       renderGlobalTop5(null);
       renderMostViewed(null);
       renderTrendingHour(null);
-      renderLiveRankBanner(null, null);
+      const bannerSeed = list
+        .slice(0, 30)
+        .map((p) => Object.assign({}, p, { spotlight_score: compositeStatScore(p) }))
+        .sort((a, b) => Number(b.spotlight_score || 0) - Number(a.spotlight_score || 0));
+      renderTopMatch({ top_player: bannerSeed[0] ? Object.assign({}, bannerSeed[0], { match_percent: 100 }) : null });
+      renderLiveRankBanner(
+        bannerSeed[0] ? { found: true, player: bannerSeed[0] } : null,
+        { items: { Global: bannerSeed.slice(0, 5) } }
+      );
       const systemEl = document.getElementById("system-status");
       if (systemEl) {
         const hint = t("sys.fallbackHint");
@@ -2746,7 +2812,11 @@
     function uniqueValues(items, key) {
       const s = new Set();
       for (const item of items) {
-        if (item[key]) s.add(item[key]);
+        const raw = String(item?.[key] || "").trim();
+        if (!raw) continue;
+        const low = raw.toLowerCase();
+        if (low === "-" || low === "unknown" || low === "unassigned" || low === "n/a" || low === "na") continue;
+        s.add(raw);
       }
       return Array.from(s).sort((a, b) => String(a).localeCompare(String(b)));
     }
@@ -2770,34 +2840,43 @@
 
     async function syncFilterOptions() {
       const f = getCurrentFilters();
-      const all = await fetchJSONRetry("/filters/options", 2);
-      fillSelect("continent-filter", all.continents || []);
+      try {
+        const all = await fetchJSONRetry("/filters/options", 2);
+        fillSelect("continent-filter", all.continents || []);
 
-      const byContinent = await fetchJSONRetry(
-        "/filters/options?continent=" + encodeURIComponent(f.continent || ""),
-        2
-      );
-      fillSelect("country-filter", byContinent.countries || []);
+        const byContinent = await fetchJSONRetry(
+          "/filters/options?continent=" + encodeURIComponent(f.continent || ""),
+          2
+        );
+        fillSelect("country-filter", byContinent.countries || []);
 
-      const params = new URLSearchParams();
-      if (f.continent) params.set("continent", f.continent);
-      if (f.country) params.set("country", f.country);
-      if (f.position) params.set("position", f.position);
-      const byScope = await fetchJSONRetry("/filters/options?" + params.toString(), 2);
-      fillSelect("league-filter", byScope.leagues || []);
-      fillSelect("position-filter", byScope.positions || ["FW", "MF", "DF", "GK"]);
+        const params = new URLSearchParams();
+        if (f.continent) params.set("continent", f.continent);
+        if (f.country) params.set("country", f.country);
+        if (f.position) params.set("position", f.position);
+        const byScope = await fetchJSONRetry("/filters/options?" + params.toString(), 2);
+        fillSelect("league-filter", byScope.leagues || []);
+        fillSelect("position-filter", byScope.positions || ["FW", "MF", "DF", "GK"]);
 
-      if (f.continent && (all.continents || []).includes(f.continent)) {
-        document.getElementById("continent-filter").value = f.continent;
-      }
-      if (f.country && (byContinent.countries || []).includes(f.country)) {
-        document.getElementById("country-filter").value = f.country;
-      }
-      if (f.position && (byScope.positions || []).includes(f.position)) {
-        document.getElementById("position-filter").value = f.position;
-      }
-      if (f.league && (byScope.leagues || []).includes(f.league)) {
-        document.getElementById("league-filter").value = f.league;
+        if (f.continent && (all.continents || []).includes(f.continent)) {
+          document.getElementById("continent-filter").value = f.continent;
+        }
+        if (f.country && (byContinent.countries || []).includes(f.country)) {
+          document.getElementById("country-filter").value = f.country;
+        }
+        if (f.position && (byScope.positions || []).includes(f.position)) {
+          document.getElementById("position-filter").value = f.position;
+        }
+        if (f.league && (byScope.leagues || []).includes(f.league)) {
+          document.getElementById("league-filter").value = f.league;
+        }
+      } catch (e) {
+        const source = allPlayersRows.length ? allPlayersRows : cachedPlayers;
+        const opts = staticFilterOptionsFromRows(source, f);
+        fillSelect("continent-filter", opts.continents);
+        fillSelect("country-filter", opts.countries);
+        fillSelect("position-filter", opts.positions.length ? opts.positions : ["FW", "MF", "DF", "GK"]);
+        fillSelect("league-filter", opts.leagues);
       }
     }
 
@@ -3475,7 +3554,7 @@
       const failedBlocks = [];
       try {
         const playersData = await fetchJSONRetry("/players", 3);
-        cachedPlayers = playersData.items || [];
+        cachedPlayers = sortU25Priority(keepUnderU25(playersData.items || []));
         if (cachedPlayers.length) {
           saveRegisteredPlayersCache(cachedPlayers);
         }
@@ -3531,7 +3610,7 @@
       ]);
 
       if (topRes.status === "fulfilled") {
-        const list = topRes.value.items || [];
+        const list = sortU25Priority(keepUnderU25(topRes.value.items || []));
         renderTop30(list);
         const best = { top_player: list[0] ? { ...list[0], match_percent: 100 } : null };
         renderTopMatch(best);
@@ -3618,7 +3697,7 @@
       );
 
       if (allPlayersRes.status === "fulfilled") {
-        allPlayersRows = allPlayersRes.value.items || [];
+        allPlayersRows = sortU25Priority(keepUnderU25(allPlayersRes.value.items || []));
         allPlayersPage = 1;
         renderAllPlayersPage();
         renderStatTopRankings(allPlayersRows);
