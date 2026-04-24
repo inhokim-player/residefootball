@@ -138,11 +138,23 @@ export default async function handler(req, res) {
       maxAge,
     });
     const u25 = filterUnderAge(items, maxAge);
+    console.log(
+      "[update-players] rows summary:",
+      JSON.stringify({
+        rows_total: items.length,
+        rows_under_u25: u25.length,
+        max_age: maxAge,
+      })
+    );
     if (!u25.length) {
-      return res.status(422).json({
-        ok: false,
-        error: "empty_players",
-        message: `API response had rows but none with age <= ${maxAge} (UNDER_U25). Check API_FOOTBALL_PLAYERS_URL filters.`,
+      return res.status(200).json({
+        ok: true,
+        mode: "no_u25_data",
+        status: "no_u25_players_found",
+        message: "no_u25_players_found",
+        rows_total: items.length,
+        rows_under_u25: 0,
+        kst_schedule_fixed: "10:00",
       });
     }
 
