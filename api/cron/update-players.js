@@ -189,7 +189,7 @@ export default async function handler(req, res) {
       age_max: maxAge,
       leagues: parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []),
       season: String(process.env.API_FOOTBALL_SEASON || currentLikelySeasonKst()).trim(),
-      sort: String(process.env.API_FOOTBALL_SORT || "value:desc").trim(),
+      sort: String(process.env.API_FOOTBALL_SORT || "").trim(),
       path: targetPath,
       daily_path: dailyPath,
       commit_sha: saved.commitSha,
@@ -437,7 +437,7 @@ function normalizePlayersEndpoint(rawUrl) {
 function buildLeagueScopedBaseUrls(baseUrl, minAge, maxAge) {
   const leagueIds = parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []);
   const season = String(process.env.API_FOOTBALL_SEASON || currentLikelySeasonKst()).trim();
-  const sortExpr = String(process.env.API_FOOTBALL_SORT || "value:desc").trim();
+  const sortExpr = String(process.env.API_FOOTBALL_SORT || "").trim();
   const ages = [];
   for (let age = Math.max(15, Number(minAge || 15)); age <= Math.min(24, Number(maxAge || 24)); age += 1) {
     ages.push(String(age));
@@ -468,9 +468,21 @@ function resolvePlayersUrlTemplate(baseUrl, params) {
       .replaceAll(`{{${key}}}`, val)
       .replaceAll(`:${key}`, val);
   });
-  // Clear unresolved placeholders so global mode works even if template had league token.
-  url = url.replaceAll("{{league}}", "").replaceAll(":league", "");
-  url = url.replace(/([?&])league=(?=&|$)/gi, "$1");
+  // Clear unresolved placeholders so template mode still works when env vars are omitted.
+  url = url
+    .replaceAll("{{league}}", "")
+    .replaceAll("{{season}}", "")
+    .replaceAll("{{sort}}", "")
+    .replaceAll("{{age}}", "")
+    .replaceAll(":league", "")
+    .replaceAll(":season", "")
+    .replaceAll(":sort", "")
+    .replaceAll(":age", "");
+  url = url
+    .replace(/([?&])league=(?=&|$)/gi, "$1")
+    .replace(/([?&])season=(?=&|$)/gi, "$1")
+    .replace(/([?&])sort=(?=&|$)/gi, "$1")
+    .replace(/([?&])age=(?=&|$)/gi, "$1");
   url = url.replace(/[?&]{2,}/g, "&").replace(/\?&/g, "?").replace(/[?&]$/, "");
   return appendApiQuery(url, params);
 }
