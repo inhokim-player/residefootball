@@ -1784,6 +1784,7 @@
         "sys.ok": "총 {{total}}명 · 마지막 갱신 {{time}}",
         "sys.fail": "시스템 상태 일부 조회 실패 (자동 재시도 중)",
         "sys.fallbackHint": "U25 라이브는 상단 API 토큰과 api 백엔드가 필요합니다. 지금은 등록 JSON만 표시 중이면 Git 반영 후 재배포·또는 Application → 로컬 저장소(u25_registered_players_cache_v1) 삭제를 확인하세요.",
+        "sys.afterTenStatic": "KST 10:00 이후: 라이브 /players 호출 없이 등록 JSON + 당일 API-Football 크론 결과(daily_player_updates)를 병합해 표시합니다.",
         "kpi.players": "U25 선수 수",
         "kpi.countries": "커버 국가 수",
         "kpi.leagues": "커버 리그 수",
@@ -1951,6 +1952,7 @@
         "sys.ok": "{{total}} players · last update {{time}}",
         "sys.fail": "System status partially unavailable (retrying)",
         "sys.fallbackHint": "Live U25 needs the top API token and api.residefootball.com. If you only see the static roster, redeploy after JSON updates and clear site data for key u25_registered_players_cache_v1 if needed.",
+        "sys.afterTenStatic": "After 10:00 KST: no live /players calls; showing registered_players.json merged with daily_player_updates.json from the API-Football cron.",
         "kpi.players": "U25 players",
         "kpi.countries": "Countries covered",
         "kpi.leagues": "Leagues covered",
@@ -2240,6 +2242,8 @@
     /** false: U25 API 우선. true: 등록 JSON만 강제(오프라인 데모). */
     const FORCE_REGISTERED_ONLY_MODE = false;
     const REGISTERED_PLAYERS_PATH = "/data/registered_players.json";
+    /** KST 10:00 이후 정적 모드에서 API-Football 크론이 쓰는 당일 오버레이(JSON). */
+    const DAILY_PLAYER_UPDATES_PATH = "/data/daily_player_updates.json";
     const REGISTERED_PLAYERS_CACHE_KEY = "u25_registered_players_cache_v1";
     const DEFAULT_REGISTERED_PLAYERS = [
       { player_id: "237104", name: "Henri", age: 23, height_cm: 0, weight_kg: 0, dominant_foot: "Right", country: "Brazil", continent: "South America", club: "CRB", position: "Defender", league: "-" },
@@ -2665,6 +2669,53 @@
       if (cached.length) return cached;
       saveRegisteredPlayersCache(DEFAULT_REGISTERED_PLAYERS);
       return DEFAULT_REGISTERED_PLAYERS.slice();
+    }
+
+    function isKstHourAtLeast10Korea() {
+      try {
+        const fmt = new Intl.DateTimeFormat("en-US", {
+          timeZone: "Asia/Seoul",
+          hour: "numeric",
+          hour12: false,
+        });
+        const parts = fmt.formatToParts(new Date());
+        const hour = Number(parts.find((p) => p.type === "hour")?.value || 0);
+        return Number.isFinite(hour) && hour >= 10;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    async function fetchDailyPlayerUpdatesSnapshot() {
+      try {
+        const sep = DAILY_PLAYER_UPDATES_PATH.includes("?") ? "&" : "?";
+        const url = `${DAILY_PLAYER_UPDATES_PATH}${sep}_cb=${Date.now()}`;
+        const res = await fetch(url, { cache: "no-store", headers: { Accept: "application/json" } });
+        if (!res.ok) return [];
+        const payload = await res.json();
+        if (!payload || typeof payload !== "object") return [];
+        return normalizeRegisteredPlayers(payload);
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function mergeRegisteredWithDailySnapshot(registered, dailyRows) {
+      const base = Array.isArray(registered) ? registered : [];
+      const daily = Array.isArray(dailyRows) ? dailyRows : [];
+      if (!daily.length) return base.slice();
+      const map = new Map();
+      for (const row of base) {
+        const c = sanitizeRegisteredPlayer(row);
+        if (c) map.set(c.player_id, c);
+      }
+      for (const row of daily) {
+        const c = sanitizeRegisteredPlayer(row);
+        if (!c) continue;
+        const prev = map.get(c.player_id) || null;
+        map.set(c.player_id, prev ? Object.assign({}, prev, c) : c);
+      }
+      return Array.from(map.values());
     }
 
     function renderRegisteredOnlyMode(items, reason) {
@@ -3287,6 +3338,59 @@
       document.getElementById("idx-drib").textContent = Number(a?.dribble_threat_index || 0).toFixed(1);
     }
 
+    function marketValueNumber(player) {
+      const candidates = [
+        player?.market_value_eur,
+        player?.market_value,
+        player?.market_value_now,
+        player?.transfer_value,
+      ];
+      for (const raw of candidates) {
+        const n = Number(raw || 0);
+        if (Number.isFinite(n) && n > 0) return n;
+      }
+      return 0;
+    }
+
+    function hiddenPotentialScore(player) {
+      const n = (v) => Number(v || 0);
+      const minutes = Math.max(1, n(player?.minutes_played));
+      const outputs = n(player?.goals) * 4 + n(player?.assists) * 3 + n(player?.space_creation_count) * 0.06;
+      const efficiency = (outputs / Math.max(120, minutes)) * 100;
+      const base = compositeStatScore(player);
+      const growthPct = Math.max(
+        n(player?.market_value_growth_rate),
+        n(player?.market_value_growth_pct),
+        n(player?.market_value_delta_pct),
+        0
+      );
+      // 저평가 보정: 가치가 너무 높으면 숨은 유망주 점수에서 감점.
+      const marketVal = marketValueNumber(player);
+      const undervaluedBoost = marketVal > 0 ? Math.max(0, 1 - Math.min(1, marketVal / 120000000)) * 24 : 12;
+      return base * 0.52 + efficiency * 0.25 + growthPct * 0.15 + undervaluedBoost * 0.08;
+    }
+
+    function pickHiddenPlayerLocal(rows) {
+      const list = Array.isArray(rows) ? rows : [];
+      if (!list.length) return null;
+      const ranked = list
+        .map((p) => ({ p, score: hiddenPotentialScore(p) }))
+        .sort((a, b) => b.score - a.score);
+      const top = ranked[0];
+      if (!top || !top.p) return null;
+      return {
+        found: true,
+        hidden_score: top.score,
+        player: top.p,
+        reason: {
+          minutes_played: Number(top.p?.minutes_played || 0),
+          goals: Number(top.p?.goals || 0),
+          assists: Number(top.p?.assists || 0),
+          space_creation_count: Number(top.p?.space_creation_count || 0),
+        },
+      };
+    }
+
     function renderHiddenPlayer(payload) {
       const nameEl = document.getElementById("hidden-player-name");
       const metaEl = document.getElementById("hidden-player-meta");
@@ -3357,6 +3461,14 @@
       if (shouldUseRegisteredOnlyMode()) {
         const registered = await fetchRegisteredPlayersSnapshot();
         renderRegisteredOnlyMode(registered, "데모 모드 - 등록된 선수만 표시 (U25 API 비활성)");
+        return;
+      }
+
+      if (isKstHourAtLeast10Korea()) {
+        const registered = await fetchRegisteredPlayersSnapshot();
+        const daily = await fetchDailyPlayerUpdatesSnapshot();
+        const merged = mergeRegisteredWithDailySnapshot(registered, daily);
+        renderRegisteredOnlyMode(merged, t("sys.afterTenStatic"));
         return;
       }
 
@@ -3449,7 +3561,7 @@
         renderHiddenPlayer(hiddenRes.value);
       } else {
         failedBlocks.push("hidden_player");
-        renderHiddenPlayer(null);
+        renderHiddenPlayer(pickHiddenPlayerLocal(allPlayersRows.length ? allPlayersRows : cachedPlayers));
       }
 
       if (spotlightRes.status === "fulfilled") {
@@ -3635,6 +3747,9 @@
     document.getElementById("position-filter").addEventListener("change", syncFiltersOnly);
     document.getElementById("league-filter").addEventListener("change", syncFiltersOnly);
     document.getElementById("top30-body").addEventListener("click", async (e) => {
+      if (e.target.closest(".copy-player-btn")) {
+        e.preventDefault();
+      }
       if (await copyPlayerNameFromButton(e.target)) {
         e.stopPropagation();
         return;
@@ -3688,6 +3803,9 @@
       openPlayerModal(row.getAttribute("data-player-id"));
     });
     document.getElementById("all-players-body").addEventListener("click", async (e) => {
+      if (e.target.closest(".copy-player-btn")) {
+        e.preventDefault();
+      }
       if (await copyPlayerNameFromButton(e.target)) {
         e.stopPropagation();
         return;
@@ -3766,7 +3884,7 @@
         const data = await fetchJSONRetry("/analytics/hidden-player" + (q ? `?${q}` : ""), 1);
         renderHiddenPlayer(data);
       } catch (e) {
-        renderHiddenPlayer(null);
+        renderHiddenPlayer(pickHiddenPlayerLocal(allPlayersRows.length ? allPlayersRows : cachedPlayers));
       }
     }
 
@@ -3941,8 +4059,9 @@
     bootstrap();
     /* 자동 새로고침: 너무 자주 돌면 실패 문구만 반복되므로 간격을 넉넉히 둠 */
     setInterval(() => runDashboardCycle(), 180000);
-    setInterval(refreshLiveRankBannerOnly, 120000);
-    setInterval(refreshHiddenPlayerOnly, 120000);
+    setInterval(refreshLiveRankBannerOnly, 30000);
+    setInterval(() => loadKeyMatches().catch(() => {}), 45000);
+    setInterval(refreshHiddenPlayerOnly, 90000);
     setInterval(loadAutomationStatus, 120000);
     setInterval(updateCountdownView, 1000);
     setInterval(updateHeroSchedulePill, 30 * 60 * 1000);

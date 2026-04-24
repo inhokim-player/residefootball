@@ -97,6 +97,7 @@ export default async function handler(req, res) {
   const githubRepo = String(process.env.GITHUB_REPO || "").trim(); // owner/repo
   const githubBranch = String(process.env.GITHUB_BRANCH || "main").trim();
   const targetPath = String(process.env.REGISTERED_PLAYERS_FILE_PATH || "data/registered_players.json").trim();
+  const dailyPath = String(process.env.DAILY_PLAYER_UPDATES_FILE_PATH || "data/daily_player_updates.json").trim();
 
   if (!apiFootballKey || !apiFootballPlayersUrl) {
     return res.status(200).json({
@@ -116,37 +117,81 @@ export default async function handler(req, res) {
     });
   }
 
+  const canonicalPlayersBase = normalizePlayersEndpoint(apiFootballPlayersUrl);
+  if (!canonicalPlayersBase) {
+    return res.status(400).json({
+      ok: false,
+      error: "invalid_api_players_url",
+      message:
+        "API_FOOTBALL_PLAYERS_URL must target API-Football players endpoint. Example: https://v3.football.api-sports.io/players",
+    });
+  }
+
   try {
     const items = await fetchAllApiFootballPlayers({
-      apiFootballPlayersUrl,
+      apiFootballPlayersUrl: canonicalPlayersBase,
       apiFootballKey,
       maxPages: apiFootballMaxPages,
     });
-    if (!items.length) {
+    const maxAge = Math.max(15, Math.min(25, Number(process.env.API_FOOTBALL_MAX_AGE || 25) || 25));
+    const minAge = Math.max(15, Math.min(maxAge, Number(process.env.API_FOOTBALL_MIN_AGE || 15) || 15));
+    const u25 = filterAgeRange(items, minAge, maxAge);
+    if (!u25.length) {
       return res.status(422).json({
         ok: false,
         error: "empty_players",
-        message: "API response contained no usable players.",
+        message: `API response had rows but none in age range ${minAge}-${maxAge} (U25). Check API_FOOTBALL_PLAYERS_URL filters.`,
       });
     }
 
-    const body = JSON.stringify({ items }, null, 2) + "\n";
+    const body = JSON.stringify({ items: u25 }, null, 2) + "\n";
     const saved = await upsertGithubFile({
       githubToken,
       githubRepo,
       githubBranch,
       path: targetPath,
       content: body,
-      message: `cron: update registered players (${items.length})`,
+      message: `cron: U25 registered players (${u25.length})`,
+    });
+
+    const dailyBody =
+      JSON.stringify(
+        {
+          updated_at: new Date().toISOString(),
+          kst_date: formatDateInTimeZone(new Date(), "Asia/Seoul"),
+          age_min: minAge,
+          age_max: maxAge,
+          players_count: u25.length,
+          source_mode: "api-football-global-u25-market-value",
+          items: u25,
+        },
+        null,
+        2
+      ) + "\n";
+    const savedDaily = await upsertGithubFile({
+      githubToken,
+      githubRepo,
+      githubBranch,
+      path: dailyPath,
+      content: dailyBody,
+      message: `cron: daily U25 overlay (${u25.length})`,
     });
 
     return res.status(200).json({
       ok: true,
       mode: "api_football_to_github",
-      players: items.length,
+      players: u25.length,
       max_pages: apiFootballMaxPages,
+      kst_schedule_fixed: "10:00",
+      age_min: minAge,
+      age_max: maxAge,
+      leagues: parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []),
+      season: String(process.env.API_FOOTBALL_SEASON || currentLikelySeasonKst()).trim(),
+      sort: String(process.env.API_FOOTBALL_SORT || "value:desc").trim(),
       path: targetPath,
+      daily_path: dailyPath,
       commit_sha: saved.commitSha,
+      daily_commit_sha: savedDaily.commitSha,
     });
   } catch (err) {
     return res.status(500).json({
@@ -154,6 +199,24 @@ export default async function handler(req, res) {
       error: "update_failed",
       detail: String(err && err.message ? err.message : err),
     });
+  }
+}
+
+function filterAgeRange(items, minAge, maxAge) {
+  const lo = Math.min(minAge, maxAge);
+  const hi = Math.max(minAge, maxAge);
+  return (items || []).filter((p) => {
+    const a = Number(p?.age);
+    if (!Number.isFinite(a) || a <= 0) return false;
+    return a >= lo && a <= hi;
+  });
+}
+
+function formatDateInTimeZone(date, tz) {
+  try {
+    return new Intl.DateTimeFormat("en-CA", { timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit" }).format(date);
+  } catch (e) {
+    return new Date(date).toISOString().slice(0, 10);
   }
 }
 
@@ -179,7 +242,7 @@ function normalizeApiFootballPlayers(payload) {
       age: Number(p?.age || row?.age || 0) || 0,
       height_cm: parseCm(p?.height || row?.height_cm || row?.height),
       weight_kg: parseKg(p?.weight || row?.weight_kg || row?.weight),
-      dominant_foot: String(row?.dominant_foot || "Unknown"),
+      dominant_foot: normalizeFoot(row?.dominant_foot || row?.foot || p?.foot || ""),
       country: String(p?.nationality || row?.country || birthCountry || "-"),
       continent: String(row?.continent || inferContinent(p?.nationality || row?.country || birthCountry || "-")),
       club: String(team?.name || row?.club || "-"),
@@ -280,30 +343,118 @@ async function fetchAllApiFootballPlayers({
   };
   const all = [];
   const seen = new Set();
-  let totalPages = 1;
+  const leagueUrls = buildLeagueScopedBaseUrls(apiFootballPlayersUrl);
 
-  for (let page = 1; page <= totalPages && page <= maxPages; page += 1) {
-    const url = buildPagedUrl(apiFootballPlayersUrl, page);
-    const apiRes = await fetch(url, { method: "GET", headers });
-    if (!apiRes.ok) {
-      const text = await apiRes.text();
-      throw new Error(`api_football_failed:${apiRes.status}:${text.slice(0, 180)}`);
-    }
-    const payload = await apiRes.json();
-    const onePage = normalizeApiFootballPlayers(payload);
-    for (const p of onePage) {
-      if (!p.player_id || seen.has(p.player_id)) continue;
-      seen.add(p.player_id);
-      all.push(p);
-    }
-    const pagingTotal = Number(payload?.paging?.total || 0);
-    if (pagingTotal > 0) {
-      totalPages = pagingTotal;
-    } else if (!onePage.length) {
-      break;
+  for (const oneBaseUrl of leagueUrls) {
+    let totalPages = 1;
+    for (let page = 1; page <= totalPages && page <= maxPages; page += 1) {
+      const url = buildPagedUrl(oneBaseUrl, page);
+      const apiRes = await fetch(url, { method: "GET", headers });
+      if (!apiRes.ok) {
+        const text = await apiRes.text();
+        throw new Error(`api_football_failed:${apiRes.status}:${text.slice(0, 180)}`);
+      }
+      const payload = await apiRes.json();
+      const onePage = normalizeApiFootballPlayers(payload);
+      for (const p of onePage) {
+        if (!p.player_id || seen.has(p.player_id)) continue;
+        seen.add(p.player_id);
+        all.push(p);
+      }
+      const pagingTotal = Number(payload?.paging?.total || 0);
+      if (pagingTotal > 0) {
+        totalPages = pagingTotal;
+      } else if (!onePage.length) {
+        break;
+      }
     }
   }
   return all;
+}
+
+function parseCsvEnv(value, fallback = []) {
+  const raw = String(value || "").trim();
+  if (!raw) return fallback.slice();
+  return raw
+    .split(",")
+    .map((x) => x.trim())
+    .filter(Boolean);
+}
+
+function currentLikelySeasonKst() {
+  try {
+    const now = new Date();
+    const parts = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Seoul", year: "numeric", month: "numeric" }).formatToParts(now);
+    const year = Number(parts.find((p) => p.type === "year")?.value || 0);
+    const month = Number(parts.find((p) => p.type === "month")?.value || 0);
+    if (!year || !month) return String(new Date().getUTCFullYear());
+    // 유럽 주요 리그 기준: 7월 이전은 이전 시즌으로 간주.
+    return String(month < 7 ? year - 1 : year);
+  } catch (e) {
+    return String(new Date().getUTCFullYear());
+  }
+}
+
+function normalizePlayersEndpoint(rawUrl) {
+  try {
+    const u = new URL(String(rawUrl || "").trim());
+    const isHttps = u.protocol === "https:";
+    const hostOk = /(^|\.)api-sports\.io$/i.test(u.hostname);
+    const pathOk = /\/players\/?$/i.test(u.pathname);
+    if (!isHttps || !hostOk || !pathOk) return "";
+    return `${u.origin}${u.pathname.replace(/\/+$/, "")}`;
+  } catch (e) {
+    return "";
+  }
+}
+
+function buildLeagueScopedBaseUrls(baseUrl) {
+  const leagueIds = parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []);
+  const season = String(process.env.API_FOOTBALL_SEASON || currentLikelySeasonKst()).trim();
+  const sortExpr = String(process.env.API_FOOTBALL_SORT || "value:desc").trim();
+  if (!leagueIds.length) {
+    // Default mode: global pool (no league restriction).
+    return [resolvePlayersUrlTemplate(baseUrl, { season, sort: sortExpr })];
+  }
+  return leagueIds.map((leagueId) =>
+    resolvePlayersUrlTemplate(baseUrl, { league: leagueId, season, sort: sortExpr })
+  );
+}
+
+function resolvePlayersUrlTemplate(baseUrl, params) {
+  let url = String(baseUrl || "").trim();
+  if (!url) return "";
+  // Template support:
+  // - https://v3.football.api-sports.io/players?league={{league}}&season={{season}}&sort={{sort}}
+  // - https://.../players?league=:league&season=:season&sort=:sort
+  Object.entries(params || {}).forEach(([key, value]) => {
+    const val = encodeURIComponent(String(value));
+    url = url
+      .replaceAll(`{{${key}}}`, val)
+      .replaceAll(`:${key}`, val);
+  });
+  // Clear unresolved placeholders so global mode works even if template had league token.
+  url = url.replaceAll("{{league}}", "").replaceAll(":league", "");
+  url = url.replace(/([?&])league=(?=&|$)/gi, "$1");
+  url = url.replace(/[?&]{2,}/g, "&").replace(/\?&/g, "?").replace(/[?&]$/, "");
+  return appendApiQuery(url, params);
+}
+
+function appendApiQuery(baseUrl, params) {
+  const out = String(baseUrl || "");
+  const pairs = Object.entries(params || {}).filter(([, v]) => String(v || "").trim());
+  let result = out;
+  for (const [k, v] of pairs) {
+    const key = encodeURIComponent(k);
+    const val = encodeURIComponent(String(v));
+    const re = new RegExp(`([?&])${key}=[^&]*`, "i");
+    if (re.test(result)) {
+      result = result.replace(re, `$1${key}=${val}`);
+      continue;
+    }
+    result += `${result.includes("?") ? "&" : "?"}${key}=${val}`;
+  }
+  return result;
 }
 
 function buildPagedUrl(baseUrl, page) {
