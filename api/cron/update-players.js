@@ -128,12 +128,15 @@ export default async function handler(req, res) {
   }
 
   try {
+    const maxAge = Math.max(16, Math.min(24, Number(process.env.API_FOOTBALL_MAX_AGE || 24) || 24));
+    const minAge = 15;
     const items = await fetchAllApiFootballPlayers({
       apiFootballPlayersUrl: canonicalPlayersBase,
       apiFootballKey,
       maxPages: apiFootballMaxPages,
+      minAge,
+      maxAge,
     });
-    const maxAge = Math.max(16, Math.min(24, Number(process.env.API_FOOTBALL_MAX_AGE || 24) || 24));
     const u25 = filterUnderAge(items, maxAge);
     if (!u25.length) {
       return res.status(422).json({
@@ -158,7 +161,7 @@ export default async function handler(req, res) {
         {
           updated_at: new Date().toISOString(),
           kst_date: formatDateInTimeZone(new Date(), "Asia/Seoul"),
-          age_min: null,
+          age_min: minAge,
           age_max: maxAge,
           players_count: u25.length,
           source_mode: "api-football-global-u25-market-value",
@@ -182,7 +185,7 @@ export default async function handler(req, res) {
       players: u25.length,
       max_pages: apiFootballMaxPages,
       kst_schedule_fixed: "10:00",
-      age_min: null,
+      age_min: minAge,
       age_max: maxAge,
       leagues: parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []),
       season: String(process.env.API_FOOTBALL_SEASON || currentLikelySeasonKst()).trim(),
@@ -357,6 +360,8 @@ async function fetchAllApiFootballPlayers({
   apiFootballPlayersUrl,
   apiFootballKey,
   maxPages,
+  minAge,
+  maxAge,
 }) {
   const headers = {
     "x-apisports-key": apiFootballKey,
@@ -364,7 +369,7 @@ async function fetchAllApiFootballPlayers({
   };
   const all = [];
   const seen = new Set();
-  const leagueUrls = buildLeagueScopedBaseUrls(apiFootballPlayersUrl);
+  const leagueUrls = buildLeagueScopedBaseUrls(apiFootballPlayersUrl, minAge, maxAge);
 
   for (const oneBaseUrl of leagueUrls) {
     let totalPages = 1;
@@ -429,17 +434,26 @@ function normalizePlayersEndpoint(rawUrl) {
   }
 }
 
-function buildLeagueScopedBaseUrls(baseUrl) {
+function buildLeagueScopedBaseUrls(baseUrl, minAge, maxAge) {
   const leagueIds = parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []);
   const season = String(process.env.API_FOOTBALL_SEASON || currentLikelySeasonKst()).trim();
   const sortExpr = String(process.env.API_FOOTBALL_SORT || "value:desc").trim();
+  const ages = [];
+  for (let age = Math.max(15, Number(minAge || 15)); age <= Math.min(24, Number(maxAge || 24)); age += 1) {
+    ages.push(String(age));
+  }
+  if (!ages.length) ages.push("24");
   if (!leagueIds.length) {
     // Default mode: global pool (no league restriction).
-    return [resolvePlayersUrlTemplate(baseUrl, { season, sort: sortExpr })];
+    return ages.map((age) => resolvePlayersUrlTemplate(baseUrl, { season, sort: sortExpr, age }));
   }
-  return leagueIds.map((leagueId) =>
-    resolvePlayersUrlTemplate(baseUrl, { league: leagueId, season, sort: sortExpr })
-  );
+  const out = [];
+  for (const leagueId of leagueIds) {
+    for (const age of ages) {
+      out.push(resolvePlayersUrlTemplate(baseUrl, { league: leagueId, season, sort: sortExpr, age }));
+    }
+  }
+  return out;
 }
 
 function resolvePlayersUrlTemplate(baseUrl, params) {
