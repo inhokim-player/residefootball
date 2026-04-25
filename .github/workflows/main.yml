@@ -1,0 +1,105 @@
+name: U25 Data Pipeline — Daily Auto-Update
+
+# ── 실행 트리거 ───────────────────────────────────────────────────────
+on:
+  # 매일 KST 06:00 (= UTC 21:00 전날) 자동 실행
+  schedule:
+    - cron: "0 21 * * *"   # UTC 21:00 = KST 06:00
+
+  # GitHub 웹에서 수동 실행 버튼 (테스트용)
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "수동 실행 이유"
+        required: false
+        default: "manual trigger"
+
+# ── 동시 실행 방지 ────────────────────────────────────────────────────
+concurrency:
+  group: u25-pipeline
+  cancel-in-progress: false
+
+jobs:
+  run-pipeline:
+    name: "Run U25 Pipeline & Push Data"
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      # ── 1. 레포지토리 체크아웃 ──────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── 2. Python 환경 설정 ─────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      # ── 3. 의존성 설치 ───────────────────────────────────────────────
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            # 기본 패키지 (requirements.txt 없을 때 fallback)
+            pip install requests python-dotenv pandas
+          fi
+
+      # ── 4. 파이프라인 실행 ───────────────────────────────────────────
+      - name: Run u25_pipeline.py
+        env:
+          # GitHub Secrets에 등록된 API 키들을 환경변수로 전달
+          API_KEY:          ${{ secrets.API_KEY }}
+          API_SPORTS_KEY:   ${{ secrets.API_SPORTS_KEY }}
+          FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
+          DB_URL:           ${{ secrets.DB_URL }}
+          ENV:              production
+        run: |
+          echo "▶ Pipeline started at $(date '+%Y-%m-%d %H:%M:%S UTC')"
+          python u25_pipeline.py
+          echo "▶ Pipeline finished at $(date '+%Y-%m-%d %H:%M:%S UTC')"
+
+      # ── 5. 생성된 데이터 파일 확인 ───────────────────────────────────
+      - name: Show changed files
+        run: |
+          echo "=== Changed/new data files ==="
+          git status --short
+          echo ""
+          echo "=== Data directory contents ==="
+          ls -lh data/ 2>/dev/null || echo "(data/ directory not found)"
+
+      # ── 6. Git 커밋 & 푸시 ──────────────────────────────────────────
+      - name: Commit and push updated data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # 변경된 파일이 있을 때만 커밋
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            TIMESTAMP=$(date '+%Y-%m-%d %H:%M UTC')
+            git commit -m "chore: auto-update U25 data [${TIMESTAMP}]
+
+            Automated pipeline run via GitHub Actions.
+            Trigger: ${{ github.event_name }}"
+            git push origin main
+            echo "✅ Data committed and pushed successfully."
+          else
+            echo "⏭ No data changes detected — skipping commit."
+          fi
+
+      # ── 7. 실패 시 슬랙/이메일 알림 (선택) ────────────────────────
+      # 아래 주석을 해제하고 SLACK_WEBHOOK_URL Secret을 등록하면 실패 알림을 받을 수 있습니다.
+      # - name: Notify on failure
+      #   if: failure()
+      #   uses: rtCamp/action-slack-notify@v2
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #     SLACK_MESSAGE: "❌ U25 pipeline FAILED! Check: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+      #     SLACK_COLOR: danger
