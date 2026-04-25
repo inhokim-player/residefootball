@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" data-bs-theme="dark">
+<html lang="ko">
 
 <head>
   <meta charset="UTF-8" />
@@ -7,1238 +7,54 @@
   <meta name="referrer" content="no-referrer" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="description" content="residefootball.com U25 축구 스카우팅 플랫폼 - 선수 데이터, 랭킹, 분석, 라이브 피드 제공." />
+  <meta name="description" content="World U25 Football Players Data — Global youth football intelligence platform." />
   <link rel="canonical" href="https://residefootball.com/" />
-  <meta property="og:title" content="Reside Football - U25 Scouting" />
-  <meta property="og:description" content="U25 선수 랭킹, 스카우팅 분석, 라이브 피드를 한 번에 확인하세요." />
+  <meta property="og:title" content="World U25 Football Players Data" />
+  <meta property="og:description" content="World U25 Football Players Data — Global youth football intelligence platform." />
   <meta property="og:url" content="https://residefootball.com/" />
   <meta property="og:type" content="website" />
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'none'; base-uri 'none'; frame-ancestors 'none'; img-src 'self' data: https: blob:; font-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://api.residefootball.com http://127.0.0.1:* http://localhost:*; upgrade-insecure-requests;" />
-  <title>U25 축구 스카우팅 시스템</title>
+  <title>World U25 Football Players Data</title>
   <!-- Bootstrap 5.3 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="style.css" />
-  <style>
-    :root {
-      --bg-main: #070d17;
-      --bg-card: #0f1828;
-      --bg-elev: #15223a;
-      --border: #284062;
-      --text-main: #eef4ff;
-      --text-muted: #9fb3d6;
-      --brand: #2d7ff9;
-      --brand-soft: #17345f;
-      --success-soft: #163f2e;
-      --radius: 16px;
-      --shadow: 0 14px 38px rgba(0, 0, 0, 0.42);
-    }
-
-    body {
-      background:
-        radial-gradient(1200px 520px at 100% -12%, rgba(72, 135, 255, 0.2), transparent 62%),
-        radial-gradient(1000px 560px at -12% -18%, rgba(61, 116, 222, 0.2), transparent 68%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0)),
-        var(--bg-main);
-      color: var(--text-main);
-      letter-spacing: 0.01em;
-    }
-
-    .header.navbar {
-      min-height: 54px;
-      padding-top: 0.3rem;
-      padding-bottom: 0.3rem;
-      backdrop-filter: blur(14px);
-      background: rgba(8, 14, 25, 0.78) !important;
-      border-bottom-color: var(--border) !important;
-      top: 42px;
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
-    }
-
-    /* 운영자만 보면 되는 초소형 연결 상태(문구만, 링크 없음) */
-    .nav-conn-hint {
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      opacity: 0.55;
-      white-space: nowrap;
-      user-select: none;
-      pointer-events: none;
-      line-height: 1;
-    }
-
-    .nav-conn-hint.is-fail {
-      color: #d4a84b;
-      opacity: 0.95;
-    }
-
-    .live-rank-banner {
-      position: sticky;
-      top: 0;
-      z-index: 1085;
-      min-height: 42px;
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      padding: 0.42rem 0.95rem;
-      border-bottom: 1px solid rgba(112, 152, 220, 0.38);
-      background: linear-gradient(90deg, rgba(6, 16, 32, 0.96), rgba(17, 42, 82, 0.96), rgba(7, 17, 34, 0.96));
-      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.34);
-      overflow: hidden;
-    }
-
-    .live-rank-banner__leader {
-      flex: 0 0 auto;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.8rem;
-      white-space: nowrap;
-      padding-right: 0.4rem;
-      border-right: 1px solid rgba(120, 152, 206, 0.35);
-    }
-
-    .live-rank-banner__label {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 40px;
-      height: 20px;
-      border-radius: 999px;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      background: linear-gradient(135deg, rgba(76, 158, 255, 0.38), rgba(35, 95, 180, 0.34));
-      color: #d5ebff;
-      box-shadow: inset 0 0 0 1px rgba(156, 202, 255, 0.35);
-    }
-
-    .live-rank-banner__label.is-idle {
-      background: rgba(40, 52, 72, 0.65);
-      color: #9aa8c4;
-      box-shadow: inset 0 0 0 1px rgba(120, 140, 170, 0.28);
-    }
-
-    .live-rank-banner__top-player {
-      color: #f3f8ff;
-      cursor: pointer;
-    }
-
-    .live-rank-banner__top-player:hover {
-      color: #99c6ff;
-    }
-
-    .live-rank-banner__top-score {
-      font-weight: 700;
-      color: #a8dbff;
-    }
-
-    .live-rank-banner__ticker-wrap {
-      flex: 1 1 auto;
-      min-width: 0;
-      overflow: hidden;
-      mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
-    }
-
-    .live-rank-banner__ticker-track {
-      display: inline-flex;
-      gap: 0.6rem;
-      white-space: nowrap;
-      will-change: transform;
-      animation: rankTickerMove 62s linear infinite;
-      padding-left: 100%;
-    }
-
-    .live-rank-banner__item {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.78rem;
-      line-height: 1.1;
-      border-radius: 999px;
-      padding: 0.18rem 0.5rem;
-      border: 1px solid rgba(129, 161, 211, 0.34);
-      color: #dceaff;
-      background: rgba(24, 46, 82, 0.54);
-      cursor: pointer;
-    }
-
-    .live-rank-banner__item:hover {
-      border-color: rgba(130, 168, 223, 0.58);
-      color: #edf4ff;
-    }
-
-    .rank-move-up {
-      color: #55d48f;
-      font-weight: 700;
-    }
-
-    .rank-move-down {
-      color: #ff8585;
-      font-weight: 700;
-    }
-
-    .rank-move-flat {
-      color: #8fa5c4;
-      font-weight: 700;
-    }
-
-    @keyframes rankTickerMove {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-
-    @media (max-width: 991px) {
-      .header.navbar {
-        top: 46px;
-      }
-
-      .live-rank-banner {
-        min-height: 46px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.35rem;
-        padding: 0.4rem 0.7rem 0.5rem;
-      }
-
-      .live-rank-banner__leader {
-        border-right: 0;
-        padding-right: 0;
-      }
-    }
-
-    .header .navbar-brand-reside {
-      display: flex;
-      align-items: baseline;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-      line-height: 1.2;
-      color: var(--text-main);
-      cursor: pointer;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .header .navbar-brand-reside:hover {
-      opacity: 0.94;
-      transform: translateY(-1px);
-    }
-
-    .header .navbar-brand-reside .brand-main {
-      font-size: 1.08rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: #f4f9ff;
-    }
-
-    .header .navbar-brand-reside .brand-sub {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #93aed8;
-    }
-
-    .hero {
-      margin-top: 0.9rem;
-      margin-bottom: 0.8rem;
-      padding: 0.95rem 0.2rem 0.3rem;
-    }
-
-    .hero-title {
-      font-size: clamp(1.35rem, 2.9vw, 2rem);
-      font-weight: 800;
-      margin: 0;
-      letter-spacing: -0.015em;
-      text-transform: uppercase;
-      text-shadow: 0 0 24px rgba(86, 146, 255, 0.28);
-    }
-
-    .hero-title-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.7rem;
-      flex-wrap: wrap;
-    }
-
-    .hero-update-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.22rem 0.62rem;
-      border-radius: 999px;
-      border: 1px solid rgba(155, 194, 246, 0.38);
-      background: linear-gradient(135deg, rgba(52, 112, 211, 0.22), rgba(29, 76, 151, 0.15));
-      color: #cde4ff;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      vertical-align: middle;
-      white-space: nowrap;
-    }
-
-    .hero-guide-pill {
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid rgba(149, 184, 243, 0.45);
-      border-radius: 999px;
-      background: rgba(20, 42, 74, 0.56);
-      color: #d8e8ff;
-      padding: 0.24rem 0.62rem;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      white-space: nowrap;
-    }
-
-    .admin-panel {
-      position: fixed;
-      right: 14px;
-      bottom: 14px;
-      z-index: 1200;
-      width: min(360px, calc(100vw - 28px));
-      border: 1px solid rgba(130, 166, 221, 0.4);
-      border-radius: 12px;
-      background: rgba(12, 23, 40, 0.96);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
-      padding: 0.72rem;
-      display: none;
-    }
-
-    .admin-panel.is-open {
-      display: block;
-    }
-
-    .admin-panel__title {
-      font-size: 0.82rem;
-      font-weight: 700;
-      margin-bottom: 0.55rem;
-      color: #e3efff;
-    }
-
-    .hero-sub {
-      margin-top: 0.35rem;
-      color: #b8c9e6;
-      font-size: 0.95rem;
-      max-width: 900px;
-    }
-
-    .hero-contact-bar {
-      margin-top: 0.65rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.65rem 1.25rem;
-    }
-
-    .hero-contact-bar__link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: #c9d8ef;
-      text-decoration: none;
-    }
-
-    .hero-contact-bar__link:hover {
-      color: #9fc1ff;
-    }
-
-    .hero-contact-bar__ico {
-      display: inline-flex;
-      color: #8fc0ff;
-    }
-
-    .hero-contact-bar__ico svg {
-      width: 18px;
-      height: 18px;
-      display: block;
-    }
-
-    .dashboard-card {
-      background: linear-gradient(180deg, rgba(21, 33, 54, 0.82), rgba(14, 22, 38, 0.94));
-      border: 1px solid var(--border) !important;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .dashboard-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      border-radius: inherit;
-      border: 1px solid rgba(125, 164, 223, 0.14);
-      background: linear-gradient(140deg, rgba(109, 162, 247, 0.08), transparent 42%, transparent 58%, rgba(109, 162, 247, 0.06));
-    }
-
-    .compact-card .card-header {
-      font-size: 0.94rem;
-      font-weight: 700;
-      padding: 0.68rem 0.85rem;
-      border-bottom: 1px solid rgba(157, 176, 207, 0.18);
-      background: linear-gradient(180deg, rgba(20, 33, 53, 0.9), rgba(17, 26, 43, 0.9));
-    }
-
-    .compact-card .card-body {
-      padding: 0.75rem 0.85rem;
-    }
-
-    .compact-label {
-      font-size: 0.78rem;
-      margin-bottom: 0.25rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .form-select,
-    .form-control {
-      background-color: rgba(8, 14, 24, 0.85);
-      border-color: var(--border);
-      color: var(--text-main);
-      border-radius: 10px;
-    }
-
-    .form-select:focus,
-    .form-control:focus {
-      border-color: var(--brand);
-      box-shadow: 0 0 0 0.2rem rgba(45, 127, 249, 0.2);
-      background-color: rgba(8, 14, 24, 0.92);
-      color: var(--text-main);
-    }
-
-    #apply-filter {
-      border-radius: 10px;
-      border: 0;
-      background: linear-gradient(180deg, #3a8bff, #2d7ff9);
-      font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-
-    #apply-filter:hover {
-      background: linear-gradient(180deg, #529aff, #3e89fb);
-    }
-
-    .table {
-      --bs-table-bg: transparent;
-      --bs-table-color: var(--text-main);
-      --bs-table-border-color: rgba(157, 176, 207, 0.16);
-      margin-bottom: 0;
-    }
-
-    .table thead th {
-      color: #c9d8ef;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      border-bottom-width: 1px;
-      border-bottom-color: rgba(157, 176, 207, 0.2);
-      white-space: nowrap;
-    }
-
-    .table tbody td {
-      font-size: 0.87rem;
-      vertical-align: middle;
-      color: #e3ebf9;
-    }
-
-    .table-hover > tbody > tr:hover > * {
-      --bs-table-bg-state: rgba(45, 127, 249, 0.12);
-    }
-
-    #top30-body td:first-child {
-      font-weight: 700;
-      color: #9fc1ff;
-      width: 44px;
-    }
-
-    #top30-body td:nth-child(2) {
-      font-weight: 600;
-    }
-
-    .player-name-cell {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .copy-player-btn {
-      border: 1px solid rgba(157, 176, 207, 0.38);
-      background: linear-gradient(135deg, rgba(48, 94, 168, 0.82), rgba(35, 73, 133, 0.8));
-      color: #f2f7ff;
-      border-radius: 999px;
-      min-width: 44px;
-      height: 22px;
-      padding: 0 0.5rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: copy;
-      font-size: 0.61rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      line-height: 1;
-    }
-
-    .copy-player-btn:hover {
-      background: linear-gradient(135deg, rgba(67, 119, 201, 0.92), rgba(45, 89, 163, 0.9));
-      border-color: rgba(184, 211, 255, 0.86);
-    }
-
-    .copy-player-btn:focus-visible {
-      outline: 2px solid rgba(110, 170, 255, 0.9);
-      outline-offset: 1px;
-    }
-
-    .badge {
-      border-radius: 999px;
-      padding: 0.35rem 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-
-    .text-bg-success {
-      background-color: var(--success-soft) !important;
-      color: #9ceec2 !important;
-      border: 1px solid rgba(156, 238, 194, 0.35);
-    }
-
-    .text-bg-danger {
-      border: 1px solid rgba(255, 147, 147, 0.35);
-    }
-
-    .tiny-note {
-      font-size: 0.74rem;
-      color: #94a3b8;
-    }
-    .index-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.45rem;
-    }
-    .index-cell {
-      border: 1px solid rgba(157, 176, 207, 0.18);
-      border-radius: 10px;
-      padding: 0.45rem;
-      background: rgba(8, 14, 24, 0.45);
-    }
-    .index-name {
-      font-size: 0.75rem;
-      color: #9db0cf;
-    }
-    .index-val {
-      font-size: 1.02rem;
-      font-weight: 700;
-      margin-top: 0.08rem;
-    }
-    .metric-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 0.5rem;
-      margin-top: 0.6rem;
-    }
-    .metric-item {
-      border: 1px solid rgba(157, 176, 207, 0.18);
-      border-radius: 10px;
-      padding: 0.45rem 0.5rem;
-      background: rgba(8, 14, 24, 0.5);
-    }
-    .metric-title {
-      font-size: 0.78rem;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      margin-bottom: 0.35rem;
-      color: #d2def2;
-    }
-    .mini-inputs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.35rem;
-    }
-    .mini-inputs input {
-      font-size: 0.75rem;
-      padding: 0.2rem 0.35rem;
-    }
-    .continent-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 0.6rem;
-      margin-top: 0.7rem;
-    }
-    .continent-card {
-      border: 1px solid rgba(157, 176, 207, 0.16);
-      border-radius: 12px;
-      background: rgba(8, 14, 24, 0.45);
-      padding: 0.55rem;
-    }
-    .continent-title {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: #b7cae9;
-      margin-bottom: 0.35rem;
-    }
-    .continent-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.78rem;
-      padding: 0.3rem 0.1rem;
-      border-bottom: 1px dashed rgba(157, 176, 207, 0.13);
-    }
-    .continent-row:last-child {
-      border-bottom: 0;
-    }
-    .continent-player {
-      min-width: 0;
-      flex: 1;
-      line-height: 1.3;
-    }
-    .continent-player-name {
-      font-weight: 600;
-      color: #e7eef9;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: block;
-    }
-    .continent-player-meta {
-      color: #8fa6cb;
-      font-size: 0.72rem;
-    }
-    .continent-score {
-      color: #8fc0ff;
-      font-weight: 700;
-      white-space: nowrap;
-      font-size: 0.76rem;
-    }
-    .global-rank-card {
-      border: 1px solid rgba(157, 176, 207, 0.2);
-      border-radius: 10px;
-      background: rgba(8, 14, 24, 0.45);
-      padding: 0.55rem 0.65rem;
-      margin-bottom: 0.5rem;
-    }
-    .clickable-player {
-      cursor: pointer;
-    }
-    .clickable-player:hover {
-      background: rgba(45, 127, 249, 0.12);
-      border-radius: 8px;
-    }
-    .pager-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      padding: 0.65rem 0.8rem;
-      border-top: 1px solid rgba(157, 176, 207, 0.16);
-      background: rgba(8, 14, 24, 0.35);
-    }
-    .pager-left,
-    .pager-right {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-    #all-players-body td:first-child {
-      color: #8fc0ff;
-      font-weight: 700;
-      width: 60px;
-    }
-
-    body.splash-open {
-      overflow: hidden;
-    }
-
-    #entry-splash {
-      position: fixed;
-      inset: 0;
-      z-index: 20000;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: flex-start;
-      overflow: hidden;
-      background: radial-gradient(1300px 740px at 65% 15%, rgba(51, 112, 214, 0.16), transparent 62%), #050812;
-      padding: max(1.25rem, env(safe-area-inset-top, 0px)) max(1.25rem, env(safe-area-inset-right, 0px))
-        max(0.5rem, env(safe-area-inset-bottom, 0px)) max(1.25rem, env(safe-area-inset-left, 0px));
-    }
-
-    .entry-splash__main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 0;
-      position: relative;
-      z-index: 3;
-      padding-bottom: clamp(0.5rem, 4vh, 2rem);
-    }
-
-    .entry-splash__footer {
-      position: relative;
-      z-index: 1;
-      flex-shrink: 0;
-      width: 100%;
-      max-width: min(100%, 560px);
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: clamp(4.4rem, 20vh, 8.6rem);
-      padding: 0.35rem 0.5rem 0;
-      background: transparent;
-      border: 0;
-      box-shadow: none;
-      backdrop-filter: none;
-      pointer-events: none;
-    }
-
-    .entry-splash__sync {
-      margin-bottom: 0.35rem;
-    }
-
-    .entry-splash__sync.automation-sand__body {
-      gap: 0.55rem;
-    }
-
-    .entry-splash__sync-caption {
-      margin: 0 0 0.55rem;
-      padding: 0;
-      text-align: center;
-      font-size: clamp(1.08rem, 2.9vw, 1.34rem);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: rgba(231, 238, 249, 0.9);
-    }
-
-    .entry-splash__sync-caption .splash-line {
-      display: block;
-      letter-spacing: 0.015em;
-      text-transform: none;
-      line-height: 1.52;
-    }
-
-    .entry-splash__sync-caption .splash-line + .splash-line {
-      margin-top: 0.22rem;
-      color: #d6e7ff;
-      font-weight: 600;
-    }
-
-    .entry-splash__footer .entry-splash__collab-link {
-      pointer-events: auto;
-    }
-
-    .entry-splash__footer .entry-splash__lang-btn {
-      pointer-events: auto;
-    }
-
-    .entry-splash__lang {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.42rem;
-      margin: 0 0 0.65rem;
-    }
-
-    .entry-splash__lang-btn {
-      border: 1px solid rgba(163, 197, 244, 0.45);
-      background: rgba(17, 29, 51, 0.72);
-      color: #ebf3ff;
-      border-radius: 999px;
-      padding: 0.2rem 0.58rem;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      line-height: 1.25;
-      cursor: pointer;
-      transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .entry-splash__lang-btn:hover {
-      border-color: rgba(203, 227, 255, 0.72);
-      background: rgba(42, 68, 111, 0.72);
-      transform: translateY(-1px);
-    }
-
-    .entry-splash__lang-btn.is-active {
-      border-color: rgba(210, 233, 255, 0.95);
-      background: linear-gradient(140deg, rgba(69, 128, 221, 0.55), rgba(48, 95, 171, 0.45));
-      color: #ffffff;
-    }
-
-    .entry-splash__collab {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.5rem 0.85rem;
-      padding-top: 0.15rem;
-      border-top: 0;
-    }
-
-    .entry-splash__collab-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: clamp(0.88rem, 2.4vw, 1.08rem);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: #e7eef9;
-      text-decoration: none;
-    }
-
-    .entry-splash__collab-link:hover {
-      color: #ffffff;
-    }
-
-    .entry-splash__collab-ico {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #9fc1ff;
-    }
-
-    .entry-splash__collab-ico svg {
-      width: clamp(22px, 4.5vw, 28px);
-      height: clamp(22px, 4.5vw, 28px);
-    }
-
-    .entry-splash__collab-sep {
-      color: rgba(200, 214, 240, 0.45);
-      font-weight: 700;
-      font-size: 1.1rem;
-      line-height: 1;
-    }
-
-    #entry-splash .entry-splash__bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    #entry-splash .entry-splash__shade {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(
-        to top,
-        rgba(5, 8, 18, 0.78) 0%,
-        rgba(5, 8, 18, 0.22) 42%,
-        rgba(5, 8, 18, 0.5) 100%
-      );
-    }
-
-    #entry-splash .entry-splash__stack {
-      position: relative;
-      text-align: center;
-      max-width: min(100%, 520px);
-    }
-
-    #reside-enter {
-      border: 1px solid rgba(199, 223, 255, 0.58);
-      outline: none;
-      box-shadow:
-        0 20px 44px rgba(4, 11, 24, 0.64),
-        0 0 42px rgba(93, 154, 255, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.88);
-      background: linear-gradient(180deg, rgba(248, 252, 255, 1), rgba(217, 233, 251, 0.94));
-      color: #0b1322;
-      font-weight: 800;
-      font-size: clamp(1.85rem, 5.2vw, 2.85rem);
-      letter-spacing: 0.2em;
-      text-indent: 0.2em;
-      padding: 0.52rem 1.3rem;
-      margin: 0;
-      cursor: pointer;
-      font-family: inherit;
-      line-height: 1.15;
-      text-shadow: none;
-      -webkit-tap-highlight-color: transparent;
-      border-radius: 999px;
-      transition: transform 0.2s ease, filter 0.2s ease;
-    }
-
-    #reside-enter:hover {
-      transform: translateY(-2px) scale(1.015);
-      filter: brightness(1.03);
-    }
-
-    #reside-enter:focus-visible {
-      color: #0b1322;
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
-      border-radius: 999px;
-    }
-
-    #entry-splash .reside-tagline {
-      margin: 0.4rem 0 0;
-      padding: 0;
-      color: rgba(236, 244, 255, 0.96);
-      font-size: clamp(0.68rem, 2.2vw, 0.92rem);
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      text-shadow: 0 0 18px rgba(90, 151, 255, 0.3);
-    }
-
-    #splash-sync-line {
-      animation: splashTextFloat 3.2s ease-in-out infinite;
-    }
-
-    @keyframes splashTextFloat {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-2px);
-      }
-    }
-
-    #entry-splash.is-hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity 0.42s ease, visibility 0s linear 0.42s;
-    }
-
-    .ad-banner-slot {
-      margin-top: 0.15rem;
-      border: 1px dashed rgba(157, 176, 207, 0.42) !important;
-      border-radius: var(--radius);
-      background: rgba(8, 14, 24, 0.42);
-      padding: 0.65rem 0.85rem;
-    }
-
-    .ad-banner-slot__content {
-      width: 100%;
-      max-width: 970px;
-      min-height: 90px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .ad-banner-slot__hint {
-      margin: 0.5rem 0 0;
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      letter-spacing: 0.02em;
-    }
-
-    .automation-sand__body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.55rem;
-    }
-
-    .automation-sand__icon {
-      display: inline-flex;
-      color: #8fc0ff;
-      filter: drop-shadow(0 0 6px rgba(45, 127, 249, 0.35));
-      animation: automation-sand-flip 3s ease-in-out infinite;
-    }
-
-    @keyframes automation-sand-flip {
-      0%,
-      100% {
-        transform: rotate(0deg);
-      }
-      50% {
-        transform: rotate(180deg);
-      }
-    }
-
-    .automation-sand__clock {
-      font-variant-numeric: tabular-nums;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      font-size: 1.28rem;
-      color: #e7eef9;
-      text-shadow: 0 0 14px rgba(45, 127, 249, 0.32);
-    }
-
-    .spotlight-split {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .spotlight-split__pane {
-      flex: 1 1 280px;
-      min-width: 0;
-    }
-
-    @media (min-width: 992px) {
-      .spotlight-split__pane--live {
-        border-right: 1px solid rgba(38, 54, 82, 0.95);
-      }
-    }
-
-    @media (max-width: 991.98px) {
-      .spotlight-split__pane--live {
-        border-bottom: 1px solid rgba(38, 54, 82, 0.95);
-      }
-    }
-
-    .stat-top-rank-title {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #9db0cf;
-      margin-bottom: 0.45rem;
-    }
-
-    .header .nav-collab__link {
-      font-size: 0.74rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #d8e8ff !important;
-      padding-left: 0.65rem;
-      padding-right: 0.65rem;
-      border-radius: 999px;
-      transition: color .18s ease, background-color .18s ease, transform .18s ease;
-    }
-
-    .header .nav-collab__link:hover {
-      color: #f8fbff !important;
-      background: rgba(67, 139, 246, 0.22);
-      transform: translateY(-1px);
-    }
-
-    .nav-lang-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      border: 1px solid rgba(153, 179, 217, 0.48);
-      background: rgba(23, 42, 74, 0.62);
-      cursor: pointer;
-      padding: 0.35rem 0.55rem;
-      line-height: 1;
-      text-decoration: none;
-      border-radius: 999px;
-      transition: border-color 0.2s ease, background-color 0.2s ease;
-    }
-
-    .nav-lang-btn:hover {
-      border-color: rgba(181, 206, 244, 0.68);
-      background: rgba(40, 65, 105, 0.68);
-    }
-
-    .nav-lang-btn__icon svg {
-      display: block;
-    }
-
-    .nav-lang-btn__badge {
-      font-size: 0.68rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      color: #9fc1ff;
-    }
-
-    #nav-contact-mail {
-      font-weight: 700;
-      padding-left: 0.78rem;
-      padding-right: 0.78rem;
-      border: 1px solid rgba(162, 196, 244, 0.42);
-      background: linear-gradient(135deg, rgba(61, 121, 216, 0.22), rgba(34, 81, 158, 0.12));
-      box-shadow: inset 0 0 0 1px rgba(181, 208, 244, 0.1);
-    }
-
-    #nav-contact-mail:hover {
-      border-color: rgba(193, 220, 255, 0.72);
-      box-shadow: 0 8px 18px rgba(25, 70, 146, 0.36);
-    }
-
-    #visitor-count {
-      background: linear-gradient(135deg, rgba(42, 115, 223, 0.95), rgba(32, 90, 181, 0.95)) !important;
-      border: 1px solid rgba(159, 201, 255, 0.36);
-      letter-spacing: 0.06em;
-    }
-
-    .nav-player-search {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-right: 0.45rem;
-    }
-
-    .nav-player-search__input {
-      width: clamp(140px, 18vw, 220px);
-      height: 34px;
-      border-radius: 999px;
-      border: 1px solid rgba(159, 201, 255, 0.4);
-      background: rgba(18, 30, 52, 0.9);
-      color: #e9f1ff;
-      padding: 0 0.8rem;
-      font-size: 0.82rem;
-    }
-
-    .nav-player-search__input::placeholder {
-      color: rgba(186, 206, 236, 0.72);
-    }
-
-    .nav-player-search__btn {
-      height: 34px;
-      border-radius: 999px;
-      border: 1px solid rgba(159, 201, 255, 0.48);
-      background: linear-gradient(140deg, rgba(54, 109, 194, 0.4), rgba(37, 77, 145, 0.3));
-      color: #eaf3ff;
-      padding: 0 0.72rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-    }
-
-    .nav-player-search__btn--yt {
-      border-color: rgba(255, 122, 122, 0.55);
-      background: linear-gradient(140deg, rgba(186, 40, 40, 0.38), rgba(140, 22, 22, 0.3));
-    }
-
-    .site-legal-footer {
-      border-top: 1px solid rgba(134, 166, 214, 0.28);
-      background: rgba(8, 13, 25, 0.95);
-      padding: 1.2rem 1.1rem 1.45rem;
-      color: rgba(219, 229, 245, 0.9);
-      font-size: 0.78rem;
-      line-height: 1.62;
-    }
-
-    .site-legal-footer__inner {
-      max-width: 1320px;
-      margin: 0 auto;
-    }
-
-    .site-legal-footer p {
-      margin: 0 0 0.45rem;
-    }
-
-    .site-legal-footer p:last-child {
-      margin-bottom: 0;
-    }
-
-    .site-legal-footer a {
-      color: #d6e8ff;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
 </head>
 
-<body>
-  <div id="entry-splash" role="dialog" aria-modal="true" aria-label="RESIDE 시작 화면"
-    aria-describedby="reside-tagline splash-sync-line">
-    <img class="entry-splash__bg" src="reside-landing.png" alt="" width="1920" height="1080" decoding="async"
-      fetchpriority="high" />
-    <div class="entry-splash__shade" aria-hidden="true"></div>
-    <div class="entry-splash__main">
-      <div class="entry-splash__stack">
-        <button type="button" id="reside-enter" data-i18n="splash.enter">RESIDE</button>
-        <p id="reside-tagline" class="reside-tagline" data-i18n="splash.tagline">WORLD U25 FOOTBALL PLAYERS</p>
-      </div>
-    </div>
-    <footer class="entry-splash__footer">
-      <div class="entry-splash__lang" aria-label="Language selector">
-        <button type="button" class="entry-splash__lang-btn" data-lang-set="ko">🇰🇷 한국어</button>
-        <button type="button" class="entry-splash__lang-btn" data-lang-set="en">🇺🇸 English</button>
-        <button type="button" class="entry-splash__lang-btn" data-lang-set="zh">🇨🇳 中文</button>
-        <button type="button" class="entry-splash__lang-btn" data-lang-set="ja">🇯🇵 日本語</button>
-        <button type="button" class="entry-splash__lang-btn" data-lang-set="ar">🇸🇦 العربية</button>
-      </div>
-      <p id="splash-sync-line" class="entry-splash__sync-caption" data-i18n-html="1" data-i18n="splash.syncLine">
-        <span class="splash-line">You can check out u25 football players around the world for free.</span>
-        <span class="splash-line">Now find some hidden gems.</span>
-        <span class="splash-line">Please apply it to the game or the reality.</span>
-      </p>
-      <div class="entry-splash__sync automation-sand__body" role="status" aria-live="polite">
-        <span class="automation-sand__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="26" height="26" xmlns="http://www.w3.org/2000/svg" focusable="false">
-            <path
-              d="M7 3h10v2.2L12.8 12 17 18.8V21H7v-2.2l4.2-6.8L7 5.2V3zm2.2 2l3.8 6.1L17 5H9.2zM9.2 19H15l-2.9-4.7L9.2 19z"
-              fill="currentColor" />
-          </svg>
-        </span>
-        <span id="splash-auto-countdown" class="automation-sand__clock" role="timer" aria-live="polite">--:--:--</span>
-      </div>
-      <div class="entry-splash__collab">
-        <a id="splash-contact-mail" class="entry-splash__collab-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=k23agent@gmail.com" target="_blank" rel="noopener noreferrer">
-          <span class="entry-splash__collab-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
-              <path d="M4 6.5h16v11H4v-11z" stroke="currentColor" stroke-width="1.65" stroke-linejoin="round" />
-              <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </span>
-          <span data-i18n="splash.mailLabel">Email</span>
-        </a>
-        <span class="entry-splash__collab-sep" aria-hidden="true">·</span>
-        <a class="entry-splash__collab-link js-ig-profile-link" href="https://www.instagram.com/resideofficial234/"
-          target="_blank" rel="noopener noreferrer">
-          <span class="entry-splash__collab-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
-              <path fill="currentColor"
-                d="M12 2.2c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85C2.42 3.92 3.93 2.4 7.15 2.25 8.42 2.19 8.8 2.18 12 2.18zm0-2.2C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12c0 3.26.01 3.67.07 4.95.2 4.35 2.62 6.77 6.98 6.98 1.28.06 1.69.07 4.95.07 3.26 0 3.67-.01 4.95-.07 4.35-.2 6.78-2.63 6.98-6.98.06-1.28.07-1.69.07-4.95 0-3.26-.01-3.67-.07-4.95-.2-4.35-2.63-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zm0 10.16a4 4 0 114-4 4 4 0 01-4 4zm6.41-11.85a1.44 1.44 0 11-1.44-1.44 1.44 1.44 0 011.44 1.44z" />
-            </svg>
-          </span>
-          <span data-i18n="splash.igLabel">Instagram</span>
-        </a>
-      </div>
-    </footer>
-  </div>
+<body>  </div>
 
-  <div id="live-rank-banner" class="live-rank-banner" aria-live="polite">
-    <div class="live-rank-banner__leader">
-      <span id="banner-live-label" class="live-rank-banner__label" role="status">LIVE</span>
-      <span data-i18n="banner.topLabel">Top</span>
-      <strong id="banner-top-player" class="live-rank-banner__top-player">-</strong>
-      <span class="live-rank-banner__top-score">(<span id="banner-top-score">-</span>)</span>
+  <!-- Compact live ticker strip -->
+  <div id="live-rank-banner" style="display:flex;align-items:center;gap:0.75rem;padding:0.4rem 1.5rem;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,0.05);overflow:hidden;" aria-live="polite">
+    <div style="flex:0 0 auto;display:inline-flex;align-items:center;gap:0.4rem;font-size:0.72rem;white-space:nowrap;padding-right:0.6rem;border-right:1.5px solid #F2F4F6;">
+      <span id="banner-live-label" class="live-rank-banner__label" role="status" style="display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:18px;border-radius:50px;font-size:0.6rem;font-weight:800;letter-spacing:0.06em;background:#3182f6;color:#fff;">LIVE</span>
+      <span style="color:#4E5968;">Top</span>
+      <strong id="banner-top-player" style="color:#191F28;cursor:pointer;font-weight:700;">-</strong>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:700;color:#3182f6;">(<span id="banner-top-score">-</span>)</span>
     </div>
-    <div class="live-rank-banner__ticker-wrap">
-      <div id="banner-rank-ticker" class="live-rank-banner__ticker-track"></div>
+    <div style="flex:1;min-width:0;overflow:hidden;mask-image:linear-gradient(to right,transparent,#000 3%,#000 97%,transparent);">
+      <div id="banner-rank-ticker" style="display:inline-flex;gap:0.4rem;white-space:nowrap;will-change:transform;animation:rankTickerMove 62s linear infinite;padding-left:100%;"></div>
     </div>
   </div>
-
-  <nav class="header navbar navbar-expand-lg bg-body-tertiary sticky-top border-bottom border-secondary">
+  <nav class="header navbar navbar-expand-lg sticky-top">
     <div class="container-fluid">
       <a id="navbar-brand-reload" class="navbar-brand navbar-brand-reside text-decoration-none" href="#"
         data-i18n-aria="nav.brandReload">
-        <span class="brand-main">RESIDE FOOTBALL</span>
-        <span class="brand-sub">WORLD U25 FOOTBALL PLAYERS</span>
+        <span class="brand-main">W·U25·DATA</span>
+        <span class="brand-sub">WORLD U25 FOOTBALL PLAYERS DATA</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" data-i18n-aria="nav.menu">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-wrap">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Football Only</a>
-          </li>
-        </ul>
+
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 flex-wrap align-items-lg-center">
           <li class="nav-item">
             <div class="nav-player-search">
@@ -1280,203 +96,161 @@
     </div>
   </nav>
 
-  <div class="container-fluid px-3 pb-4">
+  <div class="container-fluid px-3 px-md-4 pb-5">
     <section class="hero">
       <div class="hero-title-row">
-        <h1 class="hero-title" data-i18n="hero.title">U25 Data Scouting Dashboard</h1>
+        <h1 class="hero-title" data-i18n="hero.title">World U-25 Football Players Data</h1>
         <span id="hero-update-pill" class="hero-update-pill">(KST) · …</span>
-        <span class="hero-guide-pill" data-i18n="hero.copyGuide">선수 복사 후 상단 검색에 붙여넣기 하시면 됩니다.</span>
+        
       </div>
-      <div class="hero-sub" data-i18n="hero.sub">전세계 유망주를 포지션·국가·리그 기준으로 빠르게 탐색하는 스카우팅 전용 화면</div>
+      <div class="hero-sub" data-i18n="hero.sub" style="color:var(--t2)">전세계 유망주를 포지션·국가·리그 기준으로 빠르게 탐색하는 스카우팅 전용 화면</div>
     </section>
 
-    <div class="card dashboard-card compact-card text-bg-dark border-secondary mb-3">
-      <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
-        <span data-i18n="filter.cardTitle">WORLD U25 PLAYERS</span>
-        <div class="d-flex align-items-center gap-2 flex-wrap justify-content-end">
-          <span id="visitor-count" class="badge text-bg-primary">VISITORS -</span>
+    <!-- FILTER SURFACE — no card box, just chips floating on the page bg -->
+    <div class="filter-surface">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;flex-wrap:wrap;gap:0.5rem;">
+        <div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:0.2rem;">WORLD U25 PLAYERS</div>
+          <div id="system-status" style="display:none"></div>
         </div>
+        
       </div>
-      <div class="card-body">
-        <div class="row g-2 align-items-end">
-          <div class="col-12 col-md-3">
-            <label class="form-label compact-label" data-i18n="label.continent">대륙</label>
-            <select id="continent-filter" class="form-select form-select-sm">
-              <option value="">전체</option>
-            </select>
-          </div>
-          <div class="col-12 col-md-3">
-            <label class="form-label compact-label" data-i18n="label.country">국가</label>
-            <select id="country-filter" class="form-select form-select-sm">
-              <option value="">전체</option>
-            </select>
-          </div>
-          <div class="col-12 col-md-2">
-            <label class="form-label compact-label" data-i18n="label.position">포지션</label>
-            <select id="position-filter" class="form-select form-select-sm">
-              <option value="">전체</option>
-              <option value="FW">FW</option>
-              <option value="MF">MF</option>
-              <option value="DF">DF</option>
-              <option value="GK">GK</option>
-            </select>
-          </div>
-          <div class="col-12 col-md-2">
-            <label class="form-label compact-label" data-i18n="label.league">리그</label>
-            <select id="league-filter" class="form-select form-select-sm">
-              <option value="">전체</option>
-            </select>
-          </div>
-          <div class="col-12 col-md-2 d-grid">
-            <div class="d-grid gap-1">
-              <button type="button" id="apply-filter" class="btn btn-sm btn-primary" data-i18n="btn.search">검색</button>
-              <button type="button" id="reset-filter" class="btn btn-sm btn-outline-light" data-i18n="btn.reset">초기화</button>
-            </div>
-          </div>
+
+      <!-- POSITION chips -->
+      <div class="filter-chip-group">
+        <div class="filter-chip-label" data-i18n="label.position">포지션</div>
+        <div class="chip-scroll-row" id="position-chips">
+          <span class="filter-chip is-active" data-chip-group="position" data-value="">ALL</span>
+          <span class="filter-chip" data-chip-group="position" data-value="FW">FW</span>
+          <span class="filter-chip" data-chip-group="position" data-value="MF">MF</span>
+          <span class="filter-chip" data-chip-group="position" data-value="DF">DF</span>
+          <span class="filter-chip" data-chip-group="position" data-value="GK">GK</span>
         </div>
-        <div class="row g-2 align-items-end mt-1">
-          <div class="col-12 col-md-4">
-            <label class="form-label compact-label" data-i18n="label.sortBy">정렬 기준</label>
-            <select id="sort-by" class="form-select form-select-sm">
-              <option value="" data-i18n-key="sort.all">전체</option>
-              <option value="minutes_played" data-i18n-key="sort.minutes">출장시간</option>
-              <option value="height_cm" data-i18n-key="sort.height">키</option>
-              <option value="weight_kg" data-i18n-key="sort.weight">몸무게</option>
-              <option value="pass_success_rate" data-i18n-key="sort.pass">패스 성공률</option>
-              <option value="duel_win_rate" data-i18n-key="sort.duel">경합 성공률</option>
-              <option value="shot_accuracy" data-i18n-key="sort.shot">슈팅 정확도</option>
-              <option value="goals" data-i18n-key="sort.goals">득점</option>
-              <option value="assists" data-i18n-key="sort.assists">어시스트</option>
-              <option value="tackle_success_rate" data-i18n-key="sort.tackle">태클 성공률</option>
-              <option value="intercept_success_rate" data-i18n-key="sort.intercept">인터셉트 성공률</option>
-              <option value="dribble_success_rate" data-i18n-key="sort.dribble">돌파 성공률</option>
-              <option value="space_creation_count" data-i18n-key="sort.space">공간창출 횟수</option>
-              <option value="sprint_speed" data-i18n-key="sort.sprint">스프린트 속도</option>
-              <option value="distance_per_match_km" data-i18n-key="sort.distance">경기당 뛰는거리</option>
-            </select>
-          </div>
-          <div class="col-12 col-md-3">
-            <label class="form-label compact-label" data-i18n="label.sortOrder">정렬 방향</label>
-            <select id="sort-order" class="form-select form-select-sm">
-              <option value="desc" data-i18n-key="sort.desc">높은순</option>
-              <option value="asc" data-i18n-key="sort.asc">낮은순</option>
-            </select>
-          </div>
+        <select id="position-filter" style="display:none">
+          <option value="">전체</option>
+          <option value="FW">FW</option>
+          <option value="MF">MF</option>
+          <option value="DF">DF</option>
+          <option value="GK">GK</option>
+        </select>
+      </div>
+
+      <!-- CONTINENT chips -->
+      <div class="filter-chip-group">
+        <div class="filter-chip-label" data-i18n="label.continent">대륙</div>
+        <div class="chip-scroll-row" id="continent-chips">
+          <span class="filter-chip is-active" data-chip-group="continent" data-value="">ALL</span>
         </div>
-        <div class="small text-secondary mt-2" data-i18n-html="1" data-i18n="hint.search">대륙·국가·포지션·리그·정렬을 고른 뒤 <strong>검색</strong>을 누르면 Top 30·통계·전체 선수 목록이 조건에 맞게 갱신됩니다.</div>
-        <div id="system-status" class="tiny-note mt-1" data-i18n="sys.loading">시스템 상태 불러오는 중...</div>
+        <select id="continent-filter" style="display:none"><option value="">전체</option></select>
+      </div>
+
+      <!-- COUNTRY chips -->
+      <div class="filter-chip-group">
+        <div class="filter-chip-label" data-i18n="label.country">국가</div>
+        <div class="chip-scroll-row" id="country-chips">
+          <span class="filter-chip is-active" data-chip-group="country" data-value="">ALL</span>
+        </div>
+        <select id="country-filter" style="display:none"><option value="">전체</option></select>
+      </div>
+
+      <!-- LEAGUE chips -->
+      <div class="filter-chip-group">
+        <div class="filter-chip-label" data-i18n="label.league">리그</div>
+        <div class="chip-scroll-row" id="league-chips">
+          <span class="filter-chip is-active" data-chip-group="league" data-value="">ALL</span>
+        </div>
+        <select id="league-filter" style="display:none"><option value="">전체</option></select>
+      </div>
+
+      <!-- Sort + Search actions -->
+      <div class="filter-sort-row">
+        <select id="sort-by" class="form-select form-select-sm" style="width:auto;min-width:160px;border-radius:50px;">
+          <option value="" data-i18n-key="sort.all">전체</option>
+          <option value="minutes_played" data-i18n-key="sort.minutes">출장시간</option>
+          <option value="pass_success_rate" data-i18n-key="sort.pass">패스 성공률</option>
+          <option value="duel_win_rate" data-i18n-key="sort.duel">경합 성공률</option>
+          <option value="shot_accuracy" data-i18n-key="sort.shot">슈팅 정확도</option>
+          <option value="goals" data-i18n-key="sort.goals">득점</option>
+          <option value="assists" data-i18n-key="sort.assists">어시스트</option>
+          <option value="tackle_success_rate" data-i18n-key="sort.tackle">태클 성공률</option>
+          <option value="dribble_success_rate" data-i18n-key="sort.dribble">돌파 성공률</option>
+          <option value="space_creation_count" data-i18n-key="sort.space">공간창출</option>
+          <option value="sprint_speed" data-i18n-key="sort.sprint">스프린트</option>
+          <option value="height_cm" data-i18n-key="sort.height">키</option>
+          <option value="weight_kg" data-i18n-key="sort.weight">몸무게</option>
+        </select>
+        <select id="sort-order" class="form-select form-select-sm" style="width:auto;min-width:110px;border-radius:50px;">
+          <option value="desc" data-i18n-key="sort.desc">높은순</option>
+          <option value="asc" data-i18n-key="sort.asc">낮은순</option>
+        </select>
+        <button type="button" id="apply-filter" class="btn btn-sm btn-primary" data-i18n="btn.search">검색</button>
+        <button type="button" id="reset-filter" class="btn btn-sm" data-i18n="btn.reset">초기화</button>
       </div>
     </div>
 
-    <div class="row g-3 mb-1">
+    <div class="row g-3 mb-3">
       <div class="col-6 col-md-3">
-        <div class="card dashboard-card text-bg-dark border-secondary">
-          <div class="card-body py-2">
-            <div class="tiny-note" data-i18n="kpi.players">U25 선수 수</div>
-            <div id="kpi-players" class="fs-5 fw-bold">-</div>
-          </div>
+        <div class="kpi-card">
+          <div class="kpi-label" data-i18n="kpi.players">U25 선수 수</div>
+          <div id="kpi-players" class="kpi-value">-</div>
         </div>
       </div>
       <div class="col-6 col-md-3">
-        <div class="card dashboard-card text-bg-dark border-secondary">
-          <div class="card-body py-2">
-            <div class="tiny-note" data-i18n="kpi.countries">커버 국가 수</div>
-            <div id="kpi-countries" class="fs-5 fw-bold">-</div>
-          </div>
+        <div class="kpi-card">
+          <div class="kpi-label" data-i18n="kpi.countries">커버 국가 수</div>
+          <div id="kpi-countries" class="kpi-value">-</div>
         </div>
       </div>
       <div class="col-6 col-md-3">
-        <div class="card dashboard-card text-bg-dark border-secondary">
-          <div class="card-body py-2">
-            <div class="tiny-note" data-i18n="kpi.leagues">커버 리그 수</div>
-            <div id="kpi-leagues" class="fs-5 fw-bold">-</div>
-          </div>
+        <div class="kpi-card">
+          <div class="kpi-label" data-i18n="kpi.leagues">커버 리그 수</div>
+          <div id="kpi-leagues" class="kpi-value">-</div>
         </div>
       </div>
     </div>
 
     <div class="row g-3 align-items-start">
       <div class="col-12 col-lg-7 col-xl-7">
-        <div class="card dashboard-card text-bg-dark border-secondary">
+        <div class="card dashboard-card">
           <div class="card-header fw-semibold" data-i18n="card.top30">포지션별 U25 주목 선수 Top 30</div>
-          <div class="card-body p-0">
-            <div class="table-responsive">
-              <table class="table table-dark table-hover table-sm mb-0 align-middle">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th data-i18n="th.player">선수</th>
-                    <th data-i18n="th.age">나이</th>
-                    <th data-i18n="th.height">키</th>
-                    <th data-i18n="th.weight">몸무게</th>
-                    <th data-i18n="th.foot">주발</th>
-                    <th data-i18n="th.country">국가</th>
-                    <th data-i18n="th.club">클럽</th>
-                    <th data-i18n="th.position">포지션</th>
-                    <th data-i18n="th.league">리그</th>
-                  </tr>
-                </thead>
-                <tbody id="top30-body">
-                  <tr>
-                    <td colspan="9" class="text-center text-secondary py-3" data-i18n="state.loading">데이터 로딩 중...</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div id="top30-card-grid" class="player-cards-grid">
+            <div style="padding:2rem;text-align:center;color:var(--text-tertiary);" data-i18n="state.loading">데이터 로딩 중...</div>
           </div>
+          <table style="display:none"><tbody id="top30-body"></tbody></table>
         </div>
 
-        <div class="card dashboard-card text-bg-dark border-secondary mt-3">
+        <div class="card dashboard-card mt-3">
           <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
             <span data-i18n="card.allPlayers">전체 선수 데이터 (필터 연동)</span>
-            <span id="all-players-total" class="tiny-note">총 0명</span>
+            <span id="all-players-total" style="font-size:0.72rem;color:var(--text-tertiary);">총 0명</span>
           </div>
-          <div class="card-body p-0">
-            <div class="table-responsive">
-              <table class="table table-dark table-hover table-sm mb-0 align-middle">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>선수</th>
-                    <th>나이</th>
-                    <th>키</th>
-                    <th>몸무게</th>
-                    <th data-i18n="th.country">국가</th>
-                    <th data-i18n="th.continent">대륙</th>
-                    <th data-i18n="th.club">클럽</th>
-                    <th data-i18n="th.position">포지션</th>
-                    <th data-i18n="th.league">리그</th>
-                  </tr>
-                </thead>
-                <tbody id="all-players-body">
-                  <tr>
-                    <td colspan="11" class="text-center text-secondary py-3" data-i18n="state.loading">데이터 로딩 중...</td>
-                  </tr>
-                </tbody>
-              </table>
+          <div id="all-players-card-grid" class="player-cards-grid">
+            <div style="padding:2rem;text-align:center;color:var(--text-tertiary);" data-i18n="state.loading">데이터 로딩 중...</div>
+          </div>
+          <table style="display:none"><tbody id="all-players-body"></tbody></table>
+          <div class="pager-wrap">
+            <div class="pager-left">
+              <span class="tiny-note" data-i18n="pager.perPage">페이지당</span>
+              <select id="all-players-page-size" class="form-select form-select-sm" style="width:88px;">
+                <option value="30">30</option>
+                <option value="50" selected>50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+              </select>
+              <span id="all-players-page-info" class="tiny-note">1 / 1</span>
             </div>
-            <div class="pager-wrap">
-              <div class="pager-left">
-                <span class="tiny-note" data-i18n="pager.perPage">페이지당</span>
-                <select id="all-players-page-size" class="form-select form-select-sm" style="width:88px;">
-                  <option value="30">30</option>
-                  <option value="50" selected>50</option>
-                  <option value="100">100</option>
-                  <option value="200">200</option>
-                </select>
-                <span id="all-players-page-info" class="tiny-note">1 / 1</span>
-              </div>
-              <div class="pager-right">
-                <button id="all-players-prev" class="btn btn-sm btn-outline-light" data-i18n="pager.prev">이전</button>
-                <button id="all-players-next" class="btn btn-sm btn-outline-light" data-i18n="pager.next">다음</button>
-              </div>
+            <div class="pager-right">
+              <button id="all-players-prev" class="btn btn-sm" style="background:var(--bg-soft);border:none;color:var(--text-secondary);" data-i18n="pager.prev">이전</button>
+              <button id="all-players-next" class="btn btn-sm" style="background:var(--bg-soft);border:none;color:var(--text-secondary);" data-i18n="pager.next">다음</button>
             </div>
           </div>
         </div>
       </div>
       <div class="col-12 col-lg-5 col-xl-5">
-        <div class="card dashboard-card text-bg-dark border-secondary mb-3">
-          <div class="card-header fw-semibold" data-i18n="card.topMatch">통계 매칭 최고 선수</div>
+        <div class="card dashboard-card mb-3">
+          <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
+          <span data-i18n="card.topMatch">TOP STATISTICAL MATCH</span>
+        </div>
           <div class="card-body small">
             <div id="top-match-name" class="fw-bold">-</div>
             <div id="top-match-meta" class="tiny-note">-</div>
@@ -1484,20 +258,13 @@
           </div>
         </div>
 
-        <div class="card dashboard-card text-bg-dark border-secondary mb-3">
-          <div class="card-header fw-semibold" data-i18n="card.schedules">핵심 리그 일정 (대륙별)</div>
-          <div class="card-body">
-            <div id="key-match-body" class="continent-grid">
-              <div class="tiny-note" data-i18n="state.waitData">데이터 대기 중...</div>
-            </div>
-          </div>
         </div>
 
-        <div class="card dashboard-card text-bg-dark border-secondary mb-3">
+        <div class="card dashboard-card mb-3">
           <div class="card-header fw-semibold" data-i18n="card.posDist">포지션 분포</div>
           <div class="card-body p-0">
             <div class="table-responsive">
-              <table class="table table-dark table-sm mb-0">
+              <table class="table table-sm mb-0">
                 <thead>
                   <tr>
                     <th data-i18n="th.position">포지션</th>
@@ -1512,7 +279,7 @@
           </div>
         </div>
 
-        <div class="card dashboard-card text-bg-dark border-secondary mb-3">
+        <div class="card dashboard-card mb-3">
           <div class="card-header fw-semibold" data-i18n="card.advanced">분석 인덱스 (Data Model)</div>
           <div class="card-body">
             <div id="advanced-indexes" class="index-grid">
@@ -1526,20 +293,25 @@
           </div>
         </div>
 
-        <div class="card dashboard-card text-bg-dark border-secondary mb-3">
+        <div class="card dashboard-card mb-3">
           <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
-            <span>HIDDEN PLAYER PICK (STAT AI)</span>
-            <button type="button" id="hidden-player-shuffle" class="btn btn-sm btn-outline-light">Shuffle</button>
+            <span>HIDDEN PLAYER PICK</span>
+            <button type="button" id="hidden-player-shuffle" class="refresh-btn" data-refresh-btn title="Refresh" aria-label="Refresh pick">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 12a8 8 0 1 1 1.5 4.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M4 16.5V12H8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
           </div>
           <div class="card-body">
             <div id="hidden-player-name" class="fw-bold clickable-player" data-player-id="">-</div>
             <div id="hidden-player-meta" class="tiny-note mt-1">-</div>
-            <div class="tiny-note mt-1">Hidden Score: <span id="hidden-player-score">-</span></div>
+            <div class="tiny-note mt-1" style="font-family:'Montserrat',sans-serif;font-weight:700;color:var(--brand);font-size:0.88rem;">Score: <span id="hidden-player-score">-</span></div>
             <div id="hidden-player-reason" class="tiny-note mt-2">-</div>
           </div>
         </div>
 
-        <div class="card dashboard-card text-bg-dark border-secondary automation-sand">
+        <div class="card dashboard-card automation-sand" style="display:none">
           <div class="card-body py-3 automation-sand__body">
             <span class="automation-sand__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="26" height="26" xmlns="http://www.w3.org/2000/svg" focusable="false">
@@ -1550,10 +322,10 @@
             </span>
             <span id="auto-next-countdown" class="automation-sand__clock" role="timer" aria-live="polite">--:--:--</span>
           </div>
-          <div class="px-3 pb-3 pt-1 text-center tiny-note" id="last-full-sync-kst">Last full sync (KST): -</div>
+          <div id="last-full-sync-kst" style="display:none"></div>
         </div>
 
-        <div class="card dashboard-card text-bg-dark border-secondary mt-3">
+        <div class="card dashboard-card mt-3">
           <div class="card-header fw-semibold" data-i18n="card.spotlightHeader">실시간 주목 · TOP 지표</div>
           <div class="card-body p-0">
             <div class="spotlight-split">
@@ -1573,7 +345,7 @@
                 <div class="mt-2">
                   <div class="tiny-note mb-1" data-i18n="spotlight.coreStats">핵심 스탯</div>
                   <div class="table-responsive">
-                    <table class="table table-dark table-sm mb-0">
+                    <table class="table table-sm mb-0">
                       <thead>
                         <tr>
                           <th data-i18n="th.pass">패스</th>
@@ -1600,15 +372,15 @@
                 <div id="stat-top-rank-body"></div>
               </div>
             </div>
-            <div class="p-2 p-md-3 border-top border-secondary">
+            <div style="padding:1rem 1.25rem;">
               <div class="tiny-note mb-1" data-i18n="spotlight.top5">대륙별 실시간 Top5</div>
               <div id="spotlight-top5-by-continent" class="continent-grid"></div>
             </div>
-            <div class="p-2 p-md-3 border-top border-secondary">
+            <div style="padding:1rem 1.25rem;">
               <div class="tiny-note mb-1">MOST VIEWED PLAYERS TOP 10</div>
               <div id="most-viewed-body"></div>
             </div>
-            <div class="p-2 p-md-3 border-top border-secondary">
+            <div style="padding:1rem 1.25rem;">
               <div class="tiny-note mb-1">1H TRENDING PLAYERS TOP 10</div>
               <div id="trending-hour-body"></div>
             </div>
@@ -1630,15 +402,15 @@
 
   <div class="modal fade" id="playerModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
-      <div class="modal-content" style="background:#0f1a2b;border:1px solid #2a3b59;">
-        <div class="modal-header border-secondary">
+      <div class="modal-content" style="background:#fff;border:none;border-radius:20px;">
+        <div class="modal-header">
           <h5 class="modal-title" id="player-modal-title" data-i18n="modal.titleDefault">선수 상세 분석</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" data-i18n-aria="modal.close"></button>
         </div>
         <div class="modal-body">
           <div id="player-modal-meta" class="tiny-note mb-2">-</div>
           <div class="table-responsive">
-            <table class="table table-dark table-sm mb-0">
+            <table class="table table-sm mb-0">
               <thead>
                 <tr>
                   <th data-i18n="th.height">키</th>
@@ -1660,7 +432,7 @@
             </table>
           </div>
           <div class="table-responsive mt-2">
-            <table class="table table-dark table-sm mb-0">
+            <table class="table table-sm mb-0">
               <thead>
                 <tr>
                   <th data-i18n="th.physical">피지컬</th>
@@ -1690,15 +462,15 @@
     <div class="row g-2">
       <div class="col-12">
         <label class="form-label compact-label mb-1" for="admin-stuck-timeout" data-i18n="admin.stuckTimeout">Stuck timeout (ms)</label>
-        <input id="admin-stuck-timeout" class="form-control form-control-sm bg-dark text-light border-secondary" type="number" min="3000" max="120000" step="100">
+        <input id="admin-stuck-timeout" class="form-control form-control-sm" type="number" min="3000" max="120000" step="100">
       </div>
       <div class="col-12">
         <label class="form-label compact-label mb-1" for="admin-retry-delay" data-i18n="admin.retryDelay">Retry delay (ms)</label>
-        <input id="admin-retry-delay" class="form-control form-control-sm bg-dark text-light border-secondary" type="number" min="200" max="30000" step="100">
+        <input id="admin-retry-delay" class="form-control form-control-sm" type="number" min="200" max="30000" step="100">
       </div>
       <div class="col-12">
         <label class="form-label compact-label mb-1" for="admin-retry-max" data-i18n="admin.retryMax">Auto retry max</label>
-        <input id="admin-retry-max" class="form-control form-control-sm bg-dark text-light border-secondary" type="number" min="0" max="10" step="1">
+        <input id="admin-retry-max" class="form-control form-control-sm" type="number" min="0" max="10" step="1">
       </div>
     </div>
     <div class="d-flex gap-2 mt-2">
@@ -1721,7 +493,7 @@
     const INSTAGRAM_PROFILE_URL = "https://www.instagram.com/resideofficial234/";
     const I18N = {
       ko: {
-        "page.title": "U25 축구 스카우팅 시스템",
+        "page.title": "World U25 Football Players Data",
         "splash.aria": "RESIDE 시작 화면",
         "splash.enter": "입장",
         "splash.tagline": "전 세계 U25 축구 선수",
@@ -1738,8 +510,8 @@
         "nav.playerSearchPlaceholder": "선수 이름 검색",
         "nav.playerSearchBtn": "Google 검색",
         "nav.playerSearchYtBtn": "YouTube 검색",
-        "contact.subject": "RESIDE FOOTBALL 협업 문의",
-        "hero.title": "U25 Data Scouting Dashboard",
+        "contact.subject": "W·U25·DATA 협업 문의",
+        "hero.title": "World U-25 Football Players Data",
         "hero.copyGuide": "선수 복사 후 상단 검색에 붙여넣기 하시면 됩니다.",
         "hero.updatePill": "KST {{date}} · 자동 동기화 {{times}}",
         "hero.updatePillFallback": "KST {{date}} · 자동 동기화 10:00",
@@ -1889,10 +661,10 @@
         "global.noData": "데이터 없음",
       },
       en: {
-        "page.title": "U25 Football Scouting",
+        "page.title": "U25 Football Data",
         "splash.aria": "RESIDE welcome screen",
         "splash.enter": "ENTER",
-        "splash.tagline": "WORLD U25 FOOTBALL PLAYERS",
+        "splash.tagline": "WORLD U25 FOOTBALL PLAYERS DATA",
         "splash.syncLine": "<span class='splash-line'>You can check out u25 football players around the world for free.</span><span class='splash-line'>Now find some hidden gems.</span><span class='splash-line'>Please apply it to the game or the reality.</span>",
         "splash.mailLabel": "Email",
         "splash.igLabel": "Instagram",
@@ -1912,12 +684,12 @@
         "banner.noData": "No live ranking data",
         "banner.scoreTag": "Score",
         "banner.newEntry": "NEW",
-        "contact.subject": "RESIDE FOOTBALL partnership inquiry",
-        "hero.title": "U25 Data Scouting Dashboard",
+        "contact.subject": "W·U25·DATA partnership inquiry",
+        "hero.title": "World U-25 Football Players Data",
         "hero.copyGuide": "Copy a player and paste it in the top search bar.",
         "hero.updatePill": "KST {{date}} · Auto sync {{times}}",
         "hero.updatePillFallback": "KST {{date}} · Auto sync 10:00",
-        "hero.sub": "Scouting-focused view to explore prospects by position, country, and league.",
+        "hero.sub": "Data-focused view to explore prospects by position, country, and league.",
         "hero.contactAria": "Email and Instagram shortcuts",
         "filter.cardTitle": "WORLD U25 PLAYERS",
         "api.waiting": "API waiting",
@@ -2314,12 +1086,7 @@
       }
     }
 
-    function setVisitorCount(count) {
-      const el = document.getElementById("visitor-count");
-      if (!el) return;
-      const n = Number(count || 0);
-      el.textContent = `${t("visitors.label")} ${n.toLocaleString(localeTag())}`;
-    }
+    function setVisitorCount(count) { /* visitor display removed */ }
 
     function updateBrowserConnHint(mode) {
       const el = document.getElementById("browser-conn-hint");
@@ -2523,9 +1290,7 @@
         renderAutomationStatus(automationSnapshot);
       } catch (e) {
         const el = document.getElementById("auto-next-countdown");
-        const sp = document.getElementById("splash-auto-countdown");
         if (el) el.textContent = "--:--:--";
-        if (sp) sp.textContent = "--:--:--";
         countdownTargetTs = 0;
         updateLastFullSyncKst(0);
         updateHeroSchedulePill();
@@ -2823,11 +1588,61 @@
 
     function fillSelect(selectId, values) {
       const el = document.getElementById(selectId);
+      if (!el) return;
       const first = el.value || "";
       const opts = ['<option value="">' + esc(t("filter.all")) + "</option>"].concat(values.map((v) => `<option value="${esc(v)}">${esc(v)}</option>`));
       el.innerHTML = opts.join("");
       el.value = first;
+
+      // Sync chip UI
+      const chipGroupMap = { "continent-filter": "continent", "country-filter": "country", "position-filter": "position", "league-filter": "league" };
+      const group = chipGroupMap[selectId];
+      if (group) syncChipsForGroup(group, values, first);
     }
+
+    function syncChipsForGroup(group, values, activeVal) {
+      const containers = { continent: "continent-chips", country: "country-chips", position: "position-chips", league: "league-chips" };
+      const containerId = containers[group];
+      if (!containerId) return;
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      // Don't rebuild position chips (they're hardcoded)
+      if (group === "position") {
+        el.querySelectorAll(".filter-chip").forEach(chip => {
+          chip.classList.toggle("is-active", chip.dataset.value === (activeVal || ""));
+        });
+        return;
+      }
+      // Limit to 20 chips to avoid overflow
+      const limited = values.slice(0, 20);
+      el.innerHTML = `<span class="filter-chip${!activeVal ? " is-active" : ""}" data-chip-group="${group}" data-value="">ALL</span>` +
+        limited.map(v => `<span class="filter-chip${v === activeVal ? " is-active" : ""}" data-chip-group="${group}" data-value="${esc(v)}">${esc(v)}</span>`).join("");
+      el.querySelectorAll(".filter-chip").forEach(chip => {
+        chip.addEventListener("click", () => handleChipClick(chip));
+      });
+    }
+
+    function handleChipClick(chip) {
+      const group = chip.dataset.chipGroup;
+      const value = chip.dataset.value || "";
+      const containers = { continent: "continent-chips", country: "country-chips", position: "position-chips", league: "league-chips" };
+      const selectors = { continent: "continent-filter", country: "country-filter", position: "position-filter", league: "league-filter" };
+      const containerId = containers[group];
+      const selectId = selectors[group];
+      if (containerId) {
+        document.getElementById(containerId)?.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("is-active"));
+        chip.classList.add("is-active");
+      }
+      if (selectId) {
+        const sel = document.getElementById(selectId);
+        if (sel) sel.value = value;
+      }
+    }
+
+    // Wire up chip clicks on page load
+    document.querySelectorAll(".filter-chip").forEach(chip => {
+      chip.addEventListener("click", () => handleChipClick(chip));
+    });
 
     function getCurrentFilters() {
       return {
@@ -2894,33 +1709,115 @@
     }
 
 
+    function posBadgeClass(pos) {
+      const p = String(pos || "").toUpperCase().trim();
+      if (p.includes("FW") || p.includes("ATTACK") || p.includes("FORWARD") || p.includes("WING")) return "FW";
+      if (p.includes("MF") || p.includes("MID")) return "MF";
+      if (p.includes("DF") || p.includes("DEF") || p.includes("BACK")) return "DF";
+      if (p.includes("GK") || p.includes("GOAL")) return "GK";
+      return "default";
+    }
+
+    function posLabel(pos) {
+      const p = String(pos || "-").toUpperCase().trim();
+      if (p.includes("ATTACK") || p.includes("FORWARD")) return "FW";
+      if (p.includes("MIDFIELD")) return "MF";
+      if (p.includes("DEFEND") || p.includes("BACK")) return "DF";
+      if (p.includes("GOALKEEPER") || p.includes("GOAL")) return "GK";
+      return pos || "-";
+    }
+
+    function renderPlayerCard(row, idx, score) {
+      const pos = posBadgeClass(row.position);
+      const scoreVal = score != null ? Number(score).toFixed(1) : null;
+      const passVal = Number(row.pass_success_rate || 0);
+      const goalVal = Number(row.goals || 0);
+      const duelVal = Number(row.duel_win_rate || 0);
+      const hasStats = passVal > 0 || goalVal > 0 || duelVal > 0;
+      return `
+        <div class="player-card player-row" data-player-id="${esc(row.player_id)}" role="button" tabindex="0" aria-label="${esc(row.name)}">
+          <div class="player-card__top">
+            <div class="player-card__left">
+              <div class="player-card__rank">#${idx + 1}</div>
+              <div class="player-card__name">${esc(row.name)} <button type="button" class="copy-player-btn" data-copy-player-name="${esc(row.name)}" title="Copy">COPY</button></div>
+              <div class="player-card__meta">
+                <span>${esc(formatCountry(row.country))}</span>
+                <span class="player-card__meta-dot">·</span>
+                <span>${esc(row.club || "-")}</span>
+                <span class="player-card__meta-dot">·</span>
+                <span>U${esc(row.age ?? "-")}</span>
+                ${row.height_cm > 0 ? `<span class="player-card__meta-dot">·</span><span>${formatCm(row.height_cm)}</span>` : ""}
+              </div>
+              <div style="margin-top:0.4rem;">
+                <span class="player-card__pos-badge player-card__pos-badge--${pos}">${esc(posLabel(row.position))}</span>
+                ${row.dominant_foot ? `<span style="font-size:0.62rem;color:var(--text-tertiary);margin-left:0.4rem;font-weight:600;">${esc(row.dominant_foot)}</span>` : ""}
+              </div>
+            </div>
+            <div class="player-card__right">
+              <div class="player-card__score-label">HIDDEN SCORE</div>
+              ${scoreVal != null
+                ? `<div class="player-card__score">${scoreVal}</div>`
+                : `<div class="player-card__score player-card__score--no-data">—</div>`
+              }
+              <div style="font-size:0.62rem;color:var(--text-tertiary);margin-top:0.2rem;font-weight:500;">${esc(row.league || "-")}</div>
+            </div>
+          </div>
+          ${hasStats ? `
+          <div class="player-card__stats">
+            <div class="player-stat-item">
+              <div class="player-stat-item__label">PASS%</div>
+              <div class="player-stat-item__val">${passVal.toFixed(0)}%</div>
+              <div class="player-stat-bar"><div class="player-stat-bar__fill" style="width:${Math.min(passVal,100)}%"></div></div>
+            </div>
+            <div class="player-stat-item">
+              <div class="player-stat-item__label">DUEL%</div>
+              <div class="player-stat-item__val">${duelVal.toFixed(0)}%</div>
+              <div class="player-stat-bar"><div class="player-stat-bar__fill" style="width:${Math.min(duelVal,100)}%"></div></div>
+            </div>
+            <div class="player-stat-item">
+              <div class="player-stat-item__label">GOALS</div>
+              <div class="player-stat-item__val">${goalVal}</div>
+              <div class="player-stat-bar"><div class="player-stat-bar__fill" style="width:${Math.min(goalVal*5,100)}%"></div></div>
+            </div>
+          </div>` : ""}
+        </div>`;
+    }
+
     function renderTop30(items) {
-      const body = document.getElementById("top30-body");
       latestTop30 = items;
+      // Support both table tbody and card grid container
+      const body = document.getElementById("top30-body");
+      const cardGrid = document.getElementById("top30-card-grid");
       if (!items.length) {
-        body.innerHTML = '<tr><td colspan="9" class="text-center text-secondary py-3">' + esc(t("state.noPlayers")) + "</td></tr>";
+        if (body) body.innerHTML = '<tr><td colspan="9" class="text-center py-5" style="color:var(--text-tertiary);">' + esc(t("state.noPlayers")) + "</td></tr>";
+        if (cardGrid) cardGrid.innerHTML = `<div style="padding:2rem;text-align:center;color:var(--text-tertiary);">${esc(t("state.noPlayers"))}</div>`;
         return;
       }
 
-      body.innerHTML = items.map((row, idx) => `
-        <tr class="player-row" data-player-id="${esc(row.player_id)}" style="cursor:pointer">
-          <td>${idx + 1}</td>
-          <td>
-            <span class="player-name-cell">
-              <span>${esc(row.name)}</span>
-              <button type="button" class="copy-player-btn" data-copy-player-name="${esc(row.name)}" title="Copy player name">COPY</button>
-            </span>
-          </td>
-          <td>U${esc(row.age ?? "-")}</td>
-          <td>${formatCm(row.height_cm)}</td>
-          <td>${formatKg(row.weight_kg)}</td>
-          <td>${formatFoot(row.dominant_foot)}</td>
-          <td>${esc(formatCountry(row.country))}</td>
-          <td>${esc(row.club)}</td>
-          <td>${esc(row.position)}</td>
-          <td>${esc(row.league)}</td>
-        </tr>
-      `).join("");
+      const cards = items.slice(0, 30).map((row, idx) => {
+        const score = compositeStatScore(row);
+        return renderPlayerCard(row, idx, score > 0 ? score : null);
+      }).join("");
+
+      if (cardGrid) {
+        cardGrid.innerHTML = cards;
+      } else if (body) {
+        // fallback: table still present
+        body.innerHTML = items.map((row, idx) => `
+          <tr class="player-row" data-player-id="${esc(row.player_id)}" style="cursor:pointer">
+            <td>${idx + 1}</td>
+            <td><span class="player-name-cell"><span>${esc(row.name)}</span><button type="button" class="copy-player-btn" data-copy-player-name="${esc(row.name)}" title="Copy">COPY</button></span></td>
+            <td>U${esc(row.age ?? "-")}</td>
+            <td>${formatCm(row.height_cm)}</td>
+            <td>${formatKg(row.weight_kg)}</td>
+            <td>${formatFoot(row.dominant_foot)}</td>
+            <td>${esc(formatCountry(row.country))}</td>
+            <td>${esc(row.club)}</td>
+            <td>${esc(row.position)}</td>
+            <td>${esc(row.league)}</td>
+          </tr>
+        `).join("");
+      }
     }
 
     function renderPlayerModal(p) {
@@ -3054,7 +1951,7 @@
     }
 
     function renderKeyMatches(items) {
-      const body = document.getElementById("key-match-body");
+      const body = document.getElementById("key-match-body"); if (!body) return;
       const groups = items?.by_continent || {};
       const continents = Object.keys(groups);
       if (continents.length) {
@@ -3256,7 +2153,7 @@
             <span class="continent-player-name">${i + 1}. ${esc(p.name || "-")} (U${esc(p.age ?? "-")})</span>
             <span class="continent-player-meta">${meta} · Last hour views</span>
           </div>
-          <span class="continent-score rank-move-up">🔥 +${up1h.toLocaleString(localeTag())}</span>
+          <span class="continent-score rank-move-up">+${up1h.toLocaleString(localeTag())}</span>
         </div>`;
       }).join("");
     }
@@ -3302,6 +2199,7 @@
     }
 
     function renderLiveRankBanner(globalPayload, top5Payload) {
+      if (!document.getElementById("banner-top-player")) return;
       const topPlayerEl = document.getElementById("banner-top-player");
       const topScoreEl = document.getElementById("banner-top-score");
       const tickerEl = document.getElementById("banner-rank-ticker");
@@ -3494,13 +2392,16 @@
     }
 
     function renderAllPlayersPage() {
+      const cardGrid = document.getElementById("all-players-card-grid");
       const body = document.getElementById("all-players-body");
       const total = allPlayersRows.length;
       document.getElementById("all-players-total").textContent = t("all.total", {
         count: Number(total).toLocaleString(localeTag()),
       });
+      const emptyMsg = `<div style="padding:3rem;text-align:center;color:var(--text-tertiary);">${esc(t("state.noPlayers"))}</div>`;
       if (!total) {
-        body.innerHTML = '<tr><td colspan="11" class="text-center text-secondary py-3">' + esc(t("state.noPlayers")) + "</td></tr>";
+        if (cardGrid) cardGrid.innerHTML = emptyMsg;
+        if (body) body.innerHTML = '<tr><td colspan="11" class="text-center py-5" style="color:var(--text-tertiary);">' + esc(t("state.noPlayers")) + "</td></tr>";
         document.getElementById("all-players-page-info").textContent = "0 / 0";
         document.getElementById("all-players-prev").disabled = true;
         document.getElementById("all-players-next").disabled = true;
@@ -3511,26 +2412,28 @@
       const start = (allPlayersPage - 1) * allPlayersPageSize;
       const end = Math.min(total, start + allPlayersPageSize);
       const slice = allPlayersRows.slice(start, end);
-      body.innerHTML = slice.map((row, i) => `
-        <tr class="all-player-row" data-player-id="${esc(row.player_id)}" style="cursor:pointer">
-          <td>${start + i + 1}</td>
-          <td>
-            <span class="player-name-cell">
-              <span>${esc(row.name)}</span>
-              <button type="button" class="copy-player-btn" data-copy-player-name="${esc(row.name)}" title="Copy player name">COPY</button>
-            </span>
-          </td>
-          <td>U${esc(row.age ?? "-")}</td>
-          <td>${formatCm(row.height_cm)}</td>
-          <td>${formatKg(row.weight_kg)}</td>
-          <td>${formatFoot(row.dominant_foot)}</td>
-          <td>${esc(formatCountry(row.country))}</td>
-          <td>${esc(row.continent)}</td>
-          <td>${esc(row.club)}</td>
-          <td>${esc(row.position)}</td>
-          <td>${esc(row.league)}</td>
-        </tr>
-      `).join("");
+
+      if (cardGrid) {
+        cardGrid.innerHTML = slice.map((row, i) => {
+          const score = compositeStatScore(row);
+          return renderPlayerCard(row, start + i, score > 0 ? score : null);
+        }).join("");
+      } else if (body) {
+        body.innerHTML = slice.map((row, i) => `
+          <tr class="all-player-row" data-player-id="${esc(row.player_id)}" style="cursor:pointer">
+            <td>${start + i + 1}</td>
+            <td><span class="player-name-cell"><span>${esc(row.name)}</span><button type="button" class="copy-player-btn" data-copy-player-name="${esc(row.name)}" title="Copy">COPY</button></span></td>
+            <td>U${esc(row.age ?? "-")}</td>
+            <td>${formatCm(row.height_cm)}</td>
+            <td>${formatKg(row.weight_kg)}</td>
+            <td>${esc(formatCountry(row.country))}</td>
+            <td>${esc(row.continent)}</td>
+            <td>${esc(row.club)}</td>
+            <td>${esc(row.position)}</td>
+            <td>${esc(row.league)}</td>
+          </tr>
+        `).join("");
+      }
       document.getElementById("all-players-page-info").textContent = `${allPlayersPage} / ${pageCount}`;
       document.getElementById("all-players-prev").disabled = allPlayersPage <= 1;
       document.getElementById("all-players-next").disabled = allPlayersPage >= pageCount;
@@ -3600,10 +2503,10 @@
         fetchJSONRetry("/analytics/overview" + (q ? `?${q}` : ""), 2),
         fetchJSONRetry("/analytics/advanced" + (q ? `?${q}` : ""), 2),
         fetchJSONRetry("/analytics/hidden-player" + (q ? `?${q}` : ""), 2),
-        fetchJSONRetry("/scouting/spotlight" + (q ? `?${q}` : ""), 2),
-        fetchJSONRetry("/scouting/spotlight-top5", 2),
+        fetchJSONRetry("/Data/spotlight" + (q ? `?${q}` : ""), 2),
+        fetchJSONRetry("/Data/spotlight-top5", 2),
         fetchJSONRetry("/system/status", 2),
-        fetchJSONRetry("/scouting/spotlight-top-global?limit=5", 2),
+        fetchJSONRetry("/Data/spotlight-top-global?limit=5", 2),
         fetchJSONRetry("/analytics/most-viewed?limit=10", 2),
         fetchJSONRetry("/analytics/trending-hour?limit=10", 2),
         fetchJSONRetry(allPlayersPath, 2),
@@ -3881,6 +2784,32 @@
       if (!row) return;
       openPlayerModal(row.getAttribute("data-player-id"));
     });
+
+    // Card grid click handler for all-players
+    const allPlayersCardGrid = document.getElementById("all-players-card-grid");
+    if (allPlayersCardGrid) {
+      allPlayersCardGrid.addEventListener("click", async (e) => {
+        if (e.target.closest(".copy-player-btn")) { e.preventDefault(); }
+        if (await copyPlayerNameFromButton(e.target)) { e.stopPropagation(); return; }
+        const card = e.target.closest(".player-card");
+        if (!card) return;
+        openPlayerModal(card.getAttribute("data-player-id"));
+      });
+    }
+
+    // Card grid click handler for top30
+    const top30CardGrid = document.getElementById("top30-card-grid");
+    if (top30CardGrid) {
+      top30CardGrid.addEventListener("click", async (e) => {
+        if (e.target.closest(".copy-player-btn")) { e.preventDefault(); }
+        if (await copyPlayerNameFromButton(e.target)) { e.stopPropagation(); return; }
+        const card = e.target.closest(".player-card");
+        if (!card) return;
+        openPlayerModal(card.getAttribute("data-player-id"));
+      });
+    }
+
+    // Fallback: legacy tbody handler (hidden table)
     document.getElementById("all-players-body").addEventListener("click", async (e) => {
       if (e.target.closest(".copy-player-btn")) {
         e.preventDefault();
@@ -3947,8 +2876,8 @@
 
     async function refreshLiveRankBannerOnly() {
       const [topGlobalRes, top5Res] = await Promise.allSettled([
-        fetchJSONRetry("/scouting/spotlight-top-global?limit=5", 1),
-        fetchJSONRetry("/scouting/spotlight-top5", 1),
+        fetchJSONRetry("/Data/spotlight-top-global?limit=5", 1),
+        fetchJSONRetry("/Data/spotlight-top5", 1),
       ]);
       const top = topGlobalRes.status === "fulfilled" ? (topGlobalRes.value?.items || [])[0] : null;
       renderLiveRankBanner(
@@ -3968,6 +2897,8 @@
     }
 
     (function setupEntrySplash() {
+      // Entry splash removed
+      return;
       const splash = document.getElementById("entry-splash");
       const btn = document.getElementById("reside-enter");
       if (!splash || !btn) return;
@@ -4000,7 +2931,7 @@
         /* show splash if storage unavailable */
       }
 
-      document.body.classList.add("splash-open");
+      // document.body.classList.add("splash-open");
       btn.addEventListener("click", () => {
         dismissSplash(true);
       });
@@ -4147,7 +3078,135 @@
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) updateHeroSchedulePill();
     });
-  </script>
+  
+
+
+    /* ================================================================
+       UX LAYER — design-only, no data logic touched
+    ================================================================ */
+    (function UXLayer() {
+      'use strict';
+
+      // ── TOP button ────────────────────────────────────────────────
+      const topBtn = document.createElement('button');
+      topBtn.id = 'btn-top';
+      topBtn.setAttribute('aria-label', 'Back to top');
+      topBtn.innerHTML = '&#8679;';
+      document.body.appendChild(topBtn);
+
+      let _ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!_ticking) {
+          requestAnimationFrame(() => {
+            topBtn.classList.toggle('visible', window.scrollY > 300);
+            _ticking = false;
+          });
+          _ticking = true;
+        }
+      }, { passive: true });
+
+      topBtn.addEventListener('click', () => {
+        _springClick(topBtn);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // ── Elastic spring click helper ───────────────────────────────
+      function _springClick(el) {
+        el.classList.remove('u-press');
+        void el.offsetWidth;
+        el.classList.add('u-press');
+        el.addEventListener('animationend', () => el.classList.remove('u-press'), { once: true });
+      }
+
+      // ── Add spring class to CSS (appended to existing style) ──────
+      const uxStyle = document.createElement('style');
+      uxStyle.textContent = `
+        @keyframes k-press2 {
+          0%  { transform:scale(1); }
+          35% { transform:scale(0.96); }
+          70% { transform:scale(1.02); }
+          100%{ transform:scale(1); }
+        }
+        .u-press:active,
+        .u-press { animation: k-press2 0.32s cubic-bezier(0.34,1.56,0.64,1) both; }
+        @keyframes k-haptic {
+          0%   { transform:rotate(0deg)   scale(1); }
+          15%  { transform:rotate(22deg)  scale(1.2); }
+          100% { transform:rotate(720deg) scale(1); }
+        }
+        .u-haptic-spin { animation: k-haptic 0.72s cubic-bezier(0.22,1,0.36,1) both; }
+      `;
+      document.head.appendChild(uxStyle);
+
+      // ── Delegated elastic click on interactive elements ───────────
+      document.addEventListener('click', (e) => {
+        const t = e.target.closest(
+          '.filter-chip, #apply-filter, #reset-filter, .btn-primary, .btn-sm, .player-card'
+        );
+        if (t) _springClick(t);
+      }, true);
+
+      // ── Haptic refresh spin ───────────────────────────────────────
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.refresh-btn, [data-refresh-btn]');
+        if (!btn) return;
+        const icon = btn.querySelector('svg') || btn;
+        icon.classList.remove('u-haptic-spin');
+        void icon.offsetWidth;
+        icon.classList.add('u-haptic-spin');
+        icon.addEventListener('animationend', () => icon.classList.remove('u-haptic-spin'), { once: true });
+      });
+
+      // ── Skeleton cards helper ─────────────────────────────────────
+      window._showSkeletons = function(containerId, n) {
+        const el = document.getElementById(containerId);
+        if (!el) return;
+        el.innerHTML = Array.from({ length: n || 6 }).map((_, i) => `
+          <div class="skeleton-card" style="animation-delay:${i * 0.04}s">
+            <div class="skel" style="height:9px;width:32%;margin-bottom:9px;"></div>
+            <div class="skel" style="height:15px;width:68%;margin-bottom:7px;"></div>
+            <div class="skel" style="height:9px;width:52%;margin-bottom:16px;"></div>
+            <div style="display:flex;gap:7px;margin-top:auto;">
+              <div class="skel" style="flex:1;height:7px;"></div>
+              <div class="skel" style="flex:1;height:7px;"></div>
+              <div class="skel" style="flex:1;height:7px;"></div>
+            </div>
+          </div>`).join('');
+      };
+
+      // Show skeletons immediately on load
+      window._showSkeletons('top30-card-grid', 6);
+      window._showSkeletons('all-players-card-grid', 6);
+
+      // ── Count-up number animation ─────────────────────────────────
+      window._countUp = function(el, target, ms) {
+        if (!el || !target) return;
+        const dur = ms || 850;
+        const t0  = performance.now();
+        el.classList.add('count-up', 'going');
+        (function tick(now) {
+          const p = Math.min((now - t0) / dur, 1);
+          const e = 1 - Math.pow(1 - p, 3); // ease-out-cubic
+          el.textContent = Math.round(target * e).toLocaleString();
+          if (p < 1) requestAnimationFrame(tick);
+          else { el.textContent = Number(target).toLocaleString(); el.classList.remove('going'); }
+        })(t0);
+      };
+
+      // Observe KPI elements and animate when they get a real value
+      ['kpi-players','kpi-countries','kpi-leagues'].forEach(function(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const obs = new MutationObserver(function() {
+          const v = parseInt(el.textContent.replace(/,/g,''), 10);
+          if (!isNaN(v) && v > 0) { obs.disconnect(); window._countUp(el, v); }
+        });
+        obs.observe(el, { childList: true, subtree: true, characterData: true });
+      });
+
+    })(); // end UXLayer
+
+</script>
 
 </body>
 
