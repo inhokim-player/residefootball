@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-26T21:10:03.404Z",
+  "updated_at": "2026-04-26T21:10:47.453Z",
   "season": "2024",
-  "leagues_done": 82,
+  "leagues_done": 83,
   "leagues_total": 55,
-  "players_count": 2637,
+  "players_count": 2759,
   "items": [
     {
       "player_id": "59863",
@@ -5916,9 +5916,9 @@
       "dominant_foot": "Unknown",
       "country": "Argentina",
       "continent": "South America",
-      "club": "Velez Sarsfield",
+      "club": "Portland Timbers",
       "position": "Attacker",
-      "league": "Liga Profesional Argentina"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "293299",
@@ -18695,9 +18695,9 @@
       "dominant_foot": "Unknown",
       "country": "Ecuador",
       "continent": "South America",
-      "club": "LDU de Quito",
+      "club": "FC Cincinnati",
       "position": "Midfielder",
-      "league": "Liga Pro"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "342923",
@@ -31489,7 +31489,7 @@
       "continent": "North America",
       "club": "Seattle Sounders",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "146737",
@@ -31502,7 +31502,7 @@
       "continent": "North America",
       "club": "Seattle Sounders",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "297269",
@@ -31528,7 +31528,7 @@
       "continent": "North America",
       "club": "New York Red Bulls",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "422778",
@@ -31541,7 +31541,7 @@
       "continent": "North America",
       "club": "FC Cincinnati",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "460351",
@@ -31554,7 +31554,7 @@
       "continent": "North America",
       "club": "Columbus Crew",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "154853",
@@ -31593,7 +31593,7 @@
       "continent": "North America",
       "club": "Chicago Fire",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "297716",
@@ -31619,7 +31619,7 @@
       "continent": "North America",
       "club": "Los Angeles FC",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "359558",
@@ -31632,7 +31632,7 @@
       "continent": "Europe",
       "club": "Real Salt Lake",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "406056",
@@ -31723,7 +31723,7 @@
       "continent": "North America",
       "club": "Orlando City SC",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "304526",
@@ -31749,7 +31749,7 @@
       "continent": "North America",
       "club": "San Jose Earthquakes",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "371224",
@@ -31788,7 +31788,7 @@
       "continent": "Europe",
       "club": "Toronto FC",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "407364",
@@ -31905,7 +31905,7 @@
       "continent": "North America",
       "club": "Los Angeles FC",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "128161",
@@ -31931,7 +31931,7 @@
       "continent": "North America",
       "club": "Minnesota United FC",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "371083",
@@ -31944,7 +31944,7 @@
       "continent": "-",
       "club": "Nashville SC",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "374118",
@@ -31996,7 +31996,7 @@
       "continent": "North America",
       "club": "Real Salt Lake",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "454038",
@@ -32022,7 +32022,7 @@
       "continent": "North America",
       "club": "San Jose Earthquakes",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "71249",
@@ -32035,7 +32035,7 @@
       "continent": "North America",
       "club": "DC United",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "131096",
@@ -32048,7 +32048,7 @@
       "continent": "Europe",
       "club": "Inter Miami",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "212237",
@@ -32061,7 +32061,7 @@
       "continent": "North America",
       "club": "Seattle Sounders",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "237164",
@@ -32074,7 +32074,7 @@
       "continent": "North America",
       "club": "Toronto FC",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "303284",
@@ -32087,7 +32087,7 @@
       "continent": "Africa",
       "club": "Toronto FC",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "310979",
@@ -32100,7 +32100,7 @@
       "continent": "-",
       "club": "Minnesota United FC",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "362080",
@@ -32113,7 +32113,7 @@
       "continent": "Oceania",
       "club": "Vancouver Whitecaps",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "407530",
@@ -32126,7 +32126,7 @@
       "continent": "North America",
       "club": "CF Montreal",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "419858",
@@ -32139,7 +32139,7 @@
       "continent": "North America",
       "club": "Inter Miami",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "452825",
@@ -32152,7 +32152,7 @@
       "continent": "North America",
       "club": "FC Dallas",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "456022",
@@ -32165,7 +32165,7 @@
       "continent": "North America",
       "club": "San Jose Earthquakes",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "462459",
@@ -32178,7 +32178,7 @@
       "continent": "Europe",
       "club": "Inter Miami",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "20499",
@@ -32191,7 +32191,7 @@
       "continent": "Europe",
       "club": "Vancouver Whitecaps",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "71115",
@@ -32202,9 +32202,9 @@
       "dominant_foot": "Unknown",
       "country": "USA",
       "continent": "North America",
-      "club": "Minnesota United FC",
+      "club": "Real Salt Lake",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "143675",
@@ -32217,7 +32217,7 @@
       "continent": "North America",
       "club": "Sporting Kansas City",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "202714",
@@ -32230,7 +32230,7 @@
       "continent": "Europe",
       "club": "Los Angeles FC",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "203394",
@@ -32243,7 +32243,7 @@
       "continent": "North America",
       "club": "Real Salt Lake",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "238958",
@@ -32256,7 +32256,7 @@
       "continent": "Africa",
       "club": "New York Red Bulls",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "362151",
@@ -32269,7 +32269,7 @@
       "continent": "Oceania",
       "club": "Vancouver Whitecaps",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "403329",
@@ -32282,7 +32282,7 @@
       "continent": "North America",
       "club": "FC Cincinnati",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "403596",
@@ -32295,7 +32295,7 @@
       "continent": "Africa",
       "club": "New England Revolution",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "407385",
@@ -32308,7 +32308,7 @@
       "continent": "North America",
       "club": "Toronto FC",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "413044",
@@ -32321,7 +32321,7 @@
       "continent": "North America",
       "club": "Minnesota United FC",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "413198",
@@ -32334,7 +32334,7 @@
       "continent": "North America",
       "club": "Columbus Crew",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "417105",
@@ -32347,7 +32347,7 @@
       "continent": "North America",
       "club": "Sporting Kansas City",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "455598",
@@ -32360,7 +32360,7 @@
       "continent": "North America",
       "club": "Chicago Fire",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "458221",
@@ -32373,7 +32373,7 @@
       "continent": "North America",
       "club": "Houston Dynamo",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "458331",
@@ -32386,7 +32386,7 @@
       "continent": "North America",
       "club": "Orlando City SC",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "458671",
@@ -32399,7 +32399,7 @@
       "continent": "North America",
       "club": "New York Red Bulls",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "51011",
@@ -32412,7 +32412,7 @@
       "continent": "South America",
       "club": "Atlanta United FC",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "51252",
@@ -32425,7 +32425,7 @@
       "continent": "North America",
       "club": "Charlotte",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "51301",
@@ -32438,7 +32438,7 @@
       "continent": "North America",
       "club": "Colorado Rapids",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "102360",
@@ -32451,7 +32451,7 @@
       "continent": "North America",
       "club": "Colorado Rapids",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "102916",
@@ -32464,7 +32464,7 @@
       "continent": "North America",
       "club": "Sporting Kansas City",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "147921",
@@ -32477,7 +32477,7 @@
       "continent": "North America",
       "club": "Nashville SC",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "190650",
@@ -32490,7 +32490,7 @@
       "continent": "Europe",
       "club": "Real Salt Lake",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "201790",
@@ -32503,7 +32503,7 @@
       "continent": "North America",
       "club": "San Jose Earthquakes",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "316833",
@@ -32516,7 +32516,7 @@
       "continent": "North America",
       "club": "Real Salt Lake",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "351915",
@@ -32527,9 +32527,9 @@
       "dominant_foot": "Unknown",
       "country": "USA",
       "continent": "North America",
-      "club": "FC Cincinnati",
+      "club": "New York City FC",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "359440",
@@ -32542,7 +32542,7 @@
       "continent": "North America",
       "club": "New England Revolution",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "408351",
@@ -32555,7 +32555,7 @@
       "continent": "North America",
       "club": "Inter Miami",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "412234",
@@ -32568,7 +32568,7 @@
       "continent": "North America",
       "club": "FC Dallas",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "413051",
@@ -32581,7 +32581,7 @@
       "continent": "North America",
       "club": "Minnesota United FC",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "458451",
@@ -32594,7 +32594,7 @@
       "continent": "Africa",
       "club": "Houston Dynamo",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "463582",
@@ -32607,7 +32607,7 @@
       "continent": "Europe",
       "club": "Minnesota United FC",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "35673",
@@ -32672,7 +32672,7 @@
       "continent": "North America",
       "club": "Nashville SC",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "313023",
@@ -32711,7 +32711,7 @@
       "continent": "North America",
       "club": "Nashville SC",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "359455",
@@ -32724,7 +32724,7 @@
       "continent": "North America",
       "club": "FC Cincinnati",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "363207",
@@ -32737,7 +32737,7 @@
       "continent": "North America",
       "club": "New York Red Bulls",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "414097",
@@ -32750,7 +32750,7 @@
       "continent": "North America",
       "club": "Real Salt Lake",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "464292",
@@ -32763,7 +32763,7 @@
       "continent": "Europe",
       "club": "Minnesota United FC",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "35905",
@@ -32789,7 +32789,7 @@
       "continent": "-",
       "club": "Inter Miami",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "102840",
@@ -32815,7 +32815,7 @@
       "continent": "North America",
       "club": "Inter Miami",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "295609",
@@ -33244,7 +33244,7 @@
       "continent": "Europe",
       "club": "Sporting Kansas City",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "119029",
@@ -33283,7 +33283,7 @@
       "continent": "-",
       "club": "Orlando City SC",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "237142",
@@ -33296,7 +33296,7 @@
       "continent": "-",
       "club": "FC Dallas",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "324697",
@@ -33335,7 +33335,7 @@
       "continent": "Africa",
       "club": "Vancouver Whitecaps",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "454033",
@@ -33361,7 +33361,7 @@
       "continent": "North America",
       "club": "Colorado Rapids",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "119006",
@@ -33374,7 +33374,7 @@
       "continent": "North America",
       "club": "DC United",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "146755",
@@ -33387,7 +33387,7 @@
       "continent": "North America",
       "club": "FC Dallas",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "203406",
@@ -33398,9 +33398,9 @@
       "dominant_foot": "Unknown",
       "country": "Venezuela",
       "continent": "South America",
-      "club": "FC Cincinnati",
+      "club": "Orlando City SC",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "267868",
@@ -33413,7 +33413,7 @@
       "continent": "North America",
       "club": "Real Salt Lake",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "308174",
@@ -33426,7 +33426,7 @@
       "continent": "South America",
       "club": "Philadelphia Union",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "315770",
@@ -33439,7 +33439,7 @@
       "continent": "Europe",
       "club": "CF Montreal",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "351332",
@@ -33465,7 +33465,7 @@
       "continent": "Europe",
       "club": "New York City FC",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "5999",
@@ -33478,7 +33478,7 @@
       "continent": "South America",
       "club": "San Jose Earthquakes",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "6241",
@@ -33491,7 +33491,7 @@
       "continent": "South America",
       "club": "Chicago Fire",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "311345",
@@ -33504,7 +33504,7 @@
       "continent": "South America",
       "club": "Inter Miami",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "351587",
@@ -33517,7 +33517,7 @@
       "continent": "Africa",
       "club": "Minnesota United FC",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "417104",
@@ -33530,7 +33530,7 @@
       "continent": "North America",
       "club": "Sporting Kansas City",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "35656",
@@ -33569,7 +33569,7 @@
       "continent": "South America",
       "club": "Inter Miami",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "295179",
@@ -33608,7 +33608,7 @@
       "continent": "North America",
       "club": "New England Revolution",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "362581",
@@ -33647,7 +33647,7 @@
       "continent": "North America",
       "club": "Colorado Rapids",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "407365",
@@ -33842,7 +33842,7 @@
       "continent": "North America",
       "club": "Austin",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "428468",
@@ -34230,9 +34230,9 @@
       "dominant_foot": "Unknown",
       "country": "Mexico",
       "continent": "North America",
-      "club": "Guadalajara Chivas",
+      "club": "Real Salt Lake",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Major League Soccer"
     },
     {
       "player_id": "428064",
@@ -34285,6 +34285,1592 @@
       "club": "Santos Laguna",
       "position": "Goalkeeper",
       "league": "Leagues Cup"
+    },
+    {
+      "player_id": "50819",
+      "name": "A. Akinola",
+      "age": 25,
+      "height_cm": 179,
+      "weight_kg": 90,
+      "dominant_foot": "Unknown",
+      "country": "Canada",
+      "continent": "North America",
+      "club": "San Jose Earthquakes",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "102851",
+      "name": "R. Ledezma",
+      "age": 25,
+      "height_cm": 173,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "New York City FC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "102857",
+      "name": "J. Faria",
+      "age": 25,
+      "height_cm": 170,
+      "weight_kg": 73,
+      "dominant_foot": "Unknown",
+      "country": "Canada",
+      "continent": "North America",
+      "club": "Toronto FC",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "129878",
+      "name": "F. Ibarra",
+      "age": 24,
+      "height_cm": 175,
+      "weight_kg": 69,
+      "dominant_foot": "Unknown",
+      "country": "Argentina",
+      "continent": "South America",
+      "club": "Toronto FC",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "195717",
+      "name": "Y. Mosquera",
+      "age": 24,
+      "height_cm": 187,
+      "weight_kg": 76,
+      "dominant_foot": "Unknown",
+      "country": "Colombia",
+      "continent": "South America",
+      "club": "FC Cincinnati",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "197038",
+      "name": "Juninho",
+      "age": 24,
+      "height_cm": 174,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "Brazil",
+      "continent": "South America",
+      "club": "Orlando City SC",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "363123",
+      "name": "D. Aguirre",
+      "age": 19,
+      "height_cm": 183,
+      "weight_kg": 73,
+      "dominant_foot": "Unknown",
+      "country": "Uruguay",
+      "continent": "South America",
+      "club": "Los Angeles FC",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "405060",
+      "name": "Matheus Maia",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Brazil",
+      "continent": "South America",
+      "club": "Los Angeles FC",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "417945",
+      "name": "C. Johnson",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Costa Rica",
+      "continent": "North America",
+      "club": "Inter Miami",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "51186",
+      "name": "C. Cowell",
+      "age": 22,
+      "height_cm": 183,
+      "weight_kg": 79,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "San Jose Earthquakes",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "203014",
+      "name": "M. Hoppe",
+      "age": 24,
+      "height_cm": 191,
+      "weight_kg": 80,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "San Jose Earthquakes",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "260972",
+      "name": "M. Schneider",
+      "age": 25,
+      "height_cm": 191,
+      "weight_kg": 84,
+      "dominant_foot": "Unknown",
+      "country": "Germany",
+      "continent": "Europe",
+      "club": "St. Louis City",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "362144",
+      "name": "V. Fry",
+      "age": 25,
+      "height_cm": 178,
+      "weight_kg": 82,
+      "dominant_foot": "Unknown",
+      "country": "Peru",
+      "continent": "South America",
+      "club": "Vancouver Whitecaps",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "6411",
+      "name": "M. Pellegrini",
+      "age": 25,
+      "height_cm": 180,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Argentina",
+      "continent": "South America",
+      "club": "New York City FC",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "71340",
+      "name": "K. Yao",
+      "age": 25,
+      "height_cm": 191,
+      "weight_kg": 85,
+      "dominant_foot": "Unknown",
+      "country": "Canada",
+      "continent": "North America",
+      "club": "Vancouver Whitecaps",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "126448",
+      "name": "Þ. Úlfarsson",
+      "age": 25,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Iceland",
+      "continent": "-",
+      "club": "Houston Dynamo",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "153465",
+      "name": "N. Gioacchini",
+      "age": 25,
+      "height_cm": 183,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "St. Louis City",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "203413",
+      "name": "D. Rodríguez",
+      "age": 23,
+      "height_cm": 178,
+      "weight_kg": 63,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Austin",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "306213",
+      "name": "Max",
+      "age": 24,
+      "height_cm": 175,
+      "weight_kg": 73,
+      "dominant_foot": "Unknown",
+      "country": "Brazil",
+      "continent": "South America",
+      "club": "Colorado Rapids",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "308690",
+      "name": "I. Parente",
+      "age": 25,
+      "height_cm": 179,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Columbus Crew",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "403598",
+      "name": "K. Tingey",
+      "age": 25,
+      "height_cm": 178,
+      "weight_kg": 75,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "San Jose Earthquakes",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "6119",
+      "name": "G. González",
+      "age": 24,
+      "height_cm": 182,
+      "weight_kg": 81,
+      "dominant_foot": "Unknown",
+      "country": "Argentina",
+      "continent": "South America",
+      "club": "Orlando City SC",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "71284",
+      "name": "J. Gaines",
+      "age": 23,
+      "height_cm": 178,
+      "weight_kg": 73,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Los Angeles FC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "265676",
+      "name": "T. Leone",
+      "age": 21,
+      "height_cm": 185,
+      "weight_kg": 82,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Los Angeles FC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "351578",
+      "name": "L. Meek",
+      "age": 25,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Inter Miami",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "351916",
+      "name": "S. Owusu",
+      "age": 25,
+      "height_cm": 188,
+      "weight_kg": 84,
+      "dominant_foot": "Unknown",
+      "country": "Ghana",
+      "continent": "Africa",
+      "club": "New York City FC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "102645",
+      "name": "T. Romero",
+      "age": 25,
+      "height_cm": 188,
+      "weight_kg": 86,
+      "dominant_foot": "Unknown",
+      "country": "El Salvador",
+      "continent": "North America",
+      "club": "Toronto FC",
+      "position": "Goalkeeper",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "203435",
+      "name": "T. Antonoglou",
+      "age": 24,
+      "height_cm": 173,
+      "weight_kg": 69,
+      "dominant_foot": "Unknown",
+      "country": "Canada",
+      "continent": "North America",
+      "club": "Toronto FC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "237106",
+      "name": "K. Habibullah",
+      "age": 22,
+      "height_cm": 168,
+      "weight_kg": 69,
+      "dominant_foot": "Unknown",
+      "country": "Canada",
+      "continent": "North America",
+      "club": "Vancouver Whitecaps",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "330333",
+      "name": "M. Campagna",
+      "age": 21,
+      "height_cm": 188,
+      "weight_kg": 73,
+      "dominant_foot": "Unknown",
+      "country": "Canada",
+      "continent": "North America",
+      "club": "Vancouver Whitecaps",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "345106",
+      "name": "D. Poręba",
+      "age": 23,
+      "height_cm": 178,
+      "weight_kg": 77,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Charlotte",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "357318",
+      "name": "H. Robledo",
+      "age": 23,
+      "height_cm": 170,
+      "weight_kg": 65,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "FC Cincinnati",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "403599",
+      "name": "C. Cilley",
+      "age": 25,
+      "height_cm": 180,
+      "weight_kg": 82,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "San Jose Earthquakes",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "410105",
+      "name": "I. Walker",
+      "age": 25,
+      "height_cm": 193,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Charlotte",
+      "position": "Goalkeeper",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "6719",
+      "name": "M. Miljevic",
+      "age": 24,
+      "height_cm": 176,
+      "weight_kg": 76,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "CF Montreal",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "11245",
+      "name": "F. Krastev",
+      "age": 24,
+      "height_cm": 178,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "Bulgaria",
+      "continent": "Europe",
+      "club": "Los Angeles FC",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "51137",
+      "name": "T. Roberts",
+      "age": 24,
+      "height_cm": 180,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Columbus Crew",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "289622",
+      "name": "Jeremi Rodríguez",
+      "age": 22,
+      "height_cm": 182,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Spain",
+      "continent": "Europe",
+      "club": "Los Angeles FC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "301659",
+      "name": "L. Mallé",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mali",
+      "continent": "Africa",
+      "club": "Los Angeles FC",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "313343",
+      "name": "A. Avila",
+      "age": 20,
+      "height_cm": 178,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Los Angeles FC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "313344",
+      "name": "C. Jaime",
+      "age": 21,
+      "height_cm": 178,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Los Angeles FC",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "313699",
+      "name": "B. Fischer",
+      "age": 21,
+      "height_cm": 193,
+      "weight_kg": 82,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Minnesota United FC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "331847",
+      "name": "J. Romero",
+      "age": 19,
+      "height_cm": 183,
+      "weight_kg": 78,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Los Angeles FC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "414132",
+      "name": "B. Moyado",
+      "age": 20,
+      "height_cm": 173,
+      "weight_kg": 64,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Los Angeles FC",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "102538",
+      "name": "M. Abualnadi",
+      "age": 24,
+      "height_cm": 185,
+      "weight_kg": 81,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Sporting Kansas City",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "102572",
+      "name": "E. Bryant",
+      "age": 24,
+      "height_cm": 175,
+      "weight_kg": 60,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Sporting Kansas City",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "237155",
+      "name": "D. Amadou",
+      "age": 23,
+      "height_cm": 160,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Cameroon",
+      "continent": "Africa",
+      "club": "Colorado Rapids",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "237288",
+      "name": "D. Las",
+      "age": 23,
+      "height_cm": 188,
+      "weight_kg": 84,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Austin",
+      "position": "Goalkeeper",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "265740",
+      "name": "A. González",
+      "age": 22,
+      "height_cm": 168,
+      "weight_kg": 63,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Los Angeles Galaxy",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "308143",
+      "name": "J. Batioja",
+      "age": 22,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Ecuador",
+      "continent": "South America",
+      "club": "Los Angeles FC",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "314030",
+      "name": "Y. Subah",
+      "age": 21,
+      "height_cm": 180,
+      "weight_kg": 79,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Los Angeles FC",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "362083",
+      "name": "N. Pierre",
+      "age": 20,
+      "height_cm": 185,
+      "weight_kg": 82,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Philadelphia Union",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "374157",
+      "name": "M. Gherasimencov",
+      "age": 20,
+      "height_cm": 177,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Vancouver Whitecaps",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "375533",
+      "name": "H. Ališah",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Bosnia and Herzegovina",
+      "continent": "Europe",
+      "club": "Sporting Kansas City",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "413200",
+      "name": "A. Shapiro-Thompson",
+      "age": 25,
+      "height_cm": 175,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "New York Red Bulls",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "97857",
+      "name": "C. Touré",
+      "age": 24,
+      "height_cm": 167,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Netherlands",
+      "continent": "Europe",
+      "club": "Austin",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "125163",
+      "name": "E. Dobbelaere",
+      "age": 22,
+      "height_cm": 175,
+      "weight_kg": 65,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "DC United",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "202791",
+      "name": "G. Portella",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Italy",
+      "continent": "Europe",
+      "club": "Philadelphia Union",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "203447",
+      "name": "Michael Collodi",
+      "age": 24,
+      "height_cm": 183,
+      "weight_kg": 88,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "FC Dallas",
+      "position": "Goalkeeper",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "292219",
+      "name": "S. Biuk",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Croatia",
+      "continent": "Europe",
+      "club": "Los Angeles FC",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "313366",
+      "name": "E. Centeno",
+      "age": 22,
+      "height_cm": 173,
+      "weight_kg": 67,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Atlanta United FC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "318814",
+      "name": "E. Björgólfs­son",
+      "age": 25,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Norway",
+      "continent": "Europe",
+      "club": "Seattle Sounders",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "326864",
+      "name": "D. García",
+      "age": 19,
+      "height_cm": 173,
+      "weight_kg": 54,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "FC Dallas",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "351580",
+      "name": "O. Mullings",
+      "age": 25,
+      "height_cm": 178,
+      "weight_kg": 74,
+      "dominant_foot": "Unknown",
+      "country": "Canada",
+      "continent": "North America",
+      "club": "New York Red Bulls",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "358139",
+      "name": "Pedrinho",
+      "age": 22,
+      "height_cm": 175,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Brazil",
+      "continent": "South America",
+      "club": "FC Dallas",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "413247",
+      "name": "L. Taboada",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Argentina",
+      "continent": "South America",
+      "club": "FC Dallas",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "414131",
+      "name": "I. Kasule",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Uganda",
+      "continent": "Africa",
+      "club": "New York Red Bulls",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "268580",
+      "name": "F. Valencia",
+      "age": 19,
+      "height_cm": 175,
+      "weight_kg": 63,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Inter Miami",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "282881",
+      "name": "J. Orozco",
+      "age": 21,
+      "height_cm": 175,
+      "weight_kg": 83,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Real Salt Lake",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "308691",
+      "name": "O. Cisneros",
+      "age": 20,
+      "height_cm": 165,
+      "weight_kg": 59,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Sporting Kansas City",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "335553",
+      "name": "O. De Rosario",
+      "age": 24,
+      "height_cm": 188,
+      "weight_kg": 81,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Seattle Sounders",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "362062",
+      "name": "J. Knight",
+      "age": 23,
+      "height_cm": 191,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Canada",
+      "continent": "North America",
+      "club": "Nashville SC",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "362164",
+      "name": "S. Brunell",
+      "age": 18,
+      "height_cm": 178,
+      "weight_kg": 61,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Seattle Sounders",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "362665",
+      "name": "A. Carleton",
+      "age": 20,
+      "height_cm": 173,
+      "weight_kg": 54,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Atlanta United FC",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "407438",
+      "name": "A. Gordon",
+      "age": 18,
+      "height_cm": 170,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Jamaica",
+      "continent": "North America",
+      "club": "Atlanta United FC",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "413237",
+      "name": "A. Bibout",
+      "age": 21,
+      "height_cm": 193,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Cameroon",
+      "continent": "Africa",
+      "club": "Los Angeles Galaxy",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "461515",
+      "name": "Colin Guske",
+      "age": 18,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Orlando City SC",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "461635",
+      "name": "Stefan Chirila",
+      "age": 18,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "FC Cincinnati",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "102948",
+      "name": "J. Perruzza",
+      "age": 23,
+      "height_cm": 185,
+      "weight_kg": 81,
+      "dominant_foot": "Unknown",
+      "country": "Canada",
+      "continent": "North America",
+      "club": "Toronto FC",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "203409",
+      "name": "G. Rayo",
+      "age": 24,
+      "height_cm": 173,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Columbus Crew",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "344514",
+      "name": "E. Arzú",
+      "age": 21,
+      "height_cm": 178,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Honduras",
+      "continent": "North America",
+      "club": "Houston Dynamo",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "351491",
+      "name": "H. Uderitz",
+      "age": 25,
+      "height_cm": 191,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Seattle Sounders",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "362112",
+      "name": "M. Perez",
+      "age": 20,
+      "height_cm": 173,
+      "weight_kg": 63,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "St. Louis City",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "362156",
+      "name": "Bajung Darboe",
+      "age": 19,
+      "height_cm": 184,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Los Angeles FC",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "412224",
+      "name": "B. Stitz",
+      "age": 24,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "FC Cincinnati",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "474282",
+      "name": "O. Herrera",
+      "age": 22,
+      "height_cm": 180,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Minnesota United FC",
+      "position": "Goalkeeper",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "351585",
+      "name": "I. Parker",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "FC Dallas",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "71343",
+      "name": "A. Keita",
+      "age": 25,
+      "height_cm": 188,
+      "weight_kg": 81,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Colorado Rapids",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "311238",
+      "name": "A. Ćurić",
+      "age": 24,
+      "height_cm": 191,
+      "weight_kg": 79,
+      "dominant_foot": "Unknown",
+      "country": "Canada",
+      "continent": "North America",
+      "club": "Toronto FC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "341450",
+      "name": "M. Rodríguez",
+      "age": 22,
+      "height_cm": 175,
+      "weight_kg": 73,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Chicago Fire",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "350173",
+      "name": "V. Bezerra",
+      "age": 25,
+      "height_cm": 188,
+      "weight_kg": 79,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Chicago Fire",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "412229",
+      "name": "T. Clegg",
+      "age": 25,
+      "height_cm": 193,
+      "weight_kg": 88,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Portland Timbers",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "460354",
+      "name": "A. Enriquez",
+      "age": 19,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Portland Timbers",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "270230",
+      "name": "I. Johnston",
+      "age": 24,
+      "height_cm": 173,
+      "weight_kg": 84,
+      "dominant_foot": "Unknown",
+      "country": "Canada",
+      "continent": "North America",
+      "club": "Nashville SC",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "461640",
+      "name": "Riley Lynch",
+      "age": 22,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "San Jose Earthquakes",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "201730",
+      "name": "T. Ikoba",
+      "age": 22,
+      "height_cm": 191,
+      "weight_kg": 90,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Portland Timbers",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "265866",
+      "name": "N. Holliday",
+      "age": 19,
+      "height_cm": 185,
+      "weight_kg": 77,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Charlotte",
+      "position": "Goalkeeper",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "362094",
+      "name": "P. Elias",
+      "age": 23,
+      "height_cm": 174,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "New York City FC",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "406708",
+      "name": "J. Akpunonu",
+      "age": 24,
+      "height_cm": 191,
+      "weight_kg": 84,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "FC Cincinnati",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "163052",
+      "name": "H. Neville",
+      "age": 23,
+      "height_cm": 181,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Republic of Ireland",
+      "continent": "-",
+      "club": "Inter Miami",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "455012",
+      "name": "T. Humphrey",
+      "age": 25,
+      "height_cm": 188,
+      "weight_kg": 86,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "FC Dallas",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "470404",
+      "name": "Grayson Doody",
+      "age": 23,
+      "height_cm": 178,
+      "weight_kg": 82,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "CF Montreal",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "103065",
+      "name": "D. Pierre",
+      "age": 25,
+      "height_cm": 185,
+      "weight_kg": 79,
+      "dominant_foot": "Unknown",
+      "country": "Haiti",
+      "continent": "-",
+      "club": "Real Salt Lake",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "15887",
+      "name": "L. Singh",
+      "age": 25,
+      "height_cm": 183,
+      "weight_kg": 81,
+      "dominant_foot": "Unknown",
+      "country": "Trinidad and Tobago",
+      "continent": "North America",
+      "club": "Toronto FC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "61643",
+      "name": "R. Þorkelsson",
+      "age": 23,
+      "height_cm": 188,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Iceland",
+      "continent": "-",
+      "club": "CF Montreal",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "71079",
+      "name": "H. Sulte",
+      "age": 23,
+      "height_cm": 201,
+      "weight_kg": 88,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Portland Timbers",
+      "position": "Goalkeeper",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "148710",
+      "name": "M. Biegański",
+      "age": 23,
+      "height_cm": 190,
+      "weight_kg": 84,
+      "dominant_foot": "Unknown",
+      "country": "Poland",
+      "continent": "Europe",
+      "club": "San Jose Earthquakes",
+      "position": "Goalkeeper",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "201720",
+      "name": "D. Rivera",
+      "age": 23,
+      "height_cm": 178,
+      "weight_kg": 73,
+      "dominant_foot": "Unknown",
+      "country": "Costa Rica",
+      "continent": "North America",
+      "club": "New England Revolution",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "266225",
+      "name": "E. Azcona",
+      "age": 22,
+      "height_cm": 168,
+      "weight_kg": 63,
+      "dominant_foot": "Unknown",
+      "country": "Dominican Republic",
+      "continent": "-",
+      "club": "Inter Miami",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "319420",
+      "name": "A. Ordoñez",
+      "age": 22,
+      "height_cm": 191,
+      "weight_kg": 82,
+      "dominant_foot": "Unknown",
+      "country": "Guatemala",
+      "continent": "North America",
+      "club": "FC Cincinnati",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "407653",
+      "name": "A. Salim",
+      "age": 24,
+      "height_cm": 185,
+      "weight_kg": 82,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Orlando City SC",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "128761",
+      "name": "N. Dyhr",
+      "age": 24,
+      "height_cm": 177,
+      "weight_kg": 60,
+      "dominant_foot": "Unknown",
+      "country": "Denmark",
+      "continent": "Europe",
+      "club": "St. Louis City",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "196850",
+      "name": "J. Mulato",
+      "age": 22,
+      "height_cm": 180,
+      "weight_kg": 75,
+      "dominant_foot": "Unknown",
+      "country": "Colombia",
+      "continent": "South America",
+      "club": "FC Dallas",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "237127",
+      "name": "A. Jasson",
+      "age": 23,
+      "height_cm": 175,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "New York City FC",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "294187",
+      "name": "B. Byaruhanga",
+      "age": 24,
+      "height_cm": 178,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "Uganda",
+      "continent": "Africa",
+      "club": "Austin",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "455013",
+      "name": "M. Westergren",
+      "age": 23,
+      "height_cm": 191,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Denmark",
+      "continent": "Europe",
+      "club": "FC Dallas",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "6652",
+      "name": "B. Galván",
+      "age": 25,
+      "height_cm": 166,
+      "weight_kg": 64,
+      "dominant_foot": "Unknown",
+      "country": "Argentina",
+      "continent": "South America",
+      "club": "Colorado Rapids",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "362172",
+      "name": "M. Weinstein",
+      "age": 21,
+      "height_cm": 188,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "New England Revolution",
+      "position": "Goalkeeper",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "35864",
+      "name": "J. Torres",
+      "age": 25,
+      "height_cm": 169,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Chicago Fire",
+      "position": "Attacker",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "125162",
+      "name": "M. Ferkranus",
+      "age": 22,
+      "height_cm": 183,
+      "weight_kg": 84,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Los Angeles Galaxy",
+      "position": "Defender",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "237078",
+      "name": "P. Vite",
+      "age": 23,
+      "height_cm": 168,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "Ecuador",
+      "continent": "South America",
+      "club": "Vancouver Whitecaps",
+      "position": "Midfielder",
+      "league": "Major League Soccer"
+    },
+    {
+      "player_id": "364962",
+      "name": "L. Flores",
+      "age": 22,
+      "height_cm": 180,
+      "weight_kg": 71,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Los Angeles FC",
+      "position": "Attacker",
+      "league": "Major League Soccer"
     }
   ]
 }
