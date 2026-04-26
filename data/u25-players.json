@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-26T13:31:42.140Z",
+  "updated_at": "2026-04-26T13:32:03.813Z",
   "season": "2024",
-  "leagues_done": 24,
+  "leagues_done": 25,
   "leagues_total": 110,
-  "players_count": 12,
+  "players_count": 13,
   "items": [
     {
       "player_id": "495038",
@@ -160,6 +160,19 @@
       "club": "Livyi Bereh",
       "position": "Midfielder",
       "league": "Premier League"
+    },
+    {
+      "player_id": "496479",
+      "name": "E. Lahti",
+      "age": 16,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Finland",
+      "continent": "Europe",
+      "club": "SJK",
+      "position": "Goalkeeper",
+      "league": "Veikkausliiga"
     }
   ]
 }
