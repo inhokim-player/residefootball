@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-26T13:32:03.813Z",
+  "updated_at": "2026-04-26T13:32:25.533Z",
   "season": "2024",
-  "leagues_done": 25,
+  "leagues_done": 26,
   "leagues_total": 110,
-  "players_count": 13,
+  "players_count": 14,
   "items": [
     {
       "player_id": "495038",
@@ -173,6 +173,19 @@
       "club": "SJK",
       "position": "Goalkeeper",
       "league": "Veikkausliiga"
+    },
+    {
+      "player_id": "475211",
+      "name": "P. Horvat",
+      "age": 16,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Croatia",
+      "continent": "Europe",
+      "club": "Dinamo Zagreb",
+      "position": "Attacker",
+      "league": "HNL"
     }
   ]
 }
