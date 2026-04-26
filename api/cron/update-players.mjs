@@ -55,7 +55,12 @@ export default async function handler(req, res) {
   const githubToken  = String(process.env.GITHUB_TOKEN  || "").trim();
   const githubRepo   = String(process.env.GITHUB_REPO   || "").trim();
   const githubBranch = String(process.env.GITHUB_BRANCH || "main").trim();
-  const lockPath     = "data/.update-lock";
+  const targetPath   = String(process.env.REGISTERED_PLAYERS_FILE_PATH  || "data/registered_players.json").trim();
+  const dailyPath    = String(process.env.DAILY_PLAYER_UPDATES_FILE_PATH || "data/daily_player_updates.json").trim();
+  const apiFootballKey        = String(process.env.API_FOOTBALL_KEY          || "").trim();
+  const apiFootballPlayersUrl = String(process.env.API_FOOTBALL_PLAYERS_URL  || "").trim();
+  const apiFootballMaxPages   = Math.max(1, Math.min(200, Number(process.env.API_FOOTBALL_MAX_PAGES || 30) || 30));
+  const lockPath = "data/.update-lock";
 
   if (githubToken && githubRepo) {
     const lockHeaders = {
@@ -148,14 +153,6 @@ export default async function handler(req, res) {
     }
   }
 
-  const apiFootballKey = String(process.env.API_FOOTBALL_KEY || "").trim();
-  const apiFootballPlayersUrl = String(process.env.API_FOOTBALL_PLAYERS_URL || "").trim();
-  const apiFootballMaxPages = Math.max(1, Math.min(200, Number(process.env.API_FOOTBALL_MAX_PAGES || 30) || 30));
-  const githubToken = String(process.env.GITHUB_TOKEN || "").trim();
-  const githubRepo = String(process.env.GITHUB_REPO || "").trim(); // owner/repo
-  const githubBranch = String(process.env.GITHUB_BRANCH || "main").trim();
-  const targetPath = String(process.env.REGISTERED_PLAYERS_FILE_PATH || "data/registered_players.json").trim();
-  const dailyPath = String(process.env.DAILY_PLAYER_UPDATES_FILE_PATH || "data/daily_player_updates.json").trim();
 
   if (!apiFootballKey || !apiFootballPlayersUrl) {
     return res.status(200).json({
