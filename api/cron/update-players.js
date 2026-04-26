@@ -368,6 +368,56 @@ function inferContinent(country) {
   return "-";
 }
 
+// ── Rate limit 딜레이 ────────────────────────────────────────
+const CALL_DELAY_MS  = Number(process.env.API_CALL_DELAY_MS  || 2500); // 호출 간격 (기본 2.5초)
+const RATE_RETRY_MS  = Number(process.env.API_RATE_RETRY_MS  || 10000); // rateLimit 시 재시도 대기
+const MAX_RETRIES    = 3; // rateLimit 재시도 횟수
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchWithRateLimit(url, headers) {
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    const res = await fetch(url, { method: "GET", headers });
+
+    if (res.status === 429) {
+      // Rate limit 초과 — 대기 후 재시도
+      console.log(`[rate-limit] 429 수신 (시도 ${attempt}/${MAX_RETRIES}) → ${RATE_RETRY_MS}ms 대기`);
+      await sleep(RATE_RETRY_MS);
+      continue;
+    }
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`api_football_failed:${res.status}:${text.slice(0, 180)}`);
+    }
+
+    const payload = await res.json();
+
+    // API 응답 내 rateLimit 에러 확인
+    const errObj = payload?.errors || {};
+    const errKeys = Object.keys(errObj);
+    if (errKeys.length) {
+      const isRateLimit = errKeys.some(k =>
+        String(errObj[k]).toLowerCase().includes("rate") ||
+        String(errObj[k]).toLowerCase().includes("limit") ||
+        String(errObj[k]).toLowerCase().includes("requests")
+      );
+      if (isRateLimit && attempt < MAX_RETRIES) {
+        console.log(`[rate-limit] API error (시도 ${attempt}/${MAX_RETRIES}):`, JSON.stringify(errObj), `→ ${RATE_RETRY_MS}ms 대기`);
+        await sleep(RATE_RETRY_MS);
+        continue;
+      }
+      console.log("[fetch] API errors:", JSON.stringify(errObj));
+      throw new Error(`api_football_error:${JSON.stringify(errObj)}`);
+    }
+
+    return payload;
+  }
+  throw new Error(`api_football_rate_limit_exceeded: ${MAX_RETRIES}회 재시도 실패`);
+}
+
 async function fetchAllApiFootballPlayers({
   apiFootballPlayersUrl,
   apiFootballKey,
@@ -383,47 +433,50 @@ async function fetchAllApiFootballPlayers({
   const seen = new Set();
   const leagueUrls = buildLeagueScopedBaseUrls(apiFootballPlayersUrl, minAge, maxAge);
 
-  console.log("[fetch] 총 URL 수:", leagueUrls.length, "/ maxPages per URL:", maxPages);
+  console.log(`[fetch] 총 URL 수: ${leagueUrls.length} / maxPages: ${maxPages} / 호출간격: ${CALL_DELAY_MS}ms`);
 
-  for (const oneBaseUrl of leagueUrls) {
+  let callCount = 0;
+
+  for (let i = 0; i < leagueUrls.length; i++) {
+    const oneBaseUrl = leagueUrls[i];
     let totalPages = 1;
-    for (let page = 1; page <= totalPages && page <= maxPages; page += 1) {
+
+    for (let page = 1; page <= totalPages && page <= maxPages; page++) {
       const url = buildPagedUrl(oneBaseUrl, page);
-      console.log("[fetch] 호출:", url);
-      const apiRes = await fetch(url, { method: "GET", headers });
-      console.log("[fetch] 응답 HTTP:", apiRes.status);
-      if (!apiRes.ok) {
-        const text = await apiRes.text();
-        throw new Error(`api_football_failed:${apiRes.status}:${text.slice(0, 180)}`);
-      }
-      const payload = await apiRes.json();
 
-      // 에러 필드 확인
-      if (payload?.errors && Object.keys(payload.errors).length) {
-        console.log("[fetch] API errors:", JSON.stringify(payload.errors));
-        throw new Error(`api_football_error:${JSON.stringify(payload.errors)}`);
+      // ── 호출 간격 딜레이 (첫 번째 제외) ───────────────────────
+      if (callCount > 0) await sleep(CALL_DELAY_MS);
+      callCount++;
+
+      console.log(`[fetch #${callCount}] 리그 ${i+1}/${leagueUrls.length} page ${page}/${totalPages} → ${url}`);
+
+      let payload;
+      try {
+        payload = await fetchWithRateLimit(url, headers);
+      } catch (err) {
+        // rateLimit 이외의 에러면 이 리그는 건너뜀
+        console.log(`[fetch] 에러로 리그 건너뜀: ${err.message}`);
+        break;
       }
 
-      console.log("[fetch] results:", payload?.results ?? 0, "/ paging:", JSON.stringify(payload?.paging));
+      console.log(`[fetch] results: ${payload?.results ?? 0} / paging: ${JSON.stringify(payload?.paging)}`);
 
       const onePage = normalizeApiFootballPlayers(payload);
-      console.log("[fetch] 정규화 선수 수:", onePage.length, "/ page:", page);
+      console.log(`[fetch] 정규화 선수: ${onePage.length}명 / 누적: ${all.length + onePage.filter(p => !seen.has(p.player_id)).length}명`);
 
       for (const p of onePage) {
         if (!p.player_id || seen.has(p.player_id)) continue;
         seen.add(p.player_id);
         all.push(p);
       }
+
       const pagingTotal = Number(payload?.paging?.total || 0);
-      if (pagingTotal > 0) {
-        totalPages = pagingTotal;
-      } else if (!onePage.length) {
-        break;
-      }
+      if (pagingTotal > 0) totalPages = pagingTotal;
+      else if (!onePage.length) break;
     }
   }
 
-  console.log("[fetch] 최종 수집 선수 수 (중복제거):", all.length);
+  console.log(`[fetch] 완료 — 총 API 호출: ${callCount}회 / 최종 선수 수: ${all.length}명`);
   return all;
 }
 
@@ -464,25 +517,74 @@ function normalizePlayersEndpoint(rawUrl) {
 }
 
 function buildLeagueScopedBaseUrls(baseUrl, minAge, maxAge) {
-  const leagueIds = parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []);
   const season = String(process.env.API_FOOTBALL_SEASON || currentLikelySeasonKst()).trim();
   const sortExpr = String(process.env.API_FOOTBALL_SORT || "").trim();
 
+  // ── 기본 50개 리그 (전세계 대륙별 커버) ────────────────────────
+  // 환경변수 API_FOOTBALL_LEAGUE_IDS가 있으면 그걸 우선 사용
+  const DEFAULT_LEAGUES = [
+    // 유럽 1부 (30개)
+    39,   // England - Premier League
+    140,  // Spain - La Liga
+    78,   // Germany - Bundesliga
+    135,  // Italy - Serie A
+    61,   // France - Ligue 1
+    88,   // Netherlands - Eredivisie
+    94,   // Portugal - Primeira Liga
+    203,  // Turkey - Süper Lig
+    144,  // Belgium - Pro League
+    179,  // Scotland - Premiership
+    197,  // Greece - Super League
+    207,  // Switzerland - Super League
+    218,  // Denmark - Superliga
+    113,  // Norway - Eliteserien
+    103,  // Sweden - Allsvenskan
+    119,  // Austria - Bundesliga
+    168,  // Croatia - HNL
+    182,  // Serbia - Super Liga
+    332,  // Poland - Ekstraklasa
+    235,  // Russia - Premier League
+    333,  // Ukraine - Premier League
+    271,  // Romania - Liga I
+    106,  // Finland - Veikkausliiga
+    // 아시아 (8개)
+    292,  // South Korea - K League 1
+    98,   // Japan - J1 League
+    307,  // Saudi Arabia - Pro League
+    322,  // Qatar - Stars League
+    323,  // UAE - Arabian Gulf League
+    289,  // Thailand - Thai League 1
+    296,  // India - ISL
+    301,  // Indonesia - Liga 1
+    // 남미 (8개)
+    71,   // Brazil - Série A
+    128,  // Argentina - Liga Profesional
+    239,  // Colombia - Liga BetPlay
+    265,  // Chile - Primera División
+    268,  // Paraguay - División Profesional
+    273,  // Uruguay - Primera División
+    266,  // Peru - Liga 1
+    242,  // Venezuela - Primera División
+    // 아프리카 (4개)
+    200,  // Egypt - Premier League
+    204,  // Nigeria - NPFL
+    206,  // South Africa - Premier Soccer League
+    233,  // Morocco - Botola Pro
+    // 북중미 (2개)
+    253,  // USA - MLS
+    262,  // Mexico - Liga MX
+  ];
+
+  const envLeagues = parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []);
+  const leagueIds  = envLeagues.length ? envLeagues : DEFAULT_LEAGUES;
+
   // ── age 파라미터는 API-Football /players 에서 지원하지 않음 ──────
   // age 필터링은 데이터 수신 후 filterUnderAge()에서 JS로 처리
-  console.log("[build-urls] season:", season, "leagues:", leagueIds.length ? leagueIds : "ALL");
-
-  if (!leagueIds.length) {
-    // 리그 지정 없음 → season만으로 글로벌 호출
-    const url = resolvePlayersUrlTemplate(baseUrl, { season, sort: sortExpr });
-    console.log("[build-urls] global url:", url);
-    return [url];
-  }
+  console.log(`[build-urls] season: ${season} / 리그 수: ${leagueIds.length} (${envLeagues.length ? "환경변수" : "기본값"})`);
 
   const out = [];
   for (const leagueId of leagueIds) {
     const url = resolvePlayersUrlTemplate(baseUrl, { league: leagueId, season, sort: sortExpr });
-    console.log("[build-urls] league url:", url);
     out.push(url);
   }
   return out;
