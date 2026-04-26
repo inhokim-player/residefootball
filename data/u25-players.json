@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-26T13:25:10.590Z",
+  "updated_at": "2026-04-26T13:25:32.122Z",
   "season": "2024",
-  "leagues_done": 5,
+  "leagues_done": 6,
   "leagues_total": 110,
-  "players_count": 1,
+  "players_count": 2,
   "items": [
     {
       "player_id": "495038",
@@ -17,6 +17,19 @@
       "club": "Athletic Club",
       "position": "Midfielder",
       "league": "La Liga"
+    },
+    {
+      "player_id": "473415",
+      "name": "S. de Mol",
+      "age": 16,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Netherlands",
+      "continent": "Europe",
+      "club": "Feyenoord",
+      "position": "Goalkeeper",
+      "league": "Eredivisie"
     }
   ]
 }
