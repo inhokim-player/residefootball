@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-26T16:20:53.498Z",
+  "updated_at": "2026-04-26T16:20:55.590Z",
   "season": "2024",
-  "leagues_done": 59,
+  "leagues_done": 60,
   "leagues_total": 110,
-  "players_count": 1855,
+  "players_count": 1856,
   "items": [
     {
       "player_id": "44192",
@@ -24119,6 +24119,19 @@
       "club": "Shabab Al Ahli Dubai",
       "position": "Midfielder",
       "league": "Pro League"
+    },
+    {
+      "player_id": "128902",
+      "name": "R. Tagir",
+      "age": 22,
+      "height_cm": 182,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Türkiye",
+      "continent": "-",
+      "club": "Al-Jazira",
+      "position": "Defender",
+      "league": "League Cup"
     }
   ]
 }
