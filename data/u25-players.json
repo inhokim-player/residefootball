@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-26T13:28:23.815Z",
+  "updated_at": "2026-04-26T13:28:44.976Z",
   "season": "2024",
-  "leagues_done": 14,
+  "leagues_done": 15,
   "leagues_total": 110,
-  "players_count": 6,
+  "players_count": 7,
   "items": [
     {
       "player_id": "495038",
@@ -82,6 +82,19 @@
       "club": "Dundee Utd",
       "position": "Midfielder",
       "league": "Premiership"
+    },
+    {
+      "player_id": "416061",
+      "name": "B. Olszewski",
+      "age": 16,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Norway",
+      "continent": "Europe",
+      "club": "Brann",
+      "position": "Goalkeeper",
+      "league": "Eliteserien"
     }
   ]
 }
