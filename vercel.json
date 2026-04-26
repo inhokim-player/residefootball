@@ -22,9 +22,6 @@
   "functions": {
     "api/cron/update-players.mjs": {
       "maxDuration": 300
-    },
-    "api/cron/diagnose-api.js": {
-      "maxDuration": 60
     }
   },
   "crons": [
