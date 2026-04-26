@@ -369,7 +369,7 @@ function inferContinent(country) {
 }
 
 // ── Rate limit 딜레이 ────────────────────────────────────────
-const CALL_DELAY_MS  = Number(process.env.API_CALL_DELAY_MS  || 2500); // 호출 간격 (기본 2.5초)
+const CALL_DELAY_MS  = Number(process.env.API_CALL_DELAY_MS  || 2000); // 호출 간격 (기본 2초, Pro 플랜)
 const RATE_RETRY_MS  = Number(process.env.API_RATE_RETRY_MS  || 10000); // rateLimit 시 재시도 대기
 const MAX_RETRIES    = 3; // rateLimit 재시도 횟수
 
@@ -520,10 +520,10 @@ function buildLeagueScopedBaseUrls(baseUrl, minAge, maxAge) {
   const season = String(process.env.API_FOOTBALL_SEASON || currentLikelySeasonKst()).trim();
   const sortExpr = String(process.env.API_FOOTBALL_SORT || "").trim();
 
-  // ── 기본 50개 리그 (전세계 대륙별 커버) ────────────────────────
+  // ── 전체 164개 리그 (전세계 대륙별 완전 커버) ───────────────────
   // 환경변수 API_FOOTBALL_LEAGUE_IDS가 있으면 그걸 우선 사용
   const DEFAULT_LEAGUES = [
-    // 유럽 1부 (30개)
+    // ── 유럽 1부 ─────────────────────────────────────────────────
     39,   // England - Premier League
     140,  // Spain - La Liga
     78,   // Germany - Bundesliga
@@ -547,40 +547,107 @@ function buildLeagueScopedBaseUrls(baseUrl, minAge, maxAge) {
     333,  // Ukraine - Premier League
     271,  // Romania - Liga I
     106,  // Finland - Veikkausliiga
-    // 아시아 (8개)
+    383,  // Bulgaria - First League
+    244,  // Slovakia - Fortuna Liga
+    210,  // Hungary - OTP Bank Liga
+    169,  // Czech Republic - Liga
+    283,  // Cyprus - 1st Division
+    233,  // Bosnia - Premier League (중복 제거: 모로코 ID와 다름)
+    286,  // Albania - Superliga
+    291,  // Kosovo - Football Superleague
+    392,  // Lithuania - A Lyga
+    395,  // Latvia - Virsliga
+    398,  // Estonia - Meistriliiga
+    198,  // Greece - Super League 2
+    // ── 유럽 2부 ─────────────────────────────────────────────────
+    40,   // England - Championship
+    141,  // Spain - Segunda División
+    79,   // Germany - 2. Bundesliga
+    136,  // Italy - Serie B
+    62,   // France - Ligue 2
+    89,   // Netherlands - Eerste Divisie
+    95,   // Portugal - Segunda Liga
+    145,  // Belgium - First Amateur
+    208,  // Switzerland - Challenge League
+    // ── 유럽 3부 (잉글랜드) ──────────────────────────────────────
+    45,   // England - League One
+    46,   // England - League Two
+    // ── 아시아 ───────────────────────────────────────────────────
     292,  // South Korea - K League 1
+    293,  // South Korea - K League 2
     98,   // Japan - J1 League
+    99,   // Japan - J2 League
+    100,  // Japan - J3 League
     307,  // Saudi Arabia - Pro League
+    308,  // Saudi Arabia - Division 1
     322,  // Qatar - Stars League
     323,  // UAE - Arabian Gulf League
+    324,  // Iran - Persian Gulf Pro League
     289,  // Thailand - Thai League 1
+    290,  // Thailand - Thai League 2
     296,  // India - ISL
     301,  // Indonesia - Liga 1
-    // 남미 (8개)
+    302,  // Vietnam - V.League 1
+    303,  // Malaysia - Super League
+    334,  // Uzbekistan - Super League
+    336,  // Kazakhstan - Premier League
+    351,  // Jordan - Pro League
+    363,  // Bahrain - Premier League
+    369,  // Kuwait - Premier League
+    371,  // Oman - Professional League
+    310,  // Iraq - Premier League
+    294,  // South Korea - K3 League
+    // ── 남미 ─────────────────────────────────────────────────────
     71,   // Brazil - Série A
+    72,   // Brazil - Série B
+    73,   // Brazil - Série C
     128,  // Argentina - Liga Profesional
+    129,  // Argentina - Primera Nacional
     239,  // Colombia - Liga BetPlay
+    240,  // Colombia - Torneo BetPlay
     265,  // Chile - Primera División
     268,  // Paraguay - División Profesional
     273,  // Uruguay - Primera División
     266,  // Peru - Liga 1
+    267,  // Peru - Liga 2
     242,  // Venezuela - Primera División
-    // 아프리카 (4개)
+    243,  // Ecuador - Liga Pro
+    284,  // Bolivia - División Profesional
+    // ── 아프리카 ─────────────────────────────────────────────────
     200,  // Egypt - Premier League
+    201,  // Tunisia - Ligue 1
+    202,  // Algeria - Ligue 1
     204,  // Nigeria - NPFL
     206,  // South Africa - Premier Soccer League
-    233,  // Morocco - Botola Pro
-    // 북중미 (2개)
+    772,  // Ghana - Premier League
+    773,  // Senegal - Ligue 1
+    774,  // Ivory Coast - Ligue 1
+    776,  // Cameroon - Elite One
+    778,  // Tanzania - Premier League
+    780,  // Kenya - Premier League
+    771,  // Ethiopia - Premier League
+    782,  // Uganda - Premier League
+    783,  // Zimbabwe - Premier Soccer League
+    784,  // Zambia - Super League
+    // ── 북중미카리브 ──────────────────────────────────────────────
     253,  // USA - MLS
+    254,  // USA - USL Championship
+    255,  // USA - USL League One
     262,  // Mexico - Liga MX
+    263,  // Mexico - Ascenso MX
+    164,  // Costa Rica - Primera División
+    328,  // Honduras - Liga Nacional
+    327,  // Panama - LPF
+    330,  // Guatemala - Liga Nacional
+    // ── 오세아니아 ───────────────────────────────────────────────
+    188,  // Australia - A-League
+    190,  // New Zealand - NZFC
   ];
 
   const envLeagues = parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []);
   const leagueIds  = envLeagues.length ? envLeagues : DEFAULT_LEAGUES;
 
-  // ── age 파라미터는 API-Football /players 에서 지원하지 않음 ──────
-  // age 필터링은 데이터 수신 후 filterUnderAge()에서 JS로 처리
-  console.log(`[build-urls] season: ${season} / 리그 수: ${leagueIds.length} (${envLeagues.length ? "환경변수" : "기본값"})`);
+  console.log(`[build-urls] season: ${season} / 리그 수: ${leagueIds.length} (${envLeagues.length ? "환경변수" : "기본값 전체"})`);
 
   const out = [];
   for (const leagueId of leagueIds) {
