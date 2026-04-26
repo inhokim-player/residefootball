@@ -51,6 +51,64 @@ export default async function handler(req, res) {
     }
   }
 
+  // ── 중복 실행 방지: 실행 중 락 파일 체크 ─────────────────────────
+  const githubToken  = String(process.env.GITHUB_TOKEN  || "").trim();
+  const githubRepo   = String(process.env.GITHUB_REPO   || "").trim();
+  const githubBranch = String(process.env.GITHUB_BRANCH || "main").trim();
+  const lockPath     = "data/.update-lock";
+
+  if (githubToken && githubRepo) {
+    const lockHeaders = {
+      Authorization: `Bearer ${githubToken}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json",
+    };
+    try {
+      // 락 파일 존재 확인
+      const lockCheck = await fetch(
+        `https://api.github.com/repos/${githubRepo}/contents/${lockPath}?ref=${githubBranch}`,
+        { headers: lockHeaders }
+      );
+      if (lockCheck.ok) {
+        const lockData = await lockCheck.json();
+        const lockedAt = Buffer.from(lockData.content, "base64").toString("utf8").trim();
+        const lockedMs = Date.parse(lockedAt);
+        const elapsedMin = (Date.now() - lockedMs) / 60000;
+        // 락이 10분 이내면 중복 실행으로 판단
+        if (elapsedMin < 10) {
+          console.log(`[lock] 중복 실행 차단 — 이미 실행 중 (${elapsedMin.toFixed(1)}분 전 시작)`);
+          return res.status(200).json({
+            ok: false,
+            error: "already_running",
+            message: `이미 다른 인스턴스가 실행 중입니다 (${elapsedMin.toFixed(1)}분 전 시작). 잠시 후 다시 시도하세요.`,
+            locked_at: lockedAt,
+          });
+        }
+        console.log(`[lock] 오래된 락 파일 발견 (${elapsedMin.toFixed(1)}분 전) — 무시하고 진행`);
+      }
+      // 락 파일 생성 (실행 시작 표시)
+      const now = new Date().toISOString();
+      let existingSha = "";
+      if (lockCheck.ok) {
+        const ld = await lockCheck.json().catch(() => ({}));
+        existingSha = String(ld?.sha || "");
+      }
+      await fetch(`https://api.github.com/repos/${githubRepo}/contents/${lockPath}`, {
+        method: "PUT",
+        headers: lockHeaders,
+        body: JSON.stringify({
+          message: "chore: update-players lock",
+          content: Buffer.from(now, "utf8").toString("base64"),
+          branch: githubBranch,
+          ...(existingSha ? { sha: existingSha } : {}),
+        }),
+      });
+      console.log(`[lock] 락 파일 생성 완료: ${now}`);
+    } catch (e) {
+      console.log("[lock] 락 체크 실패 (무시하고 진행):", String(e?.message || e));
+    }
+  }
+
   const triggerUrl = process.env.API_SYNC_TRIGGER_URL || "";
   const triggerSecret = process.env.API_SYNC_TRIGGER_SECRET || "";
   if (triggerUrl) {
@@ -213,6 +271,36 @@ export default async function handler(req, res) {
       error: "update_failed",
       detail: String(err && err.message ? err.message : err),
     });
+  } finally {
+    // ── 락 파일 삭제 (실행 완료/실패 모두) ───────────────────────
+    if (githubToken && githubRepo) {
+      try {
+        const lockHeaders = {
+          Authorization: `Bearer ${githubToken}`,
+          Accept: "application/vnd.github+json",
+          "Content-Type": "application/json",
+        };
+        const lockCheck = await fetch(
+          `https://api.github.com/repos/${githubRepo}/contents/${lockPath}?ref=${githubBranch}`,
+          { headers: lockHeaders }
+        );
+        if (lockCheck.ok) {
+          const lockData = await lockCheck.json();
+          await fetch(`https://api.github.com/repos/${githubRepo}/contents/${lockPath}`, {
+            method: "DELETE",
+            headers: lockHeaders,
+            body: JSON.stringify({
+              message: "chore: remove update-players lock",
+              sha: lockData.sha,
+              branch: githubBranch,
+            }),
+          });
+          console.log("[lock] 락 파일 삭제 완료");
+        }
+      } catch (e) {
+        console.log("[lock] 락 삭제 실패 (무시):", String(e?.message || e));
+      }
+    }
   }
 }
 
