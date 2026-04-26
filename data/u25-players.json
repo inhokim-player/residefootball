@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-26T21:10:47.453Z",
+  "updated_at": "2026-04-26T21:11:31.155Z",
   "season": "2024",
-  "leagues_done": 83,
+  "leagues_done": 84,
   "leagues_total": 55,
-  "players_count": 2759,
+  "players_count": 2918,
   "items": [
     {
       "player_id": "59863",
@@ -6059,9 +6059,9 @@
       "dominant_foot": "Unknown",
       "country": "Colombia",
       "continent": "South America",
-      "club": "Pachuca",
+      "club": "Monterrey",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "307876",
@@ -31515,7 +31515,7 @@
       "continent": "North America",
       "club": "Pachuca",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "310972",
@@ -31567,7 +31567,7 @@
       "continent": "North America",
       "club": "Cruz Azul",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "179509",
@@ -31580,7 +31580,7 @@
       "continent": "North America",
       "club": "Puebla",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "265748",
@@ -31606,7 +31606,7 @@
       "continent": "North America",
       "club": "Cruz Azul",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "313339",
@@ -31645,7 +31645,7 @@
       "continent": "North America",
       "club": "U.N.A.M. - Pumas",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "443087",
@@ -31658,7 +31658,7 @@
       "continent": "North America",
       "club": "Mazatlán",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "467145",
@@ -31671,7 +31671,7 @@
       "continent": "North America",
       "club": "Cruz Azul",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "474372",
@@ -31684,7 +31684,7 @@
       "continent": "North America",
       "club": "Club Queretaro",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "476904",
@@ -31697,7 +31697,7 @@
       "continent": "North America",
       "club": "U.N.A.M. - Pumas",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "477899",
@@ -31710,7 +31710,7 @@
       "continent": "North America",
       "club": "Necaxa",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "103045",
@@ -31736,7 +31736,7 @@
       "continent": "North America",
       "club": "Club Tijuana",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "351194",
@@ -31762,7 +31762,7 @@
       "continent": "North America",
       "club": "Pachuca",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "382994",
@@ -31775,7 +31775,7 @@
       "continent": "North America",
       "club": "Monterrey",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "400936",
@@ -31801,7 +31801,7 @@
       "continent": "North America",
       "club": "Santos Laguna",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "414157",
@@ -31814,7 +31814,7 @@
       "continent": "North America",
       "club": "Santos Laguna",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "417937",
@@ -31827,7 +31827,7 @@
       "continent": "North America",
       "club": "Tigres UANL",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "424398",
@@ -31840,7 +31840,7 @@
       "continent": "North America",
       "club": "Club America",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "454036",
@@ -31853,7 +31853,7 @@
       "continent": "North America",
       "club": "Guadalajara Chivas",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "474113",
@@ -31866,7 +31866,7 @@
       "continent": "North America",
       "club": "Club America",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "474371",
@@ -31879,7 +31879,7 @@
       "continent": "North America",
       "club": "Atlas",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "476905",
@@ -31892,7 +31892,7 @@
       "continent": "North America",
       "club": "Club Tijuana",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "71242",
@@ -31918,7 +31918,7 @@
       "continent": "North America",
       "club": "Puebla",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "319139",
@@ -31957,7 +31957,7 @@
       "continent": "North America",
       "club": "Guadalajara Chivas",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "382283",
@@ -31970,7 +31970,7 @@
       "continent": "North America",
       "club": "Pachuca",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "402906",
@@ -31983,7 +31983,7 @@
       "continent": "North America",
       "club": "Santos Laguna",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "430084",
@@ -32009,7 +32009,7 @@
       "continent": "North America",
       "club": "Pachuca",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "51285",
@@ -32618,9 +32618,9 @@
       "dominant_foot": "Unknown",
       "country": "Mexico",
       "continent": "North America",
-      "club": "Club Queretaro",
+      "club": "FC Juarez",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "94831",
@@ -32633,7 +32633,7 @@
       "continent": "North America",
       "club": "Monterrey",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "129939",
@@ -32646,7 +32646,7 @@
       "continent": "North America",
       "club": "Pachuca",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "161558",
@@ -32659,7 +32659,7 @@
       "continent": "North America",
       "club": "Leon",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "212256",
@@ -32685,7 +32685,7 @@
       "continent": "North America",
       "club": "Necaxa",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "325890",
@@ -32698,7 +32698,7 @@
       "continent": "North America",
       "club": "Club Queretaro",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "326017",
@@ -32776,7 +32776,7 @@
       "continent": "North America",
       "club": "Atlas",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "102497",
@@ -32802,7 +32802,7 @@
       "continent": "North America",
       "club": "FC Juarez",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "289144",
@@ -32828,7 +32828,7 @@
       "continent": "North America",
       "club": "Tigres UANL",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "372143",
@@ -32839,9 +32839,9 @@
       "dominant_foot": "Unknown",
       "country": "Mexico",
       "continent": "North America",
-      "club": "FC Juarez",
+      "club": "Necaxa",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "374039",
@@ -32854,7 +32854,7 @@
       "continent": "South America",
       "club": "Puebla",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "409593",
@@ -32867,7 +32867,7 @@
       "continent": "North America",
       "club": "Necaxa",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "268384",
@@ -32880,7 +32880,7 @@
       "continent": "North America",
       "club": "Leon",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "271081",
@@ -32893,7 +32893,7 @@
       "continent": "North America",
       "club": "Atlas",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "286662",
@@ -32906,7 +32906,7 @@
       "continent": "North America",
       "club": "U.N.A.M. - Pumas",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "299945",
@@ -32919,7 +32919,7 @@
       "continent": "North America",
       "club": "FC Juarez",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "372100",
@@ -32932,7 +32932,7 @@
       "continent": "North America",
       "club": "FC Juarez",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "407383",
@@ -32945,7 +32945,7 @@
       "continent": "North America",
       "club": "Monterrey",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "436534",
@@ -32958,7 +32958,7 @@
       "continent": "North America",
       "club": "Monterrey",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "454032",
@@ -32971,7 +32971,7 @@
       "continent": "North America",
       "club": "Monterrey",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "460817",
@@ -32984,7 +32984,7 @@
       "continent": "North America",
       "club": "Santos Laguna",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "461408",
@@ -32997,7 +32997,7 @@
       "continent": "North America",
       "club": "Santos Laguna",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "461409",
@@ -33010,7 +33010,7 @@
       "continent": "North America",
       "club": "Santos Laguna",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "474583",
@@ -33023,7 +33023,7 @@
       "continent": "North America",
       "club": "Leon",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "474588",
@@ -33036,7 +33036,7 @@
       "continent": "North America",
       "club": "Monterrey",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "475937",
@@ -33049,7 +33049,7 @@
       "continent": "North America",
       "club": "Necaxa",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "237187",
@@ -33062,7 +33062,7 @@
       "continent": "North America",
       "club": "Pachuca",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "300931",
@@ -33075,7 +33075,7 @@
       "continent": "North America",
       "club": "Necaxa",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "303049",
@@ -33088,7 +33088,7 @@
       "continent": "North America",
       "club": "Necaxa",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "344179",
@@ -33101,7 +33101,7 @@
       "continent": "North America",
       "club": "Necaxa",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "351020",
@@ -33114,7 +33114,7 @@
       "continent": "North America",
       "club": "Toluca",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "351593",
@@ -33127,7 +33127,7 @@
       "continent": "North America",
       "club": "Toluca",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "364296",
@@ -33140,7 +33140,7 @@
       "continent": "North America",
       "club": "Puebla",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "407340",
@@ -33153,7 +33153,7 @@
       "continent": "North America",
       "club": "Puebla",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "407363",
@@ -33166,7 +33166,7 @@
       "continent": "North America",
       "club": "Pachuca",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "414156",
@@ -33179,7 +33179,7 @@
       "continent": "North America",
       "club": "Necaxa",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "427359",
@@ -33192,7 +33192,7 @@
       "continent": "North America",
       "club": "Mazatlán",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "449314",
@@ -33205,7 +33205,7 @@
       "continent": "North America",
       "club": "Santos Laguna",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "474545",
@@ -33218,7 +33218,7 @@
       "continent": "North America",
       "club": "Toluca",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "478170",
@@ -33231,7 +33231,7 @@
       "continent": "North America",
       "club": "Toluca",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "15388",
@@ -33270,7 +33270,7 @@
       "continent": "North America",
       "club": "Leon",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "216526",
@@ -33307,9 +33307,9 @@
       "dominant_foot": "Unknown",
       "country": "Mexico",
       "continent": "North America",
-      "club": "Guadalajara Chivas",
+      "club": "Pachuca",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "371227",
@@ -33322,7 +33322,7 @@
       "continent": "North America",
       "club": "Pachuca",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "453099",
@@ -33346,9 +33346,9 @@
       "dominant_foot": "Unknown",
       "country": "Mexico",
       "continent": "North America",
-      "club": "FC Juarez",
+      "club": "Monterrey",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "13969",
@@ -33452,7 +33452,7 @@
       "continent": "North America",
       "club": "Club Tijuana",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "355454",
@@ -33699,7 +33699,7 @@
       "continent": "North America",
       "club": "Club Tijuana",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "133216",
@@ -33725,7 +33725,7 @@
       "continent": "North America",
       "club": "U.N.A.M. - Pumas",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "237098",
@@ -33775,9 +33775,9 @@
       "dominant_foot": "Unknown",
       "country": "Mexico",
       "continent": "North America",
-      "club": "Club Queretaro",
+      "club": "Monterrey",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "328826",
@@ -33816,7 +33816,7 @@
       "continent": "North America",
       "club": "FC Juarez",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "297145",
@@ -33827,9 +33827,9 @@
       "dominant_foot": "Unknown",
       "country": "Mexico",
       "continent": "North America",
-      "club": "Puebla",
+      "club": "Necaxa",
       "position": "Defender",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "358091",
@@ -33931,9 +33931,9 @@
       "dominant_foot": "Unknown",
       "country": "Mexico",
       "continent": "North America",
-      "club": "Leon",
+      "club": "Pachuca",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "350630",
@@ -33998,7 +33998,7 @@
       "continent": "North America",
       "club": "Tigres UANL",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "403700",
@@ -34061,9 +34061,9 @@
       "dominant_foot": "Unknown",
       "country": "Mexico",
       "continent": "North America",
-      "club": "Mazatlán",
+      "club": "Guadalajara Chivas",
       "position": "Midfielder",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "195704",
@@ -34100,9 +34100,9 @@
       "dominant_foot": "Unknown",
       "country": "Mexico",
       "continent": "North America",
-      "club": "Puebla",
+      "club": "Santos Laguna",
       "position": "Attacker",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "281743",
@@ -34284,7 +34284,7 @@
       "continent": "North America",
       "club": "Santos Laguna",
       "position": "Goalkeeper",
-      "league": "Leagues Cup"
+      "league": "Liga MX"
     },
     {
       "player_id": "50819",
@@ -35871,6 +35871,2073 @@
       "club": "Los Angeles FC",
       "position": "Attacker",
       "league": "Major League Soccer"
+    },
+    {
+      "player_id": "119193",
+      "name": "L. Olivas",
+      "age": 25,
+      "height_cm": 182,
+      "weight_kg": 88,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Mazatlán",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "323869",
+      "name": "L. Nájera",
+      "age": 22,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tigres UANL",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "357997",
+      "name": "A. Montaño",
+      "age": 23,
+      "height_cm": 175,
+      "weight_kg": 65,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Mazatlán",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "36166",
+      "name": "R. Sandoval",
+      "age": 25,
+      "height_cm": 176,
+      "weight_kg": 60,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Queretaro",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "125607",
+      "name": "J. Gamboa",
+      "age": 24,
+      "height_cm": 169,
+      "weight_kg": 58,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Toluca",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "237097",
+      "name": "B. El-mesmari",
+      "age": 23,
+      "height_cm": 161,
+      "weight_kg": 57,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "339650",
+      "name": "E. Ayón",
+      "age": 24,
+      "height_cm": 177,
+      "weight_kg": 63,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Queretaro",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "374360",
+      "name": "S. Martínez",
+      "age": 22,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "379309",
+      "name": "L. Palestina",
+      "age": 21,
+      "height_cm": 183,
+      "weight_kg": 79,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "379310",
+      "name": "J. Blanco",
+      "age": 23,
+      "height_cm": 168,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "35622",
+      "name": "J. Cortés",
+      "age": 25,
+      "height_cm": 183,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Necaxa",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "35669",
+      "name": "R. de la Rosa",
+      "age": 25,
+      "height_cm": 177,
+      "weight_kg": 73,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Pachuca",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "269358",
+      "name": "J. Salazar",
+      "age": 22,
+      "height_cm": 174,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Leon",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "317280",
+      "name": "L. de los Santos",
+      "age": 24,
+      "height_cm": 182,
+      "weight_kg": 80,
+      "dominant_foot": "Unknown",
+      "country": "Uruguay",
+      "continent": "South America",
+      "club": "Puebla",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "378973",
+      "name": "Manuel Carrillo",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Tijuana",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "381326",
+      "name": "P. Budib",
+      "age": 21,
+      "height_cm": 190,
+      "weight_kg": 75,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Leon",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "428072",
+      "name": "Daniel Vázquez Contreras",
+      "age": 22,
+      "height_cm": 172,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Tijuana",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "463863",
+      "name": "A. Gutiérrez",
+      "age": 18,
+      "height_cm": 172,
+      "weight_kg": 67,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Leon",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "179508",
+      "name": "Luis Armando Flores Gómez",
+      "age": 24,
+      "height_cm": 173,
+      "weight_kg": 60,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Atlas",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "237246",
+      "name": "A. Delgado",
+      "age": 23,
+      "height_cm": 173,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tigres UANL",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "295607",
+      "name": "F. González",
+      "age": 24,
+      "height_cm": 177,
+      "weight_kg": 58,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tigres UANL",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "365979",
+      "name": "L. Prieto",
+      "age": 24,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tigres UANL",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "404868",
+      "name": "M. Aguilar",
+      "age": 21,
+      "height_cm": 175,
+      "weight_kg": 63,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tigres UANL",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "416908",
+      "name": "C. Galicia",
+      "age": 21,
+      "height_cm": 170,
+      "weight_kg": 65,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Tijuana",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "428065",
+      "name": "J. Ramírez",
+      "age": 22,
+      "height_cm": 178,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Santos Laguna",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "428073",
+      "name": "M. Hernández",
+      "age": 19,
+      "height_cm": 172,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "U.N.A.M. - Pumas",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "454542",
+      "name": "J. Castro",
+      "age": 21,
+      "height_cm": 182,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Tijuana",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "456580",
+      "name": "P. Jurado",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Toluca",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "458362",
+      "name": "L. Carrillo",
+      "age": 19,
+      "height_cm": 179,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Mazatlán",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "459844",
+      "name": "L. Egurrola",
+      "age": 21,
+      "height_cm": 173,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Atlas",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "35881",
+      "name": "A. Organista",
+      "age": 25,
+      "height_cm": 162,
+      "weight_kg": 51,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Guadalajara Chivas",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "195856",
+      "name": "R. Martínez",
+      "age": 23,
+      "height_cm": 180,
+      "weight_kg": 83,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "196318",
+      "name": "Gilberto García",
+      "age": 25,
+      "height_cm": 177,
+      "weight_kg": 67,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Guadalajara Chivas",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "325260",
+      "name": "J. Díaz",
+      "age": 20,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Cruz Azul",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "335593",
+      "name": "Luis Enrique Ledesma Hurtado",
+      "age": 21,
+      "height_cm": 171,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Guadalajara Chivas",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "350602",
+      "name": "M. Pedroza",
+      "age": 22,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Necaxa",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "379311",
+      "name": "R. Orquin",
+      "age": 22,
+      "height_cm": 177,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "387350",
+      "name": "Daniel Xavier Cervantes Michel",
+      "age": 22,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Atlas",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "404003",
+      "name": "A. Bravo",
+      "age": 24,
+      "height_cm": 175,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Atlas",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "424701",
+      "name": "J. Orantes",
+      "age": 19,
+      "height_cm": 182,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Necaxa",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "427358",
+      "name": "H. López",
+      "age": 21,
+      "height_cm": 178,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Mazatlán",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "466150",
+      "name": "S. Álvarez",
+      "age": 21,
+      "height_cm": 178,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Atlas",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "154854",
+      "name": "M. Carreón",
+      "age": 20,
+      "height_cm": 163,
+      "weight_kg": 54,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "U.N.A.M. - Pumas",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "282256",
+      "name": "A. Estrada",
+      "age": 22,
+      "height_cm": 182,
+      "weight_kg": 58,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Pachuca",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "287780",
+      "name": "Neskes",
+      "age": 24,
+      "height_cm": 178,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "Spain",
+      "continent": "Europe",
+      "club": "Guadalajara Chivas",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "290647",
+      "name": "R. López",
+      "age": 23,
+      "height_cm": 177,
+      "weight_kg": 71,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Pachuca",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "316520",
+      "name": "D. Abreu",
+      "age": 22,
+      "height_cm": 189,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Uruguay",
+      "continent": "South America",
+      "club": "Toluca",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "428060",
+      "name": "E. Mata",
+      "age": 21,
+      "height_cm": 181,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Mazatlán",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "437332",
+      "name": "Á. Jordán",
+      "age": 19,
+      "height_cm": 180,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Monterrey",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "454035",
+      "name": "E. Moreno",
+      "age": 21,
+      "height_cm": 172,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Atlas",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "454336",
+      "name": "E. Torres",
+      "age": 21,
+      "height_cm": 179,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Leon",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "458361",
+      "name": "Ó. Alba",
+      "age": 20,
+      "height_cm": 168,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Leon",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "474584",
+      "name": "Y. Ortiz",
+      "age": 18,
+      "height_cm": 172,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Leon",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "474586",
+      "name": "J. Reyes",
+      "age": 20,
+      "height_cm": 174,
+      "weight_kg": 69,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Leon",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "6392",
+      "name": "A. Urzi",
+      "age": 25,
+      "height_cm": 170,
+      "weight_kg": 61,
+      "dominant_foot": "Unknown",
+      "country": "Argentina",
+      "continent": "South America",
+      "club": "FC Juarez",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "157904",
+      "name": "L. Jiménez",
+      "age": 23,
+      "height_cm": 176,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Guadalajara Chivas",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "237212",
+      "name": "J. Martínez",
+      "age": 23,
+      "height_cm": 175,
+      "weight_kg": 73,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Monterrey",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "316511",
+      "name": "G. Pelúa",
+      "age": 22,
+      "height_cm": 180,
+      "weight_kg": 63,
+      "dominant_foot": "Unknown",
+      "country": "Uruguay",
+      "continent": "South America",
+      "club": "FC Juarez",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "329501",
+      "name": "B. Romero",
+      "age": 22,
+      "height_cm": 185,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "FC Juarez",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "333857",
+      "name": "R. Guerrero",
+      "age": 22,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Cruz Azul",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "344988",
+      "name": "M. Reyes",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Guadalajara Chivas",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "453051",
+      "name": "L. Jiménez",
+      "age": 21,
+      "height_cm": 195,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Cruz Azul",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "35990",
+      "name": "G. Vázquez",
+      "age": 24,
+      "height_cm": 175,
+      "weight_kg": 64,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Tijuana",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "153152",
+      "name": "O. Botello",
+      "age": 24,
+      "height_cm": 171,
+      "weight_kg": 67,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Monterrey",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "195226",
+      "name": "U. García",
+      "age": 24,
+      "height_cm": 180,
+      "weight_kg": 73,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Guadalajara Chivas",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "325814",
+      "name": "M. Sánchez",
+      "age": 22,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Guadalajara Chivas",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "407584",
+      "name": "N. Bedolla",
+      "age": 19,
+      "height_cm": 180,
+      "weight_kg": 75,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "440236",
+      "name": "L. Ortiz",
+      "age": 19,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Monterrey",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "485962",
+      "name": "José Sánchez",
+      "age": 18,
+      "height_cm": 180,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Queretaro",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "493641",
+      "name": "Jose Quiroz",
+      "age": 19,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Queretaro",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "95234",
+      "name": "F. Ovelar",
+      "age": 21,
+      "height_cm": 170,
+      "weight_kg": 67,
+      "dominant_foot": "Unknown",
+      "country": "Paraguay",
+      "continent": "South America",
+      "club": "Pachuca",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "383971",
+      "name": "E. Velázco",
+      "age": 21,
+      "height_cm": 178,
+      "weight_kg": 71,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Tijuana",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "454039",
+      "name": "J. Flores",
+      "age": 22,
+      "height_cm": 186,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "USA",
+      "continent": "North America",
+      "club": "Pachuca",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "503203",
+      "name": "M. Cabañas",
+      "age": 20,
+      "height_cm": 184,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Pachuca",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "36114",
+      "name": "Z. Muñoz",
+      "age": 24,
+      "height_cm": 171,
+      "weight_kg": 54,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Guadalajara Chivas",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "194889",
+      "name": "D. Zago",
+      "age": 23,
+      "height_cm": 170,
+      "weight_kg": 63,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Puebla",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "265678",
+      "name": "C. Torres",
+      "age": 21,
+      "height_cm": 178,
+      "weight_kg": 69,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tapatío",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "297300",
+      "name": "D. Guajardo",
+      "age": 23,
+      "height_cm": 166,
+      "weight_kg": 64,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tapatío",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "390001",
+      "name": "L. Jiménez",
+      "age": 22,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tapatío",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "392745",
+      "name": "B. Téllez",
+      "age": 20,
+      "height_cm": 191,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tapatío",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "403095",
+      "name": "E. Montiel",
+      "age": 21,
+      "height_cm": 186,
+      "weight_kg": 76,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tapatío",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "407369",
+      "name": "Isaac Martinez",
+      "age": 19,
+      "height_cm": 174,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tapatío",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "413932",
+      "name": "D. Villaseca",
+      "age": 22,
+      "height_cm": 184,
+      "weight_kg": 69,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tapatío",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "479349",
+      "name": "M. Anaya",
+      "age": 20,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tapatío",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "127235",
+      "name": "M. García",
+      "age": 25,
+      "height_cm": 164,
+      "weight_kg": 62,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Queretaro",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "458402",
+      "name": "Vinícius Côrtes",
+      "age": 20,
+      "height_cm": 174,
+      "weight_kg": 58,
+      "dominant_foot": "Unknown",
+      "country": "Brazil",
+      "continent": "South America",
+      "club": "Puebla",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "126704",
+      "name": "S. Abdullahi",
+      "age": 24,
+      "height_cm": 181,
+      "weight_kg": 77,
+      "dominant_foot": "Unknown",
+      "country": "Nigeria",
+      "continent": "Africa",
+      "club": "FC Juarez",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "335369",
+      "name": "E. Castro",
+      "age": 23,
+      "height_cm": 188,
+      "weight_kg": 87,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Santos Laguna",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "402914",
+      "name": "M. Cordero",
+      "age": 22,
+      "height_cm": 179,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Santos Laguna",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "498963",
+      "name": "Ronaldo Rubio",
+      "age": 21,
+      "height_cm": 177,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Santos Laguna",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "518670",
+      "name": "Isaác Gómez",
+      "age": 21,
+      "height_cm": 178,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Santos Laguna",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "355948",
+      "name": "O. Pérez",
+      "age": 23,
+      "height_cm": 172,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Atletico San Luis",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "394233",
+      "name": "A. Valenzuela",
+      "age": 22,
+      "height_cm": 170,
+      "weight_kg": 61,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Tijuana",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "417936",
+      "name": "F. González",
+      "age": 23,
+      "height_cm": 179,
+      "weight_kg": 75,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Atletico San Luis",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "428054",
+      "name": "Luis Cañamar",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Atletico San Luis",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "428056",
+      "name": "Samuel Andani González Naranjo",
+      "age": 22,
+      "height_cm": 173,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Puebla",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "449315",
+      "name": "M. Sánchez",
+      "age": 19,
+      "height_cm": 174,
+      "weight_kg": 62,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "U.N.A.M. - Pumas",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "498364",
+      "name": "Diego Araujo",
+      "age": 22,
+      "height_cm": 181,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Queretaro",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "499030",
+      "name": "Diego Villaluz",
+      "age": 19,
+      "height_cm": 166,
+      "weight_kg": 58,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "U.N.A.M. - Pumas",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "505333",
+      "name": "S. Espinosa",
+      "age": 22,
+      "height_cm": 182,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Mazatlán",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "505850",
+      "name": "R. Elicerio",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Atletico San Luis",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "506551",
+      "name": "Emanuel Ley",
+      "age": 19,
+      "height_cm": 180,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Tijuana",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "508015",
+      "name": "K. Carranza",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "U.N.A.M. - Pumas",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "513756",
+      "name": "Diego Emilio Sánchez Torres",
+      "age": 19,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Tijuana",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "519174",
+      "name": "A. Zavala",
+      "age": 23,
+      "height_cm": 190,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Puebla",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "408775",
+      "name": "A. Moreno",
+      "age": 20,
+      "height_cm": 171,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Necaxa",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "492836",
+      "name": "Ricardo Jiménez",
+      "age": 19,
+      "height_cm": 179,
+      "weight_kg": 67,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Necaxa",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "492907",
+      "name": "C. Valdivia",
+      "age": 20,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Cruz Azul",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "505344",
+      "name": "J. Duran",
+      "age": 20,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Cruz Azul",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "505915",
+      "name": "C. Mora",
+      "age": 20,
+      "height_cm": 174,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Leon",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "511850",
+      "name": "K. Borges",
+      "age": 20,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "U.N.A.M. - Pumas",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "512853",
+      "name": "L. Becerra",
+      "age": 19,
+      "height_cm": 172,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Necaxa",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "289602",
+      "name": "Y. Shtrimling",
+      "age": 22,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Israel",
+      "continent": "-",
+      "club": "Club America",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "371762",
+      "name": "C. Vela",
+      "age": 21,
+      "height_cm": 167,
+      "weight_kg": 67,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "374005",
+      "name": "F. García",
+      "age": 22,
+      "height_cm": 185,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "387349",
+      "name": "J. Guzmán",
+      "age": 22,
+      "height_cm": 175,
+      "weight_kg": 66,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Atlas",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "407585",
+      "name": "L. Navarrete",
+      "age": 19,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Toluca",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "428057",
+      "name": "D. Torres",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Puebla",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "449319",
+      "name": "A. Fernández de Lara",
+      "age": 19,
+      "height_cm": 168,
+      "weight_kg": 52,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "505331",
+      "name": "S. Vallejo",
+      "age": 21,
+      "height_cm": 178,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "505332",
+      "name": "D. Alvarado",
+      "age": 21,
+      "height_cm": 167,
+      "weight_kg": 58,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "505345",
+      "name": "R. Esparza",
+      "age": 19,
+      "height_cm": 179,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Cruz Azul",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "505748",
+      "name": "Angel Contreras",
+      "age": 20,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "505749",
+      "name": "Luis Camarena",
+      "age": 21,
+      "height_cm": 181,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "505750",
+      "name": "César Lugo",
+      "age": 22,
+      "height_cm": 187,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club America",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "515682",
+      "name": "Joan Nungaray",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Puebla",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "35549",
+      "name": "J. Martínez",
+      "age": 25,
+      "height_cm": 178,
+      "weight_kg": 64,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Monterrey",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "194502",
+      "name": "S. Zamora",
+      "age": 22,
+      "height_cm": 172,
+      "weight_kg": 67,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Guadalajara Chivas",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "208666",
+      "name": "A. Ramos",
+      "age": 22,
+      "height_cm": 183,
+      "weight_kg": 64,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tigres UANL",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "350665",
+      "name": "K. Jaime",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tigres UANL",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "353766",
+      "name": "L. Basulto",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Monterrey",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "453891",
+      "name": "D. Delgadillo",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Guadalajara Chivas",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "454635",
+      "name": "Wanderson",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Brazil",
+      "continent": "South America",
+      "club": "Toluca",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "499025",
+      "name": "Jose Eduardo Castillo",
+      "age": 21,
+      "height_cm": 178,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Pachuca",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "502471",
+      "name": "Oscar Isaac Soto Garza",
+      "age": 20,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Monterrey",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "505393",
+      "name": "Tristhan Jaimes",
+      "age": 22,
+      "height_cm": 173,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Puebla",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "516947",
+      "name": "I. Aceves",
+      "age": 20,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tigres UANL",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "519519",
+      "name": "Diego Ramirez",
+      "age": 18,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tigres UANL",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "129931",
+      "name": "E. Lara",
+      "age": 23,
+      "height_cm": 180,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Necaxa",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "297208",
+      "name": "L. Rey",
+      "age": 23,
+      "height_cm": 189,
+      "weight_kg": 70,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tapatío",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "351920",
+      "name": "J. Rojas",
+      "age": 23,
+      "height_cm": 176,
+      "weight_kg": 67,
+      "dominant_foot": "Unknown",
+      "country": "Colombia",
+      "continent": "South America",
+      "club": "Necaxa",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "516945",
+      "name": "A. Gutierrez",
+      "age": 17,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Necaxa",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "51068",
+      "name": "E. Álvarez",
+      "age": 23,
+      "height_cm": 173,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Tijuana",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "237240",
+      "name": "E. García",
+      "age": 23,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tapatío",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "283943",
+      "name": "M. Gómez",
+      "age": 23,
+      "height_cm": 173,
+      "weight_kg": 64,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tapatío",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "325815",
+      "name": "S. Pérez Bouquet",
+      "age": 22,
+      "height_cm": 165,
+      "weight_kg": 57,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "FC Juarez",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "405564",
+      "name": "R. Torres",
+      "age": 21,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Necaxa",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "413060",
+      "name": "R. Árciga",
+      "age": 21,
+      "height_cm": 176,
+      "weight_kg": 66,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Mazatlán",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "424694",
+      "name": "J. Álvarez",
+      "age": 22,
+      "height_cm": 172,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Club Tijuana",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "453887",
+      "name": "H. Camberos",
+      "age": 18,
+      "height_cm": 168,
+      "weight_kg": 60,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Tapatío",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "35573",
+      "name": "A. Gutiérrez",
+      "age": 25,
+      "height_cm": 173,
+      "weight_kg": 74,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Cruz Azul",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "167014",
+      "name": "F. Ambríz",
+      "age": 22,
+      "height_cm": 181,
+      "weight_kg": 66,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Leon",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "278340",
+      "name": "V. Rodríguez",
+      "age": 24,
+      "height_cm": 173,
+      "weight_kg": 71,
+      "dominant_foot": "Unknown",
+      "country": "Uruguay",
+      "continent": "South America",
+      "club": "Pachuca",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "286663",
+      "name": "I. Violante",
+      "age": 22,
+      "height_cm": 173,
+      "weight_kg": 69,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Toluca",
+      "position": "Attacker",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "290059",
+      "name": "J. Orozco",
+      "age": 23,
+      "height_cm": 189,
+      "weight_kg": 76,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Guadalajara Chivas",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "310199",
+      "name": "R. Huescas",
+      "age": 22,
+      "height_cm": 172,
+      "weight_kg": 69,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Cruz Azul",
+      "position": "Defender",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "371226",
+      "name": "M. Rodríguez",
+      "age": 22,
+      "height_cm": 177,
+      "weight_kg": 73,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Pachuca",
+      "position": "Midfielder",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "312468",
+      "name": "Álex Padilla",
+      "age": 22,
+      "height_cm": 190,
+      "weight_kg": 83,
+      "dominant_foot": "Unknown",
+      "country": "Spain",
+      "continent": "Europe",
+      "club": "U.N.A.M. - Pumas",
+      "position": "Goalkeeper",
+      "league": "Liga MX"
+    },
+    {
+      "player_id": "498964",
+      "name": "Héctor Carranza",
+      "age": 21,
+      "height_cm": 168,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Mexico",
+      "continent": "North America",
+      "club": "Santos Laguna",
+      "position": "Midfielder",
+      "league": "Liga MX"
     }
   ]
 }
