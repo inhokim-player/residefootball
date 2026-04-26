@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-26T13:26:36.778Z",
+  "updated_at": "2026-04-26T13:26:57.937Z",
   "season": "2024",
-  "leagues_done": 9,
+  "leagues_done": 10,
   "leagues_total": 110,
-  "players_count": 4,
+  "players_count": 6,
   "items": [
     {
       "player_id": "495038",
@@ -56,6 +56,32 @@
       "club": "Gent",
       "position": "Defender",
       "league": "Jupiler Pro League"
+    },
+    {
+      "player_id": "497706",
+      "name": "C. Hamill",
+      "age": 16,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Scotland",
+      "continent": "Europe",
+      "club": "ST Johnstone",
+      "position": "Defender",
+      "league": "Premiership"
+    },
+    {
+      "player_id": "506393",
+      "name": "J. Forrest",
+      "age": 16,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Scotland",
+      "continent": "Europe",
+      "club": "Dundee Utd",
+      "position": "Midfielder",
+      "league": "Premiership"
     }
   ]
 }
