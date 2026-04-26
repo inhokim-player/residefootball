@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-26T13:30:14.445Z",
+  "updated_at": "2026-04-26T13:30:37.194Z",
   "season": "2024",
-  "leagues_done": 20,
+  "leagues_done": 21,
   "leagues_total": 110,
-  "players_count": 8,
+  "players_count": 12,
   "items": [
     {
       "player_id": "495038",
@@ -108,6 +108,58 @@
       "club": "Cove Rangers",
       "position": "Midfielder",
       "league": "Challenge Cup"
+    },
+    {
+      "player_id": "464462",
+      "name": "D. Ivanenko",
+      "age": 16,
+      "height_cm": 187,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Ukraine",
+      "continent": "Europe",
+      "club": "Livyi Bereh",
+      "position": "Goalkeeper",
+      "league": "Premier League"
+    },
+    {
+      "player_id": "478540",
+      "name": "D. Zozulia",
+      "age": 16,
+      "height_cm": 177,
+      "weight_kg": 61,
+      "dominant_foot": "Unknown",
+      "country": "Ukraine",
+      "continent": "Europe",
+      "club": "Livyi Bereh",
+      "position": "Midfielder",
+      "league": "Premier League"
+    },
+    {
+      "player_id": "478541",
+      "name": "A. Nazaruk",
+      "age": 16,
+      "height_cm": 181,
+      "weight_kg": 65,
+      "dominant_foot": "Unknown",
+      "country": "Ukraine",
+      "continent": "Europe",
+      "club": "Livyi Bereh",
+      "position": "Midfielder",
+      "league": "Premier League"
+    },
+    {
+      "player_id": "478542",
+      "name": "Y. Myroshnychenko",
+      "age": 16,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Ukraine",
+      "continent": "Europe",
+      "club": "Livyi Bereh",
+      "position": "Midfielder",
+      "league": "Premier League"
     }
   ]
 }
