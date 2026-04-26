@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-26T13:35:36.724Z",
+  "updated_at": "2026-04-26T13:35:57.937Z",
   "season": "2024",
-  "leagues_done": 36,
+  "leagues_done": 37,
   "leagues_total": 110,
-  "players_count": 14,
+  "players_count": 15,
   "items": [
     {
       "player_id": "495038",
@@ -186,6 +186,19 @@
       "club": "Dinamo Zagreb",
       "position": "Attacker",
       "league": "HNL"
+    },
+    {
+      "player_id": "432523",
+      "name": "Saido Balde",
+      "age": 16,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Portugal",
+      "continent": "Europe",
+      "club": "Hamburger SV",
+      "position": "Attacker",
+      "league": "2. Bundesliga"
     }
   ]
 }
