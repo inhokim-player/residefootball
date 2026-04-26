@@ -21,7 +21,7 @@
   ],
   "functions": {
     "api/cron/update-players.mjs": {
-      "maxDuration": 300
+      "maxDuration": 800
     }
   },
   "crons": [
