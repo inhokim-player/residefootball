@@ -1,8 +1,22 @@
 {
-  "updated_at": "2026-04-26T13:23:43.991Z",
+  "updated_at": "2026-04-26T13:24:05.846Z",
   "season": "2024",
-  "leagues_done": 1,
+  "leagues_done": 2,
   "leagues_total": 110,
-  "players_count": 0,
-  "items": []
+  "players_count": 1,
+  "items": [
+    {
+      "player_id": "495038",
+      "name": "Javier Zabala",
+      "age": 15,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Spain",
+      "continent": "Europe",
+      "club": "Athletic Club",
+      "position": "Midfielder",
+      "league": "La Liga"
+    }
+  ]
 }
