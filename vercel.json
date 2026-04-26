@@ -19,6 +19,14 @@
       ]
     }
   ],
+  "functions": {
+    "api/cron/update-players.js": {
+      "maxDuration": 300
+    },
+    "api/cron/diagnose-api.js": {
+      "maxDuration": 60
+    }
+  },
   "crons": [
     {
       "path": "/api/cron/update-players",
@@ -26,4 +34,3 @@
     }
   ]
 }
-
