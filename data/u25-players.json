@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-26T13:29:08.541Z",
+  "updated_at": "2026-04-26T13:29:29.808Z",
   "season": "2024",
-  "leagues_done": 17,
+  "leagues_done": 18,
   "leagues_total": 110,
-  "players_count": 7,
+  "players_count": 8,
   "items": [
     {
       "player_id": "495038",
@@ -95,6 +95,19 @@
       "club": "Brann",
       "position": "Goalkeeper",
       "league": "Eliteserien"
+    },
+    {
+      "player_id": "475406",
+      "name": "C. Donaldson",
+      "age": 16,
+      "height_cm": 0,
+      "weight_kg": 0,
+      "dominant_foot": "Unknown",
+      "country": "Scotland",
+      "continent": "Europe",
+      "club": "Cove Rangers",
+      "position": "Midfielder",
+      "league": "Challenge Cup"
     }
   ]
 }
