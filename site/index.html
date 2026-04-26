@@ -658,6 +658,21 @@ body {
     }
     #all-players-jump::-webkit-inner-spin-button,
     #all-players-jump::-webkit-outer-spin-button { opacity: 0.4; }
+/* ── 무한 스크롤 센티넬 ──────────────────────────────────── */
+#infinite-sentinel {
+  height: 40px; display: flex; align-items: center;
+  justify-content: center; color: var(--t3); font-size: 0.72rem;
+}
+#infinite-sentinel.is-hidden { display: none; }
+
+/* ── 💎 보석 선수 뱃지 ───────────────────────────────────── */
+.gem-badge {
+  display: inline-flex; align-items: center;
+  font-size: 0.58rem; font-weight: 800; color: #9333ea;
+  background: rgba(147,51,234,0.1); border-radius: 50px;
+  padding: 0.06rem 0.38rem; margin-left: 0.25rem;
+  vertical-align: middle; letter-spacing: 0.04em;
+}
 </style>
 </head>
 
@@ -732,22 +747,20 @@ body {
   <div class="container-fluid px-3 px-md-4 pb-5">
     <section class="hero">
       <div class="hero-title-row">
-        <h1 class="hero-title" data-i18n="hero.title">World U-25 Football Players Data</h1>
-        <span id="hero-update-pill" class="hero-update-pill">(KST) · …</span>
-        
+        <h1 class="hero-title">
+          <span style="color:var(--brand);">◆</span> World U-25 Football Data
+        </h1>
+        <span class="hero-update-pill" style="background:var(--brand-s);color:var(--brand);font-size:.7rem;font-weight:700;">
+          SCOUTING DIAMOND
+        </span>
       </div>
-      <div class="hero-sub" data-i18n="hero.sub" style="color:var(--t2)">전세계 유망주를 포지션·국가·리그 기준으로 빠르게 탐색하는 스카우팅 전용 화면</div>
+      <!-- hero-update-pill 숨김 (JS 호환용) -->
+      <span id="hero-update-pill" style="display:none"></span>
     </section>
 
-    <!-- FILTER SURFACE — no card box, just chips floating on the page bg -->
+    <!-- FILTER SURFACE -->
     <div class="filter-surface">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;flex-wrap:wrap;gap:0.5rem;">
-        <div>
-          <div style="font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:0.2rem;">WORLD U25 PLAYERS</div>
-          <div id="system-status" style="display:none"></div>
-        </div>
-        
-      </div>
+      <div id="system-status" style="display:none"></div>
 
       <!-- POSITION chips (항상 표시, 접기 없음) -->
       <div class="filter-chip-group" id="fcg-position">
@@ -852,26 +865,10 @@ body {
       </div>
     </div>
 
-    <div class="row g-3 mb-3">
-      <div class="col-6 col-md-3">
-        <div class="kpi-card">
-          <div class="kpi-label" data-i18n="kpi.players">U25 선수 수</div>
-          <div id="kpi-players" class="kpi-value">-</div>
-        </div>
-      </div>
-      <div class="col-6 col-md-3">
-        <div class="kpi-card">
-          <div class="kpi-label" data-i18n="kpi.countries">커버 국가 수</div>
-          <div id="kpi-countries" class="kpi-value">-</div>
-        </div>
-      </div>
-      <div class="col-6 col-md-3">
-        <div class="kpi-card">
-          <div class="kpi-label" data-i18n="kpi.leagues">커버 리그 수</div>
-          <div id="kpi-leagues" class="kpi-value">-</div>
-        </div>
-      </div>
-    </div>
+    <!-- KPI 카드 제거 — hidden IDs 유지 (JS 호환) -->
+    <span id="kpi-players" style="display:none"></span>
+    <span id="kpi-countries" style="display:none"></span>
+    <span id="kpi-leagues" style="display:none"></span>
 
     <div class="row g-3 align-items-start">
       <div class="col-12 col-lg-7 col-xl-7">
@@ -891,6 +888,8 @@ body {
           <div id="all-players-card-grid" class="player-cards-grid">
             <div style="padding:2rem;text-align:center;color:var(--text-tertiary);" data-i18n="state.loading">데이터 로딩 중...</div>
           </div>
+          <!-- 무한 스크롤 센티넬 -->
+          <div id="infinite-sentinel" class="is-hidden">더 불러오는 중...</div>
           <table style="display:none"><tbody id="all-players-body"></tbody></table>
           <div class="pager-wrap">
             <div class="pager-left">
@@ -1658,21 +1657,14 @@ body {
     const REGISTERED_PLAYERS_PATH_FALLBACK = "./data/registered_players.json";
     /** KST 10:00 이후 정적 모드에서 API-Football 크론이 쓰는 당일 오버레이(JSON). */
     const DAILY_PLAYER_UPDATES_PATH = "/data/daily_player_updates.json";
-    const REGISTERED_PLAYERS_CACHE_KEY = "u25_registered_players_cache_v3";
-    // 구버전 캐시 자동 정리 (더미 데이터 캐시 제거)
-    (function cleanOldCaches() {
-      const oldKeys = [
-        "u25_registered_players_cache_v1",
-        "u25_registered_players_cache_v2",
-      ];
-      oldKeys.forEach(k => {
-        try { localStorage.removeItem(k); } catch(e) {}
-      });
-    })();
-
-    const REGISTERED_PLAYERS_CACHE_KEY = "u25_registered_players_cache_v3";
-    // 더미 데이터 완전 제거 — 데이터 없을 때 빈 배열 반환
-    const DEFAULT_REGISTERED_PLAYERS = [];
+    const REGISTERED_PLAYERS_CACHE_KEY = "u25_registered_players_cache_v1";
+    const DEFAULT_REGISTERED_PLAYERS = [
+      { player_id: "237104", name: "Henri", age: 23, height_cm: 0, weight_kg: 0, dominant_foot: "Right", country: "Brazil", continent: "South America", club: "CRB", position: "Defender", league: "-" },
+      { player_id: "182434", name: "D. Beljo", age: 23, height_cm: 0, weight_kg: 0, dominant_foot: "Right", country: "Croatia", continent: "Europe", club: "Dinamo Zagreb", position: "Attacker", league: "-" },
+      { player_id: "153420", name: "G. Wickens", age: 24, height_cm: 0, weight_kg: 0, dominant_foot: "Right", country: "England", continent: "Europe", club: "Lincoln", position: "Goalkeeper", league: "-" },
+      { player_id: "298129", name: "M. Boateng", age: 23, height_cm: 0, weight_kg: 0, dominant_foot: "Right", country: "England", continent: "Europe", club: "Plymouth", position: "Midfielder", league: "-" },
+      { player_id: "272729", name: "D. Huisman", age: 23, height_cm: 0, weight_kg: 0, dominant_foot: "Right", country: "Netherlands", continent: "Europe", club: "FC Eindhoven", position: "Midfielder", league: "-" },
+    ];
     let cachedPlayers = [];
     let latestTop30 = [];
     let lastApiOkAt = 0;
@@ -2097,9 +2089,8 @@ body {
       }
       const cached = loadRegisteredPlayersCache();
       if (cached.length) return cached;
-      // 데이터 없을 때 빈 배열 반환 (더미 데이터 사용 안 함)
-      console.warn("[players] registered_players.json 로드 실패 — 빈 배열 반환");
-      return [];
+      saveRegisteredPlayersCache(DEFAULT_REGISTERED_PLAYERS);
+      return DEFAULT_REGISTERED_PLAYERS.slice();
     }
 
     function keepUnderU25(items) {
@@ -2282,21 +2273,6 @@ body {
 
     function renderRegisteredOnlyMode(items, reason) {
       const list = sortU25Priority(keepUnderU25(items));
-
-      // 데이터가 없을 때 로딩/빈 상태 표시
-      if (!list.length) {
-        const grid1 = document.getElementById("top30-card-grid");
-        const grid2 = document.getElementById("all-players-card-grid");
-        const emptyMsg = `<div style="padding:3rem;text-align:center;color:var(--t3);">
-          <div style="font-size:1.2rem;margin-bottom:0.5rem;">데이터 준비 중</div>
-          <div style="font-size:0.85rem;">매일 KST 06:00에 자동 업데이트됩니다.</div>
-        </div>`;
-        if (grid1) grid1.innerHTML = emptyMsg;
-        if (grid2) grid2.innerHTML = emptyMsg;
-        console.warn("[render] 선수 데이터 없음 — registered_players.json 확인 필요");
-        return;
-      }
-
       cachedPlayers = list.slice();
       // ── Apply client-side sort (for age + any sort in registered-only mode) ─
       const _sortBy    = document.getElementById("sort-by")?.value    || "";
@@ -4313,10 +4289,175 @@ body {
 
 
     /* ================================================================
-       UX LAYER — design-only, no data logic touched
+       UX LAYER — 무한 스크롤 + 💎 보석 뱃지
     ================================================================ */
     (function UXLayer() {
       'use strict';
+
+      // ── 무한 스크롤 ──────────────────────────────────────────────
+      const BATCH = 30; // 한 번에 추가 렌더링할 수
+      let _infiniteActive = false;
+
+      function setupInfiniteScroll() {
+        const sentinel = document.getElementById('infinite-sentinel');
+        if (!sentinel) return;
+
+        const observer = new IntersectionObserver((entries) => {
+          if (!entries[0].isIntersecting || _infiniteActive) return;
+          if (typeof allPlayersRows === 'undefined') return;
+
+          const grid  = document.getElementById('all-players-card-grid');
+          const total = allPlayersRows.length;
+          const rendered = grid ? grid.querySelectorAll('.player-card').length : 0;
+
+          if (rendered >= total) {
+            sentinel.classList.add('is-hidden');
+            return;
+          }
+
+          // 다음 배치 렌더링
+          _infiniteActive = true;
+          const slice = allPlayersRows.slice(rendered, rendered + BATCH);
+          const frag  = document.createDocumentFragment();
+          const tmp   = document.createElement('div');
+          tmp.innerHTML = slice.map((row, i) => {
+            const score = typeof compositeStatScore === 'function' ? compositeStatScore(row) : 0;
+            return typeof renderPlayerCard === 'function'
+              ? renderPlayerCard(row, rendered + i, score > 0 ? score : null)
+              : '';
+          }).join('');
+          while (tmp.firstChild) frag.appendChild(tmp.firstChild);
+          if (grid) grid.appendChild(frag);
+
+          // 💎 보석 뱃지 추가 (22세 이하)
+          applyGemBadges(grid);
+
+          sentinel.classList.toggle('is-hidden', rendered + BATCH >= total);
+          _infiniteActive = false;
+        }, { rootMargin: '200px' });
+
+        observer.observe(sentinel);
+      }
+
+      // ── 💎 보석 뱃지: 22세 이하 선수 이름 옆에 표시 ─────────────
+      function applyGemBadges(container) {
+        if (!container) return;
+        container.querySelectorAll('.player-card').forEach(card => {
+          if (card.dataset.gemDone) return;
+          card.dataset.gemDone = '1';
+          const ageEl  = card.querySelector('.player-card__meta');
+          const nameEl = card.querySelector('.player-card__name');
+          if (!ageEl || !nameEl) return;
+          const ageMatch = ageEl.textContent.match(/U(\d+)/);
+          if (!ageMatch) return;
+          const age = Number(ageMatch[1]);
+          if (age <= 22 && !nameEl.querySelector('.gem-badge')) {
+            const badge = document.createElement('span');
+            badge.className = 'gem-badge';
+            badge.textContent = '💎 GEM';
+            nameEl.appendChild(badge);
+          }
+        });
+      }
+
+      // ── renderAllPlayersPage 패치: 첫 배치만 렌더링 ──────────────
+      const _origRenderAll = typeof renderAllPlayersPage === 'function'
+        ? renderAllPlayersPage : null;
+
+      window.renderAllPlayersPage = function() {
+        if (!_origRenderAll) return;
+        _origRenderAll();
+        // 첫 렌더 후 무한 스크롤 설정
+        const grid = document.getElementById('all-players-card-grid');
+        applyGemBadges(grid);
+        const sentinel = document.getElementById('infinite-sentinel');
+        if (sentinel && typeof allPlayersRows !== 'undefined') {
+          const total    = allPlayersRows.length;
+          const rendered = grid ? grid.querySelectorAll('.player-card').length : 0;
+          sentinel.classList.toggle('is-hidden', rendered >= total);
+        }
+        _infiniteActive = false;
+      };
+
+      // ── TOP 버튼 ──────────────────────────────────────────────────
+      const topBtn = document.createElement('button');
+      topBtn.id = 'btn-top';
+      topBtn.setAttribute('aria-label', 'Back to top');
+      topBtn.innerHTML = '&#8679;';
+      document.body.appendChild(topBtn);
+      let _ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!_ticking) {
+          requestAnimationFrame(() => {
+            topBtn.classList.toggle('visible', window.scrollY > 300);
+            _ticking = false;
+          });
+          _ticking = true;
+        }
+      }, { passive: true });
+      topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // ── 칩 탄성 클릭 ─────────────────────────────────────────────
+      document.addEventListener('click', (e) => {
+        const t = e.target.closest('.filter-chip, #apply-filter, #reset-filter, .btn-primary');
+        if (!t) return;
+        t.style.transform = 'scale(0.95)';
+        setTimeout(() => { t.style.transform = ''; }, 150);
+      }, true);
+
+      // ── 스켈레톤 카드 ─────────────────────────────────────────────
+      window._showSkeletons = function(containerId, n) {
+        const el = document.getElementById(containerId);
+        if (!el) return;
+        el.innerHTML = Array.from({ length: n || 6 }).map((_, i) => `
+          <div class="skeleton-card" style="animation-delay:${i * 0.04}s">
+            <div class="skel" style="height:9px;width:32%;margin-bottom:9px;"></div>
+            <div class="skel" style="height:15px;width:68%;margin-bottom:7px;"></div>
+            <div class="skel" style="height:9px;width:52%;margin-bottom:16px;"></div>
+            <div style="display:flex;gap:7px;">
+              <div class="skel" style="flex:1;height:7px;"></div>
+              <div class="skel" style="flex:1;height:7px;"></div>
+              <div class="skel" style="flex:1;height:7px;"></div>
+            </div>
+          </div>`).join('');
+      };
+
+      // ── KPI 카운트업 ──────────────────────────────────────────────
+      window._countUp = function(el, target, ms) {
+        if (!el || !target) return;
+        const dur = ms || 850;
+        const t0  = performance.now();
+        el.classList.add('count-up', 'going');
+        (function tick(now) {
+          const p = Math.min((now - t0) / dur, 1);
+          const e = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * e).toLocaleString();
+          if (p < 1) requestAnimationFrame(tick);
+          else { el.textContent = Number(target).toLocaleString(); el.classList.remove('going'); }
+        })(t0);
+      };
+
+      ['kpi-players','kpi-countries','kpi-leagues'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        new MutationObserver(() => {
+          const v = parseInt(el.textContent.replace(/,/g,''), 10);
+          if (!isNaN(v) && v > 0) window._countUp(el, v);
+        }).observe(el, { childList: true, subtree: true, characterData: true });
+      });
+
+      // 스켈레톤 초기 표시
+      window._showSkeletons('top30-card-grid', 6);
+      window._showSkeletons('all-players-card-grid', 6);
+
+      // 무한 스크롤 초기화
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupInfiniteScroll);
+      } else {
+        setupInfiniteScroll();
+      }
+
+    })(); // end UXLayer
 
       // ── TOP button ────────────────────────────────────────────────
       const topBtn = document.createElement('button');
