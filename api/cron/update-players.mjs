@@ -1,777 +1,509 @@
-function readCronSecretFromRequest(req) {
-  const incomingHeader = String(req.headers["x-cron-secret"] || "").trim();
-  const authRaw = String(req.headers.authorization || "");
-  const bearer = authRaw.toLowerCase().startsWith("bearer ")
-    ? authRaw.slice(7).trim()
-    : "";
-  let fromQuery = "";
+/**
+ * update-players.mjs  v2  —  World U25 Football Players Data
+ *
+ * 핵심 개선:
+ * ① 리그 1개 완료마다 즉시 GitHub에 저장 (타임아웃 방지)
+ * ② 기존 데이터 + 신규 데이터 Merge (덮어쓰기 금지)
+ * ③ Checkpoint: 오늘 완료한 리그는 다음 실행에서 스킵
+ * ④ 간단한 Lock 메커니즘 (중복 실행 방지)
+ */
+
+/* ── 인증 ────────────────────────────────────────────────────── */
+function readSecret(req) {
+  const h = String(req.headers?.["x-cron-secret"] || "").trim();
+  const b = String(req.headers?.authorization || "").replace(/^bearer\s+/i, "").trim();
+  let q = "";
   try {
-    const q = req.query && typeof req.query === "object" ? req.query : null;
-    if (q) {
-      const a = q.secret ?? q.cron_secret;
-      if (Array.isArray(a)) fromQuery = String(a[0] || "").trim();
-      else if (a != null) fromQuery = String(a).trim();
-    }
-  } catch (e) {
-    // ignore
-  }
-  if (!fromQuery) {
-    try {
-      const raw = String(req.url || "");
-      const i = raw.indexOf("?");
-      if (i >= 0) {
-        const sp = new URLSearchParams(raw.slice(i + 1));
-        fromQuery = String(sp.get("secret") || sp.get("cron_secret") || "").trim();
-      }
-    } catch (e) {
-      // ignore
-    }
-  }
-  return { incomingHeader, bearer, fromQuery };
+    const raw = String(req.url || "");
+    const qi  = raw.indexOf("?");
+    if (qi >= 0) q = new URLSearchParams(raw.slice(qi + 1)).get("secret") || "";
+  } catch (_) {}
+  return { h, b, q: String(q).trim() };
 }
 
-export default async function handler(req, res) {
-  if (req.method !== "GET") {
-    return res.status(405).json({ ok: false, error: "method_not_allowed" });
-  }
+/* ── 슬립 ────────────────────────────────────────────────────── */
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-  const cronSecret = process.env.CRON_SECRET || "";
-  if (cronSecret) {
-    const { incomingHeader, bearer, fromQuery } = readCronSecretFromRequest(req);
-    const ok =
-      incomingHeader === cronSecret ||
-      bearer === cronSecret ||
-      fromQuery === cronSecret;
-    if (!ok) {
-      return res.status(401).json({
-        ok: false,
-        error: "unauthorized",
-        hint: "Set the same value as CRON_SECRET using header x-cron-secret, Authorization: Bearer ..., or query ?secret= (query may appear in access logs).",
-      });
-    }
-  }
-
-  // ── 중복 실행 방지: 실행 중 락 파일 체크 ─────────────────────────
-  const githubToken  = String(process.env.GITHUB_TOKEN  || "").trim();
-  const githubRepo   = String(process.env.GITHUB_REPO   || "").trim();
-  const githubBranch = String(process.env.GITHUB_BRANCH || "main").trim();
-  const targetPath   = String(process.env.REGISTERED_PLAYERS_FILE_PATH  || "data/registered_players.json").trim();
-  const dailyPath    = String(process.env.DAILY_PLAYER_UPDATES_FILE_PATH || "data/daily_player_updates.json").trim();
-  const apiFootballKey        = String(process.env.API_FOOTBALL_KEY          || "").trim();
-  const apiFootballPlayersUrl = String(process.env.API_FOOTBALL_PLAYERS_URL  || "").trim();
-  const apiFootballMaxPages   = Math.max(1, Math.min(200, Number(process.env.API_FOOTBALL_MAX_PAGES || 30) || 30));
-
-  const triggerUrl = process.env.API_SYNC_TRIGGER_URL || "";
-  const triggerSecret = process.env.API_SYNC_TRIGGER_SECRET || "";
-  if (triggerUrl) {
-    try {
-      const upstream = await fetch(triggerUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(triggerSecret ? { Authorization: `Bearer ${triggerSecret}` } : {}),
-        },
-        body: JSON.stringify({
-          source: "vercel-cron",
-          at: new Date().toISOString(),
-        }),
-      });
-      const text = await upstream.text();
-      if (!upstream.ok) {
-        return res.status(502).json({
-          ok: false,
-          error: "upstream_failed",
-          status: upstream.status,
-          body_preview: text.slice(0, 180),
-        });
-      }
-      return res.status(200).json({
-        ok: true,
-        mode: "external_trigger",
-        triggered: true,
-        status: upstream.status,
-      });
-    } catch (err) {
-      return res.status(500).json({
-        ok: false,
-        error: "trigger_exception",
-        detail: String(err && err.message ? err.message : err),
-      });
-    }
-  }
-
-
-  if (!apiFootballKey || !apiFootballPlayersUrl) {
-    return res.status(200).json({
-      ok: true,
-      mode: "registered_only",
-      message:
-        "No API_FOOTBALL_KEY / API_FOOTBALL_PLAYERS_URL in Vercel env: this endpoint does not pull players. Set those (and GITHUB_*) to refresh registered_players.json, or set API_SYNC_TRIGGER_URL to call your sync service.",
-      kst_schedule: "10:00",
-    });
-  }
-
-  if (!githubToken || !githubRepo) {
-    return res.status(400).json({
-      ok: false,
-      error: "missing_github_config",
-      message: "Set GITHUB_TOKEN and GITHUB_REPO to persist updated players.",
-    });
-  }
-
-  const canonicalPlayersBase = normalizePlayersEndpoint(apiFootballPlayersUrl);
-  if (!canonicalPlayersBase) {
-    return res.status(400).json({
-      ok: false,
-      error: "invalid_api_players_url",
-      message:
-        "API_FOOTBALL_PLAYERS_URL must target API-Football players endpoint. Example: https://v3.football.api-sports.io/players",
-    });
-  }
-
-  try {
-    const maxAge = Math.max(16, Math.min(24, Number(process.env.API_FOOTBALL_MAX_AGE || 24) || 24));
-    const minAge = 15;
-    const items = await fetchAllApiFootballPlayers({
-      apiFootballPlayersUrl: canonicalPlayersBase,
-      apiFootballKey,
-      maxPages: apiFootballMaxPages,
-      minAge,
-      maxAge,
-    });
-    const u25 = filterUnderAge(items, maxAge);
-    console.log(
-      "[update-players] rows summary:",
-      JSON.stringify({
-        rows_total: items.length,
-        rows_under_u25: u25.length,
-        max_age: maxAge,
-      })
-    );
-    if (!u25.length) {
-      return res.status(200).json({
-        ok: true,
-        mode: "no_u25_data",
-        status: "no_u25_players_found",
-        message: "no_u25_players_found",
-        rows_total: items.length,
-        rows_under_u25: 0,
-        kst_schedule_fixed: "10:00",
-      });
-    }
-
-    const body = JSON.stringify({ items: u25 }, null, 2) + "\n";
-    const saved = await upsertGithubFile({
-      githubToken,
-      githubRepo,
-      githubBranch,
-      path: targetPath,
-      content: body,
-      message: `cron: under-u25 registered players (${u25.length})`,
-    });
-
-    const dailyBody =
-      JSON.stringify(
-        {
-          updated_at: new Date().toISOString(),
-          kst_date: formatDateInTimeZone(new Date(), "Asia/Seoul"),
-          age_min: minAge,
-          age_max: maxAge,
-          players_count: u25.length,
-          source_mode: "api-football-global-u25-market-value",
-          items: u25,
-        },
-        null,
-        2
-      ) + "\n";
-    const savedDaily = await upsertGithubFile({
-      githubToken,
-      githubRepo,
-      githubBranch,
-      path: dailyPath,
-      content: dailyBody,
-      message: `cron: daily U25 overlay (${u25.length})`,
-    });
-
-    return res.status(200).json({
-      ok: true,
-      mode: "api_football_to_github",
-      players: u25.length,
-      max_pages: apiFootballMaxPages,
-      kst_schedule_fixed: "10:00",
-      age_min: minAge,
-      age_max: maxAge,
-      leagues: parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []),
-      season: String(process.env.API_FOOTBALL_SEASON || currentLikelySeasonKst()).trim(),
-      sort: String(process.env.API_FOOTBALL_SORT || "").trim(),
-      path: targetPath,
-      daily_path: dailyPath,
-      commit_sha: saved.commitSha,
-      daily_commit_sha: savedDaily.commitSha,
-    });
-  } catch (err) {
-    return res.status(500).json({
-      ok: false,
-      error: "update_failed",
-      detail: String(err && err.message ? err.message : err),
-    });
-  }
-}
-
-function filterUnderAge(items, maxAge) {
-  const hi = Math.max(1, Number(maxAge || 24));
-  return (items || []).filter((p) => {
-    const a = Number(p?.age);
-    if (!Number.isFinite(a) || a <= 0) return false;
-    return a <= hi;
+/* ── GitHub 파일 읽기 ─────────────────────────────────────────── */
+async function ghGet(token, repo, branch, path) {
+  const url = `https://api.github.com/repos/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`;
+  const res  = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/vnd.github+json",
+    },
   });
+  if (res.status === 404) return { exists: false, sha: "", data: null };
+  if (!res.ok) throw new Error(`gh_read:${res.status}`);
+  const json = await res.json();
+  const content = Buffer.from(json.content || "", "base64").toString("utf8");
+  let data = null;
+  try { data = JSON.parse(content); } catch (_) {}
+  return { exists: true, sha: json.sha, data };
 }
 
-function formatDateInTimeZone(date, tz) {
-  try {
-    return new Intl.DateTimeFormat("en-CA", { timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit" }).format(date);
-  } catch (e) {
-    return new Date(date).toISOString().slice(0, 10);
-  }
-}
-
-function normalizeApiFootballPlayers(payload) {
-  const rows = Array.isArray(payload?.response)
-    ? payload.response
-    : Array.isArray(payload?.items)
-      ? payload.items
-      : Array.isArray(payload)
-        ? payload
-        : [];
-
-  const out = [];
-  for (const row of rows) {
-    const p = row?.player || row || {};
-    const stats0 = Array.isArray(row?.statistics) && row.statistics.length ? row.statistics[0] : {};
-    const team = stats0?.team || {};
-    const league = stats0?.league || {};
-    const birthCountry = String(p?.birth?.country || "").trim();
-    const normalized = normalizeOnePlayer({
-      player_id: String(p?.id || row?.player_id || "").trim(),
-      name: pickPlayerName(p, row),
-      age: resolveAge(p, row),
-      height_cm: parseCm(p?.height || row?.height_cm || row?.height),
-      weight_kg: parseKg(p?.weight || row?.weight_kg || row?.weight),
-      dominant_foot: normalizeFoot(row?.dominant_foot || row?.foot || p?.foot || ""),
-      country: String(p?.nationality || row?.country || birthCountry || "-"),
-      continent: String(row?.continent || inferContinent(p?.nationality || row?.country || birthCountry || "-")),
-      club: String(team?.name || row?.club || "-"),
-      position: String(stats0?.games?.position || row?.position || "-"),
-      league: String(league?.name || row?.league || "-"),
-    });
-    if (normalized) out.push(normalized);
-  }
-  return dedupePlayers(out);
-}
-
-function resolveAge(playerObj, rowObj) {
-  const p = playerObj || {};
-  const r = rowObj || {};
-  const direct = Number(p?.age || r?.age || 0) || 0;
-  if (direct > 0) return direct;
-  const birth =
-    String(p?.birth?.date || r?.birth_date || r?.birth || "").trim();
-  const fromBirth = calcAgeFromBirthDate(birth);
-  return fromBirth > 0 ? fromBirth : 0;
-}
-
-function calcAgeFromBirthDate(isoDateLike) {
-  const raw = String(isoDateLike || "").trim();
-  if (!raw) return 0;
-  const d = new Date(raw);
-  if (Number.isNaN(d.getTime())) return 0;
-  const now = new Date();
-  let age = now.getUTCFullYear() - d.getUTCFullYear();
-  const m = now.getUTCMonth() - d.getUTCMonth();
-  if (m < 0 || (m === 0 && now.getUTCDate() < d.getUTCDate())) age -= 1;
-  return age > 0 ? age : 0;
-}
-
-function pickPlayerName(playerObj, rowObj) {
-  const p = playerObj || {};
-  const full = String(p?.name || rowObj?.name || "").trim();
-  const composed = `${String(p?.firstname || "").trim()} ${String(p?.lastname || "").trim()}`.trim();
-  return full || composed || "";
-}
-
-function normalizeOnePlayer(input) {
-  const playerId = String(input?.player_id || "").trim();
-  const name = cleanName(input?.name);
-  if (!playerId || !name) return null;
-  const country = cleanText(input?.country, "-");
-  return {
-    player_id: playerId,
-    name,
-    age: clampInt(input?.age, 0, 60),
-    height_cm: clampInt(input?.height_cm, 0, 260),
-    weight_kg: clampInt(input?.weight_kg, 0, 200),
-    dominant_foot: normalizeFoot(input?.dominant_foot),
-    country,
-    continent: cleanText(input?.continent, inferContinent(country)),
-    club: cleanText(input?.club, "-"),
-    position: cleanText(input?.position, "-"),
-    league: cleanText(input?.league, "-"),
+/* ── GitHub 파일 쓰기 ─────────────────────────────────────────── */
+async function ghPut(token, repo, branch, path, content, message, sha) {
+  const url = `https://api.github.com/repos/${repo}/contents/${path}`;
+  const body = {
+    message,
+    content: Buffer.from(content, "utf8").toString("base64"),
+    branch,
   };
-}
-
-function dedupePlayers(items) {
-  const byId = new Map();
-  for (const item of items || []) {
-    if (!item?.player_id) continue;
-    byId.set(item.player_id, item);
+  if (sha) body.sha = sha;
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const t = await res.text();
+    throw new Error(`gh_write:${res.status}:${t.slice(0, 120)}`);
   }
-  return Array.from(byId.values());
+  const json = await res.json();
+  return { sha: json.content?.sha || "", commitSha: json.commit?.sha || "" };
 }
 
-function cleanName(v) {
-  const name = String(v || "").replace(/\s+/g, " ").trim();
-  return name && name !== "-" ? name : "";
+/* ── Checkpoint 읽기/쓰기 ─────────────────────────────────────── */
+const CHECKPOINT_PATH = "data/.checkpoint.json";
+
+async function loadCheckpoint(token, repo, branch) {
+  try {
+    const { data } = await ghGet(token, repo, branch, CHECKPOINT_PATH);
+    if (!data) return { date: "", done: [] };
+    return { date: String(data.date || ""), done: Array.isArray(data.done) ? data.done : [] };
+  } catch (_) {
+    return { date: "", done: [] };
+  }
 }
 
-function cleanText(v, fallback = "-") {
-  const text = String(v || "").replace(/\s+/g, " ").trim();
-  return text || fallback;
+async function saveCheckpoint(token, repo, branch, date, done, sha) {
+  try {
+    const content = JSON.stringify({ date, done, updated_at: new Date().toISOString() }, null, 2);
+    const result  = await ghPut(token, repo, branch, CHECKPOINT_PATH, content,
+      `chore: checkpoint (${done.length} leagues done)`, sha);
+    return result.sha;
+  } catch (e) {
+    console.log("[checkpoint] 저장 실패 (무시):", String(e?.message || e));
+    return sha;
+  }
 }
 
-function clampInt(v, min, max) {
-  const n = Number(v || 0);
-  if (!Number.isFinite(n)) return min;
-  return Math.max(min, Math.min(max, Math.floor(n)));
+/* ── Lock ────────────────────────────────────────────────────── */
+const LOCK_PATH    = "data/.lock";
+const LOCK_TIMEOUT = 15; // 분
+
+async function acquireLock(token, repo, branch) {
+  try {
+    const { exists, sha, data } = await ghGet(token, repo, branch, LOCK_PATH);
+    if (exists && data) {
+      const elapsed = (Date.now() - Date.parse(data.at || "")) / 60000;
+      if (!isNaN(elapsed) && elapsed < LOCK_TIMEOUT) {
+        console.log(`[lock] 중복 실행 차단 (${elapsed.toFixed(1)}분 전 시작)`);
+        return { ok: false, sha };
+      }
+    }
+    const content = JSON.stringify({ at: new Date().toISOString() });
+    const result  = await ghPut(token, repo, branch, LOCK_PATH, content,
+      "chore: lock", exists ? sha : undefined);
+    console.log("[lock] 락 생성 완료");
+    return { ok: true, sha: result.sha };
+  } catch (e) {
+    console.log("[lock] 락 오류 (무시하고 진행):", String(e?.message || e));
+    return { ok: true, sha: "" };
+  }
 }
 
-function normalizeFoot(v) {
-  const raw = String(v || "").toLowerCase().trim();
-  if (raw.includes("left")) return "Left";
-  if (raw.includes("right")) return "Right";
-  if (raw.includes("both") || raw.includes("ambi")) return "Both";
-  return "Unknown";
+async function releaseLock(token, repo, branch) {
+  try {
+    const { exists, sha } = await ghGet(token, repo, branch, LOCK_PATH);
+    if (!exists) return;
+    await fetch(`https://api.github.com/repos/${repo}/contents/${LOCK_PATH}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github+json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: "chore: unlock", sha, branch }),
+    });
+    console.log("[lock] 락 해제 완료");
+  } catch (e) {
+    console.log("[lock] 락 해제 실패 (무시):", String(e?.message || e));
+  }
 }
 
+/* ── 데이터 정규화 ────────────────────────────────────────────── */
 function inferContinent(country) {
-  const c = String(country || "").toLowerCase().trim();
-  if (!c || c === "-") return "-";
-  const asia = ["korea", "japan", "china", "qatar", "saudi", "iran", "iraq", "uzbek", "uae", "thailand", "vietnam", "indonesia", "india"];
-  const europe = ["england", "spain", "france", "germany", "italy", "netherlands", "portugal", "belgium", "croatia", "serbia", "denmark", "sweden", "norway"];
-  const africa = ["nigeria", "ghana", "senegal", "morocco", "egypt", "algeria", "tunisia", "cameroon", "ivory coast"];
-  const northAmerica = ["usa", "canada", "mexico", "costa rica", "jamaica", "honduras", "panama"];
-  const southAmerica = ["brazil", "argentina", "uruguay", "colombia", "chile", "ecuador", "peru", "paraguay", "bolivia", "venezuela"];
-  const oceania = ["australia", "new zealand"];
-  if (asia.some((k) => c.includes(k))) return "Asia";
-  if (europe.some((k) => c.includes(k))) return "Europe";
-  if (africa.some((k) => c.includes(k))) return "Africa";
-  if (northAmerica.some((k) => c.includes(k))) return "North America";
-  if (southAmerica.some((k) => c.includes(k))) return "South America";
-  if (oceania.some((k) => c.includes(k))) return "Oceania";
+  const c = String(country || "").toLowerCase();
+  const map = {
+    Asia: ["korea","japan","china","qatar","saudi","iran","iraq","uzbek","uae","thailand","vietnam","indonesia","india","malaysia"],
+    Europe: ["england","spain","france","germany","italy","netherlands","portugal","belgium","croatia","serbia","denmark","sweden","norway","austria","poland","russia","ukraine","romania","greece","turkey","scotland","switzerland","czech","slovakia","hungary","finland","bulgaria","albania","kosovo","lithuania","latvia","estonia","cyprus","bosnia"],
+    Africa: ["nigeria","ghana","senegal","morocco","egypt","algeria","tunisia","cameroon","ivory","south africa","ethiopia","kenya","tanzania","uganda","zimbabwe","zambia"],
+    "North America": ["usa","canada","mexico","costa rica","honduras","panama","guatemala"],
+    "South America": ["brazil","argentina","uruguay","colombia","chile","ecuador","peru","paraguay","bolivia","venezuela"],
+    Oceania: ["australia","new zealand"],
+  };
+  for (const [cont, keys] of Object.entries(map)) {
+    if (keys.some(k => c.includes(k))) return cont;
+  }
   return "-";
 }
 
-// ── Rate limit 딜레이 ────────────────────────────────────────
-const CALL_DELAY_MS  = Number(process.env.API_CALL_DELAY_MS  || 2000); // 호출 간격 (기본 2초, Pro 플랜)
-const RATE_RETRY_MS  = Number(process.env.API_RATE_RETRY_MS  || 10000); // rateLimit 시 재시도 대기
-const MAX_RETRIES    = 3; // rateLimit 재시도 횟수
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+function calcAge(iso) {
+  const d = new Date(String(iso || "").trim());
+  if (isNaN(d.getTime())) return 0;
+  const now = new Date();
+  let age = now.getUTCFullYear() - d.getUTCFullYear();
+  const m = now.getUTCMonth() - d.getUTCMonth();
+  if (m < 0 || (m === 0 && now.getUTCDate() < d.getUTCDate())) age--;
+  return age > 0 ? age : 0;
 }
 
-async function fetchWithRateLimit(url, headers) {
-  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-    const res = await fetch(url, { method: "GET", headers });
-
-    if (res.status === 429) {
-      // Rate limit 초과 — 대기 후 재시도
-      console.log(`[rate-limit] 429 수신 (시도 ${attempt}/${MAX_RETRIES}) → ${RATE_RETRY_MS}ms 대기`);
-      await sleep(RATE_RETRY_MS);
-      continue;
-    }
-
-    if (!res.ok) {
-      const text = await res.text();
-      throw new Error(`api_football_failed:${res.status}:${text.slice(0, 180)}`);
-    }
-
-    const payload = await res.json();
-
-    // API 응답 내 rateLimit 에러 확인
-    const errObj = payload?.errors || {};
-    const errKeys = Object.keys(errObj);
-    if (errKeys.length) {
-      const isRateLimit = errKeys.some(k =>
-        String(errObj[k]).toLowerCase().includes("rate") ||
-        String(errObj[k]).toLowerCase().includes("limit") ||
-        String(errObj[k]).toLowerCase().includes("requests")
-      );
-      if (isRateLimit && attempt < MAX_RETRIES) {
-        console.log(`[rate-limit] API error (시도 ${attempt}/${MAX_RETRIES}):`, JSON.stringify(errObj), `→ ${RATE_RETRY_MS}ms 대기`);
-        await sleep(RATE_RETRY_MS);
-        continue;
-      }
-      console.log("[fetch] API errors:", JSON.stringify(errObj));
-      throw new Error(`api_football_error:${JSON.stringify(errObj)}`);
-    }
-
-    return payload;
-  }
-  throw new Error(`api_football_rate_limit_exceeded: ${MAX_RETRIES}회 재시도 실패`);
+function parseCm(v) { const m = String(v||"").match(/(\d+)/); return m ? Number(m[1]) : 0; }
+function parseKg(v) { const m = String(v||"").match(/(\d+)/); return m ? Number(m[1]) : 0; }
+function normFoot(v) {
+  const r = String(v||"").toLowerCase();
+  if (r.includes("left")) return "Left";
+  if (r.includes("right")) return "Right";
+  if (r.includes("both")||r.includes("ambi")) return "Both";
+  return "Unknown";
 }
+function clamp(v,mn,mx) { const n=Number(v||0); return isFinite(n)?Math.max(mn,Math.min(mx,Math.floor(n))):mn; }
+function clean(v, fb="-") { const x=String(v||"").trim(); return x||fb; }
 
-async function fetchAllApiFootballPlayers({
-  apiFootballPlayersUrl,
-  apiFootballKey,
-  maxPages,
-  minAge,
-  maxAge,
-}) {
-  const headers = {
-    "x-apisports-key": apiFootballKey,
-    Accept: "application/json",
-  };
-  const all = [];
+function normalizePlayers(payload, leagueName) {
+  const rows = Array.isArray(payload?.response) ? payload.response
+             : Array.isArray(payload?.items)    ? payload.items
+             : [];
+  const out  = [];
   const seen = new Set();
-  const leagueUrls = buildLeagueScopedBaseUrls(apiFootballPlayersUrl, minAge, maxAge);
-
-  console.log(`[fetch] 총 URL 수: ${leagueUrls.length} / maxPages: ${maxPages} / 호출간격: ${CALL_DELAY_MS}ms`);
-
-  let callCount = 0;
-
-  for (let i = 0; i < leagueUrls.length; i++) {
-    const oneBaseUrl = leagueUrls[i];
-    let totalPages = 1;
-
-    for (let page = 1; page <= totalPages && page <= maxPages; page++) {
-      const url = buildPagedUrl(oneBaseUrl, page);
-
-      // ── 호출 간격 딜레이 (첫 번째 제외) ───────────────────────
-      if (callCount > 0) await sleep(CALL_DELAY_MS);
-      callCount++;
-
-      console.log(`[fetch #${callCount}] 리그 ${i+1}/${leagueUrls.length} page ${page}/${totalPages} → ${url}`);
-
-      let payload;
-      try {
-        payload = await fetchWithRateLimit(url, headers);
-      } catch (err) {
-        // rateLimit 이외의 에러면 이 리그는 건너뜀
-        console.log(`[fetch] 에러로 리그 건너뜀: ${err.message}`);
-        break;
-      }
-
-      console.log(`[fetch] results: ${payload?.results ?? 0} / paging: ${JSON.stringify(payload?.paging)}`);
-
-      const onePage = normalizeApiFootballPlayers(payload);
-      console.log(`[fetch] 정규화 선수: ${onePage.length}명 / 누적: ${all.length + onePage.filter(p => !seen.has(p.player_id)).length}명`);
-
-      for (const p of onePage) {
-        if (!p.player_id || seen.has(p.player_id)) continue;
-        seen.add(p.player_id);
-        all.push(p);
-      }
-
-      const pagingTotal = Number(payload?.paging?.total || 0);
-      if (pagingTotal > 0) totalPages = pagingTotal;
-      else if (!onePage.length) break;
-    }
-  }
-
-  console.log(`[fetch] 완료 — 총 API 호출: ${callCount}회 / 최종 선수 수: ${all.length}명`);
-  return all;
-}
-
-function parseCsvEnv(value, fallback = []) {
-  const raw = String(value || "").trim();
-  if (!raw) return fallback.slice();
-  return raw
-    .split(",")
-    .map((x) => x.trim())
-    .filter(Boolean);
-}
-
-function currentLikelySeasonKst() {
-  try {
-    const now = new Date();
-    const parts = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Seoul", year: "numeric", month: "numeric" }).formatToParts(now);
-    const year = Number(parts.find((p) => p.type === "year")?.value || 0);
-    const month = Number(parts.find((p) => p.type === "month")?.value || 0);
-    if (!year || !month) return String(new Date().getUTCFullYear());
-    // 유럽 주요 리그 기준: 7월 이전은 이전 시즌으로 간주.
-    return String(month < 7 ? year - 1 : year);
-  } catch (e) {
-    return String(new Date().getUTCFullYear());
-  }
-}
-
-function normalizePlayersEndpoint(rawUrl) {
-  try {
-    const u = new URL(String(rawUrl || "").trim());
-    const isHttps = u.protocol === "https:";
-    const hostOk = /(^|\.)api-sports\.io$/i.test(u.hostname);
-    const pathOk = /\/players\/?$/i.test(u.pathname);
-    if (!isHttps || !hostOk || !pathOk) return "";
-    return `${u.origin}${u.pathname.replace(/\/+$/, "")}`;
-  } catch (e) {
-    return "";
-  }
-}
-
-function buildLeagueScopedBaseUrls(baseUrl, minAge, maxAge) {
-  const season = String(process.env.API_FOOTBALL_SEASON || currentLikelySeasonKst()).trim();
-  const sortExpr = String(process.env.API_FOOTBALL_SORT || "").trim();
-
-  // ── 전체 164개 리그 (전세계 대륙별 완전 커버) ───────────────────
-  // 환경변수 API_FOOTBALL_LEAGUE_IDS가 있으면 그걸 우선 사용
-  const DEFAULT_LEAGUES = [
-    // ── 유럽 1부 ─────────────────────────────────────────────────
-    39,   // England - Premier League
-    140,  // Spain - La Liga
-    78,   // Germany - Bundesliga
-    135,  // Italy - Serie A
-    61,   // France - Ligue 1
-    88,   // Netherlands - Eredivisie
-    94,   // Portugal - Primeira Liga
-    203,  // Turkey - Süper Lig
-    144,  // Belgium - Pro League
-    179,  // Scotland - Premiership
-    197,  // Greece - Super League
-    207,  // Switzerland - Super League
-    218,  // Denmark - Superliga
-    113,  // Norway - Eliteserien
-    103,  // Sweden - Allsvenskan
-    119,  // Austria - Bundesliga
-    168,  // Croatia - HNL
-    182,  // Serbia - Super Liga
-    332,  // Poland - Ekstraklasa
-    235,  // Russia - Premier League
-    333,  // Ukraine - Premier League
-    271,  // Romania - Liga I
-    106,  // Finland - Veikkausliiga
-    383,  // Bulgaria - First League
-    244,  // Slovakia - Fortuna Liga
-    210,  // Hungary - OTP Bank Liga
-    169,  // Czech Republic - Liga
-    283,  // Cyprus - 1st Division
-    233,  // Bosnia - Premier League (중복 제거: 모로코 ID와 다름)
-    286,  // Albania - Superliga
-    291,  // Kosovo - Football Superleague
-    392,  // Lithuania - A Lyga
-    395,  // Latvia - Virsliga
-    398,  // Estonia - Meistriliiga
-    198,  // Greece - Super League 2
-    // ── 유럽 2부 ─────────────────────────────────────────────────
-    40,   // England - Championship
-    141,  // Spain - Segunda División
-    79,   // Germany - 2. Bundesliga
-    136,  // Italy - Serie B
-    62,   // France - Ligue 2
-    89,   // Netherlands - Eerste Divisie
-    95,   // Portugal - Segunda Liga
-    145,  // Belgium - First Amateur
-    208,  // Switzerland - Challenge League
-    // ── 유럽 3부 (잉글랜드) ──────────────────────────────────────
-    45,   // England - League One
-    46,   // England - League Two
-    // ── 아시아 ───────────────────────────────────────────────────
-    292,  // South Korea - K League 1
-    293,  // South Korea - K League 2
-    98,   // Japan - J1 League
-    99,   // Japan - J2 League
-    100,  // Japan - J3 League
-    307,  // Saudi Arabia - Pro League
-    308,  // Saudi Arabia - Division 1
-    322,  // Qatar - Stars League
-    323,  // UAE - Arabian Gulf League
-    324,  // Iran - Persian Gulf Pro League
-    289,  // Thailand - Thai League 1
-    290,  // Thailand - Thai League 2
-    296,  // India - ISL
-    301,  // Indonesia - Liga 1
-    302,  // Vietnam - V.League 1
-    303,  // Malaysia - Super League
-    334,  // Uzbekistan - Super League
-    336,  // Kazakhstan - Premier League
-    351,  // Jordan - Pro League
-    363,  // Bahrain - Premier League
-    369,  // Kuwait - Premier League
-    371,  // Oman - Professional League
-    310,  // Iraq - Premier League
-    294,  // South Korea - K3 League
-    // ── 남미 ─────────────────────────────────────────────────────
-    71,   // Brazil - Série A
-    72,   // Brazil - Série B
-    73,   // Brazil - Série C
-    128,  // Argentina - Liga Profesional
-    129,  // Argentina - Primera Nacional
-    239,  // Colombia - Liga BetPlay
-    240,  // Colombia - Torneo BetPlay
-    265,  // Chile - Primera División
-    268,  // Paraguay - División Profesional
-    273,  // Uruguay - Primera División
-    266,  // Peru - Liga 1
-    267,  // Peru - Liga 2
-    242,  // Venezuela - Primera División
-    243,  // Ecuador - Liga Pro
-    284,  // Bolivia - División Profesional
-    // ── 아프리카 ─────────────────────────────────────────────────
-    200,  // Egypt - Premier League
-    201,  // Tunisia - Ligue 1
-    202,  // Algeria - Ligue 1
-    204,  // Nigeria - NPFL
-    206,  // South Africa - Premier Soccer League
-    772,  // Ghana - Premier League
-    773,  // Senegal - Ligue 1
-    774,  // Ivory Coast - Ligue 1
-    776,  // Cameroon - Elite One
-    778,  // Tanzania - Premier League
-    780,  // Kenya - Premier League
-    771,  // Ethiopia - Premier League
-    782,  // Uganda - Premier League
-    783,  // Zimbabwe - Premier Soccer League
-    784,  // Zambia - Super League
-    // ── 북중미카리브 ──────────────────────────────────────────────
-    253,  // USA - MLS
-    254,  // USA - USL Championship
-    255,  // USA - USL League One
-    262,  // Mexico - Liga MX
-    263,  // Mexico - Ascenso MX
-    164,  // Costa Rica - Primera División
-    328,  // Honduras - Liga Nacional
-    327,  // Panama - LPF
-    330,  // Guatemala - Liga Nacional
-    // ── 오세아니아 ───────────────────────────────────────────────
-    188,  // Australia - A-League
-    190,  // New Zealand - NZFC
-  ];
-
-  const envLeagues = parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []);
-  const leagueIds  = envLeagues.length ? envLeagues : DEFAULT_LEAGUES;
-
-  console.log(`[build-urls] season: ${season} / 리그 수: ${leagueIds.length} (${envLeagues.length ? "환경변수" : "기본값 전체"})`);
-
-  const out = [];
-  for (const leagueId of leagueIds) {
-    const url = resolvePlayersUrlTemplate(baseUrl, { league: leagueId, season, sort: sortExpr });
-    out.push(url);
+  for (const row of rows) {
+    const p     = row?.player || row || {};
+    const stats = Array.isArray(row?.statistics) && row.statistics.length ? row.statistics[0] : {};
+    const team  = stats?.team || {};
+    const lg    = stats?.league || {};
+    const nat   = String(p?.nationality || row?.country || p?.birth?.country || "-");
+    const age   = Number(p?.age || row?.age || 0) || calcAge(p?.birth?.date || "");
+    const id    = String(p?.id || row?.player_id || "").trim();
+    const first = String(p?.firstname || "").trim();
+    const last  = String(p?.lastname  || "").trim();
+    const name  = String(p?.name || row?.name || (first && last ? `${first} ${last}` : first || last) || "").trim();
+    if (!id || !name) continue;
+    if (seen.has(id)) continue;
+    seen.add(id);
+    out.push({
+      player_id:     id,
+      name,
+      age:           clamp(age, 0, 60),
+      height_cm:     clamp(parseCm(p?.height || row?.height_cm), 0, 260),
+      weight_kg:     clamp(parseKg(p?.weight || row?.weight_kg), 0, 200),
+      dominant_foot: normFoot(row?.dominant_foot || p?.foot || ""),
+      country:       clean(nat),
+      continent:     clean(row?.continent || inferContinent(nat)),
+      club:          clean(team?.name || row?.club),
+      position:      clean(stats?.games?.position || row?.position),
+      league:        clean(lg?.name || leagueName || row?.league),
+    });
   }
   return out;
 }
 
-function resolvePlayersUrlTemplate(baseUrl, params) {
-  let url = String(baseUrl || "").trim();
-  if (!url) return "";
-  // Template support:
-  // - https://v3.football.api-sports.io/players?league={{league}}&season={{season}}&sort={{sort}}
-  // - https://.../players?league=:league&season=:season&sort=:sort
-  Object.entries(params || {}).forEach(([key, value]) => {
-    const val = encodeURIComponent(String(value));
-    url = url
-      .replaceAll(`{{${key}}}`, val)
-      .replaceAll(`:${key}`, val);
-  });
-  // Clear unresolved placeholders so template mode still works when env vars are omitted.
-  url = url
-    .replaceAll("{{league}}", "")
-    .replaceAll("{{season}}", "")
-    .replaceAll("{{sort}}", "")
-    .replaceAll("{{age}}", "")
-    .replaceAll(":league", "")
-    .replaceAll(":season", "")
-    .replaceAll(":sort", "")
-    .replaceAll(":age", "");
-  url = url
-    .replace(/([?&])league=(?=&|$)/gi, "$1")
-    .replace(/([?&])season=(?=&|$)/gi, "$1")
-    .replace(/([?&])sort=(?=&|$)/gi, "$1")
-    .replace(/([?&])age=(?=&|$)/gi, "$1");
-  url = url.replace(/[?&]{2,}/g, "&").replace(/\?&/g, "?").replace(/[?&]$/, "");
-  return appendApiQuery(url, params);
-}
+/* ── 리그별 선수 fetch ───────────────────────────────────────────── */
+async function fetchLeaguePlayers(baseUrl, leagueId, season, apiKey, maxPages) {
+  const headers  = { "x-apisports-key": apiKey, Accept: "application/json" };
+  const DELAY    = Number(process.env.API_CALL_DELAY_MS || 1000);
+  const RETRY_MS = Number(process.env.API_RATE_RETRY_MS || 8000);
+  const all      = [];
+  const seen     = new Set();
+  let   totalPages = 1;
 
-function appendApiQuery(baseUrl, params) {
-  const out = String(baseUrl || "");
-  const pairs = Object.entries(params || {}).filter(([, v]) => String(v || "").trim());
-  let result = out;
-  for (const [k, v] of pairs) {
-    const key = encodeURIComponent(k);
-    const val = encodeURIComponent(String(v));
-    const re = new RegExp(`([?&])${key}=[^&]*`, "i");
-    if (re.test(result)) {
-      result = result.replace(re, `$1${key}=${val}`);
-      continue;
+  for (let page = 1; page <= totalPages && page <= maxPages; page++) {
+    if (page > 1) await sleep(DELAY);
+
+    const url = `${baseUrl}?league=${leagueId}&season=${season}&page=${page}`;
+    console.log(`[fetch] 리그${leagueId} p${page}/${totalPages} → ${url}`);
+
+    let payload;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      const res = await fetch(url, { method: "GET", headers });
+      if (res.status === 429) {
+        console.log(`[rate] 429 → ${RETRY_MS}ms 대기 (${attempt}/3)`);
+        await sleep(RETRY_MS);
+        continue;
+      }
+      if (!res.ok) throw new Error(`api:${res.status}`);
+      payload = await res.json();
+      const errs = payload?.errors || {};
+      if (Object.keys(errs).length) {
+        const isRate = Object.values(errs).some(v => /rate|limit|request/i.test(String(v)));
+        if (isRate && attempt < 3) { await sleep(RETRY_MS); continue; }
+        throw new Error(`api_err:${JSON.stringify(errs)}`);
+      }
+      break;
     }
-    result += `${result.includes("?") ? "&" : "?"}${key}=${val}`;
-  }
-  return result;
-}
+    if (!payload) throw new Error("api: max retries");
 
-function buildPagedUrl(baseUrl, page) {
-  const hasQuery = baseUrl.includes("?");
-  const re = /([?&])page=\d+/i;
-  if (re.test(baseUrl)) {
-    return baseUrl.replace(re, `$1page=${page}`);
-  }
-  return `${baseUrl}${hasQuery ? "&" : "?"}page=${page}`;
-}
+    const paging = Number(payload?.paging?.total || 0);
+    if (paging > 0) totalPages = paging;
+    console.log(`[fetch] results:${payload?.results||0} paging:${payload?.paging?.current}/${totalPages}`);
 
-function parseCm(v) {
-  if (typeof v === "number") return Math.max(0, Math.floor(v));
-  const m = String(v || "").match(/(\d+)/);
-  return m ? Number(m[1]) : 0;
-}
+    // 리그 이름 추출
+    const lgName = payload?.response?.[0]?.statistics?.[0]?.league?.name || "";
+    const players = normalizePlayers(payload, lgName);
+    console.log(`[fetch] 정규화: ${players.length}명`);
 
-function parseKg(v) {
-  if (typeof v === "number") return Math.max(0, Math.floor(v));
-  const m = String(v || "").match(/(\d+)/);
-  return m ? Number(m[1]) : 0;
-}
+    for (const p of players) {
+      if (!seen.has(p.player_id)) { seen.add(p.player_id); all.push(p); }
+    }
 
-async function upsertGithubFile({
-  githubToken,
-  githubRepo,
-  githubBranch,
-  path,
-  content,
-  message,
-}) {
-  const encodedPath = path.split("/").map(encodeURIComponent).join("/");
-  const baseUrl = `https://api.github.com/repos/${githubRepo}/contents/${encodedPath}`;
-  const commonHeaders = {
-    Authorization: `Bearer ${githubToken}`,
-    Accept: "application/vnd.github+json",
-    "Content-Type": "application/json",
-  };
-
-  let sha = "";
-  const getUrl = `${baseUrl}?ref=${encodeURIComponent(githubBranch)}`;
-  const existing = await fetch(getUrl, { headers: commonHeaders });
-  if (existing.ok) {
-    const current = await existing.json();
-    sha = String(current?.sha || "");
-  } else if (existing.status !== 404) {
-    const text = await existing.text();
-    throw new Error(`github_read_failed:${existing.status}:${text.slice(0, 160)}`);
+    await sleep(DELAY);
   }
 
-  const putBody = {
-    message,
-    content: Buffer.from(content, "utf8").toString("base64"),
-    branch: githubBranch,
-    ...(sha ? { sha } : {}),
-  };
-  const writeRes = await fetch(baseUrl, {
-    method: "PUT",
-    headers: commonHeaders,
-    body: JSON.stringify(putBody),
+  return all;
+}
+
+/* ── 기존 데이터와 Merge ─────────────────────────────────────────── */
+function mergePlayers(existing, newPlayers, maxAge) {
+  const map = new Map();
+  // 기존 데이터 먼저
+  for (const p of (existing || [])) {
+    if (p?.player_id) map.set(String(p.player_id), p);
+  }
+  // 신규 데이터로 덮어쓰기 (최신 정보 우선)
+  for (const p of (newPlayers || [])) {
+    if (p?.player_id) map.set(String(p.player_id), p);
+  }
+  // U25 필터
+  const hi = Math.max(1, Number(maxAge || 24));
+  return Array.from(map.values()).filter(p => {
+    const a = Number(p?.age);
+    return isFinite(a) && a > 0 && a <= hi;
   });
-  if (!writeRes.ok) {
-    const text = await writeRes.text();
-    throw new Error(`github_write_failed:${writeRes.status}:${text.slice(0, 160)}`);
+}
+
+/* ── 오늘 날짜 (KST) ──────────────────────────────────────────────── */
+function todayKST() {
+  try {
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Seoul", year: "numeric", month: "2-digit", day: "2-digit",
+    }).format(new Date());
+  } catch (_) { return new Date().toISOString().slice(0, 10); }
+}
+
+/* ── URL 정규화 ───────────────────────────────────────────────────── */
+function normalizeUrl(raw) {
+  try {
+    const u = new URL(String(raw || "").trim());
+    if (u.protocol !== "https:") return "";
+    if (!/(^|\.)api-sports\.io$/i.test(u.hostname)) return "";
+    if (!/\/players\/?$/i.test(u.pathname)) return "";
+    return `${u.origin}${u.pathname.replace(/\/+$/, "")}`;
+  } catch (_) { return ""; }
+}
+
+/* ── 기본 리그 목록 ───────────────────────────────────────────────── */
+const DEFAULT_LEAGUES = [
+  // 유럽 1부
+  39,140,78,135,61,88,94,203,144,179,197,207,218,113,103,119,168,182,332,235,333,271,106,383,244,210,169,283,286,291,392,395,398,198,
+  // 유럽 2부
+  40,141,79,136,62,89,95,145,208,45,46,
+  // 아시아
+  292,293,98,99,100,307,308,322,323,324,289,290,296,301,302,303,334,336,351,363,369,371,310,294,
+  // 남미
+  71,72,73,128,129,239,240,265,268,273,266,267,242,243,284,
+  // 아프리카
+  200,201,202,204,206,772,773,774,776,778,780,771,782,783,784,
+  // 북중미
+  253,254,255,262,263,164,328,327,330,
+  // 오세아니아
+  188,190,
+];
+
+/* ══════════════════════════════════════════════════════════════
+   HANDLER
+══════════════════════════════════════════════════════════════ */
+export default async function handler(req, res) {
+  if (req.method !== "GET") return res.status(405).json({ ok: false, error: "method_not_allowed" });
+
+  // 인증
+  const cronSecret = String(process.env.CRON_SECRET || "").trim();
+  if (cronSecret) {
+    const { h, b, q } = readSecret(req);
+    if (h !== cronSecret && b !== cronSecret && q !== cronSecret) {
+      return res.status(401).json({ ok: false, error: "unauthorized" });
+    }
   }
-  const saved = await writeRes.json();
-  return {
-    commitSha: String(saved?.commit?.sha || ""),
-  };
+
+  // 환경변수
+  const apiKey     = String(process.env.API_FOOTBALL_KEY         || "").trim();
+  const apiUrl     = String(process.env.API_FOOTBALL_PLAYERS_URL || "").trim();
+  const maxPages   = Math.max(1, Math.min(200, Number(process.env.API_FOOTBALL_MAX_PAGES || 10) || 10));
+  const maxAge     = Math.max(16, Math.min(25,  Number(process.env.API_FOOTBALL_MAX_AGE  || 23) || 23));
+  const season     = String(process.env.API_FOOTBALL_SEASON || (() => {
+    try {
+      const p = new Intl.DateTimeFormat("en-US", { timeZone:"Asia/Seoul", year:"numeric", month:"numeric" }).formatToParts(new Date());
+      const y = Number(p.find(x=>x.type==="year")?.value||0);
+      const m = Number(p.find(x=>x.type==="month")?.value||0);
+      return String(m < 7 ? y-1 : y);
+    } catch(_) { return String(new Date().getUTCFullYear()); }
+  })()).trim();
+  const ghToken    = String(process.env.GITHUB_TOKEN  || "").trim();
+  const ghRepo     = String(process.env.GITHUB_REPO   || "").trim();
+  const ghBranch   = String(process.env.GITHUB_BRANCH || "main").trim();
+  const targetPath = String(process.env.REGISTERED_PLAYERS_FILE_PATH   || "data/registered_players.json").trim();
+  const dailyPath  = String(process.env.DAILY_PLAYER_UPDATES_FILE_PATH || "data/daily_player_updates.json").trim();
+
+  if (!apiKey || !apiUrl) return res.status(200).json({ ok: true, mode: "no_api_key" });
+  if (!ghToken || !ghRepo) return res.status(400).json({ ok: false, error: "missing_github_config" });
+
+  const canonicalUrl = normalizeUrl(apiUrl);
+  if (!canonicalUrl) return res.status(400).json({ ok: false, error: "invalid_api_url" });
+
+  // 리그 목록
+  const envLeagues = String(process.env.API_FOOTBALL_LEAGUE_IDS || "")
+    .split(",").map(x=>x.trim()).filter(Boolean).map(Number).filter(n=>n>0);
+  const leagueIds = envLeagues.length ? envLeagues : DEFAULT_LEAGUES;
+
+  // Lock
+  const lock = await acquireLock(ghToken, ghRepo, ghBranch);
+  if (!lock.ok) {
+    return res.status(200).json({ ok: false, error: "already_running" });
+  }
+
+  try {
+    const today = todayKST();
+
+    // Checkpoint 로드
+    let checkpoint = await loadCheckpoint(ghToken, ghRepo, ghBranch);
+    let checkpointSha = "";
+
+    // 오늘 날짜가 아니면 초기화
+    if (checkpoint.date !== today) {
+      console.log(`[checkpoint] 날짜 변경 (${checkpoint.date} → ${today}) — 초기화`);
+      checkpoint = { date: today, done: [] };
+    }
+
+    const doneSet = new Set(checkpoint.done.map(String));
+    const remaining = leagueIds.filter(id => !doneSet.has(String(id)));
+    console.log(`[start] 시즌:${season} / 전체:${leagueIds.length}개 / 완료:${doneSet.size}개 / 남은:${remaining.length}개`);
+
+    if (remaining.length === 0) {
+      return res.status(200).json({
+        ok: true, mode: "already_done_today",
+        message: `오늘(${today}) 모든 리그 완료됨.`,
+        leagues_total: leagueIds.length,
+        leagues_done: doneSet.size,
+      });
+    }
+
+    // 기존 데이터 로드
+    let existingPlayers = [];
+    let existingSha = "";
+    try {
+      const { data, sha } = await ghGet(ghToken, ghRepo, ghBranch, targetPath);
+      existingSha = sha;
+      existingPlayers = Array.isArray(data?.items) ? data.items
+                      : Array.isArray(data)        ? data : [];
+      console.log(`[merge] 기존 선수: ${existingPlayers.length}명`);
+    } catch (e) {
+      console.log("[merge] 기존 파일 없음 — 새로 시작");
+    }
+
+    // 리그별 처리
+    let savedCount   = 0;
+    let totalNew     = 0;
+    let currentPlayers = existingPlayers.slice();
+
+    for (const leagueId of remaining) {
+      console.log(`\n[league] 리그 ${leagueId} 시작`);
+      let leaguePlayers = [];
+      try {
+        leaguePlayers = await fetchLeaguePlayers(canonicalUrl, leagueId, season, apiKey, maxPages);
+        console.log(`[league] 리그 ${leagueId} 완료: ${leaguePlayers.length}명`);
+      } catch (e) {
+        console.log(`[league] 리그 ${leagueId} 에러 → 건너뜀:`, String(e?.message || e));
+        // 실패한 리그도 done에 추가 (무한 반복 방지)
+        doneSet.add(String(leagueId));
+        checkpoint.done = Array.from(doneSet);
+        checkpointSha = await saveCheckpoint(ghToken, ghRepo, ghBranch, today, checkpoint.done, checkpointSha);
+        continue;
+      }
+
+      totalNew += leaguePlayers.length;
+
+      // Merge
+      const merged = mergePlayers(currentPlayers, leaguePlayers, maxAge);
+      currentPlayers = merged;
+
+      // 즉시 GitHub 저장
+      try {
+        const content = JSON.stringify({ 
+          updated_at: new Date().toISOString(),
+          season,
+          leagues_done: doneSet.size + 1,
+          leagues_total: leagueIds.length,
+          players_count: merged.length,
+          items: merged 
+        }, null, 2) + "\n";
+
+        const result = await ghPut(ghToken, ghRepo, ghBranch, targetPath, content,
+          `cron: league ${leagueId} done (${merged.length} players total)`, existingSha);
+        existingSha = result.sha;
+        savedCount++;
+        console.log(`[save] 리그 ${leagueId} 저장 완료 → 총 ${merged.length}명 (SHA: ${result.commitSha.slice(0,7)})`);
+      } catch (e) {
+        console.log(`[save] 리그 ${leagueId} 저장 실패:`, String(e?.message || e));
+      }
+
+      // Checkpoint 업데이트
+      doneSet.add(String(leagueId));
+      checkpoint.done = Array.from(doneSet);
+      checkpointSha = await saveCheckpoint(ghToken, ghRepo, ghBranch, today, checkpoint.done, checkpointSha);
+
+      console.log(`[progress] 완료: ${doneSet.size}/${leagueIds.length} | 누적 선수: ${currentPlayers.length}명`);
+    }
+
+    // daily_player_updates.json 저장
+    try {
+      const { sha: dSha } = await ghGet(ghToken, ghRepo, ghBranch, dailyPath);
+      await ghPut(ghToken, ghRepo, ghBranch, dailyPath,
+        JSON.stringify({
+          updated_at:    new Date().toISOString(),
+          season,
+          date:          today,
+          leagues_done:  doneSet.size,
+          leagues_total: leagueIds.length,
+          players_count: currentPlayers.length,
+          items:         currentPlayers,
+        }, null, 2) + "\n",
+        `cron: daily update (${currentPlayers.length} players)`,
+        dSha
+      );
+    } catch (e) {
+      console.log("[daily] 저장 실패 (무시):", String(e?.message || e));
+    }
+
+    return res.status(200).json({
+      ok:             true,
+      mode:           "league_by_league_merge",
+      date:           today,
+      season,
+      leagues_total:  leagueIds.length,
+      leagues_done:   doneSet.size,
+      leagues_saved:  savedCount,
+      players_total:  currentPlayers.length,
+      new_from_api:   totalNew,
+    });
+
+  } catch (err) {
+    console.error("[handler] 오류:", String(err?.message || err));
+    return res.status(500).json({ ok: false, error: "failed", detail: String(err?.message || err) });
+  } finally {
+    await releaseLock(ghToken, ghRepo, ghBranch);
+  }
 }
