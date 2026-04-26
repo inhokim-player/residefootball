@@ -383,17 +383,32 @@ async function fetchAllApiFootballPlayers({
   const seen = new Set();
   const leagueUrls = buildLeagueScopedBaseUrls(apiFootballPlayersUrl, minAge, maxAge);
 
+  console.log("[fetch] 총 URL 수:", leagueUrls.length, "/ maxPages per URL:", maxPages);
+
   for (const oneBaseUrl of leagueUrls) {
     let totalPages = 1;
     for (let page = 1; page <= totalPages && page <= maxPages; page += 1) {
       const url = buildPagedUrl(oneBaseUrl, page);
+      console.log("[fetch] 호출:", url);
       const apiRes = await fetch(url, { method: "GET", headers });
+      console.log("[fetch] 응답 HTTP:", apiRes.status);
       if (!apiRes.ok) {
         const text = await apiRes.text();
         throw new Error(`api_football_failed:${apiRes.status}:${text.slice(0, 180)}`);
       }
       const payload = await apiRes.json();
+
+      // 에러 필드 확인
+      if (payload?.errors && Object.keys(payload.errors).length) {
+        console.log("[fetch] API errors:", JSON.stringify(payload.errors));
+        throw new Error(`api_football_error:${JSON.stringify(payload.errors)}`);
+      }
+
+      console.log("[fetch] results:", payload?.results ?? 0, "/ paging:", JSON.stringify(payload?.paging));
+
       const onePage = normalizeApiFootballPlayers(payload);
+      console.log("[fetch] 정규화 선수 수:", onePage.length, "/ page:", page);
+
       for (const p of onePage) {
         if (!p.player_id || seen.has(p.player_id)) continue;
         seen.add(p.player_id);
@@ -407,6 +422,8 @@ async function fetchAllApiFootballPlayers({
       }
     }
   }
+
+  console.log("[fetch] 최종 수집 선수 수 (중복제거):", all.length);
   return all;
 }
 
@@ -450,20 +467,23 @@ function buildLeagueScopedBaseUrls(baseUrl, minAge, maxAge) {
   const leagueIds = parseCsvEnv(process.env.API_FOOTBALL_LEAGUE_IDS, []);
   const season = String(process.env.API_FOOTBALL_SEASON || currentLikelySeasonKst()).trim();
   const sortExpr = String(process.env.API_FOOTBALL_SORT || "").trim();
-  const ages = [];
-  for (let age = Math.max(15, Number(minAge || 15)); age <= Math.min(24, Number(maxAge || 24)); age += 1) {
-    ages.push(String(age));
-  }
-  if (!ages.length) ages.push("24");
+
+  // ── age 파라미터는 API-Football /players 에서 지원하지 않음 ──────
+  // age 필터링은 데이터 수신 후 filterUnderAge()에서 JS로 처리
+  console.log("[build-urls] season:", season, "leagues:", leagueIds.length ? leagueIds : "ALL");
+
   if (!leagueIds.length) {
-    // Default mode: global pool (no league restriction).
-    return ages.map((age) => resolvePlayersUrlTemplate(baseUrl, { season, sort: sortExpr, age }));
+    // 리그 지정 없음 → season만으로 글로벌 호출
+    const url = resolvePlayersUrlTemplate(baseUrl, { season, sort: sortExpr });
+    console.log("[build-urls] global url:", url);
+    return [url];
   }
+
   const out = [];
   for (const leagueId of leagueIds) {
-    for (const age of ages) {
-      out.push(resolvePlayersUrlTemplate(baseUrl, { league: leagueId, season, sort: sortExpr, age }));
-    }
+    const url = resolvePlayersUrlTemplate(baseUrl, { league: leagueId, season, sort: sortExpr });
+    console.log("[build-urls] league url:", url);
+    out.push(url);
   }
   return out;
 }
