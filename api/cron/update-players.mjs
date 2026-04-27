@@ -157,8 +157,8 @@ function normalizePlayers(payload, leagueName) {
 /* ── 리그 선수 fetch ─────────────────────────────────────────── */
 async function fetchLeaguePlayers(baseUrl, leagueId, season, apiKey, maxPages) {
   const headers  = { "x-apisports-key": apiKey, Accept: "application/json" };
-  const DELAY    = Number(process.env.API_CALL_DELAY_MS || 1000);
-  const RETRY_MS = Number(process.env.API_RATE_RETRY_MS || 8000);
+  const DELAY    = Number(process.env.API_CALL_DELAY_MS || 200);
+  const RETRY_MS = Number(process.env.API_RATE_RETRY_MS || 2000);
   const all = []; const seen = new Set();
   let totalPages = 1;
 
