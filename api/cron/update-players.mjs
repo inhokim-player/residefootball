@@ -3,7 +3,7 @@
  *
  * ① Lock 없음 — Run Now 즉시 실행
  * ② SHA 정확히 추적 — 422 오류 없음
- * ③ 리그별 즉시 저장 + Merge
+ * ③ 루프 완료 후 1회 최종 저장
  * ④ Checkpoint — 이어하기
  * ⑤ 50개 국가 / 60개 리그
  */
@@ -359,9 +359,9 @@ export default async function handler(req, res) {
   } catch (_) { console.log("[merge] 기존 파일 없음"); }
 
   let currentPlayers = existingPlayers.slice();
-  let savedLeagues   = 0;
   let totalNew       = 0;
 
+  // ── 루프: 수집만, 저장 없음 ──────────────────────────────────
   for (const leagueId of remaining) {
     console.log(`\n[league] 리그 ${leagueId} 시작`);
     let leaguePlayers = [];
@@ -370,64 +370,74 @@ export default async function handler(req, res) {
       console.log(`[league] 리그 ${leagueId} 완료: ${leaguePlayers.length}명`);
     } catch (e) {
       console.log(`[league] 리그 ${leagueId} 에러 → 건너뜀:`, String(e?.message||e));
-      doneSet.add(String(leagueId));
-      cp.done = Array.from(doneSet);
-      cpSha   = await saveCheckpoint(ghToken, ghRepo, ghBranch, today, cp.done, cpSha);
-      continue;
     }
-
     totalNew      += leaguePlayers.length;
     currentPlayers = mergePlayers(currentPlayers, leaguePlayers, maxAge);
-
-    // 즉시 저장
-    try {
-      const body = JSON.stringify({
-        updated_at:    new Date().toISOString(),
-        season,
-        leagues_done:  doneSet.size + 1,
-        leagues_total: leagueIds.length,
-        players_count: currentPlayers.length,
-        items:         currentPlayers,
-      }, null, 2) + "\n";
-
-      const result = await ghPut(ghToken, ghRepo, ghBranch, targetPath, body,
-        `cron: league ${leagueId} (${currentPlayers.length} players)`, playersSha);
-      playersSha = result.sha;
-      savedLeagues++;
-      console.log(`[save] 리그 ${leagueId} → 총 ${currentPlayers.length}명`);
-    } catch (e) {
-      console.log(`[save] 저장 실패:`, String(e?.message||e));
-    }
-
     doneSet.add(String(leagueId));
-    cp.done = Array.from(doneSet);
-    cpSha   = await saveCheckpoint(ghToken, ghRepo, ghBranch, today, cp.done, cpSha);
     console.log(`[progress] ${doneSet.size}/${leagueIds.length} | 누적: ${currentPlayers.length}명`);
   }
 
-  // ── daily 저장 (메타데이터만, 전체 선수 데이터 제외) ─────────
-  console.log("[daily] 메타데이터 저장 시작");
+  // ── 루프 완료 후 1회 저장 ────────────────────────────────────
+  console.log(`\n[save] 전체 수집 완료 — ${currentPlayers.length}명 저장 시작`);
+  let savedOk = false;
   try {
-    const { sha: dSha } = await ghGet(ghToken, ghRepo, ghBranch, dailyPath);
-    await ghPut(ghToken, ghRepo, ghBranch, dailyPath,
-      JSON.stringify({
-        updated_at:    new Date().toISOString(),
-        season,
-        date:          today,
-        leagues_done:  doneSet.size,
-        leagues_total: leagueIds.length,
-        players_count: currentPlayers.length,
-        // items 제거 — registered_players.json에 전체 데이터 있음
-      }, null, 2) + "\n",
-      `cron: daily meta (${currentPlayers.length} players)`, dSha);
-    console.log("[daily] 저장 완료");
-  } catch (e) { console.log("[daily] 저장 실패 (무시):", String(e?.message||e)); }
+    // 최신 SHA 재조회 (루프 중 변경됐을 수 있음)
+    const { sha: latestSha } = await ghGet(ghToken, ghRepo, ghBranch, targetPath);
+    console.log(`[save] 최신 SHA 조회: ${latestSha.slice(0,7)}`);
+
+    const body = JSON.stringify({
+      updated_at:    new Date().toISOString(),
+      season,
+      leagues_done:  doneSet.size,
+      leagues_total: leagueIds.length,
+      players_count: currentPlayers.length,
+      items:         currentPlayers,
+    }, null, 2) + "\n";
+
+    console.log(`[save] GitHub PUT 시작 (${(Buffer.byteLength(body)/1024).toFixed(0)}KB)`);
+    const result = await ghPut(
+      ghToken, ghRepo, ghBranch, targetPath, body,
+      `cron: update ${currentPlayers.length} players (${doneSet.size} leagues)`,
+      latestSha
+    );
+    console.log(`[save] ✅ 저장 성공! SHA: ${result.commitSha.slice(0,7)}`);
+    savedOk = true;
+  } catch (e) {
+    console.error(`[save] ❌ 저장 실패:`, String(e?.message || e));
+  }
+
+  // ── 메타데이터 저장 (daily) ───────────────────────────────────
+  if (savedOk) {
+    console.log("[daily] 메타데이터 저장 시작");
+    try {
+      const { sha: dSha } = await ghGet(ghToken, ghRepo, ghBranch, dailyPath);
+      await ghPut(ghToken, ghRepo, ghBranch, dailyPath,
+        JSON.stringify({
+          updated_at:    new Date().toISOString(),
+          season,
+          date:          today,
+          leagues_done:  doneSet.size,
+          leagues_total: leagueIds.length,
+          players_count: currentPlayers.length,
+        }, null, 2) + "\n",
+        `cron: daily meta (${currentPlayers.length} players)`,
+        dSha
+      );
+      console.log("[daily] ✅ 메타데이터 저장 완료");
+    } catch (e) {
+      console.log("[daily] ❌ 메타데이터 저장 실패 (무시):", String(e?.message||e));
+    }
+  }
 
   return res.status(200).json({
-    ok:true, mode:"league_by_league_merge",
-    date:today, season,
-    leagues_total:leagueIds.length, leagues_done:doneSet.size,
-    leagues_saved:savedLeagues, players_total:currentPlayers.length,
-    new_from_api:totalNew,
+    ok:            true,
+    mode:          "collect_then_save",
+    date:          today,
+    season,
+    leagues_total: leagueIds.length,
+    leagues_done:  doneSet.size,
+    players_total: currentPlayers.length,
+    new_from_api:  totalNew,
+    saved:         savedOk,
   });
 }
