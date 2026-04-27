@@ -346,6 +346,36 @@ export default async function handler(req, res) {
   console.log(`[start] 완료:${doneSet.size} / 남은:${remaining.length}`);
 
   if (!remaining.length) {
+    // 모든 리그 완료 — 하지만 저장이 안 됐을 수 있으니 강제 저장 시도
+    console.log("[start] 모든 리그 완료 상태 — 저장 파일 확인 후 필요시 저장");
+    try {
+      const { data, sha: latestSha } = await ghGet(ghToken, ghRepo, ghBranch, targetPath);
+      const savedAt = data?.updated_at || "";
+      const savedDate = savedAt ? savedAt.slice(0, 10) : "";
+      if (savedDate === today) {
+        console.log(`[start] 오늘(${today}) 이미 저장됨 — 종료`);
+        return res.status(200).json({ ok:true, mode:"already_done_today", date:today, leagues_done:doneSet.size });
+      }
+      // 오늘 저장 안 됐으면 기존 데이터로 강제 저장
+      console.log(`[start] 저장 날짜 불일치(${savedDate}) — 강제 저장 시도`);
+      const existing = Array.isArray(data?.items) ? data.items : Array.isArray(data) ? data : [];
+      if (existing.length > 0) {
+        const body = JSON.stringify({
+          updated_at:    new Date().toISOString(),
+          season,
+          leagues_done:  doneSet.size,
+          leagues_total: leagueIds.length,
+          players_count: existing.length,
+          items:         existing,
+        }, null, 2) + "\n";
+        const result = await ghPut(ghToken, ghRepo, ghBranch, targetPath, body,
+          `cron: force-save ${existing.length} players`, latestSha);
+        console.log(`[start] ✅ 강제 저장 완료: ${existing.length}명 (SHA: ${result.commitSha.slice(0,7)})`);
+        return res.status(200).json({ ok:true, mode:"force_saved", players_total:existing.length, date:today });
+      }
+    } catch (e) {
+      console.log("[start] 저장 확인 실패:", String(e?.message||e));
+    }
     return res.status(200).json({ ok:true, mode:"already_done_today", date:today, leagues_done:doneSet.size });
   }
 
