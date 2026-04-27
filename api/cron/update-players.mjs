@@ -405,15 +405,23 @@ export default async function handler(req, res) {
     console.log(`[progress] ${doneSet.size}/${leagueIds.length} | 누적: ${currentPlayers.length}명`);
   }
 
-  // daily 저장
+  // ── daily 저장 (메타데이터만, 전체 선수 데이터 제외) ─────────
+  console.log("[daily] 메타데이터 저장 시작");
   try {
     const { sha: dSha } = await ghGet(ghToken, ghRepo, ghBranch, dailyPath);
     await ghPut(ghToken, ghRepo, ghBranch, dailyPath,
-      JSON.stringify({ updated_at:new Date().toISOString(), season, date:today,
-        leagues_done:doneSet.size, leagues_total:leagueIds.length,
-        players_count:currentPlayers.length, items:currentPlayers }, null, 2) + "\n",
-      `cron: daily (${currentPlayers.length} players)`, dSha);
-  } catch (e) { console.log("[daily] 저장 실패:", String(e?.message||e)); }
+      JSON.stringify({
+        updated_at:    new Date().toISOString(),
+        season,
+        date:          today,
+        leagues_done:  doneSet.size,
+        leagues_total: leagueIds.length,
+        players_count: currentPlayers.length,
+        // items 제거 — registered_players.json에 전체 데이터 있음
+      }, null, 2) + "\n",
+      `cron: daily meta (${currentPlayers.length} players)`, dSha);
+    console.log("[daily] 저장 완료");
+  } catch (e) { console.log("[daily] 저장 실패 (무시):", String(e?.message||e)); }
 
   return res.status(200).json({
     ok:true, mode:"league_by_league_merge",
