@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-27T07:35:31.511Z",
+  "updated_at": "2026-04-27T07:35:35.683Z",
   "season": "2024",
-  "leagues_done": 38,
+  "leagues_done": 39,
   "leagues_total": 55,
-  "players_count": 1129,
+  "players_count": 1136,
   "items": [
     {
       "player_id": "127605",
@@ -14681,6 +14681,97 @@
       "club": "RB Bragantino",
       "position": "Goalkeeper",
       "league": "Serie A"
+    },
+    {
+      "player_id": "6337",
+      "name": "J. Freytes",
+      "age": 25,
+      "height_cm": 186,
+      "weight_kg": 81,
+      "dominant_foot": "Unknown",
+      "country": "Argentina",
+      "continent": "South America",
+      "club": "Newells Old Boys",
+      "position": "Defender",
+      "league": "Liga Profesional Argentina"
+    },
+    {
+      "player_id": "346270",
+      "name": "S. Núñez",
+      "age": 25,
+      "height_cm": 187,
+      "weight_kg": 78,
+      "dominant_foot": "Unknown",
+      "country": "Argentina",
+      "continent": "South America",
+      "club": "Estudiantes L.P.",
+      "position": "Defender",
+      "league": "Liga Profesional Argentina"
+    },
+    {
+      "player_id": "397458",
+      "name": "C. Cabellos",
+      "age": 21,
+      "height_cm": 171,
+      "weight_kg": 68,
+      "dominant_foot": "Unknown",
+      "country": "Peru",
+      "continent": "South America",
+      "club": "Racing Club",
+      "position": "Midfielder",
+      "league": "Liga Profesional Argentina"
+    },
+    {
+      "player_id": "194897",
+      "name": "A. Peralta",
+      "age": 24,
+      "height_cm": 162,
+      "weight_kg": 58,
+      "dominant_foot": "Unknown",
+      "country": "Argentina",
+      "continent": "South America",
+      "club": "San Lorenzo",
+      "position": "Defender",
+      "league": "Liga Profesional Argentina"
+    },
+    {
+      "player_id": "278354",
+      "name": "M. Núñez",
+      "age": 25,
+      "height_cm": 169,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Argentina",
+      "continent": "South America",
+      "club": "Racing Club",
+      "position": "Midfielder",
+      "league": "Liga Profesional Argentina"
+    },
+    {
+      "player_id": "292171",
+      "name": "A. Mulet",
+      "age": 25,
+      "height_cm": 183,
+      "weight_kg": 74,
+      "dominant_foot": "Unknown",
+      "country": "Argentina",
+      "continent": "South America",
+      "club": "Velez Sarsfield",
+      "position": "Midfielder",
+      "league": "Liga Profesional Argentina"
+    },
+    {
+      "player_id": "362722",
+      "name": "A. Di Pippa",
+      "age": 25,
+      "height_cm": 179,
+      "weight_kg": 75,
+      "dominant_foot": "Unknown",
+      "country": "Argentina",
+      "continent": "South America",
+      "club": "Banfield",
+      "position": "Midfielder",
+      "league": "Liga Profesional Argentina"
     }
   ]
 }
