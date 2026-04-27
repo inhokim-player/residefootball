@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-27T07:35:18.566Z",
+  "updated_at": "2026-04-27T07:35:20.026Z",
   "season": "2024",
-  "leagues_done": 34,
+  "leagues_done": 35,
   "leagues_total": 55,
-  "players_count": 1001,
+  "players_count": 1002,
   "items": [
     {
       "player_id": "127605",
@@ -13017,6 +13017,19 @@
       "club": "Sharjah FC",
       "position": "Defender",
       "league": "Pro League"
+    },
+    {
+      "player_id": "128902",
+      "name": "R. Tagir",
+      "age": 22,
+      "height_cm": 182,
+      "weight_kg": 72,
+      "dominant_foot": "Unknown",
+      "country": "Türkiye",
+      "continent": "-",
+      "club": "Al-Jazira",
+      "position": "Defender",
+      "league": "League Cup"
     }
   ]
 }
